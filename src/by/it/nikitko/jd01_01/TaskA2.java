@@ -8,14 +8,12 @@ package by.it.nikitko.jd01_01;
 Для автоматической проверки откройте и запустите класс Test_jd01_01
 */
 
-import java.util.Arrays;
-
 class TaskA2 {
-
     public static void main(String[] args) {
-//Arrays.sort();
-            
-    }
+        for (int i=0; i<5;i++ ){
+            System.out.println("Я начинаю изучать Java!");
+        }
 
     }
 
+}

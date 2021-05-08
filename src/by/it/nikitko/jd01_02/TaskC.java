@@ -1,25 +1,20 @@
 package by.it.nikitko.jd01_02;
 
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class TaskC {
 
     public static void main(String[] args) {
-//        Scanner scanner = new Scanner(System.in);
-//        int n = scanner.nextInt();
-//
-//        int[][] arr = step1(n);
-//
-//        int sum = step2(arr);
-//        System.out.println();
-//        System.out.println(sum);
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        step1(n);
+        int[][] arr = step1(n);
+        int sum = step2(arr);
+        System.out.println();
+        System.out.println(sum);
 
-        int[][] arr2 = {{1, -2, -2, 6}, {-1, 2, -2, 2}, {-2, -2, -6, -2}, {1, 2, -2, 6}};
-
-        int[][] ints = step3(arr2);
-        System.out.println(Arrays.deepToString(ints));
+        step3(arr);
 
 
     }
@@ -58,6 +53,8 @@ public class TaskC {
                 System.out.print(arr[i][j] + " ");
             }
         }
+        System.out.println();
+        System.out.println();
         return arr;
     }
 
@@ -87,52 +84,51 @@ public class TaskC {
                 }
             }
         }
-
         return sum;
     }
 
 
     static int[][] step3(int[][] arr) {
 
-        int max = arr.length;
-        int[] rowsDel = new int[arr.length];           // хранение рядов на удаление
-        int[] columnDel = new int[arr[0].length];         // хранение столбцов на удаление
-        int ir = 0;                                    // кол-во удаляемых рядов
-        int ic = 0;                                    // кол-во удаляемых столбцов
-        int rDt = -1;                                  //переменная для сравнения при исключении записи повторных индексов рядов
-        int rDc = -1;                                  //переменная для сравнения при исключении записи повторных индексов столбцов
+        int max = arr[0][0];
         for (int i = 0; i < arr.length; i++) {
             for (int j = 0; j < arr.length; j++) {
-                if (arr[i][j] == max && rDt != i) {
-                    rowsDel[ir] = i;
-                    rDt = i;
-                    ir = ir + 1;
-                    //  System.out.println("ряд " + i);
-                }
-                if (arr[i][j] == max && rDc != j) {
-                    columnDel[ic] = j;
-                    rDc = j;
-                    ic = ic + 1;
-                    //  System.out.println("столбец " + j);
-                    //  System.out.println();
+                if (max < arr[i][j]) {
+                    max = arr[i][j];
                 }
             }
         }
 
+        int[] rowsDel = new int[arr.length];                      // хранение индексов рядов на удаление
+        int[] columnDel = new int[arr.length];                    // хранение индексов столбцов на удаление
+        int countDelRows = 0;                                     // кол-во удаляемых рядов
+        int countDelColumns = 0;                                  // кол-во удаляемых столбцов
+        int notRepeatRows = -1;                                   //переменная для сравнения при исключении записи повторных индексов рядов
+        int notRepeatColumns = -1;                                //переменная для сравнения при исключении записи повторных индексов столбцов
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = 0; j < arr.length; j++) {
+                if (arr[i][j] == max && notRepeatRows != i) {
+                    rowsDel[countDelRows] = i;
+                    notRepeatRows = i;
+                    countDelRows = countDelRows + 1;
+                }
+                if (arr[i][j] == max && notRepeatColumns != j) {
+                    columnDel[countDelColumns] = j;
+                    notRepeatColumns = j;
+                    countDelColumns = countDelColumns + 1;
+                }
+            }
+        }
 
-        for (int i = ir - 1; i >= 0; i--) {
+        for (int i = countDelRows - 1; i >= 0; i--) {
             arr = removeRow(arr, rowsDel[i]);
         }
-        for (int j = 0; j < ic; j++) {
+        for (int j = 0; j < countDelColumns; j++) {
+            //  for (int j = ic - 1; j >= 0; j--) {
             arr = removeColumn(arr, columnDel[j]);
         }
 
         /*вывод в консоль*/
-        printArray(arr);
-        return arr;
-    }
-
-    private static void printArray(int[][] arr) {
         for (int i = 0; i < arr.length; i++) {
             if (i != 0) {                                       //пропускаем переход на след строку при первом проходе
                 System.out.println();
@@ -141,25 +137,32 @@ public class TaskC {
                 System.out.print(arr[i][j] + " ");
             }
         }
+        return arr;
     }
 
-    public static int[][] removeRow(int[][] m, int remRow) {
-        int[][] finalArr = new int[m.length - 1][m[0].length];
+    /**
+     *
+     * @param inputArray -
+     * @param remRow - row for del
+     * @return
+     */
+    public static int[][] removeRow(int[][] inputArray, int remRow) {
+        int[][] finalArr = new int[inputArray.length - 1][inputArray[0].length];
 
         for (int i = 0; i < finalArr.length; i++) {
             if (i < remRow) {
-                finalArr[i] = m[i];
+                finalArr[i] = inputArray[i];
             }
             if (i >= remRow) {
-                finalArr[i] = m[i + 1];
+                finalArr[i] = inputArray[i + 1];
             }
         }
         return finalArr;
     }
 
     /**
-     * @param m         - приимаемый массив
-     * @param remColumn - number of deleted column
+     * @param m         - принимаемый массив
+     * @param remColumn - column for del
      * @return
      */
     public static int[][] removeColumn(int[][] m, int remColumn) {
@@ -174,18 +177,9 @@ public class TaskC {
                 }
             }
         }
-        /*вывод в консоль*/
-        /*
-        for (int i = 0; i < finalArr.length; i++) {
-            if (i != 0) {                                       //пропускаем переход на след строку при первом проходе
-                System.out.println();
-            }
-            for (int j = 0; j < finalArr[0].length; j++) {
-                System.out.print(finalArr[i][j] + " ");
-            }
-        }
+
         System.out.println();
-        System.out.println();*/
+        System.out.println();
         return finalArr;
     }
 }

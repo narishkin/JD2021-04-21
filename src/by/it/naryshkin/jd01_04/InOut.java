@@ -16,7 +16,6 @@ public class InOut {
         }
         System.out.println();
     }
-
     static void printArray(double[] arr, String name, int ColumnCount) {
         for (int i = 0; i < arr.length; i++) {
             System.out.printf("%s[% -3d]=%-7.3f    ", name, i, arr[i]);
@@ -25,16 +24,12 @@ public class InOut {
             }
         }
     }
-
     static void printMatrix(double[][] matrix) {
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < matrix[0].length; j++) {
                 System.out.printf("[% -3d]=%7.3f    ", i, matrix[i][j]);
-
             }
             System.out.println();
         }
     }
-
-
 }

@@ -50,8 +50,6 @@ public class Helper {
                     arr[j] = buffer;
                 }
             }
-
-
         }
         for (double element : arr) {
             System.out.print(element + " ");
@@ -72,7 +70,6 @@ public class Helper {
                 c[i] = c[i] + A[i][j]*v[j];
             }
         }
-
         return c;
     }
 

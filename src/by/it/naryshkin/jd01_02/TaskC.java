@@ -12,13 +12,11 @@ public class TaskC {
         arr = step1(n);
         step2(arr);
         step3(arr);
-
-
     }
 
     static int[][] step1(int n) {
         int[][] array = new int[n][n];
-        Random random = new Random();
+        Random random = new Random(10);
         int countpos;
         int countneg;
         do {
@@ -49,44 +47,30 @@ public class TaskC {
         }
 
         return array;
-
     }
-
     static int step2(int[][] array) {
         int sum = 0;
-
-
         for (int i = 0; i < array.length; i++) {
             int m1 = -1, m2 = -1;
-
             for (int j = 0; j < array.length; j++) {
                 if (array[i][j] > 0 && j < (array.length - 1)) {
                     m1 = j;
                     break;
                 }
-
             }
             for (int j = 0; j < array.length; j++) {
                 if (array[i][j] > 0 && j > m1) {
                     m2 = j;
                     break;
                 }
-
             }
             if (m1 >= 0 && m2 >= 0) {
                 for (int j = m1 + 1; j < m2; j++) {
-
                     sum = sum + array[i][j];
-
                 }
-
             }
-
-
         }
         System.out.println("Summ is: " + sum);
-
-
         return sum;
     }
 
@@ -96,11 +80,9 @@ public class TaskC {
             for (int j = 0; j < arr.length; j++) {
 //                System.out.print(arr[i][j] + " ");
                 if (arr[i][j] > MAX) MAX = arr[i][j];
-
             }
 //            System.out.print('\n');
         }
-//        System.out.println(MAX);
         ArrayList<Integer> ilist = new ArrayList<>();
         ArrayList<Integer> jlist = new ArrayList<>();
         for (int i = 0; i < arr.length; i++) {
@@ -111,9 +93,6 @@ public class TaskC {
                 }
             }
         }
-//        for (int i = 0; i < ilist.size(); i++) {
-//            System.out.println(ilist.get(i) + " " + jlist.get(i));
-//        }
 
         for (int k = 0; k < ilist.size(); k++) {
             for (int i = 0; i < arr.length; i++) {
@@ -125,17 +104,9 @@ public class TaskC {
             }
         }
 
-//        for (int i = 0; i < arr.length; i++) {
-//            for (int j = 0; j < arr.length; j++) {
-//                System.out.print(arr[i][j] + " ");
-//            }
-//            System.out.print('\n');
-//        }
-
         int sizei = 0;
         int sizej = 0;
         for (int i = 0; i < arr.length; i++) {
-
             for (int j = 0; j < arr.length; j++) {
                 if (arr[i][j] != MAX) {
                     sizei = sizei + 1;
@@ -144,18 +115,13 @@ public class TaskC {
             }
         }
         for (int j = 0; j < arr.length; j++) {
-
             for (int i = 0; i < arr.length; i++) {
                 if (arr[i][j] != MAX) {
-
                     sizej = sizej + 1;
                     break;
-
-
                 }
             }
         }
-//        System.out.println(sizei + ":" + sizej);
         // Объявление выходного массива
         int[][] cuttedArray = new int[sizei][sizej];
 //        System.out.println("-----------------------------");
@@ -175,29 +141,19 @@ public class TaskC {
             l = 0;
             for (int j = 0; j < arr.length; j++) {
                 if (arr[i][j] != MAX) {
-
                     cuttedArray[k][l] = arr[i][j];
                     l += 1;
                 }
-
             }
             if (l > 0) k += 1;
-
         }
         System.out.println("===============================");
         for (int i = 0; i < cuttedArray.length; i++) {
             for (int j = 0; j < cuttedArray[i].length; j++) {
                 System.out.print(cuttedArray[i][j] + " ");
-
-
             }
             System.out.print('\n');
         }
-
-
         return cuttedArray;
-
     }
-
-
 }

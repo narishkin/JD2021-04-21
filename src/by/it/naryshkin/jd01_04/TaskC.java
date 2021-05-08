@@ -24,7 +24,6 @@ public class TaskC {
         System.out.println("Index of first element=" + binarySearch(array, first));
         System.out.println("Index of last element=" + binarySearch(array, last));
 
-
         for (int i = 0; i < array.length; i++) {
             if (array[i] == first) {
                 System.out.println("Index of first element=" + i);
@@ -44,7 +43,6 @@ public class TaskC {
         Scanner sc = new Scanner(System.in);
         String line = sc.nextLine();
         buildOneDimArray(line);
-
     }
 
     static void mergeSort(double[] array) {

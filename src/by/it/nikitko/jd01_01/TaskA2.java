@@ -13,7 +13,7 @@ import java.util.Arrays;
 class TaskA2 {
 
     public static void main(String[] args) {
-Arrays.sort();
+//Arrays.sort();
             
     }
 

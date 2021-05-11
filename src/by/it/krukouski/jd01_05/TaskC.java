@@ -5,6 +5,7 @@ public class TaskC {
         int quantityElement = (int) ((Math.random() * 21) + 20);
         double[] array = new double[quantityElement];
         int i = 0;
+        //заполняем массив
         for (double x = 5.33; x <= 9; x += (9.53 / 5.33) / (quantityElement - 1)) {
             if (i >= quantityElement) {
                 break;
@@ -14,6 +15,7 @@ public class TaskC {
             i++;
 
         }
+        //печатаем массив и считаем количество элементов, которые больше значения 3,5
         int a = 0;
         for (int j = 0; j < array.length; j++) {
             System.out.printf("%1s[%d]=%f\n", "v", j, array[j]);
@@ -21,15 +23,17 @@ public class TaskC {
                 a++;
             }
         }
+        //заполняем итоговый массив с значениями больше 3,5
         double[] resultArray = new double[a];
         int el = 0;
-        for (double v : array) {
-            if (v > 3.5) {
-                resultArray[el] = v;
+        for (double elementArray : array) {
+            if (elementArray > 3.5) {
+                resultArray[el] = elementArray;
                 el++;
             }
 
         }
+        //печатаем итоговый массив
         for (int j = 0; j < resultArray.length; j++) {
             System.out.printf("%1s[%d]=%f\n", "v", j, resultArray[j]);
         }

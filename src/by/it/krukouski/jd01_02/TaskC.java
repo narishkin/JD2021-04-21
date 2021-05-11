@@ -9,7 +9,8 @@ public class TaskC {
         step1(n);
         int[][] array = step1(n);
         step2(array);
-        //step3(array);
+        step3(array);
+
     }
 
     static int[][] step1(int n) {
@@ -78,6 +79,57 @@ public class TaskC {
 
         }
         return sum;
+    }
+
+    static int[][] step3(int[][] array) {
+        int max = 0;
+        for (int i = 0; i < array.length; i++) {
+            for (int j = 0; j < array[i].length; j++) {
+                if (max < array[i][j]) {
+                    max = array[i][j];
+                }
+            }
+        }
+        boolean[] delCol = new boolean[array[0].length];
+        boolean[] delRow = new boolean[array.length];
+        for (int i = 0; i < array.length; i++) {
+            for (int j = 0; j < array[i].length; j++) {
+                if (array[i][j] == max) {
+                    delRow[i] = true;
+                    delCol[j] = true;
+                }
+            }
+        }
+        int rowCount = 0;
+        for (boolean delCurrentRow : delRow) {
+            if (!delCurrentRow) {
+                rowCount++;
+            }
+        }
+        int colCount = 0;
+        for (boolean delCurrentCol : delCol) {
+            if (!delCurrentCol) {
+                colCount++;
+            }
+        }
+
+        int[][] arrayResult = new int[rowCount][colCount];
+        int ir = 0;
+        for (int i = 0; i < array.length; i++) {
+            int jr = 0;
+            if (!delRow[i]) {
+                for (int j = 0; j < array[i].length; j++) {
+                    if (!delCol[j]) {
+                        arrayResult[ir][jr++] = array[i][j];
+                    }
+
+                }
+                ir++;
+            }
+
+        }
+        return arrayResult;
+
     }
 }
 

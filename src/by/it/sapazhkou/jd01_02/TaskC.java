@@ -138,25 +138,25 @@ public class TaskC {
         int[][] resArray = new int[(array.length-indexString.length)][(array.length-indexColumn.length)];
 
         for (int i = 0; i < array.length; i++) {
-            boolean stopSrt = false;
-            for (int iSrt = 0; iSrt < indexString.length; iSrt++) {
-                if (i == indexString[iSrt]) {
-                    stopSrt = true;
+            boolean stopStr = false;
+            for (int iStr = 0; iStr < indexString.length; iStr++) {
+                if (i == indexString[iStr]) {
+                    stopStr = true;
                 }
             }
-            if (stopSrt) {
+            if (stopStr) {
 
             } else {
 
 
                 for (int j = 0; j < array.length; j++) {
-                    boolean stopCln = false;
+                    boolean stopClm = false;
                     for (int jClm = 0; jClm < indexColumn.length; jClm++) {
                         if (j == indexColumn[jClm]) {
-                            stopCln = true;
+                            stopClm = true;
                         }
                     }
-                    if (stopCln) {
+                    if (stopClm) {
 
                     } else {
 

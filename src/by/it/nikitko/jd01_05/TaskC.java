@@ -7,14 +7,14 @@ import java.util.Arrays;
 public class TaskC {
     public static void main(String[] args) {
         step1();
+        step2();
 
 
     }
 
     private static void step1() {
 
-        int lenghtOfArray = getRandomNumber(20, 41);
-
+        int lenghtOfArray = Helper.getRandomNumber(20, 40);
         double[] array = new double[lenghtOfArray];
         double deltaX = (9 - 5.33) / (lenghtOfArray);
         double x = 5.33;
@@ -22,7 +22,7 @@ public class TaskC {
             array[i] = Math.cbrt(x * x + 4.5);
             x = x + deltaX;
         }
-        System.out.println("Length of array = " + lenghtOfArray);
+        System.out.println("Length of array A = " + lenghtOfArray);
         InOut.printArray(array, "A", 5);
         Arrays.sort(array);
         int indexFirstNumber = -1;
@@ -33,26 +33,39 @@ public class TaskC {
             }
         }
 
-        System.out.println("New array with numbers more than 3.5");
+        System.out.println("New array B with numbers more than 3.5");
         double[] arrayB = Arrays.copyOfRange(array, indexFirstNumber, array.length);
         InOut.printArray(arrayB, "B", 5);
-        calculateGeometricMeanOfNumbers(arrayB);
+        Helper.calculateGeometricMeanOfNumbers(arrayB);
 
     }
 
+    private static void step2() {
+        int[] arrayA = new int[31];
+        int lenghtArrayB = 0;
+        System.out.println();
 
-    public static int getRandomNumber(int min, int max) {
-        return (int) ((Math.random() * (max - min)) + min);
-    }
-
-    private static void calculateGeometricMeanOfNumbers(double[] array) {
-        double geometricMeanOfNumbers = 1;
-        for (double v : array) {
-            geometricMeanOfNumbers = geometricMeanOfNumbers * v;
+        for (int i = 0; i < arrayA.length; i++) {
+            arrayA[i] = Helper.getRandomNumber(103, 450);
+            if (arrayA[i] / 10 > i) {
+                lenghtArrayB++;
+            }
         }
-        geometricMeanOfNumbers = Math.pow(geometricMeanOfNumbers, (1.0 / array.length));
-        System.out.printf("Geometric mean of numbers = %4.2f ", geometricMeanOfNumbers);
+        Helper.printIntArray(arrayA,"A",5);
+        System.out.println();
+
+        int[] arrayB = new int[lenghtArrayB];
+        int j=0;
+        for (int i = 0; i < arrayA.length; i++) {
+            if (arrayA[i] / 10 > i) {
+                arrayB[j] = arrayA[i];
+                j++;
+            }
+        }
+        Arrays.sort(arrayB);
+        Helper.printIntArray(arrayB,"B",5);
 
     }
+
 
 }

@@ -31,8 +31,8 @@ public class TaskC {
             }
         }
 
-        System.out.println("New array B with numbers more than 3.5");
         double[] arrayB = Arrays.copyOfRange(array, indexFirstNumber, array.length);
+        System.out.println("New array B with numbers more than 3.5");
         InOut.printArray(arrayB, "B", 5);
         Helper.calculateGeometricMeanOfNumbers(arrayB);
 

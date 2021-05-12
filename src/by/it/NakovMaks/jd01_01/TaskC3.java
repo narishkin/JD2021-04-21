@@ -39,21 +39,19 @@ class TaskC3 {
     private static final double Grav_Mars = 3.86;
     private static final double Grav_Earth = 9.81;
 
-    public static double getWeight(int weight) {
-
-        return (double) weight * Grav_Mars / Grav_Earth;
-    }
-
     public static void main(String[] args) {
 
-        System.out.println("Ввод: ");
-        Scanner sc = new Scanner(System.in);
-        int weight = sc.nextInt();
+//        System.out.println("Ввод: ");
+        final Scanner sc = new Scanner(System.in);
+        final int weight = sc.nextInt();
         Locale.setDefault(Locale.ENGLISH);
 
-        System.out.format("Вывод: " + "\n" + "%.2f", getWeight(weight));
-
+        System.out.format("%.2f", getWeight(weight));
     }
 
+    public static double getWeight(final int weight) {
+
+        return weight * Grav_Mars / Grav_Earth;
+    }
 
 }

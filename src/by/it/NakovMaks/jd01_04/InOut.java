@@ -1,4 +1,4 @@
-package by.it.NakovMaks.jd01_03;
+package by.it.NakovMaks.jd01_04;
 
 public class InOut {
     static double[] getArray(String line) {

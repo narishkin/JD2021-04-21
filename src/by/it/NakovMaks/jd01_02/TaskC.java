@@ -54,28 +54,27 @@ public class TaskC {
         } else return step1(n);
     }
 
-    private static int step2(int[][] arr) {
+    private static int step2(int[][] array) {
         int sum = 0;
         int indexStart = 0;
         int indexEnd = 0;
-        for (int i = 0; i < arr.length; i++) {
-            for (int j = arr.length-1 ; j >= indexStart; j--) {
-                if (arr[i][j] > 0) {
-                    indexStart = i;
-                    indexEnd = j;
-                    break;
+        for (int i = 0; i < array.length; i++) {
+            if (array[i][0] >= 0) {
+                if (indexStart <= 0) {
+                    indexStart = array[i][0];
+                }
+                for (int j = 0; j < array[i].length; j++) {
+
+                    if (indexEnd <= 0) {
+                        indexEnd = array[0][j];
+                    }
                 }
             }
-            System.out.println(arr[indexStart][indexEnd]);
-//            System.out.println(sum);
-            return sum;
+            System.out.println(indexStart + indexEnd);
         }
-
-
-//        static void step3 () {
-//
-//        }
-
         return sum;
     }
+    //        static void step3 () {
+//
+//        }
 }

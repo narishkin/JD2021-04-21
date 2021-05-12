@@ -1,4 +1,4 @@
-package by.it.khmelov.jd01_05;
+package by.it._classwork_.jd01_05;
 
 import static java.lang.Math.*;
 

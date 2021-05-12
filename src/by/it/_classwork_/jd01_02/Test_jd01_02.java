@@ -1,4 +1,4 @@
-package by.it.khmelov.jd01_02;
+package by.it._classwork_.jd01_02;
 
 import org.junit.Test;
 

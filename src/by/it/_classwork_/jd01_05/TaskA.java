@@ -7,7 +7,7 @@ public class TaskA {
     public static void main(String[] args) {
         step1();
         step3();
-
+ 
     }
 
     private static void step1() {

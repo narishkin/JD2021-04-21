@@ -1,5 +1,6 @@
 package by.it.krukouski.jd01_04;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class TaskC {
@@ -29,7 +30,9 @@ public class TaskC {
         }
         int middle = (right + left) / 2;
         double[] arrayLeft = new double[middle];
+        System.arraycopy(array,0,arrayLeft,0,middle);
         double[] arrayRight = new double[right - middle];
+        System.arraycopy(array,middle,arrayRight,0,right-middle);
         mergeSort(arrayLeft);
         mergeSort(arrayRight);
         merge(arrayLeft, arrayRight);

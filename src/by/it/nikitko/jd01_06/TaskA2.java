@@ -12,10 +12,10 @@ public class TaskA2 {
 
     public static void main(String[] args) {
 
-        Pattern pattern = Pattern.compile(WORD_PATTERN);
-        Matcher matcher = pattern.matcher(Poem.TEXT);
-        while (matcher.find()) {
-            String word = matcher.group();
+        Pattern patternWord = Pattern.compile(WORD_PATTERN);
+        Matcher matcherWord = patternWord.matcher(Poem.TEXT);
+        while (matcherWord.find()) {
+            String word = matcherWord.group();
             processOneWord(word);
         }
         printResult();

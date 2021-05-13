@@ -1,30 +1,53 @@
 package by.it.nikitko.jd01_06;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.Arrays;
+
+
+import static jdk.nashorn.internal.objects.NativeString.trim;
 
 public class TaskB2 {
 
-    public static final String WORD_PATTERN = "[\\.][^\\...]";
-    String [] ArrayOfSentence;
+
 
 
     public static void main(String[] args) {
-        int sentenceCount =0;
 
-        Pattern pattern = Pattern.compile(WORD_PATTERN);
-        Matcher matcher = pattern.matcher(Poem.TEXT);
-        while (matcher.find()) {
-            sentenceCount++;
+        String[] sentences = Poem.TEXT.split("[.!?]\\s*");
+        formatText(sentences);
+        sortSentences(sentences);
+        printText(sentences);
+    }
 
-
-         //   String word = matcher.group();
-         //   StringBuilder predl = new StringBuilder();
-          //  predl.append(word);
-            }
-        System.out.println(sentenceCount);
+    private static void formatText(String[] sentences) {
+        for (int i = 0; i < sentences.length; i++) {
+            sentences[i] = sentences[i].replaceAll("[^а-яА-ЯёЁ\\s]", " ").replaceAll("\\s+", " ");
+            sentences[i] = trim(sentences[i]);
         }
     }
+
+    private static void sortSentences(String[] sentences) {
+        Arrays.sort(sentences, (x, y) -> x.split(" ").length - y.split(" ").length);
+         }
+
+    private static void printText(String[] sentences) {
+        for (String sentence : sentences) {
+            System.out.println(sentence);
+
+        }
+    }
+}
+
+
+
+/*"У лукоморья дуб зелёный Златая цепь на дубе том\n" +
+        "Идёт направо песнь заводит Налево сказку говорит\n" +
+        "Там на неведомых дорожках Следы невиданных зверей\n" +
+        "И днём и ночью кот учёный Всё ходит по цепи кругом\n" +
+        "Там чудеса там леший бродит Русалка на ветвях сидит\n" +
+        "Избушка там на курьих ножках Стоит без окон без дверей\n" +
+        "В темнице там царевна тужит А бурый волк ей верно служит\n");
+
+*/
 
 
 

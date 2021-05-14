@@ -21,7 +21,7 @@ public class TaskB1 {
 
     }
 
-    public static boolean checkWord(String word) {
+    private static boolean checkWord(String word) {
         boolean firstChar = VOTES.indexOf(word.charAt(0)) < 0;
         boolean lastChar = VOTES.indexOf(word.charAt(word.length() - 1)) >= 0;
         return firstChar && lastChar;

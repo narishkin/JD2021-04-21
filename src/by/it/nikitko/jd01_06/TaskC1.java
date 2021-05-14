@@ -4,7 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class TaskC1 {
-    public static final String WORD_PATTERN = "[,а-яёА-ЯЁ-]+";
+    public static final String WORD_PATTERN = "[.,а-яёА-ЯЁ-]+";
 
 
     public static void main(String[] args) {

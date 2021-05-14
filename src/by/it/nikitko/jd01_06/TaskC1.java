@@ -4,36 +4,26 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class TaskC1 {
-    public static final String WORD_PATTERN = "[.,а-яёА-ЯЁ-]+";
+    public static final String WORD_PATTERN = "[-.,а-яёА-ЯЁ]+";
 
 
     public static void main(String[] args) {
 
         String[] poemByString = Poem.TEXT.split("\n");
-        System.out.println(poemByString[5]);
+        System.out.println(poemByString[4]);
         int maxLenght = findMaxString(poemByString);
         formatString(poemByString, maxLenght);
 
     }
 
 
-    private static int findMaxString(String[] poemByString) {
-        int maxLenght = 0;
-        for (String s : poemByString) {
-            if (s.length() > maxLenght) {
-                maxLenght = s.length();
-            }
-        }
-        System.out.println("maxLenght=" + maxLenght);
-        return maxLenght;
-    }
-
-
     private static void formatString(String[] poemByString, int maxLenght) {
-        int spaceNeeded = maxLenght - poemByString[5].length();
-        int wordsInSentence = foundCountOfWords(poemByString[5]);
 
-       /* int firstSpaceCount = 0;
+
+        int spaceNeeded = maxLenght - poemByString[4].length();
+        int wordsInSentence = foundCountOfWords(poemByString[4]);
+
+        int firstSpaceCount = 0;
         int otherSpaceCount = 0;
 
         if (spaceNeeded % (wordsInSentence - 1) == 0) {
@@ -41,24 +31,45 @@ public class TaskC1 {
         } else {
             firstSpaceCount = spaceNeeded / (wordsInSentence - 1) + 1;
             otherSpaceCount = spaceNeeded / (wordsInSentence - 1);
-        }*/
-        StringBuilder string = new StringBuilder(poemByString[5]);
+        }
+
+
+        StringBuilder string = new StringBuilder(poemByString[4]);
         Pattern patternWord = Pattern.compile(WORD_PATTERN);
         Matcher matcher = patternWord.matcher(string);
-      //  while (matcher.find()&& matcher.hitEnd()) {
-        while (matcher.find()) {
+        while (matcher.find() && !matcher.hitEnd()) {
             int position = matcher.end();
-            string.insert(position,' ');
+
+
+
+
+            if ((spaceNeeded % (wordsInSentence - 1) != 0) ) {
+                for (int i = 0; i < firstSpaceCount; i++) {
+                    string.insert(position, ' ');
+                    spaceNeeded--;
+                }
+                wordsInSentence--;
+            }
+
+            if ((spaceNeeded % (wordsInSentence - 1)) == 0) {
+                for (int i = 0; i < otherSpaceCount; i++) {
+                    string.insert(position, ' ');
+                    spaceNeeded--;
+                }
+            }
+
+
         }
         System.out.println(string);
-
+        System.out.println("Там русский дух... там Русью пахнет!");
+        ;
 
 
         System.out.println("lenght of current string =" + poemByString[4].length());
         System.out.println("spaceNeeded=" + spaceNeeded);
         System.out.println("wordsInSentence=" + wordsInSentence);
-      //  System.out.println("firstSpaceCount=" + firstSpaceCount);
-      //  System.out.println("otherSpaceCount=" + otherSpaceCount);
+        //  System.out.println("firstSpaceCount=" + firstSpaceCount);
+        //  System.out.println("otherSpaceCount=" + otherSpaceCount);
 
 
     }
@@ -72,6 +83,17 @@ public class TaskC1 {
             wordsInSentence++;
         }
         return wordsInSentence;
+    }
+
+    private static int findMaxString(String[] poemByString) {
+        int maxLenght = 0;
+        for (String s : poemByString) {
+            if (s.length() > maxLenght) {
+                maxLenght = s.length();
+            }
+        }
+        System.out.println("maxLenght=" + maxLenght);
+        return maxLenght;
     }
 
 }

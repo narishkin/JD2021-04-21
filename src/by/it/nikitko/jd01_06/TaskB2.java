@@ -1,14 +1,10 @@
 package by.it.nikitko.jd01_06;
 
 import java.util.Arrays;
-
-
 import static jdk.nashorn.internal.objects.NativeString.trim;
 
+
 public class TaskB2 {
-
-
-
 
     public static void main(String[] args) {
 
@@ -39,7 +35,7 @@ public class TaskB2 {
 
 
 
-/*"У лукоморья дуб зелёный Златая цепь на дубе том\n" +
+/*      "У лукоморья дуб зелёный Златая цепь на дубе том\n" +
         "Идёт направо песнь заводит Налево сказку говорит\n" +
         "Там на неведомых дорожках Следы невиданных зверей\n" +
         "И днём и ночью кот учёный Всё ходит по цепи кругом\n" +

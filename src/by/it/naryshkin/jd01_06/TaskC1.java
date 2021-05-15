@@ -58,19 +58,22 @@ public class TaskC1 {
             array[i] = temp;
 
 
-            Pattern p3 = Pattern.compile("(?<=[А-Яа-яёЁ,.:])( )");
+            Pattern p3 = Pattern.compile("(?<=[А-Яа-яёЁ,.-:])( )");
             Matcher m3 = p3.matcher(array[i]);
             int counter=0;
             StringBuilder sb = new StringBuilder(array[i]);
             while (m3.find()) {
-                int start = 0;
+                int start;
 //                System.out.println(m3.group());
                 spacesRemain = diff % numberOfMatched;
 //                System.out.println("оставшихся пробелов" + spacesRemain);
                 if (counter<spacesRemain) {
                     start = m3.start();
-                    System.out.println("start" + start);
-                    sb.insert(start, "+");
+                    start = start+ counter;
+//                    System.out.println(i);
+//                    System.out.println("start" + start);
+                    sb.insert(start, " ");
+
 
                     counter++;
                 }

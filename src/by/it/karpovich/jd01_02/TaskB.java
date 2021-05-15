@@ -1,4 +1,4 @@
-package by.it.karpovich.J0102;
+package by.it.karpovich.jd01_02;
 
 import java.util.Scanner;
 

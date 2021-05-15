@@ -1,4 +1,4 @@
-package by.it.karpovich.J0103;
+package by.it.karpovich.jd01_04;
 
 import java.util.Arrays;
 import java.util.Random;
@@ -40,7 +40,7 @@ public class Helper {
     }
 
 
-    private static void sort(double[] arr) {
+    public static void sort(double[] arr) {
         Arrays.sort(arr);
         for (double v : arr) {
             System.out.println(v + " ");

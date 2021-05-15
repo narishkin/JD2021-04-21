@@ -1,6 +1,5 @@
 package by.it.marusich.jd01_02;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class TaskA {
@@ -47,17 +46,46 @@ public class TaskA {
 
 
     private static void step3(int[] array) {
-        Arrays.sort(array);
+        int[] minIndex = new int[10];
         int min = array[0];
-        for (int element : array) {
-            if (min > element)
-                min = element;
+        int g=0;
+        for (int k : array) {
+            if (min > k) {
+                min = k;
+            }
         }
-        for (int i = array.length - 1; i >= 0; i--) {
-            System.out.print(i + " ");
+        for (int i = 0; i < array.length; i++) {
+            if(min == array[i]){
+                minIndex[g] = i;
+                g=g+1;
+            }
         }
+        for (int i = g-1; i >= 0 ; i--) {
+            System.out.print(minIndex[i]+" ");
+        }
+        System.out.println();
     }
 }
+ /*   int[] minIndex = new int[10];
+int min = array[0];
+    int j=0;
+    for (int i = 0; i < array.length; i++) {
+           if (min>array[i]){
+            min = array[i];
+        }
+       }
+       for (int i = 0; i < array.length; i++) {
+            if(min == array[i]){
+            minIndex[j] = i;
+        j=j+1;
+        }
+        }
+        for (int i = j-1; i >= 0 ; i--) {
+            System.out.print(minIndex[i]+" ");
+        }
+        System.out.println();
+}
+}*/
 
 
 

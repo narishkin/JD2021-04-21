@@ -34,16 +34,24 @@ import java.util.Scanner;
 
 */
 class TaskC3 {
-
     public static void main(String[] args) {
-        System.out.println(getWeight(888));
-    }
-
-    public static double getWeight(int Weight) {
         Scanner sc = new Scanner(System.in);
-        int earthWeight = sc.nextInt();
-        double a = earthWeight * (3.86 / 9.81);
-        return a;
+        int weight = sc.nextInt();
+        sc.close();
+        System.out.println(getWeight(weight));
+    }
+    static double getWeight(int weight) {
+        double MARS = 3.86;
+        double EARHT = 9.81;
+        int a = (int) (weight * MARS / EARHT * 1000);
+        int b = (int) (weight * MARS / EARHT * 100);
+        b = b * 10;
+        if (a - b >= 5) {
+            b = b + 10;
+        }
+        b = b / 10;
+        double result = b * 0.01;
+        return result;
     }
 }
 

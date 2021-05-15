@@ -17,7 +17,8 @@ public class TaskB2 {
         Pattern pattern = Pattern.compile(SENTENCES_PATTERN);
         Matcher matcher = pattern.matcher(text);
         while (matcher.find()) {
-            String sentence = matcher.group().replace("\n", " ").trim();
+            String sentence = matcher.group().replace("\n", " ");
+            sentence=sentence.trim();
             sentenceToArray(sentence);
         }
         for (int i = 0; i < sentences.length; i++) {
@@ -34,8 +35,8 @@ public class TaskB2 {
 
         }
 
-        for (String s : sentences) {
-            System.out.println(s);
+        for (String sentence : sentences) {
+            System.out.printf("%s\n",sentence);
 
         }
 

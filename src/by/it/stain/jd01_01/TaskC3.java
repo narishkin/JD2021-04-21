@@ -1,7 +1,4 @@
-package by.it.marusich.jd01_01;
-
-import java.util.Scanner;
-
+package by.it.stain.jd01_01;
 /*
 Ускорение свободного падения на Земле и Марсе таково:
 Марс   3.86
@@ -33,31 +30,34 @@ import java.util.Scanner;
 29.51
 
 */
+
+import java.util.Scanner;
+
 class TaskC3 {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int weight = sc.nextInt();
-        sc.close();
-        System.out.println(getWeight(weight));
+        System.out.println("Введите вес человека в кг. ");
+        Scanner s = new Scanner(System.in);
+        System.out.println("Вес человека на марсе = "+getWeight(s.nextInt())+"кг");
+        getWeight(s.nextInt());
     }
-    static double getWeight(int weight) {
-        double MARS = 3.86;
-        double EARHT = 9.81;
-        int a = (int) (weight * MARS / EARHT * 1000);
-        int b = (int) (weight * MARS / EARHT * 100);
-        b = b * 10;
-        if (a - b >= 5) {
-            b = b + 10;
-        }
-        b = b / 10;
-        double result = b * 0.01;
-        return result;
+
+
+        public static double getWeight(double s) {
+
+
+            double z = 9.81;
+            double y = 3.86;
+            double n = y / z;
+            double q=s;
+            double a = q*n;
+            double c = Math.pow(10 ,2);
+            double result = Math.round(a * c) / c;
+
+            return result ;
+
     }
+
+
+
+
 }
-
-
-
-
-
-
-

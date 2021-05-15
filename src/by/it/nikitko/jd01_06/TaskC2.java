@@ -19,7 +19,7 @@ public class TaskC2 {
 
 
         lStartTime = System.nanoTime();
-        StringBuilder fastString = fast(Poem.TEXT);
+        String fastString = fast(Poem.TEXT);
         System.out.println(fastString);
         lEndTime = System.nanoTime();
         long outputFast = lEndTime - lStartTime;
@@ -43,7 +43,7 @@ public class TaskC2 {
     }
 
 
-    public static StringBuilder fast(String text) {
+    public static String fast(String text) {
         String[] words = text.split("[^а-яёА-ЯЁ]+");
 
         Random random = setSeedRandom();
@@ -53,7 +53,7 @@ public class TaskC2 {
             String addedString = words[random.nextInt(words.length)];
             string.append(addedString).append(" ");
         }
-        return string;
+        return string.toString();
     }
 
     private static Random setSeedRandom() {

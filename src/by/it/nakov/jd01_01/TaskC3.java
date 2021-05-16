@@ -1,5 +1,6 @@
-package by.it.marusich.jd01_01;
+package by.it.nakov.jd01_01;
 
+import java.util.Locale;
 import java.util.Scanner;
 
 /*
@@ -34,30 +35,24 @@ import java.util.Scanner;
 
 */
 class TaskC3 {
+
+    private static final double Grav_Mars = 3.86;
+    private static final double Grav_Earth = 9.81;
+
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int weight = sc.nextInt();
-        sc.close();
-        System.out.println(getWeight(weight));
+
+//        System.out.println("Ввод: ");
+        final Scanner sc = new Scanner(System.in);
+        final int weight = sc.nextInt();
+        Locale.setDefault(Locale.ENGLISH);
+
+        System.out.format("%.2f\n", getWeight(weight));
     }
-    static double getWeight(int weight) {
-        double MARS = 3.86;
-        double EARHT = 9.81;
-        int a = (int) (weight * MARS / EARHT * 1000);
-        int b = (int) (weight * MARS / EARHT * 100);
-        b = b * 10;
-        if (a - b >= 5) {
-            b = b + 10;
-        }
-        b = b / 10;
-        double result = b * 0.01;
-        return result;
+
+    public static double getWeight(final int weight) {
+        double v = weight * Grav_Mars / Grav_Earth;
+
+        return Math.round(v * 100) / 100.0;
     }
+
 }
-
-
-
-
-
-
-

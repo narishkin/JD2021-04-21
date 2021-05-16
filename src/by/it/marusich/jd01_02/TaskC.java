@@ -1,40 +1,40 @@
 package by.it.marusich.jd01_02;
 
-import java.util.Random;
 import java.util.Scanner;
 
-/*public class TaskC {
+public class TaskC {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int n = scanner.nextInt();
-        Random rand = new Random();
-        int x = rand.nextInt();
-
-        step1(x);
+        int array[][];
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        array = step1(n);
     }
-
-    private static void step1(int x) {
-        for (int i = -5; i < 5; i++) {
-            System.out.println(i + " ");
-            if (i % 5 == 0) ;
-            System.out.println();
-
-        }
-
-    }
-
-    int[][] step3(int[][] array) {
-        int max = Integer.MAX_VALUE;
-        for (int[] row : array) {
-            for (int e : row) {
-                if (e > max) {
-                    max = e;
+    static int[][] step1(int n) {
+        boolean minFind = false;
+        boolean maxFind = false;
+        int size = n + n + 1;
+        int[][] array = new int[size][size];
+        int minBorder = -1 * n;
+        int maxBorder = n;
+        while (!minFind || !maxFind) {
+            for (int i = 0; i < array.length; i++) {
+                for (int g = 0; g < array.length; g++) {
+                    int rnd = (int) (Math.random() * size) + minBorder;
+                    array[i][g] = rnd;
+                    if (rnd == minBorder) {
+                        minFind = true;
+                    } else if (rnd == maxBorder) {
+                        maxFind = true;
+                    }
                 }
             }
         }
-        return
+        for (int[] ints : array) {
+            for (int g = 0; g < array.length; g++) {
+                System.out.print(ints[g] + " ");
+            }
+            System.out.print("\n");
+        }
+        return array;
     }
-    /*boolean[]delCol = new boolean[array[0].length];
-    boolean[]delCol = new boolean[array.length];
-
-*/
+}

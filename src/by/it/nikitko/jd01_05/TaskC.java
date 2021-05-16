@@ -4,6 +4,8 @@ import by.it.nikitko.jd01_04.InOut;
 
 import java.util.Arrays;
 
+import static java.lang.Math.*;
+
 public class TaskC {
     public static void main(String[] args) {
         step1();
@@ -17,7 +19,7 @@ public class TaskC {
         double deltaX = (9 - 5.33) / (lenghtOfArray);
         double x = 5.33;
         for (int i = 0; i < array.length; i++) {
-            array[i] = Math.cbrt(x * x + 4.5);
+            array[i] = cbrt(x * x + 4.5);
             x = x + deltaX;
         }
         System.out.println("Length of array A = " + lenghtOfArray);
@@ -31,8 +33,8 @@ public class TaskC {
             }
         }
 
-        System.out.println("New array B with numbers more than 3.5");
         double[] arrayB = Arrays.copyOfRange(array, indexFirstNumber, array.length);
+        System.out.println("New array B with numbers more than 3.5");
         InOut.printArray(arrayB, "B", 5);
         Helper.calculateGeometricMeanOfNumbers(arrayB);
 
@@ -49,11 +51,11 @@ public class TaskC {
                 lenghtArrayB++;
             }
         }
-        Helper.printIntArray(arrayA,"A",5);
+        Helper.printIntArray(arrayA, "A", 5);
         System.out.println();
 
         int[] arrayB = new int[lenghtArrayB];
-        int j=0;
+        int j = 0;
         for (int i = 0; i < arrayA.length; i++) {
             if (arrayA[i] / 10 > i) {
                 arrayB[j] = arrayA[i];
@@ -61,8 +63,20 @@ public class TaskC {
             }
         }
         Arrays.sort(arrayB);
-        Helper.printIntArray(arrayB,"B",5);
+         Helper.printIntArray(arrayB,"B",5);
+      /*  int columnCount = 3;
+        int i1=0;
+        int stringCount = (int) (ceil(arrayB.length / columnCount));
+        for (int i = 0; i < stringCount; i++) {
+            for ( i1 = 0; i1 < (columnCount * columnCount); i1++) {
+                if (i1 % columnCount == 0) {
+                    System.out.printf("B[% -3d]=%-10d", i1, arrayB[i1]);
+                }
+            }
+            System.out.println();
 
+        }
+*/
     }
 
 

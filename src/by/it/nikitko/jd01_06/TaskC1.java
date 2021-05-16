@@ -11,7 +11,7 @@ public class TaskC1 {
 
         String[] poemByString = Poem.TEXT.split("\n");
         int maxLength = findMaxString(poemByString);
-        for (String stringI : poemByString) {
+       for (String stringI : poemByString) {
             formatString(stringI, maxLength);
        }
       //    formatString(poemByString[29], maxLength);
@@ -27,8 +27,9 @@ public class TaskC1 {
 
         while (spaceNeeded > 0) {
             matcher.reset();
-            while (matcher.find() && !matcher.hitEnd()&&spaceNeeded>0) {
-                int position = matcher.end();
+            int position=0;
+            while (matcher.find(position) && !matcher.hitEnd()&&spaceNeeded>0) {
+                position = matcher.end();
                 string.insert(position, ' ');
                 spaceNeeded--;
             }

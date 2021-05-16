@@ -20,6 +20,16 @@ public class Runner {
         System.out.println(vector1);
         Var vector2 = new Vector("{1.0, 2.0, 4.0}");
         System.out.println(vector2);
+        System.out.println();
+
+        double[][] doubleArray = new double[][]{{1.0, 2.0},{3.0, 4.0}};
+        Var matrix = new Matrix(doubleArray);
+        System.out.println(matrix);
+        Matrix newMatrix = new Matrix(doubleArray);
+        Var matrix1 = new Matrix(newMatrix);
+        System.out.println(matrix1);
+        Var matrix2= new Matrix("{{1.0,2.0},{3.0,4.0}}");
+        System.out.println(matrix2);
 
 
     }

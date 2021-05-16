@@ -13,8 +13,8 @@ public class Vector extends Var{
     }
 
     public Vector(String stringVector){
-        String str = stringVector.replaceAll("[{}]", "");
-        String[] vector = str.split(",");
+        String line = stringVector.replaceAll("[{}]", "");
+        String[] vector = line.split(",");
         this.ARRAY=new double[vector.length];
         for (int i = 0; i < ARRAY.length; i++) {
             ARRAY[i]=Double.parseDouble(vector[i]);

@@ -87,41 +87,110 @@ public class TaskC {
         }
         Arrays.sort(arrayB);
 
+        //начало таблицы А
+        int columnsA = 5; // количество столбцов в таблице
+        int cellWidth = 11; // устанавливаем ширину ячейки
+        double rows = (double) arrayA.length / columnsA; //вычисляем количество строк в таблице
+        int rowsA = (int) (Math.ceil(rows)); //округляем до целого значения
+        System.out.print("╔");
+        for (int i = 0; i < columnsA; i++) {
+            if (i > 0) {
+                System.out.print("╦");
+            }
+            for (int j = 0; j < cellWidth; j++) {
+                System.out.print("═");
+            }
+        }
+        System.out.println("╗");
 
         //печатаем массив А
-        for (int i = 0; i < arrayA.length; i++) {
-            if (i % 5 == 0 && i > 0) {
-                System.out.println();
+        for (int i = 0; i < rowsA * columnsA; i++) {
+            if (i < arrayA.length) {
+                System.out.printf("║ A[%2d]=%d ", i, arrayA[i]);
+            } else {
+                System.out.print("║           ");
             }
-            System.out.printf("A[%2d]=%d  ", i, arrayA[i]);
+            if ((i + 1) % columnsA == 0 && i < arrayA.length) {
+                System.out.println("║");
+                System.out.print("╠");
+                for (int k = 0; k < columnsA; k++) {
+                    if (k > 0) {
+                        System.out.print("╬");
+                    }
+                    for (int j = 0; j < cellWidth; j++) {
+                        System.out.print("═");
+                    }
+                }
+                System.out.println("╣");
+            }
+
         }
+        System.out.println("║");
+
+        // конец таблицы А
+        System.out.print("╚");
+        for (int l = 0; l < columnsA; l++) {
+            if (l > 0) {
+                System.out.print("╩");
+            }
+            for (int j = 0; j < cellWidth; j++) {
+                System.out.print("═");
+            }
+        }
+        System.out.println("╝");
         System.out.println();
         System.out.println();
+
+        //начало таблицы В
+        int columnsB = 2; //устанавливаем количество столбцов в таблице В
+        int rowsB = countElementArrayB / columnsB; // вычисляем количество строк таблицы В
+        System.out.print("╔");
+        for (int i = 0; i < columnsB; i++) {
+            if (i > 0) {
+                System.out.print("╦");
+            }
+            for (int j = 0; j < cellWidth; j++) {
+                System.out.print("═");
+            }
+        }
+        System.out.println("╗");
 
         //печатаем массив В
-        int countsArrayB = 2;
-        int rowsArrayB = countElementArrayB/countsArrayB;
-        System.out.println("╔===========╦===========╗");
-        for (int i = 0; i < rowsArrayB; i++) {
-          System.out.printf("║ B[%2d]=%d   B[%2d]=%d ║ \n", i, arrayB[i], i+rowsArrayB, arrayB[i+rowsArrayB]);
+        int indexI = 0;
+        for (int i = 0; i < rowsB; i++) {
+            for (int j = 0; j < columnsB; j++) {
+                System.out.printf("║ B[%2d]=%d ", indexI, arrayB[indexI]);
+                indexI+=rowsB;
+            }
+            indexI=i+1;
+            if (i<(rowsB-1)) {
+                System.out.println("║");
+                System.out.print("╠");
+                for (int k = 0; k < columnsB; k++) {
+                    if (k > 0) {
+                        System.out.print("╬");
+                    }
+                    for (int j = 0; j < cellWidth; j++) {
+                        System.out.print("═");
+                    }
+                }
+                System.out.println("╣");
+            }
+
         }
-        System.out.println("╚=============================================╝");
+        System.out.println("║");
 
-        /*"╗"
-         "╝"
-        "╔"
-         "╚"
-         "╠"
-               "╣"
-                "╦"
-                "╩"
-                "╬"
-                "═"
-               "\\["
-                "]"
-                "║"
-*/
-
+        // конец таблицы B
+        System.out.print("╚");
+        for (int l = 0; l < columnsB; l++) {
+            if (l > 0) {
+                System.out.print("╩");
+            }
+            for (int j = 0; j < cellWidth; j++) {
+                System.out.print("═");
+            }
+        }
+        System.out.println("╝");
 
     }
 }

@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class TaskC2 {
 
-    public static final int WORDS_COUNTS = 100000;
+    public static final int WORDS_COUNTS = 50000;
     public static final long RANDOM_SEED = 12345;
 
 

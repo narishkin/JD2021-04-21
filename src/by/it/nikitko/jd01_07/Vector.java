@@ -14,9 +14,9 @@ class Vector extends Var {
     }
 
     public Vector(String strVector) {
-        double [] value = Arrays.stream(strVector.substring(1, strVector.length()-1).split(","))
+        this.value = Arrays.stream(strVector.substring(1, strVector.length()-1).split(","))
                 .map(String::trim).mapToDouble(Double::parseDouble).toArray();
-        this.value=value;
+
         }
 
 

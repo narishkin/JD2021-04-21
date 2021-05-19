@@ -66,9 +66,9 @@ public class TaskC {
 
         // Helper.printIntArray(arrayB,"B",5);
         int columnCount = 3;
-        double rowCount =  (double)arrayB.length/(double)columnCount;
+        int rowCount = (int) ceil((double)arrayB.length/(double)columnCount);
         System.out.println(arrayB.length);
-        System.out.printf("rowCount =%5.3f",rowCount);
+        System.out.printf("rowCount =%5d",rowCount);
         /*int i1=0;
         int stringCount = (int) (ceil(arrayB.length / columnCount));
         for (int i = 0; i < stringCount; i++) {

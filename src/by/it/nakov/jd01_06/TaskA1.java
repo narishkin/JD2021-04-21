@@ -19,8 +19,6 @@ public class TaskA1 {
             if (wordLenght >= 7) {
                 text.setCharAt(position + 6, REPLACE_CHAR);
             }
-//            String word = matcher.group();
-//            System.out.println(text);
         }
         System.out.println(text);
     }

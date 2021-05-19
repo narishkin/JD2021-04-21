@@ -13,12 +13,13 @@ public class TaskB2 {
 
     public static void main(String[] args) {
         String textWithoutSymbols = Poem.TEXT.replaceAll(WITHOUT, " ");
-        StringBuilder text = new StringBuilder(textWithoutSymbols);
+        String newText = textWithoutSymbols.replaceAll("\\.{3}", "");
+        StringBuilder text = new StringBuilder(newText);
         Pattern pattern = Pattern.compile(SENTENCES_PATTERN);
         Matcher matcher = pattern.matcher(text);
         while (matcher.find()) {
             String sentence = matcher.group().replace("\n", " ");
-            sentence=sentence.trim();
+            sentence = sentence.trim();
             sentenceToArray(sentence);
         }
         for (int i = 0; i < sentences.length; i++) {
@@ -36,7 +37,7 @@ public class TaskB2 {
         }
 
         for (String sentence : sentences) {
-            System.out.printf("%s\n",sentence);
+            System.out.printf("%s\n", sentence);
 
         }
 

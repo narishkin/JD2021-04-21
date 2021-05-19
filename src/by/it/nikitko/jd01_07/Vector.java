@@ -1,6 +1,8 @@
 package by.it.nikitko.jd01_07;
 
 import java.util.Arrays;
+import java.util.stream.DoubleStream;
+import java.util.stream.Stream;
 
 class Vector extends Var {
     private double[] value;
@@ -14,15 +16,15 @@ class Vector extends Var {
     }
 
     public Vector(String strVector) {
-        this.value = Arrays.stream(strVector.substring(1, strVector.length()-1).split(","))
-                .map(String::trim).mapToDouble(Double::parseDouble).toArray();
+        String[] split = strVector.substring(1, strVector.length() - 1).split(",");
+        Stream<String> stream = Arrays.stream(split);
+        Stream<String> streamTrimmed = stream.map(String::trim);
+        DoubleStream doubleStream = streamTrimmed.mapToDouble(Double::parseDouble);
+        this.value = doubleStream.toArray();
+    }
 
-        }
 
-
-
-
-
+    @Override
     public String toString() {
         StringBuilder out = new StringBuilder();
         String delimiter = ("");

@@ -8,8 +8,8 @@ class Scalar extends Var {
         this.value = value;
     }
 
-    public Scalar(Scalar scalar) {
-        this.value = scalar.value;
+    public  Scalar(Scalar otherScalar) {
+        this.value = otherScalar.value;
     }
 
     public Scalar(String string) {

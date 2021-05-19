@@ -18,17 +18,20 @@ public class Matrix extends Var {
         this.value = matrix.value;
     }
 
-    public Matrix (String strMatrix) {
+    public Matrix(String strMatrix) {
 
+        strMatrix = strMatrix.substring(2, strMatrix.length() - 2);
+        String[] arrayMatrixString = strMatrix.split("},\\{");
+        String[] stringNumbers = arrayMatrixString[0].split(",");
+        double[][] tempValue = new double[arrayMatrixString.length][stringNumbers.length];
+        for (int i = 0; i < arrayMatrixString.length; i++) {
+            stringNumbers = arrayMatrixString[i].split(",");
+            for (int j = 0; j < stringNumbers.length; j++) {
+                tempValue[i][j] = Double.parseDouble(stringNumbers[j]);
+            }
+        }
+        value = Arrays.copyOf(tempValue, tempValue.length);
     }
-//
-//        this.value = Arrays.stream(strMatrix.substring(1, strMatrix.length()-1).split(","))
-//                .map(String::trim).mapToDouble(Double::parseDouble).toArray();
-//
-
-
-
-
 
 
     public String toString() {
@@ -44,7 +47,7 @@ public class Matrix extends Var {
                 delimiter = (", ");
             }
             out.append("}");
-            if (i!= value.length-1){
+            if (i != value.length - 1) {
                 out.append(", ");
             }
         }

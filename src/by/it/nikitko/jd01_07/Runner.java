@@ -1,6 +1,6 @@
 package by.it.nikitko.jd01_07;
 
-import java.util.Arrays;
+
 
 public class Runner {
     public static void main(String[] args) {
@@ -35,13 +35,17 @@ public class Runner {
 
         double[][]matrix = { { 1.0, 2.0 }, { 3.0, 4.0 } };
 
-        var matrixVar = new Matrix(matrix);
-        System.out.println(matrixVar);
+        var matrixArrayVar = new Matrix(matrix);
+        System.out.println(matrixArrayVar);
 
 
-        String matrixString ="{ { 1.0, 2.0 }, { 3.0, 4.0 } }";
+        String matrixString ="{{1,2},{3,4}}";
+
         var matrixStringVar = new Matrix (matrixString);
-        System.out.println(matrixString);
+        System.out.println(matrixStringVar);
+
+        var matrixVar = new Matrix(matrixArrayVar);
+        System.out.println(matrixVar);
 
     }
 }

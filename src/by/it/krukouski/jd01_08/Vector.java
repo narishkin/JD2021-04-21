@@ -14,6 +14,10 @@ public class Vector extends Var {
         ARRAY = vector.ARRAY;
     }
 
+    public double[] getARRAY() {
+        return ARRAY;
+    }
+
     public Vector(String stringVector) {
         String line = stringVector.replaceAll("[{}]", "");
         String[] vector = line.split(",");

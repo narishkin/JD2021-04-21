@@ -21,11 +21,11 @@ public class Matrix extends Var {
     public Matrix(String strMatrix) {
 
         strMatrix = strMatrix.substring(2, strMatrix.length() - 2);
-        String[] arrayMatrixString = strMatrix.split("},\\{");
-        String[] stringNumbers = arrayMatrixString[0].split(",");
+        String[] arrayMatrixString = strMatrix.split("}, *\\{");
+        String[] stringNumbers = arrayMatrixString[0].split(", *");
         double[][] tempValue = new double[arrayMatrixString.length][stringNumbers.length];
         for (int i = 0; i < arrayMatrixString.length; i++) {
-            stringNumbers = arrayMatrixString[i].split(",");
+            stringNumbers = arrayMatrixString[i].split(", *");
             for (int j = 0; j < stringNumbers.length; j++) {
                 tempValue[i][j] = Double.parseDouble(stringNumbers[j]);
             }
@@ -35,14 +35,43 @@ public class Matrix extends Var {
 
     @Override
     public Var add(Var other) {
-        if(other instanceof Scalar){
-            double[][]addMatrix = new double[this.value.length][this.value[0].length];
+        if (other instanceof Scalar) {
+            double[][] addMatrix = new double[this.value.length][this.value[0].length];
             for (int i = 0; i < addMatrix.length; i++) {
-                addMatrix[i]=Arrays.copyOf(this.value[i],this.value.length );
+                addMatrix[i] = Arrays.copyOf(this.value[i], this.value.length);
             }
-
+            for (int i = 0; i < addMatrix.length; i++) {
+                for (int j = 0; j < addMatrix.length; j++) {
+                    addMatrix[i][j] += ((Scalar) other).getValue();
+                }
+            }
+            return new Matrix(addMatrix);
         }
-        return super.add(other);
+        if (other instanceof Matrix) {
+            //getting Matrix size and compatibility check
+            double[][] addMatrixA = new double[this.value.length][this.value[0].length];
+            double[][] addMatrixB = new double[((Matrix) other).value.length][((Matrix) other).value[0].length];
+
+            if (addMatrixA.length == addMatrixB.length && addMatrixA[0].length == addMatrixB[0].length) {
+                double[][] addMatrixC = new double[addMatrixA.length][addMatrixA[0].length];
+
+            //Matrix copying
+                for (int i = 0; i < addMatrixA.length; i++) {
+                    addMatrixA[i] = Arrays.copyOf(this.value[i], this.value.length);
+                }
+                for (int i = 0; i < addMatrixB.length; i++) {
+                    addMatrixB[i] = Arrays.copyOf(((Matrix) other).value[i], ((Matrix) other).value.length);
+                }
+            // Add matrixA for matrixB
+                for (int i = 0; i < addMatrixA.length; i++) {
+                    for (int j = 0; j < addMatrixA.length; j++) {
+                        addMatrixC[i][j] = addMatrixA[i][j] + addMatrixB[i][j];
+                    }
+                }
+                return new Matrix(addMatrixC);
+            }
+        }
+        return super.sub(other);
     }
 
     @Override

@@ -33,6 +33,32 @@ public class Matrix extends Var {
         value = Arrays.copyOf(tempValue, tempValue.length);
     }
 
+    @Override
+    public Var add(Var other) {
+        if(other instanceof Scalar){
+            double[][]addMatrix = new double[this.value.length][this.value[0].length];
+            for (int i = 0; i < addMatrix.length; i++) {
+                addMatrix[i]=Arrays.copyOf(this.value[i],this.value.length );
+            }
+
+        }
+        return super.add(other);
+    }
+
+    @Override
+    public Var sub(Var other) {
+        return super.sub(other);
+    }
+
+    @Override
+    public Var mul(Var other) {
+        return super.mul(other);
+    }
+
+    @Override
+    public Var div(Var other) {
+        return super.div(other);
+    }
 
     public String toString() {
 

@@ -38,25 +38,68 @@ class Vector extends by.it.nikitko.jd01_08.Var {
             }
             return new Vector(addRes);
 
-        }
-        else{
+        } else {
             return super.add(other);
         }
     }
 
     @Override
     public Var sub(Var other) {
-        return super.sub(other);
+        if (other instanceof Scalar) {
+            double[] subRes = Arrays.copyOf(value, value.length);
+            for (int i = 0; i < subRes.length; i++) {
+                subRes[i] -= ((Scalar) other).getValue();
+            }
+            return new Vector(subRes);
+        } else if (other instanceof Vector) {
+            double[] subRes = Arrays.copyOf(value, value.length);
+            for (int i = 0; i < subRes.length; i++) {
+                subRes[i] = subRes[i] - ((Vector) other).value[i];
+            }
+            return new Vector(subRes);
+        } else {
+            return super.sub(other);
+        }
     }
 
     @Override
     public Var mul(Var other) {
-        return super.mul(other);
+        if (other instanceof Scalar) {
+            double[] mulRes = Arrays.copyOf(value, value.length);
+            for (int i = 0; i < mulRes.length; i++) {
+                mulRes[i] *= ((Scalar) other).getValue();
+            }
+            return new Vector(mulRes);
+        } else if (other instanceof Vector) {
+            double result = 0;
+            double[] mulRes = Arrays.copyOf(value, value.length);
+            for (int i = 0; i < mulRes.length; i++) {
+                mulRes[i] = mulRes[i] * ((Vector) other).value[i];
+                result += mulRes[i];
+            }
+            return new Scalar(result);
+        } else {
+            return super.mul(other);
+        }
     }
+
 
     @Override
     public Var div(Var other) {
-        return super.div(other);
+        if (other instanceof Scalar) {
+            double denominator = ((Scalar) other).getValue();
+            if (denominator == 0) {
+                System.out.println("Division by zero");
+                return null; //TODO Exception
+            }
+            double[] divRes = Arrays.copyOf(value, value.length);
+            for (int i = 0; i < divRes.length; i++) {
+                divRes[i] /= ((Scalar) other).getValue();
+            }
+            return new Vector(divRes);
+        } else {
+            return super.div(other);
+        }
     }
 
     @Override

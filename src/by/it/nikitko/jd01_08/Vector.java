@@ -23,6 +23,41 @@ class Vector extends by.it.nikitko.jd01_08.Var {
         this.value = doubleStream.toArray();
     }
 
+    @Override
+    public Var add(Var other) {
+        if (other instanceof Scalar) {
+            double[] addRes = Arrays.copyOf(value, value.length);
+            for (int i = 0; i < addRes.length; i++) {
+                addRes[i] += ((Scalar) other).getValue();
+            }
+            return new Vector(addRes);
+        } else if (other instanceof Vector) {
+            double[] addRes = Arrays.copyOf(value, value.length);
+            for (int i = 0; i < addRes.length; i++) {
+                addRes[i] = addRes[i] + ((Vector) other).value[i];
+            }
+            return new Vector(addRes);
+
+        }
+        else{
+            return super.add(other);
+        }
+    }
+
+    @Override
+    public Var sub(Var other) {
+        return super.sub(other);
+    }
+
+    @Override
+    public Var mul(Var other) {
+        return super.mul(other);
+    }
+
+    @Override
+    public Var div(Var other) {
+        return super.div(other);
+    }
 
     @Override
     public String toString() {

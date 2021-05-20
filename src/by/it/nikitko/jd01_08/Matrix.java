@@ -71,11 +71,47 @@ public class Matrix extends Var {
                 return new Matrix(addMatrixC);
             }
         }
-        return super.sub(other);
+        return super.add(other);
     }
 
     @Override
     public Var sub(Var other) {
+        if (other instanceof Scalar) {
+            double[][] subMatrix = new double[this.value.length][this.value[0].length];
+            for (int i = 0; i < subMatrix.length; i++) {
+                subMatrix[i] = Arrays.copyOf(this.value[i], this.value.length);
+            }
+            for (int i = 0; i < subMatrix.length; i++) {
+                for (int j = 0; j < subMatrix.length; j++) {
+                    subMatrix[i][j] -= ((Scalar) other).getValue();
+                }
+            }
+            return new Matrix(subMatrix);
+        }
+        if (other instanceof Matrix) {
+            //getting Matrix size and compatibility check
+            double[][] subMatrixA = new double[this.value.length][this.value[0].length];
+            double[][] subMatrixB = new double[((Matrix) other).value.length][((Matrix) other).value[0].length];
+
+            if (subMatrixA.length == subMatrixB.length && subMatrixA[0].length == subMatrixB[0].length) {
+                double[][] addMatrixC = new double[subMatrixA.length][subMatrixA[0].length];
+
+                //Matrix copying
+                for (int i = 0; i < subMatrixA.length; i++) {
+                    subMatrixA[i] = Arrays.copyOf(this.value[i], this.value.length);
+                }
+                for (int i = 0; i < subMatrixB.length; i++) {
+                    subMatrixB[i] = Arrays.copyOf(((Matrix) other).value[i], ((Matrix) other).value.length);
+                }
+                // Add matrixA for matrixB
+                for (int i = 0; i < subMatrixA.length; i++) {
+                    for (int j = 0; j < subMatrixA.length; j++) {
+                        addMatrixC[i][j] = subMatrixA[i][j] - subMatrixB[i][j];
+                    }
+                }
+                return new Matrix(addMatrixC);
+            }
+        }
         return super.sub(other);
     }
 

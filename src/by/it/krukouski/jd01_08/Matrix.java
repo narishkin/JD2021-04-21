@@ -1,5 +1,7 @@
 package by.it.krukouski.jd01_08;
 
+import java.util.Arrays;
+
 public class Matrix extends Var {
     private final double[][] ARRAY;
 
@@ -15,7 +17,7 @@ public class Matrix extends Var {
 
     public Matrix(String stringMatrix) {
         String line = stringMatrix.replaceAll("[{}]{2,}", "");
-        String[] arrayString = line.split("(},\\{)");
+        String[] arrayString = line.split("(},\\s?\\{)");
         String[][] matrix = new String[arrayString.length][];
         for (int i = 0; i < matrix.length; i++) {
             matrix[i] = arrayString[i].split(",");
@@ -33,6 +35,11 @@ public class Matrix extends Var {
     public Var add(Var other) {
         if (other instanceof Scalar) {
             double[][] resultMatrix = new double[this.ARRAY.length][this.ARRAY[0].length];
+            for (int i = 0; i < this.ARRAY.length; i++) {
+                for (int j = 0; j < this.ARRAY[i].length; j++) {
+                    resultMatrix[i] = Arrays.copyOf(this.ARRAY[i], this.ARRAY[i].length);
+                }
+            }
             double scalar = ((Scalar) other).getScalar();
             for (int i = 0; i < resultMatrix.length; i++) {
                 for (int j = 0; j < resultMatrix[i].length; j++) {
@@ -43,17 +50,22 @@ public class Matrix extends Var {
             return new Matrix(resultMatrix);
         }
 
-        if (other instanceof Vector) {
+        else if (other instanceof Vector) {
             System.out.println("Sum impossible");
         }
 
-        if (other instanceof Matrix) {
-            double[][] resultMatrixFirst = this.ARRAY;
+        else if (other instanceof Matrix) {
+            double[][] resultMatrixFirst = new double[this.ARRAY.length][this.ARRAY[0].length];
+            for (int i = 0; i < this.ARRAY.length; i++) {
+                for (int j = 0; j < this.ARRAY[i].length; j++) {
+                    resultMatrixFirst[i] = Arrays.copyOf(this.ARRAY[i], this.ARRAY[i].length);
+                }
+            }
             double[][] resultMatrixSecond = ((Matrix) other).ARRAY;
             if (resultMatrixFirst.length == resultMatrixSecond.length && resultMatrixFirst[0].length == resultMatrixSecond[0].length) {
                 for (int i = 0; i < resultMatrixFirst.length; i++) {
                     for (int j = 0; j < resultMatrixFirst[i].length; j++) {
-                        resultMatrixFirst[i][j] += resultMatrixFirst[i][j];
+                        resultMatrixFirst[i][j] += resultMatrixSecond[i][j];
                     }
                 }
             }
@@ -67,6 +79,11 @@ public class Matrix extends Var {
     public Var sub(Var other) {
         if (other instanceof Scalar) {
             double[][] resultMatrix = new double[this.ARRAY.length][this.ARRAY[0].length];
+            for (int i = 0; i < this.ARRAY.length; i++) {
+                for (int j = 0; j < this.ARRAY[i].length; j++) {
+                    resultMatrix[i] = Arrays.copyOf(this.ARRAY[i], this.ARRAY[i].length);
+                }
+            }
             double scalar = ((Scalar) other).getScalar();
             for (int i = 0; i < resultMatrix.length; i++) {
                 for (int j = 0; j < resultMatrix[i].length; j++) {
@@ -82,12 +99,17 @@ public class Matrix extends Var {
         }
 
         if (other instanceof Matrix) {
-            double[][] resultMatrixFirst = this.ARRAY;
+            double[][] resultMatrixFirst = new double[this.ARRAY.length][this.ARRAY[0].length];
+            for (int i = 0; i < this.ARRAY.length; i++) {
+                for (int j = 0; j < this.ARRAY[i].length; j++) {
+                    resultMatrixFirst[i] = Arrays.copyOf(this.ARRAY[i], this.ARRAY[i].length);
+                }
+            }
             double[][] resultMatrixSecond = ((Matrix) other).ARRAY;
             if (resultMatrixFirst.length == resultMatrixSecond.length && resultMatrixFirst[0].length == resultMatrixSecond[0].length) {
                 for (int i = 0; i < resultMatrixFirst.length; i++) {
                     for (int j = 0; j < resultMatrixFirst[i].length; j++) {
-                        resultMatrixFirst[i][j] -= resultMatrixFirst[i][j];
+                        resultMatrixFirst[i][j] -= resultMatrixSecond[i][j];
                     }
                 }
             }
@@ -101,39 +123,54 @@ public class Matrix extends Var {
     public Var mul(Var other) {
         if (other instanceof Scalar) {
             double[][] resultMatrix = new double[this.ARRAY.length][this.ARRAY[0].length];
+            for (int i = 0; i < this.ARRAY.length; i++) {
+                for (int j = 0; j < this.ARRAY[i].length; j++) {
+                    resultMatrix[i] = Arrays.copyOf(this.ARRAY[i], this.ARRAY[i].length);
+                }
+            }
             double scalar = ((Scalar) other).getScalar();
             for (int i = 0; i < resultMatrix.length; i++) {
                 for (int j = 0; j < resultMatrix[i].length; j++) {
-                    resultMatrix[i][j] += scalar;
+                    resultMatrix[i][j] *= scalar;
                 }
             }
             return new Matrix(resultMatrix);
         }
 
         if (other instanceof Vector) {
-            double[][] matrix = this.ARRAY;
-            double[] resultMatrix = new double[this.ARRAY.length];
+            double[][] resultMatrix = new double[this.ARRAY.length][this.ARRAY[0].length];
+            for (int i = 0; i < this.ARRAY.length; i++) {
+                for (int j = 0; j < this.ARRAY[i].length; j++) {
+                    resultMatrix[i] = Arrays.copyOf(this.ARRAY[i], this.ARRAY[i].length);
+                }
+            }
+            double[] totalMatrix = new double[this.ARRAY.length];
             double[] vector = ((Vector) other).getARRAY();
-            if (matrix.length == vector.length) {
-                for (int i = 0; i < resultMatrix.length; i++) {
+            if (resultMatrix.length == vector.length) {
+                for (int i = 0; i < totalMatrix.length; i++) {
                     for (int j = 0; j < vector.length; j++) {
-                        resultMatrix[i] = resultMatrix[i] + matrix[i][j] * vector[j];
+                        totalMatrix[i] = totalMatrix[i] + resultMatrix[i][j] * vector[j];
                     }
                 }
             }
-            return new Vector(resultMatrix);
+            return new Vector(totalMatrix);
 
         }
 
         if (other instanceof Matrix) {
-            double[][] firstMatrix = this.ARRAY;
+            double[][] resultMatrixFirst = new double[this.ARRAY.length][this.ARRAY[0].length];
+            for (int i = 0; i < this.ARRAY.length; i++) {
+                for (int j = 0; j < this.ARRAY[i].length; j++) {
+                    resultMatrixFirst[i] = Arrays.copyOf(this.ARRAY[i], this.ARRAY[i].length);
+                }
+            }
             double[][] secondMatrix = ((Matrix) other).ARRAY;
-            double[][] matrixResult = new double[firstMatrix.length][secondMatrix[0].length];
-            if (firstMatrix.length == secondMatrix[0].length) {
-                for (int i = 0; i < firstMatrix.length; i++) {
+            double[][] matrixResult = new double[resultMatrixFirst.length][secondMatrix[0].length];
+            if (resultMatrixFirst.length == secondMatrix[0].length) {
+                for (int i = 0; i < resultMatrixFirst.length; i++) {
                     for (int j = 0; j < secondMatrix[0].length; j++) {
-                        for (int k = 0; k < firstMatrix[0].length; k++) {
-                            matrixResult[i][j] = matrixResult[i][j] + firstMatrix[i][k] * secondMatrix[k][j];
+                        for (int k = 0; k < resultMatrixFirst[0].length; k++) {
+                            matrixResult[i][j] = matrixResult[i][j] + resultMatrixFirst[i][k] * secondMatrix[k][j];
                         }
                     }
                 }
@@ -148,6 +185,11 @@ public class Matrix extends Var {
     public Var div(Var other) {
         if (other instanceof Scalar) {
             double[][] resultMatrix = new double[this.ARRAY.length][this.ARRAY[0].length];
+            for (int i = 0; i < this.ARRAY.length; i++) {
+                for (int j = 0; j < this.ARRAY[i].length; j++) {
+                    resultMatrix[i] = Arrays.copyOf(this.ARRAY[i], this.ARRAY[i].length);
+                }
+            }
             double scalar = ((Scalar) other).getScalar();
             if (scalar == 0) {
                 System.out.println("Division by zero");
@@ -161,11 +203,11 @@ public class Matrix extends Var {
             return new Matrix(resultMatrix);
         }
 
-        if (other instanceof Vector){
+        if (other instanceof Vector) {
             System.out.println("Operation impossible");
         }
 
-        if (other instanceof Matrix){
+        if (other instanceof Matrix) {
             System.out.println("Operation impossible");
         }
         return super.div(other);

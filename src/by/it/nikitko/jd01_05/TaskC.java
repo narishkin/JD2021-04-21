@@ -63,20 +63,30 @@ public class TaskC {
             }
         }
         Arrays.sort(arrayB);
-         Helper.printIntArray(arrayB,"B",5);
-      /*  int columnCount = 3;
-        int i1=0;
-        int stringCount = (int) (ceil(arrayB.length / columnCount));
-        for (int i = 0; i < stringCount; i++) {
-            for ( i1 = 0; i1 < (columnCount * columnCount); i1++) {
-                if (i1 % columnCount == 0) {
-                    System.out.printf("B[% -3d]=%-10d", i1, arrayB[i1]);
-                }
+        int columnCount = 2;
+        int rowCount = (int) ceil((double) arrayB.length / (double) columnCount);
+        boolean flagEmptyCeil = false;
+        System.out.println("Array B, index to columns");
+        System.out.println("╔═══════════╦═══════════╗");
+        for (int i = 0; i < rowCount; i++) {
+            if (i != 0) {
+                System.out.println("╠═══════════╬═══════════╣");
             }
-            System.out.println();
-
+            if (i + rowCount >= arrayB.length) {
+                 System.out.printf("║A[% -3d]=%3d ║           ║\n", i, arrayB[i]);
+                System.out.println("╚═══════════╩═══════════╝");
+                flagEmptyCeil=true;
+                break;
+            }
+            System.out.printf("║A[% -3d]=%3d ║A[%3d]=%3d ║\n", i, arrayB[i], i + rowCount, arrayB[i + rowCount]);
         }
-*/
+        if (!flagEmptyCeil) {
+            System.out.println("╚═══════════╩═══════════╝");
+        }
+
+
+
+
     }
 
 

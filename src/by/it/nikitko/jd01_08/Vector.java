@@ -7,6 +7,10 @@ import java.util.stream.Stream;
 class Vector extends by.it.nikitko.jd01_08.Var {
     private double[] value;
 
+    public double[] getValue() {
+        return value;
+    }
+
     public Vector(double[] value) {
         this.value = Arrays.copyOf(value, value.length);
     }

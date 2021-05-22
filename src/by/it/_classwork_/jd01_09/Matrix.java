@@ -1,4 +1,4 @@
-package by.it._classwork_.jd01_08;
+package by.it._classwork_.jd01_09;
 
 class Matrix extends Var {
     public Matrix(String stringValues) {

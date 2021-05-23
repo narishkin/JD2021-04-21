@@ -11,6 +11,7 @@ abstract class Var implements Operation {
         return new Vector(expression);
         if (expression.matches(Patterns.MATRIX))
         return new Matrix(expression);
+        System.out.println("Incorrect expression");
         return null;
     }
 

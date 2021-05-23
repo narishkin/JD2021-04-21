@@ -30,7 +30,7 @@ public class Matrix extends Var {
                 tempValue[i][j] = Double.parseDouble(stringNumbers[j]);
             }
         }
-        value = Arrays.copyOf(tempValue, tempValue.length);
+       value = Arrays.copyOf(tempValue, tempValue.length);
     }
 
     @Override

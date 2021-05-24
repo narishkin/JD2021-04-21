@@ -51,8 +51,6 @@ public class TaskC {
                 lenghtArrayB++;
             }
         }
-        Helper.printIntArray(arrayA, "A", 5);
-        System.out.println();
 
         int[] arrayB = new int[lenghtArrayB];
         int j = 0;
@@ -62,30 +60,13 @@ public class TaskC {
                 j++;
             }
         }
+
+        Helper.printIntArrayIndexToRowsWithBorders(arrayA, "A", 5);
+        System.out.println();
+
         Arrays.sort(arrayB);
         int columnCount = 2;
-        int rowCount = (int) ceil((double) arrayB.length / (double) columnCount);
-        boolean flagEmptyCeil = false;
-        System.out.println("Array B, index to columns");
-        System.out.println("╔═══════════╦═══════════╗");
-        for (int i = 0; i < rowCount; i++) {
-            if (i != 0) {
-                System.out.println("╠═══════════╬═══════════╣");
-            }
-            if (i + rowCount >= arrayB.length) {
-                 System.out.printf("║A[% -3d]=%3d ║           ║\n", i, arrayB[i]);
-                System.out.println("╚═══════════╩═══════════╝");
-                flagEmptyCeil=true;
-                break;
-            }
-            System.out.printf("║A[% -3d]=%3d ║A[%3d]=%3d ║\n", i, arrayB[i], i + rowCount, arrayB[i + rowCount]);
-        }
-        if (!flagEmptyCeil) {
-            System.out.println("╚═══════════╩═══════════╝");
-        }
-
-
-
+        Helper.printIntArrayIndexToColumnsWithBorders(arrayA,"B",2);
 
     }
 

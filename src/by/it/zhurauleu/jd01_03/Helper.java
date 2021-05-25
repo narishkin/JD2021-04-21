@@ -60,7 +60,7 @@ public class Helper {
      * @param vector input vector
      * @return result vector of matrix multiplication by vector
      */
-    static double[] mul(double[][] matrix, double[] vector) {
+    public static double[] mul(double[][] matrix, double[] vector) {
         double[] result = new double[matrix.length];
         for (int i = 0; i < matrix.length; i++) {
             for (int j = 0; j < vector.length; j++) {
@@ -76,7 +76,7 @@ public class Helper {
      * @param matrixRight input matrix
      * @return result of multiplication matrices
      */
-    static double[][] mul(double[][] matrixLeft, double[][] matrixRight) {
+    public static double[][] mul(double[][] matrixLeft, double[][] matrixRight) {
         double[][] result = new double[matrixLeft.length][matrixRight[0].length];
         for (int i = 0; i < matrixLeft.length; i++) {
             for (int j = 0; j < matrixRight[i].length; j++) {

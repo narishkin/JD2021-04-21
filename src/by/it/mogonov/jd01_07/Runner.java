@@ -11,9 +11,9 @@ public class Runner {
 
         Var vector1 = new Vector(new double[]{1.0, 2.0, 4.0});
         System.out.println(vector1.toString());
-        Var vector2 = new Vector("{1.0, 2.0, 4.0}");
+        Vector vector2 = new Vector("{1.0, 2.0, 4.0}");
         System.out.println(vector2);
-        Var vector3 = new Vector((Vector) vector2);
+        Var vector3 = new Vector(vector2);
         System.out.println(vector3.toString());
 
 

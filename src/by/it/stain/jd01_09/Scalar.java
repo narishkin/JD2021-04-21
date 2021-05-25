@@ -1,4 +1,4 @@
-package by.it.stain.jd01_08;
+package by.it.stain.jd01_09;
 
 class Scalar extends Var {
      private double value;

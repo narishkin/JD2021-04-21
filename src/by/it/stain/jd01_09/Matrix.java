@@ -1,4 +1,4 @@
-package by.it.stain.jd01_08;
+package by.it.stain.jd01_09;
 
 
 
@@ -84,11 +84,10 @@ class Matrix extends Var {
     @Override
     public Var mul(Var other) {
         if (other instanceof Scalar) {
-            double[][] mulMatrix = new double[value.length][value[0].length];
+            double[][] mulMatrix = new double[this.value.length][this.value[0].length];
             for (int i = 0; i < mulMatrix.length; i++) {
-                for (int j = 0; j < mulMatrix[i].length; j++) {
+                for (int j = 0; j < mulMatrix.length; j++)
                     mulMatrix[i][j] = this.value[i][j] * ((Scalar) other).getValue();
-                }
             }
 
             return new Matrix(mulMatrix);

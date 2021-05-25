@@ -4,28 +4,48 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class TaskB2 {
-    public static final String WORD_PATTERN = "[а-яёА-ЯЁ]{1,}";
-    public static final char REPLACE_CHAR = ' ';
-    public static final String CHAR_PATTERN = "[.]";
+
 
     public static void main(String[] args) {
-        StringBuilder text = new StringBuilder(Poem.TEXT);
-        Pattern pattern = Pattern.compile(WORD_PATTERN);
-        Matcher matcher = pattern.matcher(text);
-        matcher.replaceAll("[.]");
+        step1();
+        step2();
 
-        System.out.println(text);
+    }
+
+    private static void step1() {
+        String text = new String(Poem.TEXT);
+        Pattern pattern = Pattern.compile("");
+        Matcher matcher = pattern.matcher(Poem.TEXT);
+        final  String [] SENTENCE = text.replace(". ", ".\n").replace("! ", "!\n").split("[\\.\\!]\n");
+        int value = 0;
 
 
-        while (matcher.find()){
 
+        for (int i = 0; i < SENTENCE.length; i++) {
 
-            text.setCharAt(matcher.end(), REPLACE_CHAR);
+            System.out.println(SENTENCE[i]+SENTENCE[i].length());
+            if(SENTENCE[i].length()>value){
+                value=SENTENCE[i].length();
+            }
+            System.out.println(SENTENCE[i].length());
 
 
         }
-        System.out.println(text);
+        for (int i = 0; i < SENTENCE.length; i++) {
 
+
+        }
+
+
+    }
+
+    private static void step2() {
+        Pattern pattern = Pattern.compile("(\\p{Punct}{1,})\\p{Blank}{0,}");
+        Matcher matcher = pattern.matcher(Poem.TEXT);
+        String text = matcher.replaceAll(" ");
+
+
+       // System.out.println(text.trim());
 
     }
 }

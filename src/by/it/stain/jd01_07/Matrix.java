@@ -1,77 +1,55 @@
 package by.it.stain.jd01_07;
 
 
-import java.util.Arrays;
 
-class Matrix extends Var {
-    private double[][] value;
+import java.util.regex.Pattern;
+
+public class Matrix extends Var {
+
+    double[][] value;
 
     public Matrix(double[][] value) {
-        this.value = Arrays.copyOf(value, value.length);
+        this.value = value;
     }
 
-    Matrix(Matrix matrix) {
-        this.value = matrix.value;
-    }
+    public Matrix(String strMatrix) {
+        Pattern pattern = Pattern.compile("},");
+        String[] arraySubString = pattern.split(strMatrix);
+        String[][] arrayElementString = new String[arraySubString.length][0];
 
-    Matrix(String strMatrix) {
-        String string = strMatrix.replaceAll("[{}]", "");
-
-
-        String[] array1 = string.split(",");
-
-        String[][] value = new String[array1.length][];
-        for (int i = 0; i < array1.length; i++) {
-
-            value[i] = array1[i].split(", ");
-
-
+        for (int i = 0; i < arraySubString.length; i++) {
+            Pattern pattern1 = Pattern.compile("[^\\d+.]+");
+            arrayElementString[i] = pattern1.split(arraySubString[i]);
         }
-
-
-        this.value = new double[value.length][value[0].length];
-        for (int i = 0; i < value.length; i++) {
-            for (int j = 0; j < value[i].length; j++) {
-
-                this.value[i][j] = Double.parseDouble(value[i][j]);
-                System.out.println(value[i][j]);
-
+        double[][] value = new double[arrayElementString.length][arrayElementString[0].length-1];
+        for (int i = 0; i < value.length; i++)
+            for (int j = 0; j < value.length; j++) {
+                value[i][j] = Double.parseDouble(arrayElementString[i][j + 1]);
             }
-        }
+        this.value = value;
+    }
 
-
+    public Matrix(Matrix matrix) {
+        this.value = matrix.value;
     }
 
     @Override
     public String toString() {
-        StringBuilder outVector = new StringBuilder("{");
-        String separator = ",";
-        String space = "";
-
+        StringBuilder sb = new StringBuilder("{ ");
         for (int i = 0; i < value.length; i++) {
-            outVector.append("{");
-            for (int j = 0; j < value[i].length; j++) {
-                if (j > 0) {
-                    outVector.append(value[i][j]);
+            sb.append("{ ");
+            for (int j = 0; j < value.length; j++) {
+                sb.append(value[i][j]);
+                if (j < value[i].length - 1 && i <= value.length - 1) {
+                    sb.append("," + " ");
+                } else if (j == value[i].length - 1 && i < value.length - 1) {
+                    sb.append(" " + " }, ");
                 } else {
-                    outVector.append(value[i][j]).append(separator);
+                    sb.append(" " + " }");
                 }
-
-
-            }
-            outVector.append("}");
-            if (value.length - 1 == i) {
-                outVector.append(space);
-
-
-            } else {
-                outVector.append(separator);
             }
         }
-
-
-        outVector.append("}");
-
-        return outVector.toString();
+        sb.append(" }");
+        return sb.toString();
     }
 }

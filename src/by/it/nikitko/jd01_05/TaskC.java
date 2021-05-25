@@ -61,7 +61,7 @@ public class TaskC {
             }
         }
 
-        Helper.printIntArrayIndexToRowsWithBorders(arrayA, "A", 5);
+        Helper.printIntArrayIndexToRowsWithBorders(arrayA, "A", 6);
         System.out.println();
 
         Arrays.sort(arrayB);

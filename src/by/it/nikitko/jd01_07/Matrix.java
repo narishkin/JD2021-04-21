@@ -21,11 +21,11 @@ public class Matrix extends Var {
     public Matrix(String strMatrix) {
 
         strMatrix = strMatrix.substring(2, strMatrix.length() - 2);
-        String[] arrayMatrixString = strMatrix.split("},\\{");
-        String[] stringNumbers = arrayMatrixString[0].split(",");
+        String[] arrayMatrixString = strMatrix.split("}, *\\{");
+        String[] stringNumbers = arrayMatrixString[0].split(", *");
         double[][] tempValue = new double[arrayMatrixString.length][stringNumbers.length];
         for (int i = 0; i < arrayMatrixString.length; i++) {
-            stringNumbers = arrayMatrixString[i].split(",");
+            stringNumbers = arrayMatrixString[i].split(", *");
             for (int j = 0; j < stringNumbers.length; j++) {
                 tempValue[i][j] = Double.parseDouble(stringNumbers[j]);
             }

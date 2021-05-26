@@ -1,7 +1,7 @@
 package by.it.stain.jd01_07;
 
  class Scalar extends Var {
-     private double value;
+     private final double value;
 
      public Scalar(double value) {
          this.value = value;

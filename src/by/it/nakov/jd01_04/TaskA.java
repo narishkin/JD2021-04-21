@@ -38,6 +38,5 @@ public class TaskA {
         Scanner scanner = new Scanner(System.in);
         String str = scanner.nextLine();
         buildOneDimArray(str);
-
     }
 }

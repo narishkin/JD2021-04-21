@@ -1,4 +1,4 @@
-package by.it.nakov.jd01_07;
+package by.it.nakov.jd01_08;
 
 class Vector extends Var {
     private double[] value;
@@ -7,12 +7,9 @@ class Vector extends Var {
         this.value = value;
     }
 
-    Vector(String strVector) {
-        for (int i = 0; i < strVector.length(); i++) {
-            this.value[i] = Double.valueOf(strVector);
-        }
+    Vector(String str) {
+//        this.value = Double.parseDouble(str);
     }
-
 
     Vector(Vector vector) {
         this.value = vector.value;

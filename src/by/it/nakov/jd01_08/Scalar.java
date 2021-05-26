@@ -1,4 +1,4 @@
-package by.it.nakov.jd01_07;
+package by.it.nakov.jd01_08;
 
 class Scalar extends Var {
     private double value;
@@ -14,6 +14,7 @@ class Scalar extends Var {
     Scalar(Scalar scl) {
         this.value = scl.value;
     }
+
 
     @Override
     public String toString() {

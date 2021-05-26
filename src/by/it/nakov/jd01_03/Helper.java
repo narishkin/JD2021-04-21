@@ -26,19 +26,19 @@ public class Helper {
 
     public static void sort(double[] arr) {
         boolean isSorted = false;
-        int buf;
+        double buf;
         while (!isSorted) {
             isSorted = true;
-            for (int i = 0; i < arr.length - 1; i++) {
-                if (arr[i] > arr[i + 1]) {
+            for (double i = 0; i < arr.length - 1; i++) {
+                if (arr[(int) i] > arr[(int) (i + 1)]) {
                     isSorted = false;
-                    buf = (int) arr[i];
-                    arr[i] = arr[i + 1];
-                    arr[i + 1] = buf;
+                    buf = arr[(int) i];
+                    arr[(int) i] = arr[(int) (i + 1)];
+                    arr[(int) (i + 1)] = buf;
                 }
             }
-            System.out.println(Arrays.toString(arr));
         }
+        System.out.println(Arrays.toString(arr));
     }
 
     static double[] mul(double[][] matrix, double[] vector) {

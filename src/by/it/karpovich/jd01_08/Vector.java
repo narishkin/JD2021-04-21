@@ -118,5 +118,9 @@ class Vector extends Var {
         }
         return super.div(other);
     }
+
+    public double[] getValue() {
+        return value;
+    }
 }
 

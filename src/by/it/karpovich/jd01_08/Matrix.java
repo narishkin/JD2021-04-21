@@ -59,4 +59,8 @@ public class Matrix extends Var {
     public Var div(Var other) {
         return null;
     }
+
+    public double[][] getValue() {
+        return value;
+    }
 }

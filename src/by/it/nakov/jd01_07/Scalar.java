@@ -15,7 +15,6 @@ class Scalar extends Var {
         this.value = scl.value;
     }
 
-
     @Override
     public String toString() {
         return Double.toString(value);

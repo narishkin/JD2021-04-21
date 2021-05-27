@@ -15,7 +15,7 @@ public class TaskC {
             int n = Integer.parseInt(s);
             int[][] arr = step1(n);
             step2(arr);
-            step3(arr);
+//            step3(arr);
         } catch (NumberFormatException e) {
             System.out.println();
             System.out.println("You have entered wrong number!");
@@ -56,34 +56,24 @@ public class TaskC {
     }
 
     private static int step2(int[][] array) {
-        int sum = 0;
-        int indexPlusStart = 0;
-        int indexPlusEnd = 0;
-        for (int i = 0; i < array.length; i++) {
-            for (int j = 0; j < array[i].length - 1; j--) {
-                if (i > 0 && j > 0) {
-                    i = indexPlusStart;
-                    j = indexPlusEnd;
-                    sum += array[i][j];
-                }
-            }
-            System.out.println(sum);
-        }
-        return sum;
+//        int[] plusIndex1 = array[0];
+
+
+        return 0;
     }
 
-    private static int[][] step3(int[][] arr) {
-        if (arr.length == 0) throw new IllegalArgumentException();
-        int max = Integer.MAX_VALUE;
-        List<int[]> deleteMax = new ArrayList(Arrays.asList(max));
-        Collections.shuffle(Collections.singletonList(max));
-        deleteMax.remove(0);
-
-        for (int[] i : arr) {
-            for (int j : i)
-                max = Math.max(max, j);
-        }
-        System.out.println(arr);
-        return arr;
-    }
+//    private static int[][] step3(int[][] arr) {
+//        if (arr.length == 0) throw new IllegalArgumentException();
+//        int max = Integer.MAX_VALUE;
+//        List<int[]> deleteMax = new ArrayList(Arrays.asList(max));
+//        Collections.shuffle(Collections.singletonList(max));
+//        deleteMax.remove(0);
+//
+//        for (int[] i : arr) {
+//            for (int j : i)
+//                max = Math.max(max, j);
+//        }
+//        System.out.println(arr);
+//        return arr;
+//    }
 }

@@ -51,8 +51,6 @@ public class TaskC {
                 lenghtArrayB++;
             }
         }
-        Helper.printIntArray(arrayA, "A", 5);
-        System.out.println();
 
         int[] arrayB = new int[lenghtArrayB];
         int j = 0;
@@ -62,25 +60,14 @@ public class TaskC {
                 j++;
             }
         }
+
+        Helper.printIntArrayIndexToRowsWithBorders(arrayA, "A", 6);
+        System.out.println();
+
         Arrays.sort(arrayB);
+        int columnCount = 2;
+        Helper.printIntArrayIndexToColumnsWithBorders(arrayA,"B",2);
 
-        // Helper.printIntArray(arrayB,"B",5);
-        int columnCount = 3;
-        int rowCount = (int) ceil((double)arrayB.length/(double)columnCount);
-        System.out.println(arrayB.length);
-        System.out.printf("rowCount =%5d",rowCount);
-        /*int i1=0;
-        int stringCount = (int) (ceil(arrayB.length / columnCount));
-        for (int i = 0; i < stringCount; i++) {
-            for ( i1 = 0; i1 < (columnCount * columnCount); i1++) {
-                if (i1 % columnCount == 0) {
-                    System.out.printf("B[% -3d]=%-10d", i1, arrayB[i1]);
-                }
-            }
-            System.out.println();
-
-        }
-*/
     }
 
 

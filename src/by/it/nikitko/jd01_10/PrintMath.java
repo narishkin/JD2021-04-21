@@ -2,18 +2,32 @@ package by.it.nikitko.jd01_10;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.util.StringJoiner;
 
 public class PrintMath {
     public static void main(String[] args) {
         Class<Math> structureMath = Math.class;
-        Method[] metodsMath = structureMath.getDeclaredMethods();
-        StringBuilder methodString = new StringBuilder();
-        for (Method method : metodsMath) {
+        Method[] methodsMath = structureMath.getDeclaredMethods();
+
+        for (Method method : methodsMath) {
+            StringBuilder methodString = new StringBuilder();
             if (Modifier.isPublic(method.getModifiers()))
-                methodString.append("Public");
+                methodString.append("Public ");
             if (Modifier.isStatic(method.getModifiers()))
-                methodString.append("Static");
-            System.out.println(method);
+                methodString.append("Static ");
+
+
+            methodString.append(method.getReturnType().getSimpleName()).append(" ");
+            methodString.append(method.getName()).append(" ");
+            Class<?>[] parameterTypes = method.getParameterTypes();
+            StringJoiner parameters = new StringJoiner(", ", "(", ")");
+            for (Class<?> parameterType : parameterTypes) {
+                parameters.add(parameterType.toString());
+            }
+            methodString.append(parameters.toString());
+            System.out.println(methodString);
+
+//public static float abs(float)
         }
     }
 }

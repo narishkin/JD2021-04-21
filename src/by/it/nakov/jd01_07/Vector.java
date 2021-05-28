@@ -7,9 +7,12 @@ class Vector extends Var {
         this.value = value;
     }
 
-    Vector(String str) {
-//        this.value = .parseDouble(str);
+    Vector(String strVector) {
+        for (int i = 0; i < strVector.length(); i++) {
+            this.value[i] = Double.valueOf(strVector);
+        }
     }
+
 
     Vector(Vector vector) {
         this.value = vector.value;

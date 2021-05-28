@@ -4,13 +4,11 @@ import java.util.Arrays;
 import java.util.Comparator;
 
 
-
-
 public class TaskB2 {
 
     public static void main(String[] args) {
 
-      //  String[] sentences = Poem.TEXT.split("[^.][.!?]\\s*");
+        //  String[] sentences = Poem.TEXT.split("[^.][.!?]\\s*");
         String[] sentences = Poem.TEXT.split("\\s*(?<!\\.)\\.(?!\\.)\\s*");
         formatText(sentences);
         sortSentences(sentences);
@@ -24,14 +22,7 @@ public class TaskB2 {
     }
 
     private static void sortSentences(String[] sentences) {
-        Arrays.sort(sentences,
-                new Comparator<String>() {
-                    @Override
-                    public int compare(String x, String y) {
-                        return x.length() - y.length();
-                    }
-                }
-        );
+        Arrays.sort(sentences, (x, y) -> x.length() - y.length());
     }
 
     private static void printText(String[] sentences) {

@@ -1,5 +1,6 @@
 package by.it.nikitko.jd01_10;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.util.Arrays;
@@ -12,20 +13,14 @@ public class BeanTester {
             String name = method.getName();
             Class<?>[] types = method.getParameterTypes();
             String returnType = method.getReturnType().getSimpleName();
-            System.out.printf("%s %s(%s)\n", returnType, name, Arrays.toString(types));
 
 
             if (method.isAnnotationPresent(Param.class)) {
-                Object o = bean.newInstance();
-                System.out.println(method.invoke(o,2,  5));
+                Param annotation = method.getAnnotation(Param.class);
+                Object obj = bean.newInstance();
+                System.out.println(method.invoke(obj,annotation.a(),  annotation.b()));
+                System.out.printf("%s %s(%s)\n", returnType, name, Arrays.toString(types));
             }
-       /* Object o = bean.newInstance();
-        // System.out.println(o);
-        //или найти и вызвать нужный метод
-        Method method = bean.getMethod("min", int.class, int.class);
-        System.out.println(method.invoke(o));
-
-        // Constructor constructor = bean.getConstructor(String.class);*/
         }
     }
 }

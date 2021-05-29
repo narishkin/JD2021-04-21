@@ -3,10 +3,7 @@ package by.it.nikitko.jd01_10;
 
 public class Bean {
 
-    //public Bean(int left,int right) {
-      //  this.left=left;
-      //  this.right=right;
-   // }
+
 
     @Param(a=10,b=23)
      double sum(int left, int right) {

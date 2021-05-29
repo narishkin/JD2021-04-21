@@ -1,13 +1,12 @@
 package by.it.nikitko.jd01_10;
 
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Constructor;
+
 import java.lang.reflect.Method;
 import java.util.Arrays;
 
 public class BeanTester {
     public static void main(String[] args) throws Exception {
-        Class bean = Class.forName("by.it.nikitko.jd01_10.Bean");
+        Class<?> bean = Class.forName("by.it.nikitko.jd01_10.Bean");
 
         for (Method method : bean.getDeclaredMethods()) {
             String name = method.getName();

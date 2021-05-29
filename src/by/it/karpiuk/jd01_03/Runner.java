@@ -9,7 +9,10 @@ public class Runner {
         double[] array = InOut.getArray(str);
         InOut.printArray(array);
         InOut.printArray(array,"v",3);
-        Helper.sort();
+        Helper.findMin(array);
+        Helper.findMax(array);
+        Helper.sort(array);
+
 
     }
 }

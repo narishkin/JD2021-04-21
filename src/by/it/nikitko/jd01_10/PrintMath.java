@@ -28,7 +28,7 @@ public class PrintMath {
             for (Class<?> parameterType : parameterTypes) {
                 parameters.add(parameterType.toString());
             }
-            methodString.append(parameters.toString());
+            methodString.append(parameters);
 
             if (flagPublic) {
                 System.out.println(methodString);

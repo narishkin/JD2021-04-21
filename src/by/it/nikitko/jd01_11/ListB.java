@@ -2,11 +2,15 @@ package by.it.nikitko.jd01_11;
 
 import java.util.*;
 
-public class ListA <T> implements List <T> {
+public class ListB<T> implements List <T> {
 
     private T[] elements = (T[]) new  Object[] {};
 
     private int size=0;
+
+    public int getSize() {
+        return size;
+    }
 
     @Override
     public String toString() {
@@ -38,6 +42,33 @@ public class ListA <T> implements List <T> {
     }
 
 
+    @Override
+
+    public T set(int index, T element) {
+        T delElement= elements[index];
+        elements[index]=element;
+        return delElement;
+    }
+
+
+    @Override
+    public void add(int index, T element) {
+        System.arraycopy(elements,index,elements,index+1,size-index);
+        elements[index]=element;
+        size++;
+
+    }
+
+    @Override
+    public boolean addAll(Collection<? extends T> c) {
+        System.out.println(c.size());
+        T[] elements2 = (T[]) new  Object[4];
+        c.toArray(elements2);
+        System.out.println(Arrays.deepToString(elements2));
+
+//System.arraycopy(elements2,0,elements,elements.length,8);
+        return true;
+    }
 
     @Override
     public T get(int index) {
@@ -47,7 +78,7 @@ public class ListA <T> implements List <T> {
 
     @Override
     public int size() {
-        return 0;
+       return getSize();
     }
 
     @Override
@@ -66,11 +97,6 @@ public class ListA <T> implements List <T> {
     }
 
     @Override
-    public void add(int index, T element) {
-
-    }
-
-    @Override
     public Iterator<T> iterator() {
         return null;
     }
@@ -82,16 +108,12 @@ public class ListA <T> implements List <T> {
 
     @Override
     public <T1> T1[] toArray(T1[] a) {
+
         return null;
     }
 
     @Override
     public boolean containsAll(Collection<?> c) {
-        return false;
-    }
-
-    @Override
-    public boolean addAll(Collection<? extends T> c) {
         return false;
     }
 
@@ -114,14 +136,6 @@ public class ListA <T> implements List <T> {
     public void clear() {
 
     }
-
-    @Override
-
-        public T set(int index, T element) {
-            T delElement= elements[index];
-            elements[index]=element;
-            return null;
-        }
 
 
     @Override

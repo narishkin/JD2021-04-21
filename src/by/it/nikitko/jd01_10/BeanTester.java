@@ -1,31 +1,23 @@
 package by.it.nikitko.jd01_10;
 
-import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 
 public class BeanTester {
     public static void main(String[] args) throws Exception {
-        Class bean = Class.forName("by.it.nikitko.jd01_10.Bean");
+        Class<?> bean = Class.forName("by.it.nikitko.jd01_10.Bean");
 
         for (Method method : bean.getDeclaredMethods()) {
             String name = method.getName();
             Class<?>[] types = method.getParameterTypes();
             String returnType = method.getReturnType().getSimpleName();
-            System.out.printf("%s %s(%s)\n", returnType, name, Arrays.toString(types));
-
 
             if (method.isAnnotationPresent(Param.class)) {
+                Param annotation = method.getAnnotation(Param.class);
                 Object o = bean.newInstance();
-                System.out.println(method.invoke(o,2,  5));
+                System.out.printf("%s %s(%s)\n", returnType, name, Arrays.toString(types));
+                System.out.println(method.invoke(o,annotation.a(),  annotation.b()));
             }
-       /* Object o = bean.newInstance();
-        // System.out.println(o);
-        //или найти и вызвать нужный метод
-        Method method = bean.getMethod("min", int.class, int.class);
-        System.out.println(method.invoke(o));
-
-        // Constructor constructor = bean.getConstructor(String.class);*/
         }
     }
 }

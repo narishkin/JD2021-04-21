@@ -1,11 +1,73 @@
 package by.it.krukouski.jd01_11;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
+import java.util.*;
 
 public class ListB<T> implements List<T> {
+
+    private T[] array = (T[]) new Object[]{};
+    private int size = 0;
+
+    @Override
+    public boolean add(T t) {
+        if (size == array.length) {
+            array = Arrays.copyOf(array, (size * 3) / 2 + 1);
+        }
+        array[size++] = t;
+        return false;
+    }
+
+    @Override
+    public T remove(int index) {
+        T del = array[index];
+        System.arraycopy(array,index+1,array,index,size-index-1);
+        size--;
+        return del;
+    }
+
+    @Override
+    public T get(int index) {
+        return array[index];
+    }
+
+    @Override
+    public T set(int index, T element) {
+        T set = array[index];
+        array[index]=element;
+        return set;
+    }
+
+    @Override
+    public void add(int index, T element) {
+        if (size==array.length){
+            array=Arrays.copyOf(array,(size*3)/2+1);
+        }
+        System.arraycopy(array,index,array,index+1,size-index);
+        array[index]=element;
+        size++;
+    }
+
+    @Override
+    public boolean addAll(Collection<? extends T> c) {
+        return false;
+    }
+
+
+    @Override
+    public boolean remove(Object o) {
+        return false;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder("[");
+        String delimiter = "";
+        for (int i = 0; i < size; i++) {
+            sb.append(delimiter).append(array[i]);
+            delimiter = ", ";
+        }
+        sb.append("]");
+        return sb.toString();
+    }
 
     @Override
     public int size() {
@@ -38,22 +100,7 @@ public class ListB<T> implements List<T> {
     }
 
     @Override
-    public boolean add(T t) {
-        return false;
-    }
-
-    @Override
-    public boolean remove(Object o) {
-        return false;
-    }
-
-    @Override
     public boolean containsAll(Collection<?> c) {
-        return false;
-    }
-
-    @Override
-    public boolean addAll(Collection<? extends T> c) {
         return false;
     }
 
@@ -75,26 +122,6 @@ public class ListB<T> implements List<T> {
     @Override
     public void clear() {
 
-    }
-
-    @Override
-    public T get(int index) {
-        return null;
-    }
-
-    @Override
-    public T set(int index, T element) {
-        return null;
-    }
-
-    @Override
-    public void add(int index, T element) {
-
-    }
-
-    @Override
-    public T remove(int index) {
-        return null;
     }
 
     @Override

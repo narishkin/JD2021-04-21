@@ -19,7 +19,7 @@ public class ListA<T> implements List<T> {
     @Override
     public T remove(int index) {
         T del = array[index];
-        System.arraycopy(array,index+1,array,index,size-index-1);
+        System.arraycopy(array, index + 1, array, index, size - index - 1);
         size--;
         return del;
     }
@@ -33,14 +33,13 @@ public class ListA<T> implements List<T> {
     public String toString() {
         StringBuilder sb = new StringBuilder("[");
         String delimiter = "";
-        for (T elementArray : array) {
-            sb.append(delimiter).append(elementArray);
+        for (int i = 0; i < size; i++) {
+            sb.append(delimiter).append(array[i]);
             delimiter = ", ";
         }
         sb.append("]");
         return sb.toString();
     }
-
 
     @Override
     public int size() {

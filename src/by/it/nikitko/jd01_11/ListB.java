@@ -62,15 +62,12 @@ public class ListB<T> implements List<T> {
     @Override
     public boolean addAll(Collection<? extends T> c) {
         System.out.println(c.size());
-        T[] elements2 = (T[]) new Object[c.size()];
-        elements2 = c.toArray(elements2);
-        System.out.println(elements2.length);
-        System.out.println(size);
-        System.out.println(Arrays.deepToString(elements2));
-        elements = Arrays.copyOf(elements, size+c.size());
-        System.out.println(elements.length);
-
-     System.arraycopy(elements2,0,elements,4,4);
+        T[] addPart = (T[]) new Object[c.size()];
+        addPart = c.toArray(addPart);
+        System.out.println("elemetts2" + Arrays.deepToString(elements));
+        elements = Arrays.copyOf(elements, size + c.size());
+        System.arraycopy(addPart, 0, elements, size, c.size());
+        size+=c.size();
         return true;
     }
 

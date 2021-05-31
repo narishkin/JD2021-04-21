@@ -56,10 +56,10 @@ public class Runner {
 
         System.out.println("addAll");
         myListB.addAll(myListB);
-      //  sampleList.addAll(sampleList);
+        sampleList.addAll(sampleList);
 
         System.out.println(myListB);
-        //System.out.println(sampleList);
+        System.out.println(sampleList);
 
 
     }

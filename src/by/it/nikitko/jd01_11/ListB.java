@@ -8,9 +8,6 @@ public class ListB<T> implements List<T> {
 
     private int size = 0;
 
-    public int getSize() {
-        return size;
-    }
 
     @Override
     public String toString() {
@@ -61,10 +58,8 @@ public class ListB<T> implements List<T> {
 
     @Override
     public boolean addAll(Collection<? extends T> c) {
-        System.out.println(c.size());
         T[] addPart = (T[]) new Object[c.size()];
         addPart = c.toArray(addPart);
-        System.out.println("elemetts2" + Arrays.deepToString(elements));
         elements = Arrays.copyOf(elements, size + c.size());
         System.arraycopy(addPart, 0, elements, size, c.size());
         size+=c.size();
@@ -79,7 +74,8 @@ public class ListB<T> implements List<T> {
 
     @Override
     public int size() {
-        return getSize();
+
+        return size;
     }
 
     @Override

@@ -18,11 +18,9 @@ public class Parser {
         String[] operand = expression.split(Patterns.OPERATION, 2);
         Var op1 = Var.createVar(operand[0]);
         Var op2 = Var.createVar(operand[1]);
-//        System.out.println(operand[0] + " " + operand[1]);
         if (expression.contains("=")) {
             return Var.setVar(operand[0], op2);
         }
-
         if (op1 == null || op2 == null) {
             return null;
         }

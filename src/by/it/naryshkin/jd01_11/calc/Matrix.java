@@ -88,14 +88,13 @@ public class Matrix extends Var {
             if (this.value[0].length == ((Matrix) other).value.length) {
                 double[][] resultMatrix = new double[this.value.length][((Matrix) other).value[0].length];
                 for (int i = 0; i < resultMatrix.length; i++) {
-                    for (int j = 0; j < resultMatrix.length; j++) {
+                    for (int j = 0; j < resultMatrix[0].length; j++) {
                         double sum = 0;
                         for (int k = 0; k < this.value[0].length; k++) {
                             sum = sum + this.value[i][k] * ((Matrix) other).value[k][j];
                         }
                         resultMatrix[i][j] = sum;
                     }
-
                 }
                 return new Matrix(resultMatrix);
             }
@@ -114,7 +113,6 @@ public class Matrix extends Var {
                 return new Vector(resultVector);
             }
         }
-
         return super.mul(other);
     }
 

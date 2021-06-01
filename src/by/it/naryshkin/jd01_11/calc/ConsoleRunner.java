@@ -11,7 +11,6 @@ public class ConsoleRunner {
         while (!(line = sc.nextLine()).equals("end")) {
             Var result = parser.calc(line);
             printer.print(result);
-
         }
     }
 }

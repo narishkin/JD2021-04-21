@@ -12,10 +12,10 @@ public class ListB<T> implements List<T> {
     @Override
     public String toString() {
         StringBuilder stringToPrint = new StringBuilder("[");
-        String delimeter = "";
+        String delimiter = "";
         for (int i = 0; i < size; i++) {
-            stringToPrint.append(delimeter).append(elements[i]);
-            delimeter = ", ";
+            stringToPrint.append(delimiter).append(elements[i]);
+            delimiter = ", ";
         }
         stringToPrint.append("]");
         return stringToPrint.toString();
@@ -93,6 +93,7 @@ public class ListB<T> implements List<T> {
         return false;
     }
 
+    @SuppressWarnings("ConstantConditions")
     @Override
     public Iterator<T> iterator() {
         return null;
@@ -146,16 +147,19 @@ public class ListB<T> implements List<T> {
         return 0;
     }
 
+    @SuppressWarnings("ConstantConditions")
     @Override
     public ListIterator<T> listIterator() {
         return null;
     }
 
+    @SuppressWarnings("ConstantConditions")
     @Override
     public ListIterator<T> listIterator(int index) {
         return null;
     }
 
+    @SuppressWarnings("ConstantConditions")
     @Override
     public List<T> subList(int fromIndex, int toIndex) {
         return null;

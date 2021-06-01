@@ -15,10 +15,10 @@ public class SetC<T> implements Set<T> {
     @Override
     public String toString() {
         StringBuilder stringToPrint = new StringBuilder("[");
-        String delimeter = "";
+        String delimiter = "";
         for (int i = 0; i < size; i++) {
-            stringToPrint.append(delimeter).append(elements[i]);
-            delimeter = ", ";
+            stringToPrint.append(delimiter).append(elements[i]);
+            delimiter = ", ";
         }
         stringToPrint.append("]");
         return stringToPrint.toString();
@@ -58,7 +58,7 @@ public class SetC<T> implements Set<T> {
     @Override
     public boolean contains(Object o) {
         if (o == null) {
-            o = (T) "null";
+            o = "null";
         }
         for (T element : elements) {
             if (element == null) {
@@ -78,10 +78,7 @@ public class SetC<T> implements Set<T> {
 
     @Override
     public boolean isEmpty() {
-        if (size == 0) {
-            return true;
-        }
-        return false;
+        return size == 0;
     }
 
     @Override
@@ -109,10 +106,7 @@ public class SetC<T> implements Set<T> {
                 flagAdd = true;
             }
         }
-        if (flagAdd) {
-            return true;
-        }
-        return false;
+        return flagAdd;
     }
 
     @Override
@@ -120,7 +114,7 @@ public class SetC<T> implements Set<T> {
         T[] addPart = (T[]) new Object[c.size()];
         addPart = c.toArray(addPart);
 
-        boolean flagContains = false;
+
         for (int i1 = 0; i1 < c.size(); i1++) {
             if (addPart[i1] == null) {
                 addPart[i1] = (T) "null";
@@ -130,11 +124,8 @@ public class SetC<T> implements Set<T> {
                     elements[i] = (T) "null";
                 }
                 if (addPart[i1].equals(elements[i])) {
-                    flagContains = true;
+                    return true;
                 }
-            }
-            if (flagContains) {
-                return true;
             }
         }
         return false;
@@ -150,7 +141,7 @@ public class SetC<T> implements Set<T> {
                 addPart[i] = (T) "null";
             }
             remove(addPart[i]);
-            flagRemove=true;
+            flagRemove = true;
         }
         return flagRemove;
     }
@@ -158,8 +149,8 @@ public class SetC<T> implements Set<T> {
 
     @Override
     public void clear() {
-        elements= (T[]) new Object[0];
-        size=0;
+        elements = (T[]) new Object[0];
+        size = 0;
 
 //Arrays.copyOf(elements,0);
     }

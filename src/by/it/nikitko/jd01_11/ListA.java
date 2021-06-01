@@ -2,6 +2,7 @@ package by.it.nikitko.jd01_11;
 
 import java.util.*;
 
+
 public class ListA <T> implements List <T> {
 
     private T[] elements = (T[]) new  Object[] {};
@@ -11,10 +12,10 @@ public class ListA <T> implements List <T> {
     @Override
     public String toString() {
         StringBuilder stringToPrint = new StringBuilder("[");
-        String delimeter = "";
+        String delimiter = "";
         for (int i = 0; i < size; i++) {
-            stringToPrint.append(delimeter).append(elements[i]);
-            delimeter=", ";
+            stringToPrint.append(delimiter).append(elements[i]);
+            delimiter=", ";
         }
         stringToPrint.append("]");
         return stringToPrint.toString();
@@ -70,6 +71,7 @@ public class ListA <T> implements List <T> {
 
     }
 
+    @SuppressWarnings("ConstantConditions")
     @Override
     public Iterator<T> iterator() {
         return null;
@@ -80,6 +82,7 @@ public class ListA <T> implements List <T> {
         return new Object[0];
     }
 
+    @SuppressWarnings("ConstantConditions")
     @Override
     public <T1> T1[] toArray(T1[] a) {
         return null;
@@ -120,7 +123,7 @@ public class ListA <T> implements List <T> {
         public T set(int index, T element) {
             T delElement= elements[index];
             elements[index]=element;
-            return null;
+            return delElement;
         }
 
 
@@ -134,16 +137,18 @@ public class ListA <T> implements List <T> {
         return 0;
     }
 
+    @SuppressWarnings("ConstantConditions")
     @Override
     public ListIterator<T> listIterator() {
         return null;
     }
 
+    @SuppressWarnings("ConstantConditions")
     @Override
     public ListIterator<T> listIterator(int index) {
         return null;
     }
-
+    @SuppressWarnings("ConstantConditions")
     @Override
     public List<T> subList(int fromIndex, int toIndex) {
         return null;

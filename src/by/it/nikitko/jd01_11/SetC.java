@@ -26,8 +26,8 @@ public class SetC<T> implements Set<T> {
 
     @Override
     public boolean add(T t) {
-        if (t==null){
-            t= (T) "null";
+        if (t == null) {
+            t = (T) "null";
         }
         for (int i = 0; i < size; i++) {
             if (elements[i].equals(t)) {
@@ -57,7 +57,13 @@ public class SetC<T> implements Set<T> {
 
     @Override
     public boolean contains(Object o) {
+        if (o == null) {
+            o = (T) "null";
+        }
         for (T element : elements) {
+            if (element == null) {
+                element = (T) "null";
+            }
             if (element.equals(o)) {
                 return true;
             }
@@ -83,23 +89,79 @@ public class SetC<T> implements Set<T> {
 
         T[] addPart = (T[]) new Object[c.size()];
         addPart = c.toArray(addPart);
-        for (int i = 0; i < size; i++) {
-            if (elements[i]==null){
-                elements[i]= (T) "null";
+        boolean flagAdd = false;
+        for (int i1 = 0; i1 < c.size(); i1++) {
+            boolean flagContains = false;
+
+            if (addPart[i1] == null) {
+                addPart[i1] = (T) "null";
             }
-            for (int i1 = 0; i1 < c.size(); i1++) {
-                if (addPart[i1]==null){
-                    addPart[i1]= (T) "null";
+            for (int i = 0; i < size; i++) {
+                if (elements[i] == null) {
+                    elements[i] = (T) "null";
                 }
                 if (addPart[i1].equals(elements[i])) {
-                    return false;
+                    flagContains = true;
                 }
             }
+            if (!flagContains) {
+                add(addPart[i1]);
+                flagAdd = true;
+            }
         }
-        elements = Arrays.copyOf(elements, size + c.size());
-        System.arraycopy(addPart, 0, elements, size, c.size());
-        size += c.size();
-        return true;
+        if (flagAdd) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean containsAll(Collection<?> c) {
+        T[] addPart = (T[]) new Object[c.size()];
+        addPart = c.toArray(addPart);
+
+        boolean flagContains = false;
+        for (int i1 = 0; i1 < c.size(); i1++) {
+            if (addPart[i1] == null) {
+                addPart[i1] = (T) "null";
+            }
+            for (int i = 0; i < size; i++) {
+                if (elements[i] == null) {
+                    elements[i] = (T) "null";
+                }
+                if (addPart[i1].equals(elements[i])) {
+                    flagContains = true;
+                }
+            }
+            if (flagContains) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean removeAll(Collection<?> c) {
+        T[] addPart = (T[]) new Object[c.size()];
+        addPart = c.toArray(addPart);
+        boolean flagRemove = false;
+        for (int i = 0; i < c.size(); i++) {
+            if (addPart[i] == null) {
+                addPart[i] = (T) "null";
+            }
+            remove(addPart[i]);
+            flagRemove=true;
+        }
+        return flagRemove;
+    }
+
+
+    @Override
+    public void clear() {
+        elements= (T[]) new Object[0];
+        size=0;
+
+//Arrays.copyOf(elements,0);
     }
 
     @Override
@@ -118,22 +180,7 @@ public class SetC<T> implements Set<T> {
     }
 
     @Override
-    public boolean containsAll(Collection<?> c) {
-        return false;
-    }
-
-    @Override
     public boolean retainAll(Collection<?> c) {
         return false;
-    }
-
-    @Override
-    public boolean removeAll(Collection<?> c) {
-        return false;
-    }
-
-    @Override
-    public void clear() {
-
     }
 }

@@ -13,6 +13,7 @@ public class Runner {
         Set<String> myHashSet = new SetC<>();
         Set<String> myHashSet2 = new SetC<>();
         Set<String> sampleHashSet = new HashSet<>();
+        Set<String> sampleHashSet2 = new HashSet<>();
 
         myListA.add(null);
         myListB.add("One");
@@ -80,11 +81,15 @@ public class Runner {
         myHashSet2.add("9");
         myHashSet2.add("92");
         myHashSet2.add("56");
-      //  myHashSet2.add(null);
+        myHashSet2.add(null);
 
         myHashSet2.add("1004");
         myHashSet2.add("1000");
-        myHashSet2.add("2000");
+        myHashSet2.add("30");
+        sampleHashSet2.add("1004");
+        sampleHashSet2.add("1000");
+        sampleHashSet2.add("2000");
+        sampleHashSet2.add("30");
 
         System.out.println(myHashSet);
         System.out.println(sampleHashSet);
@@ -95,13 +100,26 @@ public class Runner {
         System.out.println(sampleHashSet);
 
         System.out.println("HashSet addAll");
-        System.out.println(myHashSet.size());
-        System.out.println(sampleHashSet.size());
+        System.out.println("myHashSet "+myHashSet);
+        System.out.println("myHashSet2 "+myHashSet2);
+        System.out.println("myHashSet size ="+myHashSet.size());
+        System.out.println("myHashSet2 size ="+myHashSet2.size());
 
         myHashSet.addAll(myHashSet2);
-        System.out.println(myHashSet);
-        sampleHashSet.addAll(myHashSet2);
-        System.out.println(sampleHashSet);
+        System.out.println("myHashSet after addAll"+myHashSet);
+        System.out.println("myHashSet size ="+myHashSet.size());
+
+        boolean a=myHashSet.contains("301");
+        boolean b=myHashSet.containsAll(myHashSet2);
+        System.out.println(b);
+        //sampleHashSet.addAll(sampleHashSet2);
+       // System.out.println(sampleHashSet);
+       // System.out.println(myHashSet.size());
+        System.out.println("myHashSet size before clear="+myHashSet.size());
+        myHashSet.clear();
+        System.out.println("myHashSet after clear"+myHashSet);
+        System.out.println("myHashSet size after clear="+myHashSet.size());
+
 
 
     }

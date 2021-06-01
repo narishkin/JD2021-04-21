@@ -13,34 +13,60 @@ public class SetC<T> implements Set<T> {
 
     @Override
     public boolean add(T t) {
+        for (int i = 0; i < size; i++) {
+            if (t.equals(array[i])) {
+                return false;
+            }
+        }
         if (size == array.length) {
             array = Arrays.copyOf(array, (size * 3) / 2 + 1);
+        }
+        array[size++] = t;
 
-            for (T elementArray : array) {
-                if (t.equals(elementArray)) {
-                    return false;
-                } else {
-                    array[size++] = t;
+        return false;
+    }
+
+    @Override
+    public boolean remove(Object o) {
+        int index = 0;
+        if (o == null) {
+            for (int i = 0; i < size; i++) {
+                if (array[i] == null) {
+                    index = i;
+                    System.arraycopy(array, index + 1, array, index, size - index - 1);
+                    size--;
+                    return true;
                 }
+            }
+        } else {
+            for (int i = 0; i < size; i++) {
+                if (o.equals(array[i])) {
+                    index = i;
+                    System.arraycopy(array, index + 1, array, index, size - index - 1);
+                    size--;
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+
+    @Override
+    public boolean contains(Object o) {
+        for (int i = 0; i < size; i++) {
+            if (o.equals(array[i])) {
+                return true;
             }
         }
         return false;
     }
 
     @Override
-    public boolean remove(Object o) {
-        return false;
-    }
-
-    @Override
-    public boolean contains(Object o) {
-        return false;
-    }
-
-    @Override
     public int size() {
         int resultSize = 0;
-        for (T elementArray : array) {
+        for (int i = 0; i < size; i++) {
             resultSize++;
         }
         return resultSize;
@@ -48,6 +74,9 @@ public class SetC<T> implements Set<T> {
 
     @Override
     public boolean isEmpty() {
+        if (size == 0) {
+            return true;
+        }
         return false;
     }
 

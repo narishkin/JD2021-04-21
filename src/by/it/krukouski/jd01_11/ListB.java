@@ -19,7 +19,7 @@ public class ListB<T> implements List<T> {
     @Override
     public T remove(int index) {
         T del = array[index];
-        System.arraycopy(array,index+1,array,index,size-index-1);
+        System.arraycopy(array, index + 1, array, index, size - index - 1);
         size--;
         return del;
     }
@@ -32,30 +32,28 @@ public class ListB<T> implements List<T> {
     @Override
     public T set(int index, T element) {
         T set = array[index];
-        array[index]=element;
+        array[index] = element;
         return set;
     }
 
     @Override
     public void add(int index, T element) {
-        if (size==array.length){
-            array=Arrays.copyOf(array,(size*3)/2+1);
+        if (size == array.length) {
+            array = Arrays.copyOf(array, (size * 3) / 2 + 1);
         }
-        System.arraycopy(array,index,array,index+1,size-index);
-        array[index]=element;
+        System.arraycopy(array, index, array, index + 1, size - index);
+        array[index] = element;
         size++;
     }
 
     @Override
     public boolean addAll(Collection<? extends T> c) {
+        for (T elementCollection : c) {
+            add(elementCollection);
+        }
         return false;
     }
 
-
-    @Override
-    public boolean remove(Object o) {
-        return false;
-    }
 
     @Override
     public String toString() {
@@ -67,6 +65,11 @@ public class ListB<T> implements List<T> {
         }
         sb.append("]");
         return sb.toString();
+    }
+
+    @Override
+    public boolean remove(Object o) {
+        return false;
     }
 
     @Override

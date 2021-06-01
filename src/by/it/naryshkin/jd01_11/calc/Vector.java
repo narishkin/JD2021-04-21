@@ -18,7 +18,7 @@ public class Vector extends Var {
 
     public Vector(String strVector) {
         StringBuilder sb = new StringBuilder(strVector);
-        Pattern p1 = Pattern.compile("((-?)(\\d+\\.\\d+))|((-?)(\\d+))");
+        Pattern p1 = Pattern.compile(Patterns.SCALAR);
         Matcher m1 = p1.matcher(strVector);
         int vectorLength = 0;
         while (m1.find()) {

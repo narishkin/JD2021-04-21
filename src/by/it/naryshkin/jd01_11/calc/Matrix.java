@@ -124,7 +124,7 @@ public class Matrix extends Var {
     }
 
     private void stringMatrixParser(String strMatrix) {
-        Pattern p1 = Pattern.compile("(\\{).*?(\\})+");
+        Pattern p1 = Pattern.compile(Patterns.VECTOR);
         Matcher m1 = p1.matcher(strMatrix);
         int matrixRowQuantity = 0;
         int matrixColumnQuantity = 0;
@@ -133,7 +133,7 @@ public class Matrix extends Var {
             matrixRowQuantity++;
             row = m1.group();
         }
-        Pattern p2 = Pattern.compile("(\\d+\\.\\d+)|(\\d+)");
+        Pattern p2 = Pattern.compile(Patterns.SCALAR);
         Matcher m2 = p2.matcher(row);
         while (m2.find()) {
             matrixColumnQuantity++;
@@ -167,7 +167,6 @@ public class Matrix extends Var {
         }
         sb.delete(sb.length() - 2, sb.length());
         sb.append("}");
-
         return sb.toString();
     }
 }

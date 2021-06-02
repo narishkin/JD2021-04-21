@@ -31,7 +31,7 @@ public class TaskB {
             if (x1 == 0.2) {
                 b = tan(pow(x, 2));
             }
-//            double alfa =
         }
+//        double alfa =
     }
 }

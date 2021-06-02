@@ -1,8 +1,8 @@
-package by.it.nakov.jd01_07;
+package by.it.nakov.jd01_08;
 
 import java.util.Arrays;
 
-public class Matrix extends Var {
+public class Matrix extends by.it.nakov.jd01_07.Var {
     private double[][] value;
 
     Matrix(double[][] value) {

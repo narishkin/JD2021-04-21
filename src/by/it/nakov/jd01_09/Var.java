@@ -1,6 +1,10 @@
-package by.it.nakov.jd01_08;
+package by.it.nakov.jd01_09;
 
 class Var implements Operation {
+    @Override
+    public String toString() {
+        return "Это класс Var";
+    }
 
     @Override
     public Var add(Var other) {

@@ -13,7 +13,7 @@ public class Vector extends Var {
 
     public Vector(String strVector){
 
-        String[] arrayElement = strVector.split("[^\\.\\d]+");
+        String[] arrayElement = strVector.split("[^\\d+\\.]+");
         value = new double[arrayElement.length-1];
         for (int i = 0; i < value.length; i++) {
             value[i] = Double.valueOf(arrayElement[i+1]);

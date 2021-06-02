@@ -1,6 +1,5 @@
 package by.it.nikitko.jd01_10;
 
-
 import java.lang.reflect.Method;
 import java.util.Arrays;
 
@@ -13,12 +12,11 @@ public class BeanTester {
             Class<?>[] types = method.getParameterTypes();
             String returnType = method.getReturnType().getSimpleName();
 
-
             if (method.isAnnotationPresent(Param.class)) {
                 Param annotation = method.getAnnotation(Param.class);
-                Object obj = bean.newInstance();
-                System.out.println(method.invoke(obj,annotation.a(),  annotation.b()));
+                Object o = bean.newInstance();
                 System.out.printf("%s %s(%s)\n", returnType, name, Arrays.toString(types));
+                System.out.println(method.invoke(o,annotation.a(),  annotation.b()));
             }
         }
     }

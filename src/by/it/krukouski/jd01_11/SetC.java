@@ -23,7 +23,7 @@ public class SetC<T> implements Set<T> {
         }
         array[size++] = t;
 
-        return false;
+        return true;
     }
 
     @Override
@@ -82,17 +82,37 @@ public class SetC<T> implements Set<T> {
 
     @Override
     public boolean addAll(Collection<? extends T> c) {
-        return false;
+        boolean i = false;
+        for (T elementCollection : c) {
+            if (add(elementCollection)) {
+                i = true;
+            }
+
+        }
+        return i;
     }
 
     @Override
     public boolean containsAll(Collection<?> c) {
-        return false;
+        boolean i = false;
+        for (Object elementCollection : c) {
+            if (contains(elementCollection)) {
+                i = true;
+            }
+        }
+        return i;
     }
 
     @Override
     public boolean removeAll(Collection<?> c) {
-        return false;
+        boolean i = false;
+        for (Object elementCollection : c) {
+            if (contains(elementCollection)) {
+                remove(elementCollection);
+                i = true;
+            }
+        }
+        return i;
     }
 
     @Override

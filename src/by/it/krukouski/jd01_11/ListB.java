@@ -13,7 +13,7 @@ public class ListB<T> implements List<T> {
             array = Arrays.copyOf(array, (size * 3) / 2 + 1);
         }
         array[size++] = t;
-        return false;
+        return true;
     }
 
     @Override
@@ -50,6 +50,7 @@ public class ListB<T> implements List<T> {
     public boolean addAll(Collection<? extends T> c) {
         for (T elementCollection : c) {
             add(elementCollection);
+
         }
         return false;
     }

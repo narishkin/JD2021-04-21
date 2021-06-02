@@ -26,16 +26,30 @@ public class Runner {
         //System.out.println(listB);
         //System.out.println(list2);
 
-        setC.add(5); setR.add(5);
-        setC.add(4); setR.add(4);
+        setC.add(1); setR.add(1);
+        setC.add(2); setR.add(2);
         setC.add(3); setR.add(3);
-        setC.add(6); setR.add(6);
-        //setC.add(4); setR.add(4);
-        setC.remove(6); setR.remove(6);
+        setC.add(4); setR.add(4);
+        setC.add(4); setR.add(4);
+        System.out.println("add " + setC);
+        System.out.println("add " + setR);
+        setC.remove(2); setR.remove(2);
+        System.out.println("remove " + setC);
+        System.out.println("remove " + setR);
+        System.out.println("contain " + setC.contains(1));
+        System.out.println("contain " + setR.contains(1));
+        System.out.println("size " + setC.size());
+        System.out.println("size " + setR.size());
+        System.out.println("isEmpty " + setC.isEmpty());
+        System.out.println("isEmpty " + setR.isEmpty());
+        System.out.println("addAll " + setC.addAll(setR));
+        System.out.println("addAll " + setR.addAll(setC));
 
 
-        System.out.println(setC.size());
-        System.out.println(setR.size());
+
+        //setR.addAll(setC);
+        System.out.println(setC);
+        System.out.println(setR);
 
 
 

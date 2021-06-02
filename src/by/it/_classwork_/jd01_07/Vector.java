@@ -6,9 +6,7 @@ class Vector extends Var {
 
     private final double[] value;
 
-    public Vector(double[] value) {
-        this.value = Arrays.copyOf(value, value.length);
-    }
+    public Vector(double[] value) { this.value= Arrays.copyOf(value,value.length);}
 
     @Override
     public String toString() {

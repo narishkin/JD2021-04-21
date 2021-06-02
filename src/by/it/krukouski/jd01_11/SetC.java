@@ -22,7 +22,6 @@ public class SetC<T> implements Set<T> {
             array = Arrays.copyOf(array, (size * 3) / 2 + 1);
         }
         array[size++] = t;
-
         return true;
     }
 
@@ -48,7 +47,6 @@ public class SetC<T> implements Set<T> {
                 }
             }
         }
-
         return false;
     }
 
@@ -65,11 +63,7 @@ public class SetC<T> implements Set<T> {
 
     @Override
     public int size() {
-        int resultSize = 0;
-        for (int i = 0; i < size; i++) {
-            resultSize++;
-        }
-        return resultSize;
+        return size;
     }
 
     @Override
@@ -82,8 +76,10 @@ public class SetC<T> implements Set<T> {
 
     @Override
     public boolean addAll(Collection<? extends T> c) {
+        T[] array2 = (T[]) new Object[c.size()];
+        array2 = c.toArray(array2);
         boolean i = false;
-        for (T elementCollection : c) {
+        for (T elementCollection : array2) {
             if (add(elementCollection)) {
                 i = true;
             }
@@ -149,6 +145,7 @@ public class SetC<T> implements Set<T> {
 
     @Override
     public void clear() {
-
+        array = (T[]) new Object[0];
+        size = 0;
     }
 }

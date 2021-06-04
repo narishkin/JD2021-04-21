@@ -14,16 +14,20 @@ public class TaskB2 {
 
     }
 
-
     static String process(ArrayList<String> peoples) {
-
         int counter = 0;
-        Iterator<String> iteratorPeoples = peoples.iterator();
-        while (/*iteratorPeoples.hasNext() & */peoples.size() > 1) {
-            counter++;
-            iteratorPeoples.next();
-            if (counter % 2 == 0) {
-                iteratorPeoples.remove();
+        Iterator<String> iterator = peoples.iterator();
+        while ( peoples.size() > 1) {
+            if (iterator.hasNext()) {
+                counter++;
+                iterator.next();
+                if (counter == 2) {
+                    iterator.remove();
+                    counter = 0;
+                }
+            }
+            else {
+                iterator = peoples.iterator();
             }
         }
         String lastName = peoples.get(0);
@@ -32,13 +36,19 @@ public class TaskB2 {
 
     static String process(LinkedList<String> peoples) {
         int counter = 0;
-        Iterator<String> iteratorPeoples = peoples.iterator();
-        while (iteratorPeoples.hasNext() & peoples.size() > 1) {
-            iteratorPeoples.next();
-            if (counter % 2 == 0) {
-                iteratorPeoples.remove();
+        Iterator<String> iterator = peoples.iterator();
+        while ( peoples.size() > 1) {
+            if (iterator.hasNext()) {
+                counter++;
+                iterator.next();
+                if (counter == 2) {
+                    iterator.remove();
+                    counter = 0;
+                }
             }
-            counter++;
+            else {
+                iterator = peoples.iterator();
+            }
         }
         String lastName = peoples.get(0);
         return lastName;

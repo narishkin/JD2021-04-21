@@ -7,7 +7,7 @@ import java.util.Random;
 
 public class TaskA1 {
 
-    private List<Integer> grades = new ArrayList<>();
+    private final List<Integer> grades = new ArrayList<>();
 
     public static void main(String[] args) {
         Random random = new Random();
@@ -25,6 +25,7 @@ public class TaskA1 {
 
     private void clearBad(List<Integer> grades) {
         Iterator<Integer> iterator = grades.iterator();
+        //noinspection Java8CollectionRemoveIf
         while (iterator.hasNext()) {
             Integer currentGrade = iterator.next();
             if (currentGrade < 4) {

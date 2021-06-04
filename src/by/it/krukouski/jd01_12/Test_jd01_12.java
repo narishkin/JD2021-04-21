@@ -71,7 +71,7 @@ public class Test_jd01_12 extends HomeWork {
                     "In a house, in a suburb, in a city, there were a man and his wife who loved each other very much \n" +
                     "and were living happily ever after. They had a little boy, and they loved him very much. They had \n" +
                     "a cat and a dog that the little boy loved very much. They had a car and a caravan trailer for \n" +
-                    "and were living happily ever after. They had a little boy, and they loved him very much. They hadn" +
+                    "holidays, and a swimming-pool which was fenced so that the little boy and his playmates would \n" +
                     "not fall in and drown. They had a housemaid who was absolutely trustworthy and an itinerant \n" +
                     "gardener who was highly recommended by the neighbors. For when they began to live happily ever \n" +
                     "after they were warned, by that wise old witch, the husband's mother, not to take on anyone off the \n" +

@@ -6,6 +6,7 @@ import java.util.*;
 public class ListA <T> implements List <T> {
 
     private T[] elements = (T[]) new  Object[] {};
+   
 
     private int size=0;
 

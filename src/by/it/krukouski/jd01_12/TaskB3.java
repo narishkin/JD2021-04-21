@@ -2,18 +2,27 @@ package by.it.krukouski.jd01_12;
 
 import java.util.*;
 
-public class TaskB2 {
+public class TaskB3 {
 
-    private static final String[] PEOPLES_ARRAY = new String[]{"1", "1", "2", "3", "4", "5", "6", "7", "8"};
+    private static final String[] PEOPLES_ARRAY = new String[4096];
     static List<String> peoples = Arrays.asList(PEOPLES_ARRAY);
 
     public static void main(String[] args) {
+
         ArrayList<String> peoplesA = new ArrayList<>(peoples);
         LinkedList<String> peoplesL = new LinkedList<>(peoples);
         System.out.println("peoplesA= " + peoplesA);
         System.out.println("peoplesL= " + peoplesL);
-        System.out.println(process(peoplesA));
-        System.out.println(process(peoplesL));
+        long startTimeArrayList = System.nanoTime();
+        process(peoplesA);
+        long endTimeArrayList = System.nanoTime();
+        long timeArrayList = endTimeArrayList-startTimeArrayList;
+        System.out.println("timeArrayList= " + timeArrayList);
+        long startTimeLinked = System.nanoTime();
+        process(peoplesL);
+        long endTimeLinked = System.nanoTime();
+        long timeLinked = endTimeLinked-startTimeLinked;
+        System.out.println("timeLinkedList= " + timeLinked);
     }
 
     static String process(ArrayList<String> peoples) {
@@ -52,4 +61,5 @@ public class TaskB2 {
         return peoples.get(0);
     }
 }
+
 

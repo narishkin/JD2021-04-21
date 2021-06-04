@@ -8,25 +8,36 @@ public class TaskC1 {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        HashMap<Integer, String> words = new HashMap();
-        HashMap<String, Integer> keys = new HashMap();
-
         List<String> input = new ArrayList<>();
+        HashMap<Integer, String> wordsWithoutRepeat = new HashMap();
+        HashMap<Integer, String> wordsWithRepeat = new HashMap();
+
         String current = "";
-        while (!current.equals("end")) {
+        while (true) {
             current = scanner.nextLine();
+            if (current.equals("end")){
+                break;
+            }
             input.add(current);
         }
+        System.out.println();
+
         int key = 0;
-        //   System.out.println(input);// test
         for (String value : input) {
-            words.put(key, value);
-            key++;
+                wordsWithRepeat.put(key, value);
+                key++;
         }
 
-
-        System.out.println(words.toString());
-
+        key = 0;
+        for (String value : input) {
+            if (!wordsWithoutRepeat.containsValue(value)) {
+                wordsWithoutRepeat.put(key, value);
+                key++;
+            }
+            key++;
+        }
+        System.out.println(wordsWithRepeat.toString());
+        System.out.println(wordsWithoutRepeat.toString());
     }
 }
 

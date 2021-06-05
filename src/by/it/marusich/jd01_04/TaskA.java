@@ -26,19 +26,18 @@ public class TaskA {
         InOut.printArray(resultArray, "V", 5);
         Helper.sort(resultArray);
         InOut.printArray(resultArray, "V", 4);
-        int indexFirstElement = -1;
-        int indexLastElement = -1;
         for (int i = 0; i < resultArray.length; i++) {
             if (resultArray[i] == firstElement) {
-                indexFirstElement = i;
-            }
-            if (resultArray[i] == lastElement) {
-                indexLastElement = i;
+                System.out.println("Index of first element=" + i);
+                break;
             }
         }
-        System.out.printf("" +
-                "Index of first element=%1d" + "%n" +
-                "Index of last element=%1d", indexFirstElement, indexLastElement);
-        System.out.println();
+        for (int i = 0; i < resultArray.length; i++) {
+            if (resultArray[i] == lastElement) {
+                System.out.println("Index of last element=" + i);
+                break;
+            }
+        }
+
     }
 }

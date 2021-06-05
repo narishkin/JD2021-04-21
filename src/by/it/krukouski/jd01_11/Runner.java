@@ -44,6 +44,7 @@ public class Runner {
         System.out.println("isEmpty " + setR.isEmpty());
         System.out.println("addAll " + setC.addAll(setR));
         System.out.println("addAll " + setR.addAll(setC));
+        System.out.println("removeAll " + setC.removeAll(setR));
 
 
 

@@ -1,10 +1,18 @@
 package by.it.nakov.jd01_09;
 
-class Var implements Operation {
-    @Override
-    public String toString() {
-        return "Это класс Var";
+abstract class Var implements Operation {
+
+    static Var createVar(String operand) {
+        operand = operand.trim().replace("\\a+", "");
+        if (operand.matches(Patterns.SCALAR)) return new Scalar(operand);
+
+        if (operand.matches(Patterns.VECTOR)) return new Vector(operand);
+
+//        if (operand.matches(Patterns.MATRIX))
+//            return new Matrix(operand);
+        return null;
     }
+
 
     @Override
     public Var add(Var other) {

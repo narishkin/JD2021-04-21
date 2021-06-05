@@ -16,7 +16,7 @@ public class TaskA3 {
             int i = Integer.parseInt(value);
             if (i < 0) {
                 values.add(i);
-            }  if (i == 0) {
+            } else if (i == 0) {
                 values.add(posZero, i);
             } else {
                 values.add(posZero++, i);

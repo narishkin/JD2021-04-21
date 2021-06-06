@@ -1,4 +1,4 @@
-package by.it.naryshkin.jd01_11.calc;
+package by.it.naryshkin.calc;
 
 import java.util.Scanner;
 
@@ -9,8 +9,13 @@ public class ConsoleRunner {
         Scanner sc = new Scanner(System.in);
         String line;
         while (!(line = sc.nextLine()).equals("end")) {
-            Var result = parser.calc(line);
-            printer.print(result);
+            Var result = null;
+            try {
+                result = parser.calc(line);
+                printer.print(result);
+            } catch (CalcException e) {
+                System.out.println(e.getMessage());
+            }
         }
     }
 }

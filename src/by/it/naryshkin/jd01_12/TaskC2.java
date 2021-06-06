@@ -9,7 +9,8 @@ public class TaskC2 {
         Set<Integer> b = new HashSet<Integer>(Arrays.asList(4, 3, 5, 6, 7, 8));
         Set<Double> c = new HashSet<Double>(Arrays.asList(0., 1., 2., 3., 4., 5.));
         Set<Double> d = new HashSet<Double>(Arrays.asList(2., 3., 4., 9.));
-        System.out.println(getCross( a ,b, c, d));
+//        System.out.println(getCross( a ,b, c, d));
+        System.out.println(getUnion( a ,b, c, d));
 
     }
     static Set<Number> getCross(Set<?>... sets) {
@@ -40,10 +41,10 @@ public class TaskC2 {
         }
         return result;
     }
-    static Set<Number> getUnion(Set... sets) {
+    static Set<Number> getUnion(Set<?>... sets) {
         Set<Number> result = new HashSet<>();
         for (int i = 0; i < sets.length; i++) {
-            result.addAll(sets[i]);
+            result.addAll((Collection<? extends Number>) sets[i]);
         }
 
         return result;

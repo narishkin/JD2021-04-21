@@ -1,4 +1,4 @@
-package by.it.naryshkin.jd01_11.calc;
+package by.it.naryshkin.calc;
 
 import java.util.Arrays;
 import java.util.regex.Matcher;
@@ -34,7 +34,7 @@ public class Vector extends Var {
     }
 
     @Override
-    public Var add(Var other) {
+    public Var add(Var other) throws CalcException {
         if (other instanceof Scalar) {
             double[] result = Arrays.copyOf(value, value.length);
             for (int i = 0; i < result.length; i++) {
@@ -42,6 +42,9 @@ public class Vector extends Var {
             }
             return new Vector(result);
         } else if (other instanceof Vector) {
+            if (this.value.length!=((Vector) other).value.length){
+                throw new CalcException("длина векторов неодинакова");
+            }
             double[] result = Arrays.copyOf(value, value.length);
             for (int i = 0; i < result.length; i++) {
                 result[i] = result[i] + ((Vector) other).value[i];
@@ -54,7 +57,7 @@ public class Vector extends Var {
     }
 
     @Override
-    public Var sub(Var other) {
+    public Var sub(Var other) throws CalcException{
         if (other instanceof Scalar) {
             double[] result = Arrays.copyOf(value, value.length);
             for (int i = 0; i < result.length; i++) {
@@ -62,6 +65,9 @@ public class Vector extends Var {
             }
             return new Vector(result);
         } else if (other instanceof Vector) {
+            if (this.value.length!=((Vector) other).value.length){
+                throw new CalcException("длина векторов неодинакова");
+            }
             double[] result = Arrays.copyOf(value, value.length);
             for (int i = 0; i < result.length; i++) {
                 result[i] = result[i] - ((Vector) other).value[i];
@@ -71,7 +77,7 @@ public class Vector extends Var {
     }
 
     @Override
-    public Var mul(Var other) {
+    public Var mul(Var other) throws CalcException{
         if (other instanceof Scalar) {
             double[] result = Arrays.copyOf(value, value.length);
             for (int i = 0; i < result.length; i++) {
@@ -91,7 +97,7 @@ public class Vector extends Var {
     }
 
     @Override
-    public Var div(Var other) {
+    public Var div(Var other) throws CalcException{
         if (other instanceof Scalar) {
             if (((Scalar) other).getValue() == 0) {
                 System.out.println("Division by zero");

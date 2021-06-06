@@ -1,4 +1,4 @@
-package by.it.naryshkin.jd01_11.calc;
+package by.it.naryshkin.calc;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -20,7 +20,7 @@ public class Matrix extends Var {
     }
 
     @Override
-    public Var add(Var other) {
+    public Var add(Var other) throws CalcException{
         if (other instanceof Scalar) {
             double[][] resultMatrix = new double[value.length][value[0].length];
             for (int i = 0; i < resultMatrix.length; i++) {
@@ -48,7 +48,7 @@ public class Matrix extends Var {
     }
 
     @Override
-    public Var sub(Var other) {
+    public Var sub(Var other) throws CalcException{
         if (other instanceof Scalar) {
             double[][] resultMatrix = new double[value.length][value[0].length];
             for (int i = 0; i < resultMatrix.length; i++) {
@@ -75,7 +75,7 @@ public class Matrix extends Var {
     }
 
     @Override
-    public Var mul(Var other) {
+    public Var mul(Var other) throws CalcException{
         if (other instanceof Scalar) {
             double[][] resultMatrix = new double[value.length][value[0].length];
             for (int i = 0; i < resultMatrix.length; i++) {
@@ -117,7 +117,7 @@ public class Matrix extends Var {
     }
 
     @Override
-    public Var div(Var other) {
+    public Var div(Var other) throws CalcException {
         return super.div(other);
     }
 

@@ -7,48 +7,37 @@ import java.util.Scanner;
 
 public class TaskC {
 
-    private static int errorCounter =0;
-    public static void main(String[] args) throws Exception {
+    private static int errorCounter = 0;
+    private static Deque<Double> numbers = new ArrayDeque<>();
+    static String currentString;
+
+
+    public static void main(String[] args) throws InterruptedException {
         Scanner scanner = new Scanner(System.in);
-        Deque<Double> inputNumbers = new ArrayDeque<>();
         while (true) {
-            String inputString = scanner.nextLine();
-            readData(inputString, inputNumbers);
+            currentString = scanner.nextLine();
+            readData();
         }
     }
 
-    static void readData(String currentString, Deque numbers) throws Exception {
+    static void readData() throws InterruptedException {
         try {
+            String currentString = TaskC.currentString;
             double currentDouble = Double.parseDouble(currentString);
-            if (errorCounter <4) {
+            if (errorCounter < 4) {
                 numbers.add(currentDouble);
             }
         } catch (NumberFormatException e) {
             errorCounter++;
-            if (errorCounter >4) {
-                throw new Exception();
+            if (errorCounter > 4) {
+                throw new InterruptedException();
             }
             Thread.sleep(100);
             Iterator<Double> iterRev = numbers.descendingIterator();
             while (iterRev.hasNext()) {
-                System.out.print(iterRev.next()+" ");
+                System.out.print(iterRev.next() + " ");
             }
             System.out.println();
-          //  e.printStackTrace();
         }
     }
-
 }
-/*
-1
-2
-err1
-3
-4
-err2
-err3
-err4
-err5
-5.0
-err6
-*/

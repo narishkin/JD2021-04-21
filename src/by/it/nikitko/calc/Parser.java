@@ -26,8 +26,7 @@ public class Parser {
         Var left = Var.createVar(parts[0]);
 
         if (left == null || right == null) {
-            System.out.println("Incorrect expression");
-            return null; //TODO return error
+            throw new CalcException("Incorrect expression");
         }
         Pattern patternOperation = Pattern.compile(Patterns.OPERATION);
         Matcher matcherOperation = patternOperation.matcher(expression);
@@ -42,10 +41,8 @@ public class Parser {
                     return left.mul(right);
                 case "/":
                     return left.div(right);
-
             }
         }
-        System.out.println("Error");
-        return null; //TODO return error
+        throw new CalcException("Error");
     }
 }

@@ -6,6 +6,7 @@ public class TaskA {
     public static void main(String[] args) {
         try {
             if (Math.random() > 0.5)
+                //noinspection ConstantConditions
                 new HashMap<String, String>(null);
             else
                 Integer.parseInt("привет");

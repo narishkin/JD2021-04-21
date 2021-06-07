@@ -8,10 +8,11 @@ import java.util.Scanner;
 public class TaskC {
 
     private static int errorCounter = 0;
-    private static Deque<Double> numbers = new ArrayDeque<>();
+    private static final Deque<Double> numbers = new ArrayDeque<>();
     static String currentString;
 
 
+    @SuppressWarnings("InfiniteLoopStatement")
     public static void main(String[] args) throws InterruptedException {
         Scanner scanner = new Scanner(System.in);
         while (true) {
@@ -33,9 +34,9 @@ public class TaskC {
                 throw new InterruptedException();
             }
             Thread.sleep(100);
-            Iterator<Double> iterRev = numbers.descendingIterator();
-            while (iterRev.hasNext()) {
-                System.out.print(iterRev.next() + " ");
+            Iterator<Double> descendingIterator = numbers.descendingIterator();
+            while (descendingIterator.hasNext()) {
+                System.out.print(descendingIterator.next() + " ");
             }
             System.out.println();
         }

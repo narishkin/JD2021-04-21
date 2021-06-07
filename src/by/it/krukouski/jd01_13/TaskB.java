@@ -4,23 +4,18 @@ import java.util.Locale;
 import java.util.Scanner;
 
 public class TaskB {
-    private static String string = "";
+    private static double sum = 0;
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         for (; ; ) {
-            String line = sc.next();
-            if (line.equals("END")) {
+            String value = sc.next();
+            if (value.equals("END")) {
                 break;
             }
-            string = string.concat(line + "\n");
 
-        }
-        String[] stringsArray = string.split("\n");
-        double sum = 0;
-        for (String s1 : stringsArray) {
             try {
-                double n = Double.parseDouble(s1);
+                double n = Double.parseDouble(value);
                 if (n < 0) {
                     throw new ArithmeticException();
                 }

@@ -7,21 +7,19 @@ public class TaskC {
     private static Double[] array = new Double[]{};
     private static int err = 0;
     private static int indexArray = 0;
+    private static String number = "";
 
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws InterruptedException {
         Scanner sc = new Scanner(System.in);
         for (; ; ) {
-            if (err > 5) {
-                throw new Exception("Error > 5");
-            }
-            String number = sc.next();
-            readData(number);
+            number = sc.next();
+            readData();
         }
     }
 
 
-    private static void readData(String number) throws InterruptedException {
+    private static void readData() throws InterruptedException {
         try {
             double value = Double.parseDouble(number);
             if (indexArray == array.length) {
@@ -30,9 +28,10 @@ public class TaskC {
             array[indexArray++] = value;
         } catch (NumberFormatException e) {
             err++;
-            Class<? extends NumberFormatException> eClass = e.getClass();
-            String name = eClass.getName();
-            System.out.println("name Error: " + name);
+            System.out.println("Error " + err);
+            if (err >= 5) {
+                throw new InterruptedException("Error >= 5");
+            }
             Thread.sleep(100);
             for (int i = indexArray - 1; i >= 0; i--) {
                 System.out.print(array[i] + " ");
@@ -41,4 +40,5 @@ public class TaskC {
         }
     }
 }
+
 

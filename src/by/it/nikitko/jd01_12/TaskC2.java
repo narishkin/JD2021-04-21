@@ -31,7 +31,6 @@ public class TaskC2 {
     }
 
     static HashSet<Double> getCross(Set<?>... setsArray) {
-
         HashSet <Double> crossSet = new HashSet<>();
         for (Object o : setsArray[0].toArray()) {
             crossSet.add(Double.valueOf(o.toString()));

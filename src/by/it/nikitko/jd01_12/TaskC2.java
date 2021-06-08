@@ -5,8 +5,8 @@ import java.util.*;
 public class TaskC2 {
 
     Set<Integer> intHashSet = new HashSet<>(Arrays.asList(2, 2, 6, 9, 5, 6, 8, 6, -6, 4, 55, 66, 3, 2));
-    Set<Double> doubleHashSet = new HashSet<>(Arrays.asList(8.0, 6.0, -4.2, 3.3, 55.0, 46.0, -45.0, 5.0, 56.0, 4.0, 3.5, 3.0, 4.0, 5.0));
-    Set<Long> longHashSet = new HashSet<>(Arrays.asList(8L, 6L, 7L, 3L, 4L, 500L));
+    Set<Double> doubleHashSet = new HashSet<>(Arrays.asList(8.0, 6.0, -4.2, 3.3, 55.0, 46.0, -45.0, 5.0, 4.0, 3.5, 3.0, 4.0, 5.0));
+    Set<Long> longHashSet = new HashSet<>(Arrays.asList(8L, 6L, 7L, 3L, 4L, 55L));
 
     public static void main(String[] args) {
         TaskC2 taskC2 = new TaskC2();

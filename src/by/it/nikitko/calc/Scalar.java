@@ -59,8 +59,11 @@ class Scalar extends Var {
             }
             double div = this.value / ((Scalar) other).value;
             return new Scalar(div);
-
-        } else {
+        }
+        if (other instanceof Vector) {
+            throw new CalcException("Opretion Scalar/Vector is impossible");
+        }
+        else {
             return other.div(this);
         }
     }

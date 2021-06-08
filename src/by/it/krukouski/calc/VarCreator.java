@@ -6,7 +6,7 @@ public class VarCreator {
 
     }
 
-    static Var createVar(String string) {
+    static Var createVar(String string) throws CalcException {
         if (string.matches(Patterns.SCALAR)) {
             return new Scalar(string);
         } else if (string.matches(Patterns.VECTOR)) {
@@ -16,8 +16,7 @@ public class VarCreator {
         } else if (VarRepo.contain(string)) {
             return VarRepo.load(string);
         } else {
-            System.out.println("ERROR Var" + string);
-            return null;
+            throw new CalcException("ERROR Var" + string);
         }
     }
 

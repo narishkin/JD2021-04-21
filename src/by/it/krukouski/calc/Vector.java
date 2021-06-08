@@ -28,7 +28,7 @@ public class Vector extends Var {
     }
 
     @Override
-    public Var add(Var other) {
+    public Var add(Var other) throws CalcException {
         if (other instanceof Scalar) {
             double[] firstVector = Arrays.copyOf(ARRAY, ARRAY.length);
             double scalar = ((Scalar) other).getScalar();
@@ -44,8 +44,7 @@ public class Vector extends Var {
                     firstVector[i] += ((Vector) other).ARRAY[i];
                 }
             } else {
-                System.out.println("Different length Vectors");
-                return null;
+                throw new CalcException("Different length Vectors");
             }
             return new Vector(firstVector);
         }
@@ -53,7 +52,7 @@ public class Vector extends Var {
     }
 
     @Override
-    public Var sub(Var other) {
+    public Var sub(Var other) throws CalcException {
         if (other instanceof Scalar) {
             double[] firstVector = Arrays.copyOf(ARRAY, ARRAY.length);
             double scalar = ((Scalar) other).getScalar();
@@ -69,8 +68,7 @@ public class Vector extends Var {
                     firstVector[i] -= ((Vector) other).ARRAY[i];
                 }
             } else {
-                System.out.println("Different length Vectors");
-                return null;
+                throw new CalcException("Different length Vectors");
             }
             return new Vector(firstVector);
         }
@@ -78,7 +76,7 @@ public class Vector extends Var {
     }
 
     @Override
-    public Var mul(Var other) {
+    public Var mul(Var other) throws CalcException {
         if (other instanceof Scalar) {
             double[] firstVector = Arrays.copyOf(ARRAY, ARRAY.length);
             double scalar = ((Scalar) other).getScalar();
@@ -95,8 +93,7 @@ public class Vector extends Var {
                     sum += firstVector[i] * secondVector[i];
                 }
             } else {
-                System.out.println("Different length Vectors");
-                return null;
+                throw new CalcException("Different length Vectors");
             }
             return new Scalar(sum);
         }
@@ -104,12 +101,12 @@ public class Vector extends Var {
     }
 
     @Override
-    public Var div(Var other) {
+    public Var div(Var other) throws CalcException {
         if (other instanceof Scalar) {
             double[] firstVector = Arrays.copyOf(ARRAY, ARRAY.length);
             double scalar = ((Scalar) other).getScalar();
             if (scalar == 0) {
-                System.out.println("Division by zero");
+                throw new CalcException("Division by zero");
             } else {
                 for (int i = 0; i < firstVector.length; i++) {
                     firstVector[i] /= scalar;
@@ -119,7 +116,7 @@ public class Vector extends Var {
         }
 
         if (other instanceof Vector) {
-            System.out.println("Division impossible");
+            throw new CalcException("Division impossible");
         }
         return super.div(other);
     }

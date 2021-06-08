@@ -13,11 +13,15 @@ public class SetC<T> implements Set<T> {
 
     @Override
     public boolean add(T t) {
+        if (t == null) {
+            t = (T) "null";
+        }
         for (int i = 0; i < size; i++) {
             if (t.equals(array[i])) {
                 return false;
             }
         }
+
         if (size == array.length) {
             array = Arrays.copyOf(array, (size * 3) / 2 + 1);
         }
@@ -53,6 +57,9 @@ public class SetC<T> implements Set<T> {
 
     @Override
     public boolean contains(Object o) {
+        if (o == null) {
+            o = "null";
+        }
         for (int i = 0; i < size; i++) {
             if (o.equals(array[i])) {
                 return true;
@@ -79,11 +86,10 @@ public class SetC<T> implements Set<T> {
         T[] array2 = (T[]) new Object[c.size()];
         array2 = c.toArray(array2);
         boolean i = false;
-        for (T elementCollection : array2) {
-            if (add(elementCollection)) {
+        for (int j = 0; j < c.size(); j++) {
+            if (add(array2[j])) {
                 i = true;
             }
-
         }
         return i;
     }
@@ -101,12 +107,15 @@ public class SetC<T> implements Set<T> {
 
     @Override
     public boolean removeAll(Collection<?> c) {
+        T[] array2 = (T[]) new Object[c.size()];
+        array2 = c.toArray(array2);
         boolean i = false;
-        for (Object elementCollection : c) {
-            if (contains(elementCollection)) {
-                remove(elementCollection);
-                i = true;
+        for (int j = 0; j < c.size(); j++) {
+            if (array2[j]==null){
+                array2[j]=(T) "null";
             }
+            remove(array2[j]);
+            i = true;
         }
         return i;
     }
@@ -125,7 +134,19 @@ public class SetC<T> implements Set<T> {
 
     @Override
     public Iterator<T> iterator() {
-        return null;
+        return new Iterator<T>() {
+            int index = 0;
+
+            @Override
+            public boolean hasNext() {
+                return index<size;
+            }
+
+            @Override
+            public T next() {
+                return array[index++];
+            }
+        };
     }
 
     @Override
@@ -135,7 +156,7 @@ public class SetC<T> implements Set<T> {
 
     @Override
     public <T1> T1[] toArray(T1[] a) {
-        return null;
+        return (T1[]) array;
     }
 
     @Override

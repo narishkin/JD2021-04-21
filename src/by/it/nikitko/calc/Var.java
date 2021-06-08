@@ -7,7 +7,6 @@ abstract class Var implements Operation {
 
     private static Map<String, Var> vars = new HashMap<>();
 
-
     public static Map<String, Var> getVars() {
         return vars;
     }

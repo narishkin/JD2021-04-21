@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class Helper {
 
-    static void sort(double[] arr) {
+    public static void sort(double[] arr) {
         Arrays.sort(arr);
     }
 }

@@ -1,8 +1,5 @@
 package by.it.marusich.jd01_04;
 
-import by.it._classwork_.jd01_04.Helper;
-import by.it._classwork_.jd01_04.InOut;
-
 import java.util.Arrays;
 import java.util.Scanner;
 

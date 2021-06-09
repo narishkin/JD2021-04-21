@@ -32,7 +32,7 @@ public class Matrix extends Var {
     }
 
     @Override
-    public Var add(Var other) {
+    public Var add(Var other) throws CalcException {
         if (other instanceof Scalar) {
             double[][] resultMatrix = new double[this.ARRAY.length][this.ARRAY[0].length];
             for (int i = 0; i < this.ARRAY.length; i++) {
@@ -48,13 +48,9 @@ public class Matrix extends Var {
 
             }
             return new Matrix(resultMatrix);
-        }
-
-        else if (other instanceof Vector) {
-            System.out.println("Sum impossible");
-        }
-
-        else if (other instanceof Matrix) {
+        } else if (other instanceof Vector) {
+            throw new CalcException("Sum impossible");
+        } else if (other instanceof Matrix) {
             double[][] resultMatrixFirst = new double[this.ARRAY.length][this.ARRAY[0].length];
             for (int i = 0; i < this.ARRAY.length; i++) {
                 for (int j = 0; j < this.ARRAY[i].length; j++) {
@@ -68,6 +64,8 @@ public class Matrix extends Var {
                         resultMatrixFirst[i][j] += resultMatrixSecond[i][j];
                     }
                 }
+            } else {
+                throw new CalcException("Different length Matrix");
             }
             return new Matrix(resultMatrixFirst);
 
@@ -76,7 +74,7 @@ public class Matrix extends Var {
     }
 
     @Override
-    public Var sub(Var other) {
+    public Var sub(Var other) throws CalcException {
         if (other instanceof Scalar) {
             double[][] resultMatrix = new double[this.ARRAY.length][this.ARRAY[0].length];
             for (int i = 0; i < this.ARRAY.length; i++) {
@@ -95,7 +93,7 @@ public class Matrix extends Var {
         }
 
         if (other instanceof Vector) {
-            System.out.println("Sum impossible");
+            throw new CalcException("Sum impossible");
         }
 
         if (other instanceof Matrix) {
@@ -112,15 +110,16 @@ public class Matrix extends Var {
                         resultMatrixFirst[i][j] -= resultMatrixSecond[i][j];
                     }
                 }
+            } else {
+                throw new CalcException("Different length Matrix");
             }
             return new Matrix(resultMatrixFirst);
-
         }
         return super.sub(other);
     }
 
     @Override
-    public Var mul(Var other) {
+    public Var mul(Var other) throws CalcException {
         if (other instanceof Scalar) {
             double[][] resultMatrix = new double[this.ARRAY.length][this.ARRAY[0].length];
             for (int i = 0; i < this.ARRAY.length; i++) {
@@ -174,6 +173,8 @@ public class Matrix extends Var {
                         }
                     }
                 }
+            } else {
+                throw new CalcException("Different length Matrix");
             }
             return new Matrix(matrixResult);
 
@@ -182,7 +183,7 @@ public class Matrix extends Var {
     }
 
     @Override
-    public Var div(Var other) {
+    public Var div(Var other) throws CalcException {
         if (other instanceof Scalar) {
             double[][] resultMatrix = new double[this.ARRAY.length][this.ARRAY[0].length];
             for (int i = 0; i < this.ARRAY.length; i++) {
@@ -204,11 +205,11 @@ public class Matrix extends Var {
         }
 
         if (other instanceof Vector) {
-            System.out.println("Operation impossible");
+            throw new CalcException("Operation impossible");
         }
 
         if (other instanceof Matrix) {
-            System.out.println("Operation impossible");
+            throw new CalcException("Operation impossible");
         }
         return super.div(other);
     }

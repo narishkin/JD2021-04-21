@@ -15,11 +15,13 @@ public class TaskC3 {
 
     public static void main(String[] args) {
 
-       // Scanner scanner = new Scanner(System.in);
-      //  String inputString = scanner.nextLine();
-         String inputString = "(a+b)*{e}}{-[45+a]()";
+       ///   Scanner scanner = new Scanner(System.in);
+        //String inputString = scanner.nextLine();
+        String inputString = "{[{()}]([)]{()}}";
         System.out.println(roundBracketsProcessing(inputString) & squareBracketsProcessing(inputString) & curlyBracketsProcessing(inputString));
-
+        System.out.println("()" + roundBracketsProcessing(inputString));
+        System.out.println("[]" + squareBracketsProcessing(inputString));
+        System.out.println("{}" + curlyBracketsProcessing(inputString));
     }
 
 
@@ -34,11 +36,13 @@ public class TaskC3 {
         }
         if (roundBrackets.getFirst().equals(")")) {
             return false;
-
         }
         while (!roundBrackets.isEmpty()) {
             String currentBracket = roundBrackets.pollFirst();
             //    System.out.println(currentBracket);
+            if (counter < 0) {
+                return false;
+            }
             if (currentBracket.equals("(")) {
                 counter++;
             }
@@ -69,6 +73,9 @@ public class TaskC3 {
         while (!squareBrackets.isEmpty()) {
             String currentBracket = squareBrackets.pollFirst();
             //   System.out.println(currentBracket);
+            if (counter < 0) {
+                return false;
+            }
             if (currentBracket.equals("[")) {
                 counter++;
             }
@@ -82,21 +89,27 @@ public class TaskC3 {
     }
 
     private static boolean curlyBracketsProcessing(String inputString) {
-        Deque<String> roundBrackets = new ArrayDeque<>();
+        Deque<String> curlyBrackets = new ArrayDeque<>();
         int counter = 0;
         Pattern pattern = Pattern.compile(REG_EXP_CURLY_BRACKET);
         Matcher matcher = pattern.matcher(inputString);
         while (matcher.find()) {
-            String roundBracket = matcher.group();
-            roundBrackets.add(roundBracket);
+            String curlyBracket = matcher.group();
+            curlyBrackets.add(curlyBracket);
         }
-        if (roundBrackets.getFirst().equals("}")) {
+        if (curlyBrackets.isEmpty()) {
+            return true;
+        }
+        if (curlyBrackets.getFirst().equals("}")) {
             return false;
 
         }
-        while (!roundBrackets.isEmpty()) {
-            String currentBracket = roundBrackets.pollFirst();
+        while (!curlyBrackets.isEmpty()) {
+            String currentBracket = curlyBrackets.pollFirst();
             //   System.out.println(currentBracket);
+            if (counter < 0) {
+                return false;
+            }
             if (currentBracket.equals("{")) {
                 counter++;
             }

@@ -4,7 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Parser {
-    Var calc(String expression) {
+    Var calc(String expression) throws CalcException {
 
         if (expression.equals("printvar")) {
             System.out.println(Var.getVars());
@@ -26,8 +26,7 @@ public class Parser {
         Var left = Var.createVar(parts[0]);
 
         if (left == null || right == null) {
-            System.out.println("Incorrect expression");
-            return null; //TODO return error
+            throw new CalcException("Incorrect expression");
         }
         Pattern patternOperation = Pattern.compile(Patterns.OPERATION);
         Matcher matcherOperation = patternOperation.matcher(expression);
@@ -42,10 +41,8 @@ public class Parser {
                     return left.mul(right);
                 case "/":
                     return left.div(right);
-
             }
         }
-        System.out.println("Error");
-        return null; //TODO return error
+        throw new CalcException("Error");
     }
 }

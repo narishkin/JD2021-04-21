@@ -1,4 +1,4 @@
-package by.it.naryshkin.jd01_11.calc;
+package by.it.naryshkin.calc;
 
 
 import by.it.HomeWork;

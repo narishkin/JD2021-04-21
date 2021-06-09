@@ -1,4 +1,4 @@
-package by.it.naryshkin.jd01_11.calc;
+package by.it.naryshkin.calc;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 public class Parser {
     Printer printer = new Printer();
 
-    Var calc(String expression) {
+    Var calc(String expression) throws CalcException{
         if (expression.equals("printvar")) {
             printer.printMap(Var.getVar());
             return null;

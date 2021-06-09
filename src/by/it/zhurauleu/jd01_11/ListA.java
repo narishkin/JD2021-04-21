@@ -1,60 +1,53 @@
-package by.it.nikitko.jd01_11;
+package by.it.zhurauleu.jd01_11;
 
 import java.util.*;
 
+@SuppressWarnings("ConstantConditions")
+public class ListA<T> implements List<T> {
 
-public class ListA <T> implements List <T> {
+    private T[] elements = (T[]) new Object[16];
 
-    private T[] elements = (T[]) new  Object[] {};
-   
+    private int size;
 
-    private int size=0;
-
-    @Override
-    public String toString() {
-        StringBuilder stringToPrint = new StringBuilder("[");
-        String delimiter = "";
-        for (int i = 0; i < size; i++) {
-            stringToPrint.append(delimiter).append(elements[i]);
-            delimiter=", ";
-        }
-        stringToPrint.append("]");
-        return stringToPrint.toString();
+    public ListA() {
     }
 
     @Override
-    public boolean add(T t) {
-        if (size== elements.length){
-            elements= Arrays.copyOf(elements,(size*3)/2+1);
+    public boolean add(T element) {
+        if (elements.length <= size) {
+            elements = Arrays.copyOf(elements, elements.length * 3 / 2 + 1);
         }
-        elements[size++]=t;
+        elements[size++] = element;
         return true;
     }
 
     @Override
     public T remove(int index) {
-        T delElement= elements[index];
-        System.arraycopy(elements,index+1,elements,index,size-index-1);
-        size--;
-        return delElement;
+        T returnValue = elements[index];
+        System.arraycopy(elements, index + 1, elements, index, size - index - 1);
+        elements[--size] = null;
+        return returnValue;
     }
 
-
-
-    @Override
     public T get(int index) {
         return elements[index];
+    }
+
+    public String toString() {
+        StringBuilder resultString = new StringBuilder("[");
+        String delimiter = "";
+        for (int i = 0; i < size; i++) {
+            resultString.append(delimiter).append(elements[i]);
+            delimiter = ", ";
+        }
+        resultString.append("]");
+        return resultString.toString();
     }
 
 
     @Override
     public int size() {
         return 0;
-    }
-
-    @Override
-    public boolean remove(Object o) {
-        return false;
     }
 
     @Override
@@ -68,12 +61,6 @@ public class ListA <T> implements List <T> {
     }
 
     @Override
-    public void add(int index, T element) {
-
-    }
-
-    @SuppressWarnings("ConstantConditions")
-    @Override
     public Iterator<T> iterator() {
         return null;
     }
@@ -83,10 +70,14 @@ public class ListA <T> implements List <T> {
         return new Object[0];
     }
 
-    @SuppressWarnings("ConstantConditions")
     @Override
     public <T1> T1[] toArray(T1[] a) {
         return null;
+    }
+
+    @Override
+    public boolean remove(Object o) {
+        return false;
     }
 
     @Override
@@ -120,13 +111,14 @@ public class ListA <T> implements List <T> {
     }
 
     @Override
+    public T set(int index, T element) {
+        return null;
+    }
 
-        public T set(int index, T element) {
-            T delElement= elements[index];
-            elements[index]=element;
-            return delElement;
-        }
+    @Override
+    public void add(int index, T element) {
 
+    }
 
     @Override
     public int indexOf(Object o) {
@@ -138,18 +130,16 @@ public class ListA <T> implements List <T> {
         return 0;
     }
 
-    @SuppressWarnings("ConstantConditions")
     @Override
     public ListIterator<T> listIterator() {
         return null;
     }
 
-    @SuppressWarnings("ConstantConditions")
     @Override
     public ListIterator<T> listIterator(int index) {
         return null;
     }
-    @SuppressWarnings("ConstantConditions")
+
     @Override
     public List<T> subList(int fromIndex, int toIndex) {
         return null;

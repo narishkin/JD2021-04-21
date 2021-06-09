@@ -11,7 +11,9 @@ class Vector extends Var {
     }
 
     Vector(String strVector) {
-        String[] strVectorArr = strVector.replace('{', ' ').replace('}', ' ').trim().split(",\\s*");
+        String[] strVectorArr = strVector.replace('{', ' ')
+                .replace('}', ' ')
+                .trim().split(",\\s*");
         value = new double[strVectorArr.length];
         for (int i = 0; i < value.length; i++) {
             value[i] = Double.parseDouble(strVectorArr[i]);
@@ -42,7 +44,9 @@ class Vector extends Var {
 
     @Override
     public String toString() {
-        return Arrays.toString(value).replace('[', '{').replace(']', '}');
+        return Arrays.toString(value)
+                .replace('[', '{')
+                .replace(']', '}');
     }
 }
 

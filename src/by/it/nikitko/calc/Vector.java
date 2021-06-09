@@ -28,7 +28,7 @@ class Vector extends Var {
     }
 
     @Override
-    public Var add(Var other) {
+    public Var add(Var other) throws CalcException {
         if (other instanceof Scalar) {
             double[] addRes = Arrays.copyOf(value, value.length);
             for (int i = 0; i < addRes.length; i++) {
@@ -37,6 +37,11 @@ class Vector extends Var {
             return new Vector(addRes);
         } else if (other instanceof Vector) {
             double[] addRes = Arrays.copyOf(value, value.length);
+            double[] secondValue = ((Vector) other).value;
+
+            if (addRes.length!=secondValue.length){
+                throw new CalcException("incorrect size of vectors");
+            }
             for (int i = 0; i < addRes.length; i++) {
                 addRes[i] = addRes[i] + ((Vector) other).value[i];
             }
@@ -48,7 +53,7 @@ class Vector extends Var {
     }
 
     @Override
-    public Var sub(Var other) {
+    public Var sub(Var other) throws CalcException {
         if (other instanceof Scalar) {
             double[] subRes = Arrays.copyOf(value, value.length);
             for (int i = 0; i < subRes.length; i++) {
@@ -57,6 +62,10 @@ class Vector extends Var {
             return new Vector(subRes);
         } else if (other instanceof Vector) {
             double[] subRes = Arrays.copyOf(value, value.length);
+            double[] secondValue = ((Vector) other).value;
+            if (subRes.length!=secondValue.length) {
+                throw new CalcException("incorrect size of vectors");
+            }
             for (int i = 0; i < subRes.length; i++) {
                 subRes[i] = subRes[i] - ((Vector) other).value[i];
             }
@@ -67,7 +76,7 @@ class Vector extends Var {
     }
 
     @Override
-    public Var mul(Var other) {
+    public Var mul(Var other) throws CalcException {
         if (other instanceof Scalar) {
             double[] mulRes = Arrays.copyOf(value, value.length);
             for (int i = 0; i < mulRes.length; i++) {
@@ -89,12 +98,11 @@ class Vector extends Var {
 
 
     @Override
-    public Var div(Var other) {
+    public Var div(Var other) throws CalcException {
         if (other instanceof Scalar) {
             double denominator = ((Scalar) other).getValue();
             if (denominator == 0) {
-                System.out.println("Division by zero");
-                return null; //TODO Exception
+                throw new CalcException("Division by zero");
             }
             double[] divRes = Arrays.copyOf(value, value.length);
             for (int i = 0; i < divRes.length; i++) {

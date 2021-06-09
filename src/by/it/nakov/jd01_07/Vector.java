@@ -10,7 +10,8 @@ class Vector extends Var {
 
     Vector(String strVector) {
         String[] strVectorArr = strVector
-                .replace('{',' ').replace('}', ' ')
+                .replace('{',' ')
+                .replace('}', ' ')
                 .trim().split(",\\s*");
         value = new double[strVectorArr.length];
         for (int i = 0; i < value.length; i++) {

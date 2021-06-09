@@ -3,7 +3,7 @@ package by.it.mogonov.calc;
 import java.util.Scanner;
 
 public class ConsoleRunner {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws CalcException {
         Scanner sc = new Scanner(System.in);
         String line;
 
@@ -11,8 +11,12 @@ public class ConsoleRunner {
         Printer printer = new Printer();
 
         while (!(line = sc.nextLine()).equals("end")) {
-            Var result = parser.calc(line);
-            printer.print(result);
+            try {
+                Var result = parser.calc(line);
+                printer.print(result);
+            } catch (CalcException e) {
+                System.out.println(e.getMessage());
+            }
         }
     }
 }

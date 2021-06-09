@@ -4,10 +4,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Parser {
-    Var calc(String expression) {
+    Var calc(String expression) throws CalcException {
         String[] operand = expression.split(Patterns.OPERATION);
-        Var one=Var.createVAR(operand[0]);
-        Var two=Var.createVAR(operand[1]);
+        Var one= (Var) Var.createVAR(operand[0]);
+        Var two= (Var) Var.createVAR(operand[1]);
         if(one==null || two==null)
             return null;
         Pattern p=Pattern.compile(Patterns.OPERATION);

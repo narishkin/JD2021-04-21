@@ -1,8 +1,11 @@
 package by.it.mogonov.calc;
 
-interface Operation {
-Var add(Var other);
-Var sub(Var other);
-Var mul(Var other);
-Var div(Var other);
+public interface Operation {
+    Var add(Var other) throws CalcException;
+
+    Var sub(Var other) throws CalcException;
+
+    Var mul(Var other) throws CalcException;
+
+    Var div(Var other) throws CalcException;
 }

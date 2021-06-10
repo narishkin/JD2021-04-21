@@ -26,31 +26,6 @@ public class TaskA {
 
     }
 
-    private static void printTextFile(List<Integer> integerList, String textFile) {
-        try (PrintWriter printWriter = new PrintWriter(textFile);
-        ) {
-            double sum = 0;
-            for (Integer integer : integerList) {
-                sum += integer;
-                printWriter.print(integer + " ");
-            }
-            printWriter.println();
-            printWriter.println("avg=" + sum/ integerList.size());
-        } catch (FileNotFoundException e){
-            e.printStackTrace();
-        }
-    }
-
-    private static void printList(List<Integer> integerList) {
-        double sum = 0;
-        for (Integer integer : integerList) {
-            sum += integer;
-            System.out.print(integer + " ");
-        }
-        System.out.println();
-        System.out.println("avg=" + sum / integerList.size());
-    }
-
     private static void writeInFile(String fileName) {
         try (DataOutputStream dataOutputStream = new DataOutputStream
                 (new BufferedOutputStream
@@ -78,5 +53,30 @@ public class TaskA {
             e.printStackTrace();
         }
         return integerList;
+    }
+
+    private static void printList(List<Integer> integerList) {
+        double sum = 0;
+        for (Integer integer : integerList) {
+            sum += integer;
+            System.out.print(integer + " ");
+        }
+        System.out.println();
+        System.out.println("avg=" + sum / integerList.size());
+    }
+
+    private static void printTextFile(List<Integer> integerList, String textFile) {
+        try (PrintWriter printWriter = new PrintWriter(textFile);
+        ) {
+            double sum = 0;
+            for (Integer integer : integerList) {
+                sum += integer;
+                printWriter.print(integer + " ");
+            }
+            printWriter.println();
+            printWriter.println("avg=" + sum/ integerList.size());
+        } catch (FileNotFoundException e){
+            e.printStackTrace();
+        }
     }
 }

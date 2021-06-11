@@ -35,8 +35,9 @@ public class TaskB {
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            assert PW != null;
-            PW.close();
+            if (PW!=null){
+                PW.close();
+            }
         }
     }
 

@@ -12,18 +12,18 @@ public class TaskB {
     private String poem;
     private String finalString;
 
-    private static String dir(Class<?> cl) {
-        String path = System.getProperty("user.dir") + File.separator + "src" + File.separator;
-        String clDir = cl.getName().replace(cl.getSimpleName(), "").replace(".", File.separator);
-        return path + clDir;
-    }
-
     public static void main(String[] args) {
         TaskB taskB = new TaskB();
         taskB.poem = taskB.readText();
         System.out.println(taskB.poem);
         taskB.finder(taskB.poem);
         taskB.textWriter();
+    }
+
+    private static String dir(Class<?> cl) {
+        String path = System.getProperty("user.dir") + File.separator + "src" + File.separator;
+        String clDir = cl.getName().replace(cl.getSimpleName(), "").replace(".", File.separator);
+        return path + clDir;
     }
 
     private void textWriter() {
@@ -43,7 +43,7 @@ public class TaskB {
 
     private void finder(String poem) {
         String patternWords = "[А-ЯЁа-яё]+";
-        String punctuationMarks = "[\\.,-:;.!]+";
+        String punctuationMarks = "[.,-:;!]+";
         Pattern p1 = Pattern.compile(patternWords);
         Pattern p2 = Pattern.compile(punctuationMarks);
         Matcher m1 = p1.matcher(poem);
@@ -61,12 +61,12 @@ public class TaskB {
     }
 
     private String readText() {
-        String Poem = null;
         StringBuilder sb = new StringBuilder();
         BufferedReader br = null;
         try {
             FileReader fr = new FileReader(textFilename);
             br = new BufferedReader(fr);
+            String Poem;
             while ((Poem = br.readLine()) != null) {
                 sb.append(Poem);
                 sb.append(" ");

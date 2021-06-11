@@ -8,6 +8,14 @@ import java.io.PrintWriter;
 public class TaskC {
     private StringBuilder finalString = new StringBuilder();
 
+    public static void main(String[] args) {
+        TaskC taskC = new TaskC();
+        File dir = new File(dirCheck());
+        taskC.listFilesDirs(dir);
+        System.out.println(taskC.finalString.toString());
+        taskC.print();
+    }
+
     private static String dir() {
         String path = System.getProperty("user.dir") + File.separator + "src" + File.separator;
         String clDir = TaskC.class.getName().replace(TaskC.class.getSimpleName(), "").replace(".", File.separator);
@@ -24,14 +32,6 @@ public class TaskC {
     }
 
     private final String writeFilename = dir() + "resultTaskC.txt";
-
-    public static void main(String[] args) {
-        TaskC taskC = new TaskC();
-        File dir = new File(dirCheck());
-        taskC.listFilesDirs(dir);
-        System.out.println(taskC.finalString.toString());
-        taskC.print();
-    }
 
     public void print() {
         try (PrintWriter PW = new PrintWriter(new FileWriter(writeFilename))) {

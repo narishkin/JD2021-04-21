@@ -15,7 +15,6 @@ public class TaskA {
 
     public static void main(String[] args) {
         Locale.setDefault(Locale.ENGLISH);
-
         intWrite(file);
         list = intRead(file, list);
         Print(list);
@@ -50,7 +49,6 @@ public class TaskA {
     }
 
     private static List<Integer> intRead(File file, List list) {
-
         try (DataInputStream DIS = new DataInputStream(new FileInputStream(file));){
             while (DIS.available()>0) {
                 list.add(DIS.readInt());

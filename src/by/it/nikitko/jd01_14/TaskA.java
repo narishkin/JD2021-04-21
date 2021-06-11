@@ -2,7 +2,6 @@ package by.it.nikitko.jd01_14;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -55,10 +54,7 @@ public class TaskA {
         PrintWriter printWriter = new PrintWriter(new FileWriter(PathCreator.getPath(TaskA.class) + TXT_FILE_NAME));
         double sum = 0;
         double counter = 0;
-        Iterator<Integer> iteratorList = integerList.iterator();
-
-        while (iteratorList.hasNext()) {
-            int i = iteratorList.next();
+        for (int i : integerList) {
             System.out.print(i + " ");
             printWriter.print(i + " ");
             sum += i;

@@ -9,7 +9,8 @@ public class PathCreator {
 
     public static String getPath(Class clazz) {
         String partOne = System.getProperty("user.dir") + File.separator + "src" + File.separator;
-        String partTwo = clazz.getName().replace(".", File.separator).replace(clazz.getSimpleName(), "");
+        String partTwo = clazz.getPackageName().replace(".", File.separator) + File.separator;
         return partOne + partTwo;
+
     }
 }

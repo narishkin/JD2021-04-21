@@ -8,117 +8,47 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class TaskC3 {
-    static final String REG_EXP_ROUND_BRACKET = "[\\(\\\\)]";
-    static final String REG_EXP_SQUARE_BRACKET = "[\\[\\]]";
-    static final String REG_EXP_CURLY_BRACKET = "[\\{\\\\}]";
-
+    static final String REG_EXP_BRACKETS = "[(){}\\[\\]]";
 
     public static void main(String[] args) {
-
-       ///   Scanner scanner = new Scanner(System.in);
-        //String inputString = scanner.nextLine();
-        String inputString = "{[{()}]([)]{()}}";
-        System.out.println(roundBracketsProcessing(inputString) & squareBracketsProcessing(inputString) & curlyBracketsProcessing(inputString));
-        System.out.println("()" + roundBracketsProcessing(inputString));
-        System.out.println("[]" + squareBracketsProcessing(inputString));
-        System.out.println("{}" + curlyBracketsProcessing(inputString));
+        Scanner scanner = new Scanner(System.in);
+        String inputString = scanner.nextLine();
+        System.out.println(bracketsProcessing(inputString));
     }
 
-
-    private static boolean roundBracketsProcessing(String inputString) {
-        Deque<String> roundBrackets = new ArrayDeque<>();
-        int counter = 0;
-        Pattern pattern = Pattern.compile(REG_EXP_ROUND_BRACKET);
-        Matcher matcher = pattern.matcher(inputString);
+    private static boolean bracketsProcessing(String inputString) {
+        Deque<String> brackets = new ArrayDeque<>();
+        Pattern patternBrackets = Pattern.compile(REG_EXP_BRACKETS);
+        Matcher matcher = patternBrackets.matcher(inputString);
         while (matcher.find()) {
-            String roundBracket = matcher.group();
-            roundBrackets.add(roundBracket);
-        }
-        if (roundBrackets.getFirst().equals(")")) {
-            return false;
-        }
-        while (!roundBrackets.isEmpty()) {
-            String currentBracket = roundBrackets.pollFirst();
-            //    System.out.println(currentBracket);
-            if (counter < 0) {
-                return false;
+            String currentBracket = matcher.group();
+            if (currentBracket.equals("(") || currentBracket.equals("{") || currentBracket.equals("["))
+                brackets.add(currentBracket);
+
+            if (currentBracket.equals(")") || currentBracket.equals("}") || currentBracket.equals("]")) {
+                if (brackets.isEmpty()) {
+                    return false;
+                }
+                switch (brackets.pollLast()) {
+                    case ("("):
+                        if (!currentBracket.equals(")")) {
+                            return false;
+                        }
+                        break;
+                    case ("{"):
+                        if (!currentBracket.equals("}")) {
+                            return false;
+                        }
+                        break;
+                    case ("["):
+                        if (!currentBracket.equals("]")) {
+                            return false;
+                        }
+                        break;
+                }
             }
-            if (currentBracket.equals("(")) {
-                counter++;
-            }
-            if (currentBracket.equals(")")) {
-                counter--;
-            }
         }
-        if (counter == 0) {
-            return true;
-        } else return false;
+        return brackets.isEmpty();
     }
 
-    private static boolean squareBracketsProcessing(String inputString) {
-        Deque<String> squareBrackets = new ArrayDeque<>();
-        int counter = 0;
-        Pattern pattern = Pattern.compile(REG_EXP_SQUARE_BRACKET);
-        Matcher matcher = pattern.matcher(inputString);
-        while (matcher.find()) {
-            String squareBracket = matcher.group();
-            squareBrackets.add(squareBracket);
-        }
-        if (squareBrackets.isEmpty()) {
-            return true;
-        }
-        if (squareBrackets.getFirst().equals("]")) {
-            return false;
-        }
-        while (!squareBrackets.isEmpty()) {
-            String currentBracket = squareBrackets.pollFirst();
-            //   System.out.println(currentBracket);
-            if (counter < 0) {
-                return false;
-            }
-            if (currentBracket.equals("[")) {
-                counter++;
-            }
-            if (currentBracket.equals("]")) {
-                counter--;
-            }
-        }
-        if (counter == 0) {
-            return true;
-        } else return false;
-    }
-
-    private static boolean curlyBracketsProcessing(String inputString) {
-        Deque<String> curlyBrackets = new ArrayDeque<>();
-        int counter = 0;
-        Pattern pattern = Pattern.compile(REG_EXP_CURLY_BRACKET);
-        Matcher matcher = pattern.matcher(inputString);
-        while (matcher.find()) {
-            String curlyBracket = matcher.group();
-            curlyBrackets.add(curlyBracket);
-        }
-        if (curlyBrackets.isEmpty()) {
-            return true;
-        }
-        if (curlyBrackets.getFirst().equals("}")) {
-            return false;
-
-        }
-        while (!curlyBrackets.isEmpty()) {
-            String currentBracket = curlyBrackets.pollFirst();
-            //   System.out.println(currentBracket);
-            if (counter < 0) {
-                return false;
-            }
-            if (currentBracket.equals("{")) {
-                counter++;
-            }
-            if (currentBracket.equals("}")) {
-                counter--;
-            }
-        }
-        if (counter == 0) {
-            return true;
-        } else return false;
-    }
 }

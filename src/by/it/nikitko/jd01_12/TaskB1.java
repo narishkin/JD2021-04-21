@@ -14,7 +14,7 @@ public class TaskB1 {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        HashMap<String, Integer> words = new  HashMap();
+        HashMap<String, Integer> words = new HashMap<>();
         Pattern patternWord = Pattern.compile(WORD_PATTERN);
         List<String> input = new ArrayList<>();
         String current = "";

@@ -1,6 +1,12 @@
 package by.it.nakov.jd01_04;
 
 public class TaskC {
+
+    static void mergeSort(double[ ] array){
+
+    }
+
+
     static void buildOneDimArray(String line) {
         double[] array = InOut.getArray(line);
         double start = array[0];

@@ -9,10 +9,10 @@ public class TaskC1 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         List<String> input = new ArrayList<>();
-        HashMap<Integer, String> wordsWithoutRepeat = new HashMap();
-        HashMap<Integer, String> wordsWithRepeat = new HashMap();
+        HashMap<Integer, String> wordsWithoutRepeat = new HashMap<>();
+        HashMap<Integer, String> wordsWithRepeat = new HashMap<>();
 
-        String current = "";
+        String current;
         while (true) {
             current = scanner.nextLine();
             if (current.equals("end")){

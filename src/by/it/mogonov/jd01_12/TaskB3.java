@@ -2,15 +2,25 @@ package by.it.mogonov.jd01_12;
 
 import java.util.*;
 
-public class TaskB2 {
+public class TaskB3 {
 
     private static final String[] PERSON_ARRAY = new String[]{"1", "2", "3", "4", "5"};
     static List<String> peoples = Arrays.asList(PERSON_ARRAY);
 
 
     public static void main(String[] args) {
+
         ArrayList<String> peoplesOne = new ArrayList<>(peoples);
         LinkedList<String> peoplesTwo = new LinkedList<>(peoples);
+        int[] test=new int[4096];
+        int n=test.length;
+
+        for (int i = 0; i <=n ; i++) {
+            peoplesOne.add("n"+i);
+            peoplesTwo.add("i"+i);
+
+
+        }
         System.out.println("peoplesOne= " + peoplesOne);
         System.out.println("peoplesTwo= " + peoplesTwo);
         System.out.println(process(peoplesOne));
@@ -50,4 +60,5 @@ public class TaskB2 {
         }
         return peoples.getFirst();
     }
+
 }

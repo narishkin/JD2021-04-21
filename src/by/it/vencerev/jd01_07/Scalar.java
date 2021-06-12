@@ -20,4 +20,5 @@ class Scalar extends AbstractVar {
     public String toString() {
         return Double.toString(value);
     }
-}
+
+    }

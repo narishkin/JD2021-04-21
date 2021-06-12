@@ -1,8 +1,9 @@
 package by.it.vencerev.jd01_11;
 
 import java.util.*;
+import java.util.function.UnaryOperator;
 
-public class ListA<T, o> implements List<T>
+public class ListA<T> implements List<T>
     {
    private T[] elements= (T[]) new Object[] {};
    private int size =0;
@@ -30,18 +31,18 @@ public class ListA<T, o> implements List<T>
         return 0;
     }
 
-    @Override
-    public boolean isEmpty() {
-        return false;
-    }
+        @Override
+        public boolean isEmpty() {
+            return false;
+        }
 
-    @Override
-    public boolean contains(Object boolean o;
-        o) {
-        return false;
-    }
+        @Override
+        public boolean contains(Object o) {
+            return false;
+        }
 
-    @Override
+
+        @Override
     public Iterator<T> iterator() {
         return null;
     }
@@ -60,7 +61,7 @@ public class ListA<T, o> implements List<T>
 
     @Override
     public boolean remove(Object o) {
-        int index=indexOf();
+        int index=indexOf(o);
         if (index>-1) remove(index);
         return index>-1;
     }
@@ -103,7 +104,17 @@ public class ListA<T, o> implements List<T>
         return false;
     }
 
-    @Override
+        @Override
+        public void replaceAll(UnaryOperator<T> operator) {
+            List.super.replaceAll(operator);
+        }
+
+        @Override
+        public void sort(Comparator<? super T> c) {
+            List.super.sort(c);
+        }
+
+        @Override
     public void clear() {
 
     }
@@ -129,18 +140,19 @@ public class ListA<T, o> implements List<T>
 
     @Override
     public int indexOf(Object o) {
-         if (o == null){
-             for (int i = 0; i < size; i++) {
-             if (elements[i] == null)
-                 return i;
-             }else (){
-                 for (int i = 0; i < size; i++) {
-                 if (o.equals(elements[i]))
-                     return i;
-                 }
-                 return -1;
-             }
-         }
+//         if (o == null){
+//             for (int i = 0; i < size; i++) {
+//             if (elements[i] == null)
+//                 return i;
+//             }}else {
+//                 for (int i = 0; i < size; i++) {
+//                 if (o.equals(elements[i]))
+//                     return i;
+//                 }
+//                 return -1;
+//             }
+//         }
+        return 0;
         }
 
     @Override
@@ -162,4 +174,9 @@ public class ListA<T, o> implements List<T>
     public List<T> subList(int fromIndex, int toIndex) {
         return null;
     }
-}
+
+        @Override
+        public Spliterator<T> spliterator() {
+            return List.super.spliterator();
+        }
+    }

@@ -1,26 +1,44 @@
 package by.it.nakov.jd01_07;
 
+import java.util.Arrays;
+
 public class Matrix extends Var {
     private double[][] value;
 
     Matrix(double[][] value) {
-        this.value = value;
+        this.value = new double[value.length][value[0].length];
+        for (int i = 0; i < value.length; i++) {
+            System.arraycopy(value, 0, this.value, 0, value.length);
+        }
     }
 
-    Matrix(Matrix matrix){this.value= matrix.value;}
+    Matrix(Matrix matrix) {
+        this.value = matrix.value;
+    }
 
-    Matrix(String strMatrix){}
+    public Matrix(String strMatrix) {
+        String[] rowMatrix = strMatrix.split("}");
+        String[][] cellsMatrix = new String[rowMatrix.length][0];
+
+        for (int i = 0; i < rowMatrix.length; i++) {
+            cellsMatrix[i] = rowMatrix[i]
+                    .replace('{', ' ')
+                    .replace('}', ' ')
+                    .trim().split(",\\a*");
+        }
+    }
 
 
     @Override
     public String toString() {
-        StringBuilder ab = new StringBuilder("{{");
+        StringBuilder ab1 = new StringBuilder("{");
         String delimiter = "";
         for (double[] element : value) {
-            ab.append(delimiter).append(element);
-            delimiter = ", ";
+            ab1.append("{");
+            ab1.append(delimiter).append(Arrays.toString(element));
+            ab1.append("}");
         }
-        ab.append("}}");
-        return ab.toString();
+        ab1.append("}");
+        return ab1.toString();
     }
 }

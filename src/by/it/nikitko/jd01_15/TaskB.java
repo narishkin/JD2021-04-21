@@ -13,8 +13,9 @@ public class TaskB {
     private static void readToConsole(String fileName) {
         try (BufferedReader fileReader = new BufferedReader(new InputStreamReader(new FileInputStream(fileName)))) {
             int line = fileReader.read();
-            while (true) {
-                System.out.println(line);
+            while (line!=-1) {
+                char a = (char) line;
+                System.out.println(a);
                 line = fileReader.read();
             }
         } catch (FileNotFoundException fileNotFoundException) {

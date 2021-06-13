@@ -1,8 +1,12 @@
 package by.it.krukouski.jd01_15;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Arrays;
+import java.util.stream.Stream;
 
 public class TaskB {
 
@@ -22,19 +26,48 @@ public class TaskB {
          * Method is not found
          */
         String javaFile = PathCreator.getFileName(TaskB.class, JAVA_FILE);
+        String textFile = PathCreator.getFileName(TaskB.class, TEXT_FILE);
         StringBuilder sb = new StringBuilder();
-        try {
-            String s = Files
-                    .readString(Path.of(javaFile));
+        javaRead(javaFile, sb);
 
-            sb.append(s);
+        printToTextFile(textFile, sb);
+
+
+    }
+
+    private static void javaRead(String javaFile, StringBuilder sb) {
+        try {
+            Object[] lines = Files
+                    .lines(Path.of(javaFile))
+                    .filter(s -> !s.startsWith("//"))
+                    .filter(s -> !s.contains("/*"))
+                    .toArray();
+            System.out.println("Array= " + Arrays.toString(lines));
+            for (Object line : lines) {
+
+                sb.append(line).append("\n");
+
+            }
+            System.out.println("sb=" + sb);
+
+            // String s = Files
+             //       .readString(Path.of(javaFile));
+
+            //sb.append(lines);
 
 
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
-        System.out.println(sb);
-
-
     }
+
+    private static void printToTextFile(String textFile, StringBuilder sb) {
+        try (PrintWriter printWriter = new PrintWriter(textFile)){
+            printWriter.println(sb);
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
 }

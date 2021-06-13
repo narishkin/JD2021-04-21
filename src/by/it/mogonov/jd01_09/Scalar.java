@@ -1,6 +1,7 @@
 package by.it.mogonov.jd01_09;
 
 
+import static java.lang.Double.parseDouble;
 
 class Scalar extends Var {
     private final double value;
@@ -55,7 +56,7 @@ class Scalar extends Var {
 
     Scalar(String str) {
 
-        this.value = Double.parseDouble(str);
+        this.value = parseDouble(str);
     }
 
     Scalar(Scalar scalar) {

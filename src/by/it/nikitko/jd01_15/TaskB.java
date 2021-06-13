@@ -13,7 +13,7 @@ public class TaskB {
     public static void main(String[] args) {
 
         String fileName = PathCreator.getPath(TaskB.class) + "TaskB.java";
-        StringBuilder program = readToConsole(fileName);
+        StringBuilder program = refactoringJavaFile(fileName);
         print(program);
     }
     /*comment this line
@@ -23,49 +23,51 @@ public class TaskB {
     comment this line*/
 
 
-    /**Javadoc comment
-    javadoc comment
-    Javadoc comment*/
+    /**
+     * Javadoc comment
+     * javadoc comment
+     * Javadoc comment
+     */
 
-    private static StringBuilder readToConsole(String fileName) { //first comment
-        StringBuilder program = new StringBuilder();              //second comment
+    private static StringBuilder refactoringJavaFile(String fileName) { //first comment
+        StringBuilder program = new StringBuilder();                    //second comment
         try (BufferedReader fileReader = new BufferedReader(new InputStreamReader(new FileInputStream(fileName)))) {
-            int line = fileReader.read();
-            while (line != -1) {
-                char currentChar = (char) line;
+            int currSymbol = fileReader.read();
+            while (currSymbol != -1) {
+                char currentChar = (char) currSymbol;
                 if (currentChar == SLASH_R) {
-                    int lineNext = fileReader.read();
-                    char nextChar = (char) lineNext;
-                    if (nextChar == ASTERISK) {
-                        while (nextChar != SLASH_R) {
-                            lineNext = fileReader.read();
-                            nextChar = (char) lineNext;
-                        }
-                    }
-                    if (nextChar == SLASH_R) {
-                        while (nextChar != NEL) {
-                            lineNext = fileReader.read();
-                            nextChar = (char) lineNext;
-                        }
-                    } else {
-                        program.append(currentChar);
+                    char nextChar = (char) fileReader.read();
+                    switch (nextChar) {
+                        case (ASTERISK):
+                            while (nextChar != SLASH_R) {
+                                nextChar = (char) fileReader.read();
+                            }
+                            nextChar = (char) fileReader.read();
+                            break;
+                        case (SLASH_R):
+                            while (nextChar != NEL) {
+                                nextChar = (char) fileReader.read();
+                            }
+                            break;
+                        default:program.append(currentChar);
                     }
                     currentChar = nextChar;
                 }
                 program.append(currentChar);
-                line = fileReader.read();
+                currSymbol = fileReader.read();
             }
-
         } catch (IOException fileNotFoundException) {
             fileNotFoundException.printStackTrace();
         }
         return program;
     }
-    /*comment this line
+    /*
     comment this line
     comment this line
     comment this line
-    comment this line*/
+    comment this line
+    comment this line
+    */
 
     private static void print(StringBuilder program) {
         try (PrintWriter printWriter = new PrintWriter(new FileWriter(PathCreator.getPath(TaskB.class) + TXT_TASK_B))) {

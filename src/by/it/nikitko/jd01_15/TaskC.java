@@ -1,6 +1,10 @@
 package by.it.nikitko.jd01_15;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
 public class TaskC {
@@ -45,11 +49,21 @@ public class TaskC {
     private static void printDir(String path) {
         File currDir = new File(path);
         System.out.println();
+
+
         File[] filesCurrDir = currDir.listFiles();
         assert filesCurrDir != null;
         for (File file : filesCurrDir) {
             if (file.isDirectory()) {
                 System.out.println("dir   :" + file.getName());
+              /*  Path path1 = Paths.get(path+File.separator+ file.getName());
+                try {
+                    System.out.println(Files.getAttribute(path1,"size"));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }*/
+
+
             } else {
                 System.out.println("file  :" + file.getName());
             }

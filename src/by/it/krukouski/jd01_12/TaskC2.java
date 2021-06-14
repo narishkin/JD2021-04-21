@@ -1,8 +1,6 @@
 package by.it.krukouski.jd01_12;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class TaskC2 {
     private static final Integer[] i = {1, 2, 3, 4, 5};
@@ -21,31 +19,50 @@ public class TaskC2 {
     }
 
     private static Set<Number> getUnion(Set<? extends Number>... hashSet) {
+        Set<Number> resultSet = new TreeSet<>(COMPARATOR);
+        for (Set<? extends Number> set : hashSet) {
+            resultSet.addAll(set);
+        }
+        return resultSet;
+
+    }
+
+    private static Set<Number> getCross(Set<? extends Number>... hashSet) {
         Set<Number> resultSet = new HashSet<>(hashSet[0]);
-        for (int i = 1; i < hashSet.length; i++) {
-            int count = 0;
-            for (Number numberHashSet : hashSet[i]) {
-                for (Number numberResultSet : resultSet) {
-                    if (numberHashSet.doubleValue() != numberResultSet.doubleValue()) {
-                        count++;
-                    }
-                    if (count == resultSet.size()) {
-                        resultSet.add(numberHashSet);
-                    }
+        resultSet.removeIf(o -> checkValue(o, hashSet));
+        return resultSet;
+
+    }
+
+    private static boolean checkValue(Number o, Set<? extends Number>[] hashSet) {
+        int count = 0;
+        for (Set<? extends Number> numbers : hashSet) {
+            for (Number number : numbers) {
+                if (COMPARATOR.compare(number, o)==0){
+                    count++;
+                    break;
                 }
 
             }
 
         }
-        return resultSet;
+        return count < hashSet.length;
+
     }
 
-    private static Set<Number> getCross(Set<?>... hashSet) {
-        Set<Number> resultSet = new HashSet<>();
-        for (Set<?> collection : hashSet) {
-            resultSet.retainAll(collection);
-        }
-        return resultSet;
-    }
+    private static final Comparator<Number> COMPARATOR =
 
+            (o1, o2) -> {
+                if (Objects.equals(o1,o2)) return 0;
+                if (o1==null) return -1;
+                if (o2==null) return 1;
+
+                return o1.longValue() < o2.longValue() || o1.doubleValue() < o2.doubleValue()
+                        ? -1
+                        : o1.longValue() > o2.longValue() || o1.doubleValue() > o2.doubleValue()
+                        ? 1
+                        : 0;
+            };
 }
+
+

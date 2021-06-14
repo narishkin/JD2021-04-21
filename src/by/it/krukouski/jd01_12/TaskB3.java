@@ -16,12 +16,12 @@ public class TaskB3 {
         long startTimeArrayList = System.nanoTime();
         process(peoplesA);
         long endTimeArrayList = System.nanoTime();
-        long timeArrayList = endTimeArrayList-startTimeArrayList;
+        long timeArrayList = endTimeArrayList - startTimeArrayList;
         System.out.println("timeArrayList= " + timeArrayList);
         long startTimeLinked = System.nanoTime();
         process(peoplesL);
         long endTimeLinked = System.nanoTime();
-        long timeLinked = endTimeLinked-startTimeLinked;
+        long timeLinked = endTimeLinked - startTimeLinked;
         System.out.println("timeLinkedList= " + timeLinked);
     }
 
@@ -37,26 +37,16 @@ public class TaskB3 {
                     index = 0;
                 }
             } else {
-                iterator=peoples.iterator();
+                iterator = peoples.iterator();
             }
         }
         return peoples.get(0);
     }
 
     static String process(LinkedList<String> peoples) {
-        int index = 0;
-        ListIterator<String> listIterator = peoples.listIterator();
-        while (peoples.size()>1){
-            if (listIterator.hasNext()){
-                listIterator.next();
-                index++;
-                if (index==2){
-                    listIterator.remove();
-                    index=0;
-                }
-            } else {
-                listIterator=peoples.listIterator(0);
-            }
+        while (peoples.size() > 1) {
+            peoples.addLast(peoples.removeFirst());
+            peoples.removeFirst();
         }
         return peoples.get(0);
     }

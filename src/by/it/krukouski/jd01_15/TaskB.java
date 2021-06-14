@@ -39,7 +39,6 @@ public class TaskB {
         try {
             Object[] lines = Files
                     .lines(Path.of(javaFile))
-                    .filter(s -> !s.startsWith("//"))
                     .filter(s -> !s.contains("/*"))
                     .toArray();
             System.out.println("Array= " + Arrays.toString(lines));

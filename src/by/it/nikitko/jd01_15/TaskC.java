@@ -10,36 +10,40 @@ public class TaskC {
         System.out.print(path);
 
         while (true) {
-            String inputString = scanner.nextLine();
-            if (inputString.equals("end")) {
-                break;
-            }
-            if (inputString.equals("dir")) {
-                printDir(path);
-                System.out.print(path);
-            }
-            if (inputString.matches("cd\\s*\\.+")) {
-                File currDir = new File(path);
-                path = currDir.getParent();
-                System.out.print(path + File.separator);
-            }
-            if (!inputString.equals("dir") & !inputString.matches("cd\\s*\\.+")) {
-                path = changeDir(path, inputString);
-                System.out.print(path);
+            try {
+
+                String inputString = scanner.nextLine();
+                if (inputString.equals("end")) {
+                    break;
+                }
+                if (inputString.equals("dir")) {
+                    printDir(path);
+                    System.out.print(path+File.separator);
+                }
+                if (inputString.matches("cd\\s*\\.+")) {
+                    File currDir = new File(path);
+                    path = currDir.getParent();
+                    System.out.print(path + File.separator);
+                }
+                if (!inputString.equals("dir") & !inputString.matches("cd\\s*\\.+")) {
+                    path = changeDir(path, inputString);
+                    System.out.print(path);
+                }
+            } catch (NullPointerException e) {
+                System.out.println("Системе не удается найти указанный путь.");
+              //  e.printStackTrace();
             }
         }
     }
 
     private static String changeDir(String path, String dir) {
         dir = dir.replaceAll("cd\\s*", "");
-        System.out.println(dir);
         path = path + File.separator + dir + File.separator;
         return path;
     }
 
     private static void printDir(String path) {
         File currDir = new File(path);
-
         System.out.println();
         File[] filesCurrDir = currDir.listFiles();
         assert filesCurrDir != null;

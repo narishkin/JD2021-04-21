@@ -30,8 +30,7 @@ public class TaskB2 {
                 iterator = peoples.iterator();
             }
         }
-        String lastName = peoples.get(0);
-        return lastName;
+        return peoples.get(0);
     }
 
     static String process(LinkedList<String> peoples) {
@@ -50,8 +49,7 @@ public class TaskB2 {
                 iterator = peoples.iterator();
             }
         }
-        String lastName = peoples.get(0);
-        return lastName;
+        return peoples.get(0);
     }
 
 }

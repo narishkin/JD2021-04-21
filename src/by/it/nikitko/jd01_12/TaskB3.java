@@ -11,7 +11,7 @@ public class TaskB3 {
         String[] names = new String[4096];
         Random randomGrades = new Random();
         for (int i = 0; i < names.length; i++) {
-            names[i] ="n"+Integer.toString(randomGrades.nextInt(100) );
+            names[i] ="n"+ randomGrades.nextInt(100);
         }
 
         ArrayList<String> arrayListNames = new ArrayList<>(Arrays.asList(names));
@@ -48,8 +48,7 @@ public class TaskB3 {
                 iterator = peoples.iterator();
             }
         }
-        String lastName = peoples.get(0);
-        return lastName;
+        return peoples.get(0);
     }
 
     static String process(LinkedList<String> peoples) {
@@ -67,8 +66,7 @@ public class TaskB3 {
                 iterator = peoples.iterator();
             }
         }
-        String lastName = peoples.get(0);
-        return lastName;
+        return peoples.get(0);
     }
 
 }

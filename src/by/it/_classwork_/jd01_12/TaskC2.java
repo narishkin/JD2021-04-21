@@ -27,15 +27,15 @@ public class TaskC2 {
     @SafeVarargs
     private static Set<Number> getCross(Set<? extends Number>... sets) {
         Set<Number> returnSet = new HashSet<>(sets[0]);
-        returnSet.removeIf(o -> checkValue(o, sets));
+        returnSet.removeIf(o -> checkDeletion(o, sets));
         return returnSet;
     }
 
-    private static boolean checkValue(Number o, Set<? extends Number>[] sets) {
+    private static boolean checkDeletion(Number value, Set<? extends Number>[] sets) {
         int count = 0;
         for (Set<? extends Number> set : sets) {
             for (Number number : set) {
-                if (COMPARATOR.compare(number, o) == 0) {
+                if (COMPARATOR.compare(number, value) == 0) {
                     count++;
                     break;
                 }

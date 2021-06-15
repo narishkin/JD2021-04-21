@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 
 public class TaskB {
 
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) {
 
         String root = System.getProperty("user.dir");
         Class<TaskB> aClass = TaskB.class;
@@ -23,7 +23,12 @@ public class TaskB {
         File poem = new File(pathFile);
         Pattern patternWords = Pattern.compile("[\\s\\:\\/\\;\\.\\,\\—\\-\\?\\!\\\"]+");
         Pattern patternMarks = Pattern.compile("[\\:\\/\\;\\.\\,\\—\\-\\?\\!\\\"]+");
-        Scanner scanner = new Scanner(poem);
+        Scanner scanner = null;
+        try {
+            scanner = new Scanner(poem);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         int words = 0;
         int marks = 0;
         scanner.useDelimiter(patternWords);
@@ -32,7 +37,12 @@ public class TaskB {
             words = words + 1;
         }
         scanner.close();
-        Scanner scanner1 = new Scanner(poem);
+        Scanner scanner1 = null;
+        try {
+            scanner1 = new Scanner(poem);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         scanner1.useDelimiter(patternMarks);
         while (scanner1.hasNext()) {
             scanner1.next();

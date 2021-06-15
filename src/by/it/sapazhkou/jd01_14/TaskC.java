@@ -1,7 +1,7 @@
 package by.it.sapazhkou.jd01_14;
 
 import java.io.File;
-import java.io.IOException;
+import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
 public class TaskC {
@@ -22,6 +22,12 @@ public class TaskC {
 
         printToConsole(pathDir);
 
+        try(PrintWriter printWriter = new PrintWriter(pathFileResult)){
+           printToConsole(pathDir,printWriter);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
     }
 
     public static void printToConsole(String path){
@@ -37,5 +43,19 @@ public class TaskC {
             }
         }
     }
+    public static void printToConsole(String path,PrintWriter printWriter){
+        File dir = new File(path);
+        String[] elementsDir = dir.list();
+        for (int i = 0; i < elementsDir.length; i++) {
+            File file = new File(path, elementsDir[i]);
+            if (file.isDirectory()) {
+                printWriter.println("dir:" + file.getName());
+                printToConsole(file.getAbsolutePath(),printWriter);
+            } else {
+                printWriter.println("file:" + file.getName());
+            }
+        }
+    }
+
 }
 

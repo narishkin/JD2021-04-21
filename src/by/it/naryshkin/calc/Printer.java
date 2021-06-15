@@ -9,6 +9,9 @@ public class Printer {
             System.out.println(var);
         }
     }
+    void print(CalcException e){
+            System.out.println(e.getMessage());
+    }
 
     void printMap(Map<String,Var> vars){
         Set<Map.Entry<String,Var>> entrySet = vars.entrySet();

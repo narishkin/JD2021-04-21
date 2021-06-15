@@ -30,7 +30,7 @@ public class TaskC {
                 System.out.println("Directory of " + currentDirectory.toString() + "\n");
                 for (File content : Objects.requireNonNull(currentDirectory.listFiles())) {
                     Date date = new Date(content.lastModified());
-                    simpleDateFormat = new SimpleDateFormat("dd.mm.yyyy   hh:mm   " );
+                    simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy   hh:mm   ");
                     if (content.isDirectory()){
                         dirCounter++;
                         System.out.printf("%20s<DIR>%10d %-30s\n", simpleDateFormat.format(date), content.length(), content.getName());

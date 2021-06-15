@@ -37,23 +37,21 @@ public class TaskB {
 
     private static void javaRead(String javaFile, StringBuilder sb) {
         try {
+
             Object[] lines = Files
                     .lines(Path.of(javaFile))
-                    .filter(s -> !s.contains("/*"))
                     .toArray();
-            System.out.println("Array= " + Arrays.toString(lines));
             for (Object line : lines) {
-
-                sb.append(line).append("\n");
-
+                String s = line.toString().trim();
+                if (!s.startsWith("//") &&
+                        !s.startsWith("/*") &&
+                        !s.startsWith("*/") &&
+                        !s.startsWith("/**") &&
+                        !s.startsWith("*")) {
+                    sb.append(s).append("\n");
+                }
             }
             System.out.println("sb=" + sb);
-
-            // String s = Files
-             //       .readString(Path.of(javaFile));
-
-            //sb.append(lines);
-
 
         } catch (IOException exception) {
             throw new RuntimeException(exception);
@@ -61,7 +59,7 @@ public class TaskB {
     }
 
     private static void printToTextFile(String textFile, StringBuilder sb) {
-        try (PrintWriter printWriter = new PrintWriter(textFile)){
+        try (PrintWriter printWriter = new PrintWriter(textFile)) {
             printWriter.println(sb);
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);

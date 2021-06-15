@@ -1,9 +1,13 @@
 package by.it.naryshkin.calc;
 
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
 abstract class Var implements Operation {
+    private static final String VARS_TXT = "vars.txt";
+    private static final String FILE_NAME = PathCreator.getFileName(ConsoleRunner.class, VARS_TXT);
     private static Map<String, Var> vars = new HashMap<>();
 
     static Var setVar(String name, Var var) {
@@ -13,6 +17,14 @@ abstract class Var implements Operation {
 
     public static Map<String, Var> getVar() {
         return vars;
+    }
+
+    public static void saveVars(){
+        try(PrintWriter printWriter = new PrintWriter(FILE_NAME)){
+
+        } catch (FileNotFoundException e) {
+            throw  new RuntimeException(e);
+        }
     }
 
 

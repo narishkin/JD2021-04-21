@@ -3,6 +3,8 @@ package by.it.naryshkin.calc;
 import java.util.Scanner;
 
 public class ConsoleRunner {
+    static final String KEY_STOP_APP = "end";
+
     public static void main(String[] args) {
         Printer printer = new Printer();
         Parser parser = new Parser();

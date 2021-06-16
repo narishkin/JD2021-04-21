@@ -2,7 +2,7 @@ package by.it._classwork_.jd02_01;
 
 import java.util.Random;
 
-public class RandomHeper {
+public class RandomHelper {
 
     private static final Random RANDOM = new Random();
 

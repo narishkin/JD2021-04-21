@@ -26,7 +26,7 @@ public class Buyer extends Thread implements IBuyer {
     @Override
     public void chooseGoods() {
         System.out.println(this + "started choose goods");
-        int timeout = RandomHeper.random(500, 2000);
+        int timeout = RandomHelper.random(500, 2000);
         TimerHelper.sleep(timeout);
         System.out.println(this + "finished choose goods");
     }

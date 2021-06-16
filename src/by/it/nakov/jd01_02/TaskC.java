@@ -56,11 +56,20 @@ public class TaskC {
     }
 
     private static int step2(int[][] array) {
-//        int[] plusIndex1 = array[0];
-
-
-        return 0;
+        int n = 0;
+        int str = 0;
+        int firstPositivNum = 0;
+        int secondPositivNum = 0;
+        for (int i = 0; i < array.length; i++) {
+            if (array[n][i] > 0) str += array[n][i];
+        }
+        n++;
+//        System.out.println("Сумма елементов строки " + n + " равна: "+str);
+//        str = 0;
+        return str;
     }
+
+}
 
 //    private static int[][] step3(int[][] arr) {
 //        if (arr.length == 0) throw new IllegalArgumentException();
@@ -76,4 +85,4 @@ public class TaskC {
 //        System.out.println(arr);
 //        return arr;
 //    }
-}
+

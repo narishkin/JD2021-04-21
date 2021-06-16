@@ -5,15 +5,15 @@ import java.util.Arrays;
 public class Matrix extends Var {
     private double[][] value;
 
+    Matrix(Matrix matrix) {
+        this.value = matrix.value;
+    }
+
     Matrix(double[][] value) {
         this.value = new double[value.length][value[0].length];
         for (int i = 0; i < value.length; i++) {
             System.arraycopy(value, 0, this.value, 0, value.length);
         }
-    }
-
-    Matrix(Matrix matrix) {
-        this.value = matrix.value;
     }
 
     public Matrix(String strMatrix) {
@@ -27,7 +27,6 @@ public class Matrix extends Var {
                     .trim().split(",\\a*");
         }
     }
-
 
     @Override
     public String toString() {

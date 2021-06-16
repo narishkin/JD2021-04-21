@@ -10,7 +10,7 @@ public class TaskA {
     private static final Random RANDOM = new Random();
 
     public static void main(String[] args) {
-
+        Locale.setDefault(Locale.ENGLISH);
         String fileName = PathCreator.getFileName(TaskA.class, FILENAME);
         String txtName = PathCreator.getFileName(TaskA.class, RESULT_TXT);
 

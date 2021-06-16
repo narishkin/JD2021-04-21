@@ -3,6 +3,7 @@ package by.it.nikitko.jd01_12;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 public class TaskA1 {
 
@@ -25,3 +26,6 @@ public class TaskA1 {
         grades.removeIf(integer -> integer < 4);
     }
 }
+
+
+

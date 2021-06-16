@@ -7,6 +7,7 @@ public class ConsoleRunner {
         Scanner input =new Scanner(System.in);
         String enteredString;
         Parser parser = new Parser();
+        VarRepo.loadVars();
         Printer printer = new Printer();
 
 
@@ -18,6 +19,7 @@ public class ConsoleRunner {
             } catch (CalcException e) {
                 System.out.println(e.getMessage());
             }
+            VarRepo.saveVars();
 
         }
     }

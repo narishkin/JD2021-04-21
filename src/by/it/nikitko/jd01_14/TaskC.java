@@ -8,6 +8,8 @@ import java.io.PrintWriter;
 
 public class TaskC {
     private static final String TXT_RESULT = "resultTaskC.txt";
+
+
     public static void main(String[] args) {
 
 

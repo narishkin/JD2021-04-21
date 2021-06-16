@@ -134,7 +134,7 @@ public class Test_jd01_12 extends HomeWork {
     @Test(timeout = 12000)
     public void testTaskB1() throws Exception {
         run(text)
-                .include("been=2")
+                 .include("been=2")
                 .include("BEEN=1")
                 .include("I=21")
                 .include("don't=2")

@@ -22,7 +22,7 @@ public class TaskA {
 
     private static void printTxt(String txtName, List<Integer> integerList) {
         try (
-                PrintWriter out = new PrintWriter(txtName);
+                PrintWriter out = new PrintWriter(txtName)
         ) {
             double sum2 = 0;
             for (Integer integer : integerList) {
@@ -65,7 +65,7 @@ public class TaskA {
                 try {
                     dataInputStream.close();
                 } catch (IOException e) {
-                    throw new RuntimeException(e);
+                    e.printStackTrace();
                 }
             }
         }

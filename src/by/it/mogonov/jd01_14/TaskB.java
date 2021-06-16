@@ -21,7 +21,9 @@ public class TaskB {
 
         long simblCount = lines3
                 .flatMap(s -> Stream.of(s.replaceAll("[а-яА-ЯёЁ]+", ""))
-                        .filter(t -> !t.isEmpty())) .map(t -> t.replaceAll(" ", ""))
+                        .filter(t -> !t.isEmpty()))
+                .map(t -> t.replaceAll(" ", ""))
+                //.flatMap(t -> Arrays.stream(t.toCharArray()))
                 .count();
         Stream<String> lines2 =
                 Files.lines(Paths.get(fileName2));
@@ -29,6 +31,7 @@ public class TaskB {
         long wordsCount = lines2
                 .flatMap(s -> Stream.of(s.replaceAll("[\\.\\,\\-:;!?]","")).filter(t -> !t.isEmpty()))
                 .map(t -> t.replaceAll(" ", ""))
+
                 .count();
 
         System.out.println("words=" + wordsCount + ", " + "punctuation marks=" + simblCount);

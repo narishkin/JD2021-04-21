@@ -35,6 +35,7 @@ public class TaskC {
                 }
             } catch (NullPointerException e) {
                 System.out.println("Системе не удается найти указанный путь.");
+                System.out.print(path+File.separator);
               //  e.printStackTrace();
             }
         }

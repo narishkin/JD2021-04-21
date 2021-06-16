@@ -1,4 +1,4 @@
-package by.it.vencerev.jd01_08;
+package by.it.vencerev.jd01_09;
 
 class Scalar extends Var {
     private double value;
@@ -18,10 +18,7 @@ class Scalar extends Var {
             double sum = this.value + ((Scalar) other).value;
             return new Scalar(sum);
 
-        } else {
-            Var add = this.add(other);
-            return add;
-        }
+        } else return other.add(this);
 
     }
 

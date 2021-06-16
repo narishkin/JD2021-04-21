@@ -49,23 +49,28 @@ public class TaskC {
     private static void printDir(String path) {
         File currDir = new File(path);
         System.out.println();
-
-
         File[] filesCurrDir = currDir.listFiles();
         assert filesCurrDir != null;
         for (File file : filesCurrDir) {
             if (file.isDirectory()) {
-                System.out.println("dir   :" + file.getName());
-              /*  Path path1 = Paths.get(path+File.separator+ file.getName());
+                Path path1 = Paths.get(path+File.separator+ file.getName());
                 try {
-                    System.out.println(Files.getAttribute(path1,"size"));
+                    Object timeLustMod= (Files.getAttribute(path1,"lastModifiedTime"));
+                    String dirName = (file.getName());
+                    System.out.printf("%15s <DIR> %10s\n",timeLustMod,dirName);
                 } catch (IOException e) {
                     e.printStackTrace();
-                }*/
-
+                }
 
             } else {
-                System.out.println("file  :" + file.getName());
+                Path path1 = Paths.get(path+File.separator+ file.getName());
+                try {
+                    Object size = Files.getAttribute(path1,"size");
+                    String fileName =  file.getName();
+                    System.out.printf("%10s  %10s\n",size,fileName);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }

@@ -1,6 +1,6 @@
 package by.it._classwork_.jd01_08;
 
-abstract class Var implements Operation {
+public abstract class Var implements Operation {
 
     public Var() {
         super();

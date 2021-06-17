@@ -7,6 +7,11 @@ import java.util.List;
 public class Customer extends Thread implements Customers,UseBacket {
 
     int customerNumber;
+    boolean pensioner;
+
+    public void setPensioner(boolean pensioner) {
+        this.pensioner = pensioner;
+    }
 
     public Customer(int customerNumber) {
         this.customerNumber = customerNumber;
@@ -27,19 +32,24 @@ public class Customer extends Thread implements Customers,UseBacket {
 
     @Override
     public void enterToMarket() {
-        System.out.println("Customer " + customerNumber + " enter to the store");
+        System.out.printf("Customer #%4d enter to the store \n",customerNumber);
     }
 
     @Override
     public void chooseGoods() {
-        System.out.println("Customer " + customerNumber + " begin choose goods");
-        TimeUtils.sleep(RandomUtils.random(500, 2000));
-        System.out.println("Customer " + customerNumber + " finished choose goods");
+        System.out.printf("Customer #%4d begin choose goods \n",customerNumber);
+        if (pensioner){
+            TimeUtils.sleep(RandomUtils.random(500, 3000));
+        }
+        else {
+            TimeUtils.sleep(RandomUtils.random(500, 2000));
+        }
+        System.out.printf("Customer #%4d finished choose goods \n",customerNumber);
     }
 
     @Override
     public void goOut() {
-        System.out.println("Customer " + customerNumber + " go out from the store");
+        System.out.printf("Customer #%4d go out from the store \n",customerNumber);
     }
 
     @Override
@@ -50,16 +60,27 @@ public class Customer extends Thread implements Customers,UseBacket {
     @Override
     public void takeBasket() {
         System.out.printf("Customer #%4d take basket\n",customerNumber);
+        if (pensioner){
+            TimeUtils.sleep(RandomUtils.random(500, 3000));
+        }
+        else {
+            TimeUtils.sleep(RandomUtils.random(500, 2000));
+        }
     }
 
     @Override
     public void putGoodsToBasket() {
 
         for (int i = 0; i <  RandomUtils.random(1,4); i++) {
-
-            List<String> goodsList = new ArrayList<>(Goods.goods.keySet());
+            List<String> goodsList = new ArrayList<>(Goods.getGoods().keySet());
             String goodsName= goodsList.get(RandomUtils.random(goodsList.size()-1));
-            System.out.printf("Customer #%4d put %s in basket\n",customerNumber,goodsName);
+            if (pensioner){
+                TimeUtils.sleep(RandomUtils.random(500, 3000));
+            }
+            else {
+                TimeUtils.sleep(RandomUtils.random(500, 2000));
+            }
+            System.out.printf("Customer #%4d put %s with price %d in basket\n",customerNumber,goodsName,Goods.getGoods().get(goodsName));
 
         }
 

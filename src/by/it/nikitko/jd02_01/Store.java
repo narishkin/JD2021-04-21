@@ -1,18 +1,12 @@
 package by.it.nikitko.jd02_01;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
 
 public class Store {
 
     public static void main(String[] args) {
-        Map<String, Integer> goods = new HashMap<>();
-        goods.put("Whiskey", 160);
-        goods.put("Beer", 12);
-        goods.put("Vodka", 73);
-        goods.put("Minskaya-4", 8);
+
 
         System.out.println("Store is open");
         int peopleCount = 0;
@@ -21,6 +15,8 @@ public class Store {
             int peoplesPerSec = RandomUtils.random(2);
             for (int j = 0; j < peoplesPerSec; j++) {
                 Customer customer = new Customer(peopleCount++);
+                if (RandomUtils.random(3)==0){
+                customer.setPensioner(true);}
                 customersInStore.add(customer);
             }
             for (Customer customer : customersInStore) {

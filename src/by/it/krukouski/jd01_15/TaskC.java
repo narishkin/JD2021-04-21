@@ -34,15 +34,6 @@ public class TaskC {
                     System.out.println(s + File.separator);
                 }
             }
-            /*if (value.matches(REGEX)) {
-                File file = new File(s);
-                value = value.replaceAll("cd\\s*", "");
-
-                s = s + File.separator + value + File.separator;
-                System.out.println(s);
-            }
-
-             */
             if (value.equals("dir")) {
                 getDir(s);
             }

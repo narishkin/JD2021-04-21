@@ -17,19 +17,38 @@ public class Store {
         }
 
         List<Shopper> shoppers = new ArrayList<>();
-        System.out.println("Marked opened");
+        int periodSwitcher;
+        int localFunctionTime;
         int shopperCounter = 1;
+        System.out.println("Marked opened");
         for (int time = 1; time <= Config.MAX_TIME; time += 1) {
-            int currentShoppersPerSecond = RandomHelper.random(2);
-            for (int j = 0; j <= currentShoppersPerSecond; j++) {
-                Shopper shopper;
-                if (RandomHelper.random(1, 4) == 1) {
-                    shopper = new Shopper(shopperCounter++, true);
-                } else {
-                    shopper = new Shopper(shopperCounter++, false);
+            periodSwitcher = (time / 30) % 2;
+            localFunctionTime = time - (time / 60) * 60;
+            System.out.println("TIME: " + time);
+            System.out.println("Current numbers of shoppers in the store: " + Dispatcher.currentCountShoppers);
+            if (periodSwitcher == 0 && Dispatcher.currentCountShoppers <= localFunctionTime + 10) {
+                for (int j = 0; j <= RandomHelper.random(20 + localFunctionTime - Dispatcher.currentCountShoppers); j++) {
+                    Shopper shopper;
+                    if (RandomHelper.random(1, 4) == 1) {
+                        shopper = new Shopper(shopperCounter++, true);
+                    } else {
+                        shopper = new Shopper(shopperCounter++, false);
+                    }
+                    shoppers.add(shopper);
+                    shopper.start();
                 }
-                shoppers.add(shopper);
-                shopper.start();
+            }
+            if (periodSwitcher == 1 && Dispatcher.currentCountShoppers <= 40 + (30 - localFunctionTime)) {
+                for (int j = 0; j <= RandomHelper.random(70 - localFunctionTime - Dispatcher.currentCountShoppers); j++) {
+                    Shopper shopper;
+                    if (RandomHelper.random(1, 4) == 1) {
+                        shopper = new Shopper(shopperCounter++, true);
+                    } else {
+                        shopper = new Shopper(shopperCounter++, false);
+                    }
+                    shoppers.add(shopper);
+                    shopper.start();
+                }
             }
             TimerHelper.sleep(1000);
         }

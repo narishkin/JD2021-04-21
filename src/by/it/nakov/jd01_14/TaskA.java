@@ -1,49 +1,84 @@
 package by.it.nakov.jd01_14;
 
 import java.io.*;
+import java.util.*;
 
 public class TaskA {
-    private static String dir(Class<?> cl) {
-        String path = System.getProperty("user.dir") + File.separator + "src" + File.separator;
-        String classDir = cl.getName().replace(cl.getSimpleName(), "").replace(".", File.separator);
-        return path + classDir;
-    }
+
+    public static final String FILENAME = "dataTaskA.bin";
+    public static final String RESULT_TXT = "resultTaskA.txt";
+    private static final Random RANDOM = new Random();
 
     public static void main(String[] args) {
-        DataOutputStream dos = null;
-        try {
-            dos = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(dir(TaskA.class) + "dataTaskA.bin")));
-            for (int i = 0; i < 20; i++) {
-                dos.writeInt((int) (Math.random() * 25));
+        Locale.setDefault(Locale.ENGLISH);
+        String fileName = PathCreator.getFileName(TaskA.class, FILENAME);
+        String txtName = PathCreator.getFileName(TaskA.class, RESULT_TXT);
+
+        writeIntegers(fileName);
+        List<Integer> integerList = readIntegers(fileName);
+        printListConsole(integerList);
+        printTxt(txtName, integerList);
+    }
+
+    private static void printTxt(String txtName, List<Integer> integerList) {
+
+        try (PrintWriter out = new PrintWriter(txtName)) {
+            double summ2 = 0;
+            for (Integer integer : integerList) {
+                summ2 += integer;
+                out.printf("%d ", integer);
             }
+            out.printf("\navg=%f\n", summ2 / integerList.size());
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private static void printListConsole(List<Integer> integerList) {
+        double summ = 0;
+        for (Integer integer : integerList) {
+            summ += integer;
+            System.out.printf("%d ", integer);
+        }
+        System.out.printf("\navg=%f\n", summ / integerList.size());
+    }
+
+    private static List<Integer> readIntegers(String fileName) {
+        List<Integer> integerList = new ArrayList<>();
+        DataInputStream dataInputStream = null;
+        try {
+            dataInputStream = new DataInputStream(new BufferedInputStream(new FileInputStream(fileName)));
+            while (dataInputStream.available() > 0) {
+                int value = dataInputStream.readInt();
+                integerList.add(value);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         } finally {
-            if (dos != null) {
+            if (Objects.nonNull(dataInputStream)) {
                 try {
-                    dos.close();
+                    dataInputStream.close();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
         }
-        try (DataInputStream inputStream = new DataInputStream(
-                new BufferedInputStream(
-                        new FileInputStream(dir(TaskA.class) + "dataTaskA.bin"))); PrintWriter out2 = new PrintWriter(
-                                new FileWriter(dir(TaskA.class) + "dataTaskA.bin"))) {
-            double summ = 0;
-            double count = 0;
-            while (inputStream.available() > 0) {
-                int i = inputStream.readInt();
-                System.out.print(i + " ");
-                out2.println(i + " ");
-                summ = summ + i;
-                count++;
+        return integerList;
+    }
+
+    private static void writeIntegers(String fileName) {
+        try (
+            DataOutputStream dataOutputStream = new DataOutputStream(
+                    new BufferedOutputStream(
+                            new FileOutputStream(fileName)
+                    )
+                )
+            ) {
+            for (int i = 0; i < 20; i++) {
+                dataOutputStream.writeInt(RANDOM.nextInt(10000));
             }
-            System.out.println("\navg=" + summ / count);
-            out2.println("\navg=" + summ / count);
         } catch (IOException e) {
-            e.printStackTrace();
+           throw new RuntimeException();
         }
     }
 }

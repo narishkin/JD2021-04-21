@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Store {
-    public static Map<String, Integer> goods = new HashMap<>();
+    public static  Map<String, Integer> goods = new HashMap<>();
 
     public static void main(String[] args) {
         {

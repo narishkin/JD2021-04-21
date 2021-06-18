@@ -8,6 +8,7 @@ public class Shopper extends Thread implements TypicalShopper, UsingBasket {
     private final int numberOfGoods = RandomHelper.random(1, 4);
 
 
+
     public Shopper(int name, boolean pensioner) {
         this.pensioner = pensioner;
         if (pensioner) {
@@ -70,12 +71,14 @@ public class Shopper extends Thread implements TypicalShopper, UsingBasket {
 
     @Override
     public void run() {
+        Dispatcher dispatcher = new Dispatcher();
+
         storeEntry();
-        Dispatcher.currentCountShoppers++;
+        dispatcher.increaseCountShoppers();
         takeBasket();
         chooseGoods();
         putGoodsToBasket();
         storeExit();
-        Dispatcher.currentCountShoppers--;
+        dispatcher.decreaseCountShoppers();
     }
 }

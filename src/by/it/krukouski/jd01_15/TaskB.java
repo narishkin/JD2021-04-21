@@ -1,17 +1,12 @@
 package by.it.krukouski.jd01_15;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.Arrays;
-import java.util.stream.Stream;
+import java.io.*;
 
 public class TaskB {
 
     private static final String TEXT_FILE = "TaskB.txt";
     private static final String JAVA_FILE = "TaskB.java";
+    public static StringBuilder stringBuilder = new StringBuilder();
 
     public static void main(String[] args) {
         // comment one
@@ -27,36 +22,76 @@ public class TaskB {
          */
         String javaFile = PathCreator.getFileName(TaskB.class, JAVA_FILE);
         String textFile = PathCreator.getFileName(TaskB.class, TEXT_FILE);
-        StringBuilder sb = new StringBuilder();
-        javaRead(javaFile, sb);
 
-        printToTextFile(textFile, sb);
+        javaRead(javaFile);
+        StringBuilder stringAfterRemoveComment = removeComment(TaskB.stringBuilder);
+        System.out.println(stringAfterRemoveComment);
+
+        printToTextFile(textFile, stringAfterRemoveComment);
 
 
     }
 
-    private static void javaRead(String javaFile, StringBuilder sb) {
-        try {
-
-            Object[] lines = Files
-                    .lines(Path.of(javaFile))
-                    .toArray();
-            for (Object line : lines) {
-                String s = line.toString().trim();
-                if (!s.startsWith("//") &&
-                        !s.startsWith("/*") &&
-                        !s.startsWith("*/") &&
-                        !s.startsWith("/**") &&
-                        !s.startsWith("*")) {
-                    sb.append(s).append("\n");
-                }
+    private static StringBuilder removeComment(StringBuilder stringBuilder) {
+        String string = stringBuilder.toString();
+        StringBuilder sb = new StringBuilder();
+        Condition condition = Condition.OUTSIDE_COMMENT;
+        for (int i = 0; i < string.length(); i++) {
+            char ch = string.charAt(i);
+            switch (condition) {
+                case OUTSIDE_COMMENT:
+                    if (ch == '/') {
+                        condition = Condition.FIRST_SLASH;
+                    } else {
+                        sb.append(ch);
+                    }
+                    break;
+                case FIRST_SLASH:
+                    if (ch == '/') {
+                        condition = Condition.LINE_COMMENT;
+                    } else if (ch == '*') {
+                        condition = Condition.MULTILINE_COMMENT;
+                    } else {
+                        sb.append('/').append(ch);
+                        condition = Condition.OUTSIDE_COMMENT;
+                    }
+                    break;
+                case LINE_COMMENT:
+                    if (ch == '\n') {
+                        sb.append('\n');
+                        condition = Condition.OUTSIDE_COMMENT;
+                        break;
+                    }
+                case MULTILINE_COMMENT:
+                    if (ch == '*') {
+                        condition = Condition.STAR;
+                    }
+                    break;
+                case STAR:
+                    if (ch == '/') {
+                        condition = Condition.OUTSIDE_COMMENT;
+                        break;
+                    }
             }
-            System.out.println("sb=" + sb);
 
+        }
+        return sb;
+
+
+    }
+
+    private static void javaRead(String javaFile) {
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(javaFile));
+        ) {
+            String string;
+            while ((string = bufferedReader.readLine()) != null) {
+                stringBuilder.append(string).append("\n");
+            }
         } catch (IOException exception) {
-            throw new RuntimeException(exception);
+            exception.printStackTrace();
         }
     }
+
 
     private static void printToTextFile(String textFile, StringBuilder sb) {
         try (PrintWriter printWriter = new PrintWriter(textFile)) {
@@ -67,4 +102,12 @@ public class TaskB {
     }
 
 
+}
+
+enum Condition {
+    OUTSIDE_COMMENT,
+    FIRST_SLASH,
+    LINE_COMMENT,
+    MULTILINE_COMMENT,
+    STAR,
 }

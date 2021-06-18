@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Customer extends Thread implements Customers,UseBacket {
+public class Customer extends Thread implements Customers, UseBacket {
 
     int customerNumber;
     boolean pensioner;
@@ -16,40 +16,44 @@ public class Customer extends Thread implements Customers,UseBacket {
     public Customer(int customerNumber) {
         this.customerNumber = customerNumber;
         this.setName("Customer " + customerNumber);
-        start();
+        // start();
     }
 
     @Override
     public void run() {
-        PeoplesCounter.peopleCunt++;
         enterToMarket();
         takeBasket();
+        Thread.yield();
         chooseGoods();
         putGoodsToBasket();
+        Thread.yield();
         goOut();
-        PeoplesCounter.peopleCunt--;
     }
 
     @Override
     public void enterToMarket() {
-        System.out.printf("Customer #%4d enter to the store \n",customerNumber);
+
+        System.out.printf("Customer #%4d enter to the store \n", customerNumber);
+        PeoplesCounter.peopleInStore++;
+        System.out.println("peopleInStore " + PeoplesCounter.peopleInStore);
     }
 
     @Override
     public void chooseGoods() {
-        System.out.printf("Customer #%4d begin choose goods \n",customerNumber);
-        if (pensioner){
+        System.out.printf("Customer #%4d begin choose goods \n", customerNumber);
+        if (pensioner) {
             TimeUtils.sleep(RandomUtils.random(500, 3000));
-        }
-        else {
+        } else {
             TimeUtils.sleep(RandomUtils.random(500, 2000));
         }
-        System.out.printf("Customer #%4d finished choose goods \n",customerNumber);
+        System.out.printf("Customer #%4d finished choose goods \n", customerNumber);
     }
 
     @Override
     public void goOut() {
-        System.out.printf("Customer #%4d go out from the store \n",customerNumber);
+        System.out.printf("Customer #%4d go out from the store \n", customerNumber);
+        PeoplesCounter.peopleInStore--;
+        System.out.println("peopleInStore " + PeoplesCounter.peopleInStore);
     }
 
     @Override
@@ -59,11 +63,10 @@ public class Customer extends Thread implements Customers,UseBacket {
 
     @Override
     public void takeBasket() {
-        System.out.printf("Customer #%4d take basket\n",customerNumber);
-        if (pensioner){
+        System.out.printf("Customer #%4d take basket\n", customerNumber);
+        if (pensioner) {
             TimeUtils.sleep(RandomUtils.random(500, 3000));
-        }
-        else {
+        } else {
             TimeUtils.sleep(RandomUtils.random(500, 2000));
         }
     }
@@ -71,16 +74,15 @@ public class Customer extends Thread implements Customers,UseBacket {
     @Override
     public void putGoodsToBasket() {
 
-        for (int i = 0; i <  RandomUtils.random(1,4); i++) {
+        for (int i = 0; i < RandomUtils.random(1, 4); i++) {
             List<String> goodsList = new ArrayList<>(Goods.getGoods().keySet());
-            String goodsName= goodsList.get(RandomUtils.random(goodsList.size()-1));
-            if (pensioner){
+            String goodsName = goodsList.get(RandomUtils.random(goodsList.size() - 1));
+            if (pensioner) {
                 TimeUtils.sleep(RandomUtils.random(500, 3000));
-            }
-            else {
+            } else {
                 TimeUtils.sleep(RandomUtils.random(500, 2000));
             }
-            System.out.printf("Customer #%4d put %s with price %d in basket\n",customerNumber,goodsName,Goods.getGoods().get(goodsName));
+            System.out.printf("Customer #%4d put %s with price %d in basket\n", customerNumber, goodsName, Goods.getGoods().get(goodsName));
 
         }
 

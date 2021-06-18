@@ -20,8 +20,8 @@ public class Store {
             addCustomers(peoplesPerSec);
             correctCountCustomers(i, 10);
             TimeUtils.sleep(1000);
-          //  System.out.println("second " + i);
-          //  System.out.println("peopleInStore " + PeoplesCounter.peopleInStore);
+            System.out.println("second " + i);
+            System.out.println("peopleInStore " + PeoplesCounter.peopleInStore);
         }
         for (int t = 31; t <= Config.TIME_WORK_STORE/2; t++) {
             int peoplesPerSec = RandomUtils.random(randomMin, randomMax);
@@ -47,7 +47,7 @@ public class Store {
     }
 
     private static void correctCountCustomers(int i, int i2) {
-        int peopleNeeded = i + i2 - PeoplesCounter.peopleInStore;
+        int peopleNeeded = i +1+ i2 - PeoplesCounter.peopleInStore;
         if (peopleNeeded > 0) {
             randomMin = peopleNeeded;
             randomMax = peopleNeeded + 2;

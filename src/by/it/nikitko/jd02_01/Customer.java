@@ -23,10 +23,8 @@ public class Customer extends Thread implements Customers, UseBacket {
     public void run() {
         enterToMarket();
         takeBasket();
-        Thread.yield();
         chooseGoods();
         putGoodsToBasket();
-        Thread.yield();
         goOut();
     }
 
@@ -35,7 +33,7 @@ public class Customer extends Thread implements Customers, UseBacket {
 
         System.out.printf("Customer #%4d enter to the store \n", customerNumber);
         PeoplesCounter.peopleInStore++;
-        System.out.println("peopleInStore " + PeoplesCounter.peopleInStore);
+       // System.out.println("peopleInStore " + PeoplesCounter.peopleInStore);
     }
 
     @Override
@@ -53,7 +51,7 @@ public class Customer extends Thread implements Customers, UseBacket {
     public void goOut() {
         System.out.printf("Customer #%4d go out from the store \n", customerNumber);
         PeoplesCounter.peopleInStore--;
-        System.out.println("peopleInStore " + PeoplesCounter.peopleInStore);
+      //  System.out.println("peopleInStore " + PeoplesCounter.peopleInStore);
     }
 
     @Override

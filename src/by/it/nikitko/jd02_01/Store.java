@@ -7,81 +7,70 @@ import java.util.List;
 public class Store {
 
 
-    static List<Customer> customersInStore = new ArrayList<>();
+    private static final List<Customer> CUSTOMERS_IN_STORE = new ArrayList<>();
+    private static int randomMin = 0;
+    private static int randomMax = 2;
 
     public static void main(String[] args) {
         System.out.println("Store is open");
+        addCustomers(RandomUtils.random(9, 11));
 
+        for (int i = 0; i <= 30; i++) {
+            int peoplesPerSec = RandomUtils.random(randomMin, randomMax);
+            addCustomers(peoplesPerSec);
+            correctCountCustomers(i, 10);
+            TimeUtils.sleep(1000);
+          //  System.out.println("second " + i);
+          //  System.out.println("peopleInStore " + PeoplesCounter.peopleInStore);
+        }
+        for (int t = 31; t <= 60; t++) {
+            int peoplesPerSec = RandomUtils.random(randomMin, randomMax);
+            addCustomers(peoplesPerSec);
+            correctCountCustomers(40, 30 - t);
+            TimeUtils.sleep(1000);
+        }
+        for (int i = 61; i <= 90; i++) {
+            int peoplesPerSec = RandomUtils.random(randomMin, randomMax);
+            addCustomers(peoplesPerSec);
+            correctCountCustomers(i, 10);
+            TimeUtils.sleep(1000);
+        }
+        for (int t = 91; t <= 120; t++) {
+            int peoplesPerSec = RandomUtils.random(randomMin, randomMax);
+            addCustomers(peoplesPerSec);
+            correctCountCustomers(130, -t);
+            TimeUtils.sleep(1000);
+        }
 
-        for (int j = 0; j < RandomUtils.random(9,11); j++) {
+        joinToMain();
+        System.out.println("Store is closed");
+    }
+
+    private static void correctCountCustomers(int i, int i2) {
+        int peopleNeeded = i + i2 - PeoplesCounter.peopleInStore;
+        if (peopleNeeded > 0) {
+            randomMin = peopleNeeded;
+            randomMax = peopleNeeded + 2;
+        }
+        if (peopleNeeded <= 0) {
+            randomMin = 0;
+            randomMax = 0;
+        }
+    }
+
+    private static void addCustomers(int peoplesPerSec) {
+        for (int j = 0; j < peoplesPerSec; j++) {
             Customer customer = new Customer(++PeoplesCounter.peopleCount);
-            customersInStore.add(customer);
+            CUSTOMERS_IN_STORE.add(customer);
             if (RandomUtils.random(3) == 0) {
                 customer.setPensioner(true);
             }
             customer.start();
         }
-        System.out.println("peopleInStore " + PeoplesCounter.peopleInStore);
+    }
 
-
-
-
-        int randomMin=0;
-        int randomMax=2;
-        for (int i = 0; i <=30; i++) {
-            int peoplesPerSec = RandomUtils.random(randomMin,randomMax);
-            for (int j = 0; j < peoplesPerSec; j++) {
-                Customer customer = new Customer(++PeoplesCounter.peopleCount);
-                customersInStore.add(customer);
-                if (RandomUtils.random(3) == 0) {
-                    customer.setPensioner(true);
-                }
-                customer.start();
-            }
-            int peopleNeeded = i+10 - PeoplesCounter.peopleInStore;
-            if (peopleNeeded>0) {
-                randomMin = peopleNeeded;
-                randomMax = peopleNeeded+2;
-            }
-            if (peopleNeeded<=0){
-                randomMin=0;
-                randomMax=0;}
-
-            TimeUtils.sleep(1000);
-            System.out.println("second " + i);
-            System.out.println("peopleInStore " + PeoplesCounter.peopleInStore);
-           // System.out.println("peopleNeeded " + peopleNeeded);
-        }
-
-        for (int t = 31; t <=60; t++) {
-            int peoplesPerSec = RandomUtils.random(randomMin,randomMax);
-            for (int j = 0; j < peoplesPerSec; j++) {
-                Customer customer = new Customer(++PeoplesCounter.peopleCount);
-                customersInStore.add(customer);
-                if (RandomUtils.random(3) == 0) {
-                    customer.setPensioner(true);
-                }
-                customer.start();
-            }
-            int peopleNeeded = 40 +(30-t) - PeoplesCounter.peopleInStore;
-            if (peopleNeeded>0) {
-                randomMin = peopleNeeded;
-                randomMax = peopleNeeded+2;
-            }
-            if (peopleNeeded<=0){
-                randomMin=0;
-                randomMax=0;}
-
-            TimeUtils.sleep(1000);
-            System.out.println("second " + t);
-            System.out.println("peopleInStore " + PeoplesCounter.peopleInStore);
-            // System.out.println("peopleNeeded " + peopleNeeded);
-        }
-
-
-
-
-        for (Customer customer : customersInStore) {
+    private static void joinToMain() {
+        for (Customer customer : CUSTOMERS_IN_STORE) {
             try {
                 customer.join();
             } catch (InterruptedException e) {

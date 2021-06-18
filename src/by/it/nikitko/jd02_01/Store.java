@@ -15,7 +15,7 @@ public class Store {
         System.out.println("Store is open");
         addCustomers(RandomUtils.random(9, 11));
 
-        for (int i = 0; i <= 30; i++) {
+        for (int i = 0; i <= Config.TIME_WORK_STORE/4; i++) {
             int peoplesPerSec = RandomUtils.random(randomMin, randomMax);
             addCustomers(peoplesPerSec);
             correctCountCustomers(i, 10);
@@ -23,19 +23,19 @@ public class Store {
           //  System.out.println("second " + i);
           //  System.out.println("peopleInStore " + PeoplesCounter.peopleInStore);
         }
-        for (int t = 31; t <= 60; t++) {
+        for (int t = 31; t <= Config.TIME_WORK_STORE/2; t++) {
             int peoplesPerSec = RandomUtils.random(randomMin, randomMax);
             addCustomers(peoplesPerSec);
             correctCountCustomers(40, 30 - t);
             TimeUtils.sleep(1000);
         }
-        for (int i = 61; i <= 90; i++) {
+        for (int i = 61; i <= Config.TIME_WORK_STORE/4*3; i++) {
             int peoplesPerSec = RandomUtils.random(randomMin, randomMax);
             addCustomers(peoplesPerSec);
             correctCountCustomers(i, 10);
             TimeUtils.sleep(1000);
         }
-        for (int t = 91; t <= 120; t++) {
+        for (int t = 91; t <= Config.TIME_WORK_STORE; t++) {
             int peoplesPerSec = RandomUtils.random(randomMin, randomMax);
             addCustomers(peoplesPerSec);
             correctCountCustomers(130, -t);

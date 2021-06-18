@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Customer extends Thread implements Customers, UseBacket {
+public class Customer extends Thread implements Customers, UseBasket {
 
     int customerNumber;
     boolean pensioner;

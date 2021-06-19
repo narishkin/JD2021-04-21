@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class TaskC {
 
-    static final String REGEX = "cd\\s\\.+";
+    static final String REGEX = "cd\\s.+";
 
     public static void main(String[] args) {
         String s = System.getProperty("user.dir") + File.separator
@@ -21,9 +21,9 @@ public class TaskC {
         System.out.println(s);
         Scanner sc = new Scanner(System.in);
         for (; ; ) {
-            String value = sc.next();
+            String value = sc.nextLine();
 
-            if (value.equals("cd")) {
+            if (value.contains("cd")) {
                 if (value.matches(REGEX)) {
                     value = value.replaceAll("cd\\s*", "");
                     s = s + File.separator + value + File.separator;
@@ -34,15 +34,6 @@ public class TaskC {
                     System.out.println(s + File.separator);
                 }
             }
-            /*if (value.matches(REGEX)) {
-                File file = new File(s);
-                value = value.replaceAll("cd\\s*", "");
-
-                s = s + File.separator + value + File.separator;
-                System.out.println(s);
-            }
-
-             */
             if (value.equals("dir")) {
                 getDir(s);
             }

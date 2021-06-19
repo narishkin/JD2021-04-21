@@ -66,9 +66,10 @@ public class TaskC {
             } else {
                 Path path1 = Paths.get(path+File.separator+ file.getName());
                 try {
-                    Object size = Files.getAttribute(path1,"size");
+                    Object size =  Files.getAttribute(path1,"size");
+
                     String fileName =  file.getName();
-                    System.out.printf("%10s  %10s\n",size,fileName);
+                    System.out.printf("%15s  %10s\n",size.toString(),fileName);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

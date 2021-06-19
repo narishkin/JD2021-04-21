@@ -1,7 +1,5 @@
 package by.it.naryshkin.calc;
 
-import by.it._examples_.jd01_07.bean.Run;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -10,7 +8,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 abstract class Var implements Operation {
     private static final String VARS_TXT = "vars.txt";
@@ -79,6 +76,7 @@ abstract class Var implements Operation {
     @Override
     public Var add(Var other) throws CalcException{
         throw new CalcException("Операция сложения " + this + "+" + other + " невозможна");
+
     }
 
     @Override

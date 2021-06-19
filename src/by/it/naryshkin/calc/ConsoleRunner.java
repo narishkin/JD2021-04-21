@@ -18,6 +18,7 @@ public class ConsoleRunner {
                     printer.print(result);
                 } catch (CalcException e) {
                     printer.print(e);
+
                 }
             } else {
                 Var.saveVars();

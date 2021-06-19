@@ -1,5 +1,8 @@
 package by.it.krukouski.jd02_01;
 
+import java.util.ArrayList;
+import java.util.Set;
+
 public class Buyer extends Thread implements IBuyer, IUseBasket {
 
     private long number;
@@ -53,12 +56,12 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
     public void putGoodsToBasket() {
         int countGoods = RandomHelper.random(1, 4);
         int timeout = RandomHelper.random(500, 2000);
-        HashMapGoods.putToHashMap();
         for (int i = 0; i < countGoods; i++) {
-            Integer integer = HashMapGoods.GOODS_MAP.get(i);
+            ArrayList<String> strings = new ArrayList<>(HashMapGoods.getHashMap().keySet());
+            String good = strings.get(RandomHelper.random(strings.size()-1));
             TimerHelper.sleep(timeout);
-            System.out.println(this + "put" + integer);
+            System.out.println(this + "put " + good + " to basket");
+
         }
-        System.out.println(this + "Put goods to basket");
     }
 }

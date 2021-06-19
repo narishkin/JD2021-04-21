@@ -13,7 +13,6 @@ public class Store {
     public static void main(String[] args) {
         System.out.println("Store is open");
         addCustomers();
-
         for (int t = 0; t <= Config.TIME_WORK_STORE; t++) {
             addCustomers();
             correctCountCustomers(t);

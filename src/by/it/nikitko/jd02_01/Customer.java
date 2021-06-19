@@ -71,7 +71,7 @@ public class Customer extends Thread implements Customers, UseBasket {
     @Override
     public void putGoodsToBasket() {
 
-        for (int i = 0; i < RandomUtils.random(1, 4); i++) {
+        for (int i = 0; i < RandomUtils.random(1, Goods.getGoods().size()); i++) {
             List<String> goodsList = new ArrayList<>(Goods.getGoods().keySet());
             String goodsName = goodsList.get(RandomUtils.random(goodsList.size() - 1));
             if (pensioner) {

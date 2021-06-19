@@ -1,7 +1,6 @@
 package by.it.krukouski.jd02_01;
 
 import java.util.ArrayList;
-import java.util.Set;
 
 public class Buyer extends Thread implements IBuyer, IUseBasket {
 

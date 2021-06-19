@@ -26,7 +26,7 @@ public class Store {
             localFunctionTime = time - (time / 60) * 60;
             System.out.println("TIME: " + time);
             System.out.println("Current numbers of shoppers in the store: " + Dispatcher.currentCountShoppers);
-            if (periodSwitcher == 0 && Dispatcher.currentCountShoppers <= localFunctionTime + 10) {
+            if (periodSwitcher == 0 && Dispatcher.currentCountShoppers < localFunctionTime + 10) {
                 for (int j = 0; j <= RandomHelper.random(20 + localFunctionTime - Dispatcher.currentCountShoppers); j++) {
                     Shopper shopper;
                     if (RandomHelper.random(1, 4) == 1) {
@@ -38,8 +38,8 @@ public class Store {
                     shopper.start();
                 }
             }
-            if (periodSwitcher == 1 && Dispatcher.currentCountShoppers <= 40 + (30 - localFunctionTime)) {
-                for (int j = 0; j <= RandomHelper.random(70 - localFunctionTime - Dispatcher.currentCountShoppers); j++) {
+            if (periodSwitcher == 1 && Dispatcher.currentCountShoppers < 40 + (30 - localFunctionTime)) {
+                for (int j = 0; j <= RandomHelper.random(140 - localFunctionTime - Dispatcher.currentCountShoppers); j++) {
                     Shopper shopper;
                     if (RandomHelper.random(1, 4) == 1) {
                         shopper = new Shopper(shopperCounter++, true);

@@ -50,7 +50,7 @@ public class Shopper extends Thread implements TypicalShopper, UsingBasket {
         double puttingTime;
         for (int i = 0; i < numberOfGoods; i++) {
             if (pensioner) {
-                puttingTime = RandomHelper.random(500 * Config.PENS_COEFFICIENT, 2000 * Config.PENS_COEFFICIENT);
+                puttingTime = RandomHelper.random(500, 2000)*Config.PENS_COEFFICIENT;
             } else {
                 puttingTime = RandomHelper.random(500, 2000);
             }
@@ -71,14 +71,13 @@ public class Shopper extends Thread implements TypicalShopper, UsingBasket {
 
     @Override
     public void run() {
-        Dispatcher dispatcher = new Dispatcher();
 
         storeEntry();
-        dispatcher.increaseCountShoppers();
+        Dispatcher.currentCountShoppers++;
         takeBasket();
         chooseGoods();
         putGoodsToBasket();
         storeExit();
-        dispatcher.decreaseCountShoppers();
+        Dispatcher.currentCountShoppers--;
     }
 }

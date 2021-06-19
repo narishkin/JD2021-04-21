@@ -16,7 +16,6 @@ public class Customer extends Thread implements Customers, UseBasket {
     public Customer(int customerNumber) {
         this.customerNumber = customerNumber;
         this.setName("Customer " + customerNumber);
-        // start();
     }
 
     @Override
@@ -33,7 +32,7 @@ public class Customer extends Thread implements Customers, UseBasket {
 
         System.out.printf("Customer #%4d enter to the store \n", customerNumber);
         PeoplesCounter.peopleInStore++;
-       // System.out.println("peopleInStore " + PeoplesCounter.peopleInStore);
+        // System.out.println("peopleInStore " + PeoplesCounter.peopleInStore);
     }
 
     @Override
@@ -51,7 +50,7 @@ public class Customer extends Thread implements Customers, UseBasket {
     public void goOut() {
         System.out.printf("Customer #%4d go out from the store \n", customerNumber);
         PeoplesCounter.peopleInStore--;
-      //  System.out.println("peopleInStore " + PeoplesCounter.peopleInStore);
+        //  System.out.println("peopleInStore " + PeoplesCounter.peopleInStore);
     }
 
     @Override

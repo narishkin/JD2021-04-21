@@ -6,59 +6,25 @@ import java.util.List;
 
 public class Store {
 
-
     private static final List<Customer> CUSTOMERS_IN_STORE = new ArrayList<>();
-    private static int randomMin = 0;
-    private static int randomMax = 2;
+    private static int randomMin = 9;
+    private static int randomMax = 11;
 
     public static void main(String[] args) {
         System.out.println("Store is open");
-        addCustomers(RandomUtils.random(9, 11));
+        addCustomers();
 
-        for (int i = 0; i <= Config.TIME_WORK_STORE/4; i++) {
-            int peoplesPerSec = RandomUtils.random(randomMin, randomMax);
-            addCustomers(peoplesPerSec);
-            correctCountCustomers(i, 10);
-            TimeUtils.sleep(1000);
-            System.out.println("second " + i);
-            System.out.println("peopleInStore " + PeoplesCounter.peopleInStore);
-        }
-        for (int t = 31; t <= Config.TIME_WORK_STORE/2; t++) {
-            int peoplesPerSec = RandomUtils.random(randomMin, randomMax);
-            addCustomers(peoplesPerSec);
-            correctCountCustomers(40, 30 - t);
+        for (int t = 0; t <= Config.TIME_WORK_STORE; t++) {
+            addCustomers();
+            correctCountCustomers(t);
             TimeUtils.sleep(1000);
         }
-        for (int i = 61; i <= Config.TIME_WORK_STORE/4*3; i++) {
-            int peoplesPerSec = RandomUtils.random(randomMin, randomMax);
-            addCustomers(peoplesPerSec);
-            correctCountCustomers(i, 10);
-            TimeUtils.sleep(1000);
-        }
-        for (int t = 91; t <= Config.TIME_WORK_STORE; t++) {
-            int peoplesPerSec = RandomUtils.random(randomMin, randomMax);
-            addCustomers(peoplesPerSec);
-            correctCountCustomers(130, -t);
-            TimeUtils.sleep(1000);
-        }
-
         joinToMain();
         System.out.println("Store is closed");
     }
 
-    private static void correctCountCustomers(int i, int i2) {
-        int peopleNeeded = i +1+ i2 - PeoplesCounter.peopleInStore;
-        if (peopleNeeded > 0) {
-            randomMin = peopleNeeded;
-            randomMax = peopleNeeded + 2;
-        }
-        if (peopleNeeded <= 0) {
-            randomMin = 0;
-            randomMax = 0;
-        }
-    }
-
-    private static void addCustomers(int peoplesPerSec) {
+    private static void addCustomers() {
+        int peoplesPerSec = RandomUtils.random(randomMin, randomMax);
         for (int j = 0; j < peoplesPerSec; j++) {
             Customer customer = new Customer(++PeoplesCounter.peopleCount);
             CUSTOMERS_IN_STORE.add(customer);
@@ -66,6 +32,32 @@ public class Store {
                 customer.setPensioner(true);
             }
             customer.start();
+        }
+    }
+
+    private static void correctCountCustomers(int t) {
+        int i = 10;
+
+        if (t > Config.TIME_WORK_STORE / 4 & t <= Config.TIME_WORK_STORE / 2) {
+            i = 70;
+            t = -t;
+        }
+        if (t > Config.TIME_WORK_STORE / 2 & t <= Config.TIME_WORK_STORE / 4 * 3) {
+            i = -50;
+        }
+        if (t > Config.TIME_WORK_STORE / 4 * 3 & t <= Config.TIME_WORK_STORE) {
+            i = 130;
+            t = -t;
+        }
+
+        int peopleNeeded = i + t - PeoplesCounter.peopleInStore + 1;
+        if (peopleNeeded > 0) {
+            randomMin = peopleNeeded;
+            randomMax = peopleNeeded + 2;
+        }
+        if (peopleNeeded <= 0) {
+            randomMin = 0;
+            randomMax = 0;
         }
     }
 

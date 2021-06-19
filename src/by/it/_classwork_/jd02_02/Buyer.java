@@ -2,13 +2,11 @@ package by.it._classwork_.jd02_02;
 
 public class Buyer extends Thread implements IBuyer {
 
-    private long number;
+    private boolean waitFlag;
 
     public void setWaitFlag(boolean waitFlag) {
         this.waitFlag = waitFlag;
     }
-
-    private boolean waitFlag;
 
     Object getMonitor() {
         return this;
@@ -16,7 +14,6 @@ public class Buyer extends Thread implements IBuyer {
 
     public Buyer(long number) {
         super("Buyer № " + number + " ");
-        this.number = number;
         Dispatcher.addNewBuyer();
     }
 

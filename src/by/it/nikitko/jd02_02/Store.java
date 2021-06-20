@@ -25,7 +25,7 @@ public class Store {
     private static void addCustomers() {
         int peoplesPerSec = RandomUtils.random(randomMin, randomMax);
         for (int j = 0; j < peoplesPerSec; j++) {
-            Customer customer = new Customer(++PeoplesCounter.peopleCount);
+            Customer customer = new Customer(++Manager.peopleCount);
             CUSTOMERS_IN_STORE.add(customer);
             if (RandomUtils.random(3) == 0) {
                 customer.setPensioner(true);
@@ -49,7 +49,7 @@ public class Store {
             t = -t;
         }
 
-        int peopleNeeded = i + t - PeoplesCounter.peopleInStore + 1;
+        int peopleNeeded = i + t - Manager.peopleInStore + 1;
         if (peopleNeeded > 0) {
             randomMin = peopleNeeded;
             randomMax = peopleNeeded + 2;

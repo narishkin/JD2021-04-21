@@ -6,8 +6,13 @@ import java.util.List;
 
 public class Customer extends Thread implements Customers, UseBasket {
 
-    int customerNumber;
-    boolean pensioner;
+    private int customerNumber;
+    private boolean pensioner;
+    private boolean flagWait;
+
+    public void setFlagWait(boolean flagWait) {
+        this.flagWait = flagWait;
+    }
 
     public void setPensioner(boolean pensioner) {
         this.pensioner = pensioner;
@@ -18,12 +23,17 @@ public class Customer extends Thread implements Customers, UseBasket {
         this.setName("Customer " + customerNumber);
     }
 
+    Object getMonitor() {
+        return this;
+    }
+
     @Override
     public void run() {
         enterToMarket();
         takeBasket();
         chooseGoods();
         putGoodsToBasket();
+        goToQueue();
         goOut();
     }
 
@@ -31,8 +41,8 @@ public class Customer extends Thread implements Customers, UseBasket {
     public void enterToMarket() {
 
         System.out.printf("Customer #%4d enter to the store \n", customerNumber);
-        PeoplesCounter.peopleInStore++;
-        // System.out.println("peopleInStore " + PeoplesCounter.peopleInStore);
+        Manager.peopleInStore++;
+        Manager.addCustomer();
     }
 
     @Override
@@ -49,8 +59,21 @@ public class Customer extends Thread implements Customers, UseBasket {
     @Override
     public void goOut() {
         System.out.printf("Customer #%4d go out from the store \n", customerNumber);
-        PeoplesCounter.peopleInStore--;
-        //  System.out.println("peopleInStore " + PeoplesCounter.peopleInStore);
+        Manager.peopleInStore--;
+        Manager.servedCustomer();
+    }
+
+    @Override
+    public void goToQueue() {
+        synchronized (this){
+            QueueCustomers.add(this);
+            try {
+                flagWait=true;
+                this.wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override

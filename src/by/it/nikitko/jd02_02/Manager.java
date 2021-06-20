@@ -1,9 +1,12 @@
 package by.it.nikitko.jd02_02;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
+
 public class Manager {
 
-    static  int peopleCount =0;
-    static  int peopleInStore=0;
+    static int peopleCount = 0;
+    static int peopleInStore = 0;
 
 
     private static volatile int customersInsideCount = 0;
@@ -18,13 +21,14 @@ public class Manager {
         return servedCustomersCount + customersInsideCount < Config.CUSTOMER_PLAN;
     }
 
-    static synchronized void addCustomer(){
+    static synchronized void addCustomer() {
         customersInsideCount++;
     }
 
-    static synchronized void servedCustomer(){
+    static synchronized void servedCustomer() {
         customersInsideCount--;
         servedCustomersCount++;
     }
+
 
 }

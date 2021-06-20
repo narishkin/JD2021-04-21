@@ -65,10 +65,20 @@ public class Customer extends Thread implements Customers, UseBasket {
 
     @Override
     public void goToQueue() {
-        synchronized (this){
+        synchronized (this) {
+            System.out.printf("Customer #%4d go to the queue \n", customerNumber);
             QueueCustomers.add(this);
+
+            Cashier currentCashier = ClosedCashiers.poll();
+            if (QueueCustomers.getSize() > 1 && currentCashier != null) {
+                synchronized (currentCashier.getMonitor()) {
+                    currentCashier.setFlagWait(false);
+                    currentCashier.notify();
+                }
+            }
+
             try {
-                flagWait=true;
+                flagWait = true;
                 this.wait();
             } catch (InterruptedException e) {
                 e.printStackTrace();

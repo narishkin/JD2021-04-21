@@ -28,6 +28,12 @@ public class Store {
             TimeUtils.sleep(1000);
         }
         joinToMain();
+       /* Cashier cc = ClosedCashiers.poll();
+        while (cc!=null){
+            cc.getMonitor();
+            cc.notify();
+            cc=ClosedCashiers.poll();
+        }*/
         System.out.println("Store is closed");
     }
 

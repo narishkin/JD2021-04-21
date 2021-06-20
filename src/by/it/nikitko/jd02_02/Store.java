@@ -6,16 +6,25 @@ import java.util.List;
 
 public class Store {
 
-    private static final List<Customer> CUSTOMERS_IN_STORE = new ArrayList<>();
+    private static final List<Thread> THREADS = new ArrayList<>();
     private static int randomMin = 9;
     private static int randomMax = 11;
 
     public static void main(String[] args) {
         System.out.println("Store is open");
+
+        for (int numberCashier = 1; numberCashier <=2; numberCashier++) {
+            Cashier cashier=new Cashier(numberCashier);
+            Thread thread = new Thread(cashier);
+            THREADS.add(thread);
+            thread.start();
+
+        }
         addCustomers();
-        for (int t = 0; t <= Config.TIME_WORK_STORE; t++) {
+        int t = 1;
+        while (Manager.storeOpened()){
             addCustomers();
-            correctCountCustomers(t);
+            correctCountCustomers(t++);
             TimeUtils.sleep(1000);
         }
         joinToMain();
@@ -25,12 +34,14 @@ public class Store {
     private static void addCustomers() {
         int peoplesPerSec = RandomUtils.random(randomMin, randomMax);
         for (int j = 0; j < peoplesPerSec; j++) {
-            Customer customer = new Customer(++Manager.peopleCount);
-            CUSTOMERS_IN_STORE.add(customer);
-            if (RandomUtils.random(3) == 0) {
-                customer.setPensioner(true);
+            if (Manager.peopleCount<Config.CUSTOMER_PLAN) {
+                Customer customer = new Customer(++Manager.peopleCount);
+                THREADS.add(customer);
+                if (RandomUtils.random(3) == 0) {
+                    customer.setPensioner(true);
+                }
+                customer.start();
             }
-            customer.start();
         }
     }
 
@@ -61,9 +72,9 @@ public class Store {
     }
 
     private static void joinToMain() {
-        for (Customer customer : CUSTOMERS_IN_STORE) {
+        for (Thread thread : THREADS) {
             try {
-                customer.join();
+                thread.join();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

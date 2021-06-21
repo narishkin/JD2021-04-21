@@ -26,8 +26,10 @@ public class Store {
             addCustomers();
             correctCountCustomers(t++);
             TimeUtils.sleep(1000);
+
         }
         joinToMain();
+
        /* Cashier cc = ClosedCashiers.poll();
         while (cc!=null){
             cc.getMonitor();

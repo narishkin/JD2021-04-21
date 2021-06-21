@@ -30,18 +30,18 @@ public class Cashier implements Runnable {
             Customer currentCustomer = QueueCustomers.poll();
             if (currentCustomer != null) {
                 System.out.println(this + " started service " + currentCustomer);
-                TimeUtils.sleep(RandomUtils.random(3000, 5000));
+                TimeUtils.sleep(RandomUtils.random(4000, 7000));
                 synchronized (currentCustomer.getMonitor()) {
                     currentCustomer.setFlagWait(false);
                     currentCustomer.notify();
                 }
                 System.out.println(this + " finished service " + currentCustomer);
             } else {
-               // if (Manager.storeOpened()) {
+             //   TimeUtils.sleep(1);
                     synchronized (this) {
                         ClosedCashiers.add(this);
                         flagWait = true;
-                        System.out.println(this + " closed");
+                        System.out.println(this + " closed1 ");
                         try {
                             this.wait();
                             System.out.println(this + "opened");
@@ -49,9 +49,18 @@ public class Cashier implements Runnable {
                             e.printStackTrace();
                         }
                     }
-             //   }
+
             }
         }
-        System.out.println(this + " closed");
+        System.out.println("cc= "+ClosedCashiers.getSize());
+        if ( ClosedCashiers.getSize() > 0) {
+            //  Manager.wakeUpCC();
+            Cashier currentCashier = ClosedCashiers.poll();
+            synchronized (currentCashier.getMonitor()) {
+                currentCashier.setFlagWait(false);
+                currentCashier.notify();
+            }
+        }
+        System.out.println(this + " closed2 "+Manager.getServedCustomersCount()+Manager.storeClosed());
     }
 }

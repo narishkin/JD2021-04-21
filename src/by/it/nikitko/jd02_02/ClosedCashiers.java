@@ -14,6 +14,12 @@ public class ClosedCashiers {
         }
     }
 
+    public static int getSize() {
+        return closedCushier.size();
+    }
+
+
+
     public static void add(Cashier cashier) {
         synchronized (MONITOR_CLOSED_CASHEIRS) {
             closedCushier.add(cashier);

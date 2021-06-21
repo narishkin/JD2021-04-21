@@ -12,6 +12,9 @@ public class Manager {
     private static volatile int customersInsideCount = 0;
     private static volatile int servedCustomersCount = 0;
 
+    public static int getServedCustomersCount() {
+        return servedCustomersCount;
+    }
 
     static boolean storeClosed() {
         return servedCustomersCount == Config.CUSTOMER_PLAN;
@@ -29,6 +32,13 @@ public class Manager {
         customersInsideCount--;
         servedCustomersCount++;
     }
-
+public static void wakeUpCC(){
+    while (ClosedCashiers.getSize()>0){
+        Cashier cc = ClosedCashiers.poll();
+        cc.getMonitor();
+        cc.notify();
+        System.out.println("ss");
+    }
+}
 
 }

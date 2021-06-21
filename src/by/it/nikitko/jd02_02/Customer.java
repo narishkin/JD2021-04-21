@@ -1,6 +1,7 @@
 package by.it.nikitko.jd02_02;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -9,6 +10,15 @@ public class Customer extends Thread implements Customers, UseBasket {
     private int customerNumber;
     private boolean pensioner;
     private boolean flagWait;
+    private  HashMap <String, Integer> customerGoods = new HashMap<>();
+
+
+    public HashMap<String, Integer> getCustomerGoods() {
+        return customerGoods;
+    }
+
+
+
 
     public void setFlagWait(boolean flagWait) {
         this.flagWait = flagWait;
@@ -17,6 +27,7 @@ public class Customer extends Thread implements Customers, UseBasket {
     public void setPensioner(boolean pensioner) {
         this.pensioner = pensioner;
     }
+
 
     public Customer(int customerNumber) {
         this.customerNumber = customerNumber;
@@ -106,14 +117,19 @@ public class Customer extends Thread implements Customers, UseBasket {
         for (int i = 0; i < RandomUtils.random(1, Goods.getGoods().size()); i++) {
             List<String> goodsList = new ArrayList<>(Goods.getGoods().keySet());
             String goodsName = goodsList.get(RandomUtils.random(goodsList.size() - 1));
+
+            int count = customerGoods.getOrDefault(goodsName, 0);
+            customerGoods.put(goodsName, count + 1);
+
+
             if (pensioner) {
                 TimeUtils.sleep(RandomUtils.random(500, 3000));
             } else {
                 TimeUtils.sleep(RandomUtils.random(500, 2000));
             }
             System.out.printf("Customer #%4d put %s with price %d in basket\n", customerNumber, goodsName, Goods.getGoods().get(goodsName));
-
         }
+        System.out.println("The are "+customerGoods+" in customer "+customerNumber+" basket");
 
     }
 }

@@ -1,5 +1,9 @@
 package by.it.nikitko.jd02_02;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 public class Cashier implements Runnable {
 
     private final int number;
@@ -30,6 +34,18 @@ public class Cashier implements Runnable {
             Customer currentCustomer = QueueCustomers.poll();
             if (currentCustomer != null) {
                 System.out.println(this + " started service " + currentCustomer);
+                Printer.printCheck(currentCustomer);
+               /* HashMap<String, Integer> customerGoods = currentCustomer.getCustomerGoods();
+                List<String> goodsInBasket = new ArrayList<>(customerGoods.keySet());
+                System.out.println(currentCustomer+" check ");
+                System.out.println("     Goods    Price   Quant.   Sum");
+                for (String goodsName : goodsInBasket) {
+                    int goodsPrice = Goods.getGoods().get(goodsName);
+                    int goodsQuantity = customerGoods.get(goodsName);
+                    int sumOneType = goodsPrice*goodsQuantity;
+                    System.out.printf("%10s%9d%8d%7d\n",goodsName,goodsPrice,goodsQuantity,sumOneType);
+                }*/
+
                 TimeUtils.sleep(RandomUtils.random(2000, 5000));
                 synchronized (currentCustomer.getMonitor()) {
                     currentCustomer.setFlagWait(false);

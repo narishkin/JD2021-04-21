@@ -30,37 +30,35 @@ public class Cashier implements Runnable {
             Customer currentCustomer = QueueCustomers.poll();
             if (currentCustomer != null) {
                 System.out.println(this + " started service " + currentCustomer);
-                TimeUtils.sleep(RandomUtils.random(4000, 7000));
+                TimeUtils.sleep(RandomUtils.random(2000, 5000));
                 synchronized (currentCustomer.getMonitor()) {
                     currentCustomer.setFlagWait(false);
                     currentCustomer.notify();
                 }
                 System.out.println(this + " finished service " + currentCustomer);
             } else {
-             //   TimeUtils.sleep(1);
-                    synchronized (this) {
-                        ClosedCashiers.add(this);
-                        flagWait = true;
-                        System.out.println(this + " closed1 ");
-                        try {
-                            this.wait();
+                synchronized (this) {
+                    ClosedCashiers.add(this);
+                    flagWait = true;
+                    System.out.println(this + " closed");
+                    try {
+                        this.wait();
+                        if (Manager.getServedCustomersCount() < 100) {
                             System.out.println(this + "opened");
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
                         }
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
                     }
-
+                }
             }
         }
-        System.out.println("cc= "+ClosedCashiers.getSize());
-        if ( ClosedCashiers.getSize() > 0) {
-            //  Manager.wakeUpCC();
+        while (ClosedCashiers.getSize() > 0) {
             Cashier currentCashier = ClosedCashiers.poll();
             synchronized (currentCashier.getMonitor()) {
                 currentCashier.setFlagWait(false);
                 currentCashier.notify();
             }
         }
-        System.out.println(this + " closed2 "+Manager.getServedCustomersCount()+Manager.storeClosed());
+        System.out.println(this + " closed");
     }
 }

@@ -33,11 +33,10 @@ public class Manager {
         servedCustomersCount++;
     }
 public static void wakeUpCC(){
-    while (ClosedCashiers.getSize()>0){
-        Cashier cc = ClosedCashiers.poll();
-        cc.getMonitor();
-        cc.notify();
-        System.out.println("ss");
+    Cashier currentCashier = ClosedCashiers.poll();
+    synchronized (currentCashier.getMonitor()) {
+        currentCashier.setFlagWait(false);
+        currentCashier.notify();
     }
 }
 

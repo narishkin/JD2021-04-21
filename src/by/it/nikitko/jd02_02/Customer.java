@@ -7,10 +7,15 @@ import java.util.List;
 
 public class Customer extends Thread implements Customers, UseBasket {
 
-    private int customerNumber;
+    private final int customerNumber;
+
+    public boolean isPensioner() {
+        return pensioner;
+    }
+
     private boolean pensioner;
     private boolean flagWait;
-    private  HashMap <String, Integer> customerGoods = new HashMap<>();
+    private final HashMap <String, Integer> customerGoods = new HashMap<>();
 
 
     public HashMap<String, Integer> getCustomerGoods() {
@@ -49,6 +54,31 @@ public class Customer extends Thread implements Customers, UseBasket {
     }
 
     @Override
+    public void goToQueue() {
+        synchronized (this) {
+            System.out.printf("Customer #%4d go to the queue \n", customerNumber);
+            QueueCustomers.add(this);
+            int cashierNeeded = QueueCustomers.getSize()/5;
+            System.out.println("Queue size: "+QueueCustomers.getSize());
+            System.out.println("cashierNeeded: "+cashierNeeded);
+            if (QueueCustomers.getSize() > 5 && ClosedCashiers.getSize() > 0) {
+                System.out.println("Queue size: "+QueueCustomers.getSize());
+                Cashier currentCashier = ClosedCashiers.poll();
+                synchronized (currentCashier.getMonitor()) {
+                    currentCashier.setFlagWait(false);
+                    currentCashier.notify();
+                }
+            }
+            try {
+                flagWait = true;
+                this.wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @Override
     public void enterToMarket() {
 
         System.out.printf("Customer #%4d enter to the store \n", customerNumber);
@@ -72,28 +102,6 @@ public class Customer extends Thread implements Customers, UseBasket {
         System.out.printf("Customer #%4d go out from the store \n", customerNumber);
         Manager.peopleInStore--;
         Manager.servedCustomer();
-    }
-
-    @Override
-    public void goToQueue() {
-        synchronized (this) {
-            System.out.printf("Customer #%4d go to the queue \n", customerNumber);
-            QueueCustomers.add(this);
-           if (QueueCustomers.getSize() > 1 && ClosedCashiers.getSize() > 0) {
-               Cashier currentCashier = ClosedCashiers.poll();
-               synchronized (currentCashier.getMonitor()) {
-                    currentCashier.setFlagWait(false);
-                    currentCashier.notify();
-                }
-            }
-
-            try {
-                flagWait = true;
-                this.wait();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
     }
 
     @Override
@@ -129,7 +137,7 @@ public class Customer extends Thread implements Customers, UseBasket {
             }
             System.out.printf("Customer #%4d put %s with price %d in basket\n", customerNumber, goodsName, Goods.getGoods().get(goodsName));
         }
-        System.out.println("The are "+customerGoods+" in customer "+customerNumber+" basket");
+       // System.out.println("The are "+customerGoods+" in customer "+customerNumber+" basket");
 
     }
 }

@@ -13,7 +13,7 @@ public class Store {
     public static void main(String[] args) {
         System.out.println("Store is open");
 
-        for (int numberCashier = 1; numberCashier <=2; numberCashier++) {
+        for (int numberCashier = 1; numberCashier <=Config.MAX_CASHIER_COUNT; numberCashier++) {
             Cashier cashier=new Cashier(numberCashier);
             Thread thread = new Thread(cashier);
             THREADS.add(thread);
@@ -21,21 +21,13 @@ public class Store {
 
         }
         addCustomers();
-        int t = 1;
+        int second = 1;
         while (Manager.storeOpened()){
             addCustomers();
-            correctCountCustomers(t++);
+            correctCountCustomers(second++);
             TimeUtils.sleep(1000);
-
         }
         joinToMain();
-
-       /* Cashier cc = ClosedCashiers.poll();
-        while (cc!=null){
-            cc.getMonitor();
-            cc.notify();
-            cc=ClosedCashiers.poll();
-        }*/
         System.out.println("Store is closed");
     }
 

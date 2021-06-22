@@ -6,12 +6,12 @@ public class Cashier implements Runnable {
     private final int number;
     public static final Object MONITOR_CASHIER = new Object();
 
-
     public Cashier(int number) {
         this.number = number;
     }
-    private static  synchronized void setCashiersMap(Cashier currentCashier, int sumCash){
-        Store.cashiersMap.put(currentCashier.toString(),Store.cashiersMap.get(currentCashier.toString())+sumCash);
+
+    private static synchronized void setCashiersMap(Cashier currentCashier, int sumCash) {
+        Store.cashiersMap.put(currentCashier.toString(), Store.cashiersMap.get(currentCashier.toString()) + sumCash);
     }
 
     @Override
@@ -43,11 +43,9 @@ public class Cashier implements Runnable {
                         sumCash = sumCash + totalPrice;
                     }
                 }
-
                 System.out.println(this + "finished service " + currentShopper);
                 System.out.println("Размер очереди: " + Shopper.getDequeSize() + "\n" +
-                        "Текущее количество кассиров: " + Dispatcher.getCurrentCashiersNumber());
-                System.out.println("текущее количество Threads кассиров: " + Store.getCashierThreadsSize());
+                        "текущее количество Threads кассиров: " + Store.getCashierThreadsSize());
             } else {
                 TimerHelper.sleep(1);
             }
@@ -56,8 +54,6 @@ public class Cashier implements Runnable {
             }
         }
         System.out.println(this + " closed");
-
-//        Store.cashiersMap.put(this.toString(),Store.cashiersMap.get(this.toString())+sumCash);
         synchronized (this) {
             setCashiersMap(this, sumCash);
         }

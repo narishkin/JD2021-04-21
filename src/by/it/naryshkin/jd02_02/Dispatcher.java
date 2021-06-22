@@ -21,7 +21,6 @@ public class Dispatcher {
     static synchronized void finishedShoppersCounter() {
         currentCountShoppersInside--;
         currentCountShoppersAfterExit++;
-
     }
 
     public static synchronized int getCurrentCashiersNumber() {
@@ -30,7 +29,6 @@ public class Dispatcher {
 
     public static synchronized int addCashier(Thread thread){
         Store.cashierThreads.add(thread);
-
         return currentCashiersNumber++;
     }
 

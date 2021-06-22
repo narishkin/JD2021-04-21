@@ -7,9 +7,10 @@ import java.util.Map;
 
 public class Store {
     public static final Map<String, Integer> GOODS = new HashMap<>();
-    public static  List<Thread> cashierThreads = new ArrayList<>();
+    public static List<Thread> cashierThreads = new ArrayList<>();
     public static Map<String, Integer> cashiersMap = new HashMap<>();
     public static List<Shopper> shoppers = new ArrayList<>();
+
     static {
         GOODS.put("Jeans", 42);
         GOODS.put("T-Shirt", 21);
@@ -17,27 +18,16 @@ public class Store {
         GOODS.put("Shoes", 37);
     }
 
-    public Object getStoreMonitor(){
+    public Object getStoreMonitor() {
         return this;
     }
-
-
 
     public static synchronized int getCashierThreadsSize() {
         return cashierThreads.size();
     }
 
-//    public static synchronized int getShoppersSize() {
-//        return shoppers.size();
-//    }
-
     public static void main(String[] args) {
-
-
-
-
         System.out.println("Store opened");
-
         int periodSwitcher;
         int localFunctionTime;
         int shopperCounter = 1;
@@ -49,9 +39,9 @@ public class Store {
                 Cashier cashier = new Cashier(numberCashiers);
                 Thread thread = new Thread(cashier);
 //                cashierThreads.add(thread);
-                    if (!cashiersMap.containsKey(cashier.toString())) {
-                        cashiersMap.put(cashier.toString(), 0);
-                    }
+                if (!cashiersMap.containsKey(cashier.toString())) {
+                    cashiersMap.put(cashier.toString(), 0);
+                }
                 thread.start();
                 Dispatcher.addCashier(thread);
                 numberCashiers++;
@@ -59,7 +49,7 @@ public class Store {
             periodSwitcher = (time / 30) % 2;
             localFunctionTime = time - (time / 60) * 60;
             System.out.println("TIME: " + time);
-            if (periodSwitcher == 0 && Dispatcher.currentCountShoppersInside<10) {
+            if (periodSwitcher == 0 && Dispatcher.currentCountShoppersInside < 10) {
                 for (int j = 0; j <= RandomHelper.random(20 + localFunctionTime - Dispatcher.currentCountShoppersInside); j++) {
                     if (!Dispatcher.storeOpened()) {
                         break;
@@ -74,7 +64,7 @@ public class Store {
                     shopper.start();
                 }
             }
-            if (periodSwitcher == 1 && Dispatcher.currentCountShoppersInside<40) {
+            if (periodSwitcher == 1 && Dispatcher.currentCountShoppersInside < 40) {
                 for (int j = 0; j <= RandomHelper.random(140 - localFunctionTime - Dispatcher.currentCountShoppersInside); j++) {
                     if (!Dispatcher.storeOpened()) {
                         break;
@@ -94,7 +84,6 @@ public class Store {
             System.out.println("Current numbers of shoppers after shopping: " + Dispatcher.currentCountShoppersAfterExit);
             time++;
 
-
         }
 
         try {
@@ -111,7 +100,7 @@ public class Store {
             e.printStackTrace();
         }
         System.out.println(cashiersMap.toString());
-        System.out.println(cashiersMap.values().stream().reduce((s1,s2) -> s1+s2).orElse(0));
+        System.out.println(cashiersMap.values().stream().reduce((s1, s2) -> s1 + s2).orElse(0));
 
         System.out.println("Store closed");
     }

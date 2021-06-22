@@ -15,52 +15,46 @@ public class Printer {
             generateIndentation(cashier);
             System.out.println("______________________________");
             generateIndentation(cashier);
-            System.out.printf("%24s check\n", currentCustomer);
+            System.out.printf("%22s receipt\n", currentCustomer);
             generateIndentation(cashier);
-            System.out.println("Product     Price  Quant.  Sum");
+            System.out.println("Item        Price   Qty Amount");
             generateIndentation(cashier);
             System.out.println("______________________________");
             int sumTotal = 0;
             for (String goodsName : goodsInBasket) {
                 int goodsPrice = Goods.getGoods().get(goodsName);
                 int goodsQuantity = customerGoods.get(goodsName);
-                int sumOneType = goodsPrice * goodsQuantity;
-                sumTotal += sumOneType;
+                int amount = goodsPrice * goodsQuantity;
+                sumTotal += amount;
                 generateIndentation(cashier);
-                System.out.printf("%-10s%7d%7d%6d\n", goodsName, goodsPrice, goodsQuantity, sumOneType);
+                System.out.printf("%-10s%7d%6d%7d\n", goodsName, goodsPrice, goodsQuantity, amount);
             }
             generateIndentation(cashier);
             System.out.println("______________________________");
             generateIndentation(cashier);
             System.out.printf("                    Total %4d\n", sumTotal);
             generateIndentation(cashier);
-            System.out.printf("                   %11s", cashier);
+            System.out.printf("                   %11s\n", cashier);
             sumTotalStore += sumTotal;
-            printQueueSize();
-            printSumTotalStore();
+            printInformation();
+
         }
     }
 
     private static void generateIndentation(Cashier cashier) {
         for (int i = 0; i < cashier.getNumber() - 1; i++) {
-            System.out.printf("                               ");
+            System.out.print("                               ");
         }
 
     }
 
-    public static void printQueueSize() {
+    public static void printInformation() {
         System.out.print("\r");
         for (int i = 0; i < 5; i++) {
             System.out.print("                               ");
         }
-        System.out.println(" Queue size " + QueueCustomers.getSize());
+        System.out.printf(" Queue size: %-3d   Total sum store: %6d\n",QueueCustomers.getSize(),sumTotalStore);
     }
 
-    public static void printSumTotalStore() {
-        System.out.print("\r");
-        for (int i = 0; i < 6; i++) {
-            System.out.print("                            ");
-        }
-        System.out.println("  SumTotalStore " + sumTotalStore);
-    }
+
 }

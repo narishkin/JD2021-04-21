@@ -16,7 +16,6 @@ public class Customer extends Thread implements Customers, UseBasket {
     private boolean pensioner;
     private boolean flagWait;
     private final HashMap<String, Integer> customerGoods = new HashMap<>();
-    private static final Object goToQueueMonitor = new Object();
 
 
     public HashMap<String, Integer> getCustomerGoods() {
@@ -72,7 +71,7 @@ public class Customer extends Thread implements Customers, UseBasket {
 
     private void wakeUpCashier() {
         synchronized (this) {
-            int cashierNeeded = (int) Math.ceil(QueueCustomers.getSize() / Config.MAX_QUEUE_LENGHT);
+            int cashierNeeded = (int) Math.ceil(QueueCustomers.getSize() / Config.MAX_QUEUE_LENGTH);
             int openedCashier = ClosedCashiers.getOpenedCashier();
             System.out.println("Queue size: " + QueueCustomers.getSize());
             System.out.println("cashierNeeded: " + cashierNeeded);

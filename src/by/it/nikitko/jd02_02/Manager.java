@@ -1,7 +1,5 @@
 package by.it.nikitko.jd02_02;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
 
 public class Manager {
 
@@ -32,12 +30,4 @@ public class Manager {
         customersInsideCount--;
         servedCustomersCount++;
     }
-public static void wakeUpCC(){
-    Cashier currentCashier = ClosedCashiers.poll();
-    synchronized (currentCashier.getMonitor()) {
-        currentCashier.setFlagWait(false);
-        currentCashier.notify();
-    }
-}
-
 }

@@ -48,9 +48,11 @@ public class Cashier implements Runnable {
         }
         while (ClosedCashiers.getSize() > 0) {
             Cashier currentCashier = ClosedCashiers.poll();
-            synchronized (currentCashier.getMonitor()) {
-                currentCashier.setFlagWait(false);
-                currentCashier.notify();
+            if (currentCashier != null) {
+                synchronized (currentCashier.getMonitor()) {
+                    currentCashier.setFlagWait(false);
+                    currentCashier.notify();
+                }
             }
         }
         System.out.println(this + " closed");

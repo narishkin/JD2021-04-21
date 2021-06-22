@@ -4,12 +4,18 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 
 public class ClosedCashiers {
-    public static final Object MONITOR_CLOSED_CASHEIRS = new Object();
+    public static final Object MONITOR_CLOSED_CASHIERS = new Object();
 
-    private static Deque<Cashier> closedCushier = new ArrayDeque<>();
+    private static final Deque<Cashier> closedCushier = new ArrayDeque<>();
+
+    private static final int openedCashier = Config.MAX_CASHIER_COUNT-getSize();
+
+    public static int getOpenedCashier() {
+        return openedCashier;
+    }
 
     public static Cashier poll() {
-        synchronized (MONITOR_CLOSED_CASHEIRS) {
+        synchronized (MONITOR_CLOSED_CASHIERS) {
             return closedCushier.poll();
         }
     }
@@ -21,7 +27,7 @@ public class ClosedCashiers {
 
 
     public static void add(Cashier cashier) {
-        synchronized (MONITOR_CLOSED_CASHEIRS) {
+        synchronized (MONITOR_CLOSED_CASHIERS) {
             closedCushier.add(cashier);
         }
     }

@@ -58,9 +58,19 @@ public class Customer extends Thread implements Customers, UseBasket {
         synchronized (this) {
             System.out.printf("Customer #%4d go to the queue \n", customerNumber);
             QueueCustomers.add(this);
-            int cashierNeeded = QueueCustomers.getSize()/5;
+
+
+            int cashierNeeded = (int)Math.ceil(QueueCustomers.getSize()/5.0);
+            int openedCashier = Config.MAX_CASHIER_COUNT-ClosedCashiers.getSize();
             System.out.println("Queue size: "+QueueCustomers.getSize());
             System.out.println("cashierNeeded: "+cashierNeeded);
+            System.out.println("cashierOpened: "+openedCashier);
+
+
+
+
+
+
             if (QueueCustomers.getSize() > 5 && ClosedCashiers.getSize() > 0) {
                 System.out.println("Queue size: "+QueueCustomers.getSize());
                 Cashier currentCashier = ClosedCashiers.poll();

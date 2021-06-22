@@ -8,10 +8,10 @@ public class ClosedCashiers {
 
     private static final Deque<Cashier> closedCushier = new ArrayDeque<>();
 
-    private static final int openedCashier = Config.MAX_CASHIER_COUNT-getSize();
+
 
     public static int getOpenedCashier() {
-        return openedCashier;
+        return Config.MAX_CASHIER_COUNT-getSize();
     }
 
     public static Cashier poll() {

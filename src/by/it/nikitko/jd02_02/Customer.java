@@ -16,12 +16,12 @@ public class Customer extends Thread implements Customers, UseBasket {
     private boolean pensioner;
     private boolean flagWait;
     private final HashMap<String, Integer> customerGoods = new HashMap<>();
+    private static final Object goToQueueMonitor= new Object();
 
 
     public HashMap<String, Integer> getCustomerGoods() {
         return customerGoods;
     }
-
 
     public void setFlagWait(boolean flagWait) {
         this.flagWait = flagWait;
@@ -56,29 +56,30 @@ public class Customer extends Thread implements Customers, UseBasket {
         synchronized (this) {
             System.out.printf("Customer #%4d go to the queue \n", customerNumber);
             QueueCustomers.add(this);
-
-
-            int cashierNeeded = (int) Math.ceil(QueueCustomers.getSize() / 5.0);
-            int openedCashier = Config.MAX_CASHIER_COUNT - ClosedCashiers.getSize();
-            System.out.println("Queue size: " + QueueCustomers.getSize());
-            System.out.println("cashierNeeded: " + cashierNeeded);
-            System.out.println("cashierOpened: " + openedCashier);
-
-
-            while (ClosedCashiers.getSize() > 0 & openedCashier < cashierNeeded) {
-                System.out.println("Queue size2: " + QueueCustomers.getSize());
-                Cashier currentCashier = ClosedCashiers.poll();
-                synchronized (currentCashier.getMonitor()) {
-                    openedCashier = Config.MAX_CASHIER_COUNT - ClosedCashiers.getSize();
-                    currentCashier.setFlagWait(false);
-                    currentCashier.notify();
-                }
-            }
+            wakeUpCashier();
             try {
                 flagWait = true;
                 this.wait();
             } catch (InterruptedException e) {
                 e.printStackTrace();
+            }
+        }
+    }
+
+    private void wakeUpCashier() {
+        synchronized (this) {
+            int cashierNeeded = (int) Math.ceil(QueueCustomers.getSize() / Config.MAX_QUEUE_LENGHT);
+            int openedCashier = ClosedCashiers.getOpenedCashier();
+            System.out.println("Queue size: " + QueueCustomers.getSize());
+            System.out.println("cashierNeeded: " + cashierNeeded);
+            System.out.println("cashierOpened: " + openedCashier);
+            while (ClosedCashiers.getSize() > 0 & openedCashier < cashierNeeded) {
+                Cashier currentCashier = ClosedCashiers.poll();
+                synchronized (currentCashier.getMonitor()) {
+                    openedCashier = ClosedCashiers.getOpenedCashier();
+                    currentCashier.setFlagWait(false);
+                    currentCashier.notify();
+                }
             }
         }
     }

@@ -4,6 +4,11 @@ package by.it.nikitko.jd02_02;
 public class Cashier implements Runnable {
 
     private final int number;
+
+    public int getNumber() {
+        return number;
+    }
+
     private boolean flagWait;
 
     public void setFlagWait(boolean flagWait) {
@@ -36,7 +41,7 @@ public class Cashier implements Runnable {
                 } else {
                     TimeUtils.sleep(RandomUtils.random(2000, 5000));
                 }
-                Printer.printCheck(currentCustomer);
+                Printer.printCheck(currentCustomer,this);
                 synchronized (currentCustomer.getMonitor()) {
                     currentCustomer.setFlagWait(false);
                     currentCustomer.notify();

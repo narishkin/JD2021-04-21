@@ -1,12 +1,43 @@
 package by.it.naryshkin.jd02_02;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 
 public class Shopper extends Thread implements TypicalShopper, UsingBasket {
-    private final String name;
+    public final String name;
     private final boolean pensioner;
-    private final int numberOfGoods = RandomHelper.random(1, 4);
     private boolean waitPointer;
+    public final int numberOfGoods = RandomHelper.random(1, 4);
+
+
+    private static final Object MONITOR_QUEUE_SHOPPERS = new Object();
+
+
+
+    private static final Deque<Shopper> SHOPPERS = new ArrayDeque<>();
+
+
+    public static Shopper poll() {
+        synchronized (MONITOR_QUEUE_SHOPPERS) {
+            return SHOPPERS.pollFirst();
+        }
+
+
+    }
+    public static void add(Shopper shopper){
+        synchronized (MONITOR_QUEUE_SHOPPERS){
+            SHOPPERS.addLast(shopper);
+        }
+    }
+
+    public static synchronized int getDequeSize(){
+        return SHOPPERS.size();
+    }
+
+
+
+
 
     public void setWaitPointer(boolean waitPointer) {
         this.waitPointer = waitPointer;
@@ -23,7 +54,7 @@ public class Shopper extends Thread implements TypicalShopper, UsingBasket {
         Dispatcher.addShopper();
     }
 
-    Object getMonitor(){
+    Object getMonitor() {
         return this;
     }
 
@@ -55,35 +86,31 @@ public class Shopper extends Thread implements TypicalShopper, UsingBasket {
 
 
     @Override
-    public void putGoodsToBasket() {
-        ArrayList<String> list = new ArrayList<>(Store.goods.keySet());
+    public synchronized void putGoodsToBasket() {
+        ArrayList<String> list = new ArrayList<>(Store.GOODS.keySet());
         double puttingTime;
         for (int i = 0; i < numberOfGoods; i++) {
             if (pensioner) {
-                puttingTime = RandomHelper.random(500, 2000)*Config.PENS_COEFFICIENT;
+                puttingTime = RandomHelper.random(500, 2000) * Config.PENS_COEFFICIENT;
             } else {
                 puttingTime = RandomHelper.random(500, 2000);
             }
             TimerHelper.sleep(puttingTime);
             int goodNumber = RandomHelper.random(0, list.size() - 1);
-            System.out.println(name + " took " + list.get(goodNumber) +
-                    " by price " + Store.goods.get(list.get(goodNumber)) +
-                    "r. It takes " + puttingTime / 1000 + " seconds.");
+            System.out.println(name + " took " + list.get(goodNumber) + ". It takes: " + puttingTime/1000);
         }
-        System.out.println(name + " picked " + numberOfGoods + " goods.");
-
     }
 
     @Override
     public void goToQueue() {
-        synchronized (this){
-            QueueShoppers.add(this);
+        synchronized (this) {
+            Shopper.add(this);
             try {
                 waitPointer = true;
-                while (waitPointer){
-                    this.wait();
-                }
-            } catch (InterruptedException e){
+//                while (waitPointer){
+                this.wait();
+//                }
+            } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
@@ -101,7 +128,6 @@ public class Shopper extends Thread implements TypicalShopper, UsingBasket {
 
     @Override
     public void run() {
-
         storeEntry();
         takeBasket();
         chooseGoods();

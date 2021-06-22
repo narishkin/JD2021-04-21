@@ -25,4 +25,8 @@ public class QueueShoppers {
         }
     }
 
+    public static synchronized int getDequeSize(){
+        return SHOPPERS.size();
+    }
+
 }

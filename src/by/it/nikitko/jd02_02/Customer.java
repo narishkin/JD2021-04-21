@@ -16,7 +16,7 @@ public class Customer extends Thread implements Customers, UseBasket {
     private boolean pensioner;
     private boolean flagWait;
     private final HashMap<String, Integer> customerGoods = new HashMap<>();
-    private static final Object goToQueueMonitor= new Object();
+    private static final Object goToQueueMonitor = new Object();
 
 
     public HashMap<String, Integer> getCustomerGoods() {
@@ -55,7 +55,11 @@ public class Customer extends Thread implements Customers, UseBasket {
     public void goToQueue() {
         synchronized (this) {
             System.out.printf("Customer #%4d go to the queue \n", customerNumber);
-            QueueCustomers.add(this);
+            if (this.pensioner) {
+                QueueCustomers.addPensioner(this);
+            } else {
+                QueueCustomers.add(this);
+            }
             wakeUpCashier();
             try {
                 flagWait = true;

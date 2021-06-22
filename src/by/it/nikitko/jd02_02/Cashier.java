@@ -33,7 +33,13 @@ public class Cashier implements Runnable {
     public void run() {
         System.out.println(this + "opened");
         while (!Manager.storeClosed()) {
-            Customer currentCustomer = QueueCustomers.poll();
+            Customer currentCustomer;
+            if (QueueCustomers.getSizePensioner() > 0) {
+                currentCustomer = QueueCustomers.polPensioner();
+            } else {
+                currentCustomer = QueueCustomers.poll();
+            }
+
             if (currentCustomer != null) {
                 System.out.println(this + " started service " + currentCustomer);
                 if (currentCustomer.isPensioner()) {
@@ -41,8 +47,7 @@ public class Cashier implements Runnable {
                 } else {
                     TimeUtils.sleep(RandomUtils.random(2000, 5000));
                 }
-                Printer.printCheck(currentCustomer,this);
-           //     Printer.printQueueSize();
+                Printer.printCheck(currentCustomer, this);
                 synchronized (currentCustomer.getMonitor()) {
                     currentCustomer.setFlagWait(false);
                     currentCustomer.notify();

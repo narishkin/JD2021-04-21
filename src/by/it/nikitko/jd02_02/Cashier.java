@@ -42,6 +42,7 @@ public class Cashier implements Runnable {
                     TimeUtils.sleep(RandomUtils.random(2000, 5000));
                 }
                 Printer.printCheck(currentCustomer,this);
+           //     Printer.printQueueSize();
                 synchronized (currentCustomer.getMonitor()) {
                     currentCustomer.setFlagWait(false);
                     currentCustomer.notify();

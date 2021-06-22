@@ -143,7 +143,5 @@ public class Customer extends Thread implements Customers, UseBasket {
             }
             System.out.printf("Customer #%4d put %s with price %d in basket\n", customerNumber, goodsName, Goods.getGoods().get(goodsName));
         }
-        // System.out.println("The are "+customerGoods+" in customer "+customerNumber+" basket");
-
     }
 }

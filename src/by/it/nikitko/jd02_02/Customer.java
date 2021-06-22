@@ -15,14 +15,12 @@ public class Customer extends Thread implements Customers, UseBasket {
 
     private boolean pensioner;
     private boolean flagWait;
-    private final HashMap <String, Integer> customerGoods = new HashMap<>();
+    private final HashMap<String, Integer> customerGoods = new HashMap<>();
 
 
     public HashMap<String, Integer> getCustomerGoods() {
         return customerGoods;
     }
-
-
 
 
     public void setFlagWait(boolean flagWait) {
@@ -60,21 +58,18 @@ public class Customer extends Thread implements Customers, UseBasket {
             QueueCustomers.add(this);
 
 
-            int cashierNeeded = (int)Math.ceil(QueueCustomers.getSize()/5.0);
-            int openedCashier = Config.MAX_CASHIER_COUNT-ClosedCashiers.getSize();
-            System.out.println("Queue size: "+QueueCustomers.getSize());
-            System.out.println("cashierNeeded: "+cashierNeeded);
-            System.out.println("cashierOpened: "+openedCashier);
+            int cashierNeeded = (int) Math.ceil(QueueCustomers.getSize() / 5.0);
+            int openedCashier = Config.MAX_CASHIER_COUNT - ClosedCashiers.getSize();
+            System.out.println("Queue size: " + QueueCustomers.getSize());
+            System.out.println("cashierNeeded: " + cashierNeeded);
+            System.out.println("cashierOpened: " + openedCashier);
 
 
-
-
-
-
-            if (QueueCustomers.getSize() > 5 && ClosedCashiers.getSize() > 0) {
-                System.out.println("Queue size: "+QueueCustomers.getSize());
+            while (ClosedCashiers.getSize() > 0 & openedCashier < cashierNeeded) {
+                System.out.println("Queue size2: " + QueueCustomers.getSize());
                 Cashier currentCashier = ClosedCashiers.poll();
                 synchronized (currentCashier.getMonitor()) {
+                    openedCashier = Config.MAX_CASHIER_COUNT - ClosedCashiers.getSize();
                     currentCashier.setFlagWait(false);
                     currentCashier.notify();
                 }
@@ -147,7 +142,7 @@ public class Customer extends Thread implements Customers, UseBasket {
             }
             System.out.printf("Customer #%4d put %s with price %d in basket\n", customerNumber, goodsName, Goods.getGoods().get(goodsName));
         }
-       // System.out.println("The are "+customerGoods+" in customer "+customerNumber+" basket");
+        // System.out.println("The are "+customerGoods+" in customer "+customerNumber+" basket");
 
     }
 }

@@ -62,13 +62,11 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
         for (int i = 0; i <= countGood; i++) {
             int idGood = RandomHelper.randomValue(0, 3);
             HashMap good = new PriceOfGood().getGoods();
-            Good goodValue = Good.values()[idGood];
+            GoodEnum goodValue = GoodEnum.values()[idGood];
             basket.addToBasket(goodValue);
             int timeChoose = RandomHelper.randomValue(Configs.CHOOSE_MIN, Configs.CHOOSE_MAX);
             TimerHelper.sleep(timeChoose);
         }
-        System.out.println("Bayer #"+ basket.idBuyer + basket.getBasket().toString());
-//        basket.toConsoleBasket();
-
+        basket.toConsoleBasket();
     }
 }

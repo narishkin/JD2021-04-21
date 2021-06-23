@@ -18,13 +18,13 @@ public class Cashier implements Runnable {
                 int timeService =Randomaser.random(2000,5000);
                 Timer.sleep(timeService);
                 synchronized (currentPurchaser.getMonitor()){
-                    currentPurchaser.setWaitFlag(true);
+                    currentPurchaser.setWaitFlag(false);
                     currentPurchaser.notify();
                 }
                 System.out.println(this+"finish service "+ currentPurchaser);
             }else {
 
-                Timer.sleep(1);
+                Timer.sleep(1000);
             }
         }
         System.out.println(this + " close");

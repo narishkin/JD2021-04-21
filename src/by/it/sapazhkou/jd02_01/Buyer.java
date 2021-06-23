@@ -1,6 +1,6 @@
 package by.it.sapazhkou.jd02_01;
 
-public class Buyer extends Thread implements IBuyer {
+public class Buyer extends Thread implements IBuyer,IUseBasket {
 
 
     int num;
@@ -14,11 +14,11 @@ public class Buyer extends Thread implements IBuyer {
 
     @Override
     public void run() {
-//        Dispatcher.currentCountBuyer++;
+        Dispatcher.currentCountBuyer++;
         enterToMarket();
         chooseGoods();
         goOut();
-//        Dispatcher.currentCountBuyer--;
+        Dispatcher.currentCountBuyer--;
     }
 
     @Override
@@ -38,11 +38,20 @@ public class Buyer extends Thread implements IBuyer {
     @Override
     public void goOut() {
         System.out.println(this + "left the store");
-
     }
 
     @Override
     public String toString() {
         return this.getName();
+    }
+
+    @Override
+    public void takeBasket() {
+
+    }
+
+    @Override
+    public void putGoodsToBasket() {
+
     }
 }

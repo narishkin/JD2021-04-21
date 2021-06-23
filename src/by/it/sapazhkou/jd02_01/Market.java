@@ -6,6 +6,10 @@ import java.util.List;
 public class Market {
 
     public static void main(String[] args) {
+        mainA(args);
+    }
+
+    public static void mainA(String[] args) {
         System.out.println("Market open");
         List<Buyer> buyerList = new ArrayList<>();
         int idBuyer = 0;
@@ -17,8 +21,9 @@ public class Market {
                 buyer.start();
 //                System.out.println("В магазине "+ buyerList.size()+" покупателей");
             }
+        TimerHelper.sleep(1000);
+
         }
-//        TimerHelper.sleep(1000);
         for (Buyer buyer : buyerList) {
             try {
                 buyer.join();

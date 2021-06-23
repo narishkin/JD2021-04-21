@@ -1,6 +1,8 @@
 package by.it.sapazhkou.jd02_01;
 
-public class Buyer extends Thread implements IBuyer,IUseBasket {
+import java.util.HashMap;
+
+public class Buyer extends Thread implements IBuyer, IUseBasket {
 
 
     int num;
@@ -31,6 +33,7 @@ public class Buyer extends Thread implements IBuyer,IUseBasket {
         System.out.println(this + "started choosing ");
         int timeChoose = RandomHelper.randomValue(Configs.CHOOSE_MIN, Configs.CHOOSE_MAX);
         TimerHelper.sleep(timeChoose);
+        putGoodsToBasket();
         System.out.println(this + "completed selection ");
 
     }
@@ -47,11 +50,25 @@ public class Buyer extends Thread implements IBuyer,IUseBasket {
 
     @Override
     public void takeBasket() {
-
+        System.out.println(this + "take a basket ");
+        int timeChoose = RandomHelper.randomValue(Configs.CHOOSE_MIN, Configs.CHOOSE_MAX);
+        TimerHelper.sleep(timeChoose);
     }
 
     @Override
     public void putGoodsToBasket() {
+        int countGood = RandomHelper.randomValue(0, 3);
+        Basket basket = new Basket(this.num);
+        for (int i = 0; i <= countGood; i++) {
+            int idGood = RandomHelper.randomValue(0, 3);
+            HashMap good = new PriceOfGood().getGoods();
+            Good goodValue = Good.values()[idGood];
+            basket.addToBasket(goodValue);
+            int timeChoose = RandomHelper.randomValue(Configs.CHOOSE_MIN, Configs.CHOOSE_MAX);
+            TimerHelper.sleep(timeChoose);
+        }
+        System.out.println("Bayer #"+ basket.idBuyer + basket.getBasket().toString());
+//        basket.toConsoleBasket();
 
     }
 }

@@ -12,6 +12,19 @@ public class Runner {
         Helper.findMin(array);
         Helper.findMax(array);
         Helper.sort(array);
+        double [][] leftArray = {{1,2},{3,4}};
+        double [][] rightArray = {{5,6},{7,8}};
+        double [][] result = Helper.mul(leftArray,rightArray);
+        for (int i = 0; i < result.length; i++) {
+            for (int j = 0; j < result[i].length; j++) {
+                System.out.println(result[i][j]+" ");
+
+            }
+            System.out.println();
+
+        }
+
+
 
 
 

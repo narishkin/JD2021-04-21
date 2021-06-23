@@ -7,9 +7,10 @@ import java.util.Map;
 
 public class Store {
     public static final Map<String, Integer> GOODS = new HashMap<>();
-    public static List<Thread> cashierThreads = new ArrayList<>();
+    public volatile static List<Thread> cashierThreads = new ArrayList<>();
     public static Map<String, Integer> cashiersMap = new HashMap<>();
     public static List<Shopper> shoppers = new ArrayList<>();
+    public static volatile int storeSum = 0;
 
     static {
         GOODS.put("Jeans", 42);
@@ -48,7 +49,7 @@ public class Store {
             }
             periodSwitcher = (time / 30) % 2;
             localFunctionTime = time - (time / 60) * 60;
-            System.out.println("TIME: " + time);
+//            System.out.println("TIME: " + time);
             if (periodSwitcher == 0 && Dispatcher.currentCountShoppersInside < 10) {
                 for (int j = 0; j <= RandomHelper.random(20 + localFunctionTime - Dispatcher.currentCountShoppersInside); j++) {
                     if (!Dispatcher.storeOpened()) {
@@ -80,27 +81,30 @@ public class Store {
                 }
             }
             TimerHelper.sleep(1000);
-            System.out.println("Current numbers of shoppers in the store: " + Dispatcher.currentCountShoppersInside);
-            System.out.println("Current numbers of shoppers after shopping: " + Dispatcher.currentCountShoppersAfterExit);
+//            System.out.println("Current numbers of shoppers in the store: " + Dispatcher.currentCountShoppersInside);
+//            System.out.println("Current numbers of shoppers after shopping: " + Dispatcher.currentCountShoppersAfterExit);
             time++;
 
         }
 
         try {
-            for (Thread thread : cashierThreads) {
-                thread.join();
+            Store store = new Store();
+            synchronized (store.getStoreMonitor()) {
+                for (Thread thread : cashierThreads) {
+                    thread.join();
+                }
             }
 
-            System.out.println("Кассиры всё");
+//            System.out.println("Кассиры всё");
             for (Shopper shopper : shoppers) {
                 shopper.join();
             }
-            System.out.println("Шоперы всё");
+//            System.out.println("Шоперы всё");
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println(cashiersMap.toString());
-        System.out.println(cashiersMap.values().stream().reduce((s1, s2) -> s1 + s2).orElse(0));
+//        System.out.println(cashiersMap.toString());
+        System.out.println("Store revenue: " + cashiersMap.values().stream().reduce((s1, s2) -> s1 + s2).orElse(0));
 
         System.out.println("Store closed");
     }

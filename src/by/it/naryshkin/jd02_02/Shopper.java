@@ -14,7 +14,6 @@ public class Shopper extends Thread implements TypicalShopper, UsingBasket {
     private static final Object MONITOR_QUEUE_SHOPPERS = new Object();
 
 
-
     private static final Deque<Shopper> SHOPPERS = new ArrayDeque<>();
 
 
@@ -25,18 +24,20 @@ public class Shopper extends Thread implements TypicalShopper, UsingBasket {
 
 
     }
-    public static void add(Shopper shopper){
-        synchronized (MONITOR_QUEUE_SHOPPERS){
-            SHOPPERS.addLast(shopper);
+
+    public static void add(Shopper shopper) {
+        synchronized (MONITOR_QUEUE_SHOPPERS) {
+            if (shopper.name.contains("pens")) {
+                SHOPPERS.addFirst(shopper);
+            } else {
+                SHOPPERS.addLast(shopper);
+            }
         }
     }
 
-    public static synchronized int getDequeSize(){
+    public static synchronized int getDequeSize() {
         return SHOPPERS.size();
     }
-
-
-
 
 
     public void setWaitPointer(boolean waitPointer) {
@@ -47,9 +48,9 @@ public class Shopper extends Thread implements TypicalShopper, UsingBasket {
 
         this.pensioner = pensioner;
         if (pensioner) {
-            this.name = "Shopper-pensioner №" + name;
+            this.name = "S-pensioner №" + name;
         } else {
-            this.name = "Shopper № " + name;
+            this.name = "Shopper №" + name;
         }
         Dispatcher.addShopper();
     }
@@ -60,7 +61,7 @@ public class Shopper extends Thread implements TypicalShopper, UsingBasket {
 
     @Override
     public void storeEntry() {
-        System.out.println(name + " enters into the store.");
+//        System.out.println(name + " enters into the store.");
     }
 
     @Override
@@ -70,18 +71,18 @@ public class Shopper extends Thread implements TypicalShopper, UsingBasket {
         } else {
             TimerHelper.sleep(RandomHelper.random(500, 2000));
         }
-        System.out.println(name + " takes a basket.");
+//        System.out.println(name + " takes a basket.");
     }
 
     @Override
     public void chooseGoods() {
-        System.out.println(name + " is choosing goods.");
+//        System.out.println(name + " is choosing goods.");
         if (pensioner) {
             TimerHelper.sleep((RandomHelper.random(500, 2000) * Config.PENS_COEFFICIENT));
         } else {
             TimerHelper.sleep(RandomHelper.random(500, 2000));
         }
-        System.out.println("Goods were chosen by " + name);
+//        System.out.println("Goods were chosen by " + name);
     }
 
 
@@ -97,7 +98,7 @@ public class Shopper extends Thread implements TypicalShopper, UsingBasket {
             }
             TimerHelper.sleep(puttingTime);
             int goodNumber = RandomHelper.random(0, list.size() - 1);
-            System.out.println(name + " took " + list.get(goodNumber) + ". It takes: " + puttingTime/1000);
+//            System.out.println(name + " took " + list.get(goodNumber) + ". It takes: " + puttingTime/1000);
         }
     }
 
@@ -118,7 +119,7 @@ public class Shopper extends Thread implements TypicalShopper, UsingBasket {
 
     @Override
     public void storeExit() {
-        System.out.println(name + " goes out.");
+//        System.out.println(name + " goes out.");
     }
 
     @Override

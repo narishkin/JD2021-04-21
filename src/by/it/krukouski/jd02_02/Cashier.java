@@ -10,7 +10,7 @@ public class Cashier implements Runnable {
 
     @Override
     public void run() {
-        System.out.println(this + "opened");
+        System.out.println(this + " opened");
         while (!CounterBuyers.storeClosed()) {
             Buyer buyer = QueueBuyers.poll();
             if (buyer != null) {
@@ -23,10 +23,10 @@ public class Cashier implements Runnable {
                 }
                 System.out.println(this + " finished service " + buyer);
             } else {
-                // think
+                // thinking
             }
         }
-        System.out.println(this + "closed");
+        System.out.println(this + " closed");
 
     }
 

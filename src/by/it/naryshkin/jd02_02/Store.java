@@ -89,7 +89,7 @@ public class Store {
 
         try {
             Store store = new Store();
-            synchronized (store.getStoreMonitor()) {
+            synchronized (Store.class) {
                 for (Thread thread : cashierThreads) {
                     thread.join();
                 }

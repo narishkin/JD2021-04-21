@@ -25,11 +25,11 @@ public class Manager {
         return SERVED_CUSTOMERS_COUNT.get() + CUSTOMERS_INSIDE_COUNT.get() < Config.CUSTOMER_PLAN;
     }
 
-    static synchronized void addCustomer() {
+    static void addCustomer() {
         CUSTOMERS_INSIDE_COUNT.getAndIncrement();
     }
 
-    static synchronized void servedCustomer() {
+    static  void servedCustomer() {
         CUSTOMERS_INSIDE_COUNT.getAndDecrement();
         SERVED_CUSTOMERS_COUNT.getAndIncrement();
     }

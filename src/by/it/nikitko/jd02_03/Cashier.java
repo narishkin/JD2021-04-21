@@ -9,6 +9,11 @@ public class Cashier implements Runnable {
         return number;
     }
 
+    private boolean flagWait;
+
+    public void setFlagWait(boolean flagWait) {
+        this.flagWait = flagWait;
+    }
 
     public Cashier(int number) {
         this.number = number;
@@ -35,33 +40,46 @@ public class Cashier implements Runnable {
                 currentCustomer = QueueCustomers.poll();
             }
             if (currentCustomer != null) {
-                serveCustomer(currentCustomer);
+               serveCustomer(currentCustomer);
             } else {
                 cashierWait();
             }
         }
+        closeWaitingCashiers();
         System.out.println(this + " closed");
     }
 
     private void serveCustomer(Customer currentCustomer) {
-        System.out.println(this + " started service " + currentCustomer);
-        if (currentCustomer.isPensioner()) {
-            TimeUtils.sleep(RandomUtils.random(3000, 7500));
-        } else {
-            TimeUtils.sleep(RandomUtils.random(2000, 5000));
-        }
-        Printer.printCheck(currentCustomer, this);
-        synchronized (currentCustomer.getMonitor()) {
-            currentCustomer.setFlagWait(false);
+        synchronized (currentCustomer) {
+            System.out.println(this + " started service " + currentCustomer);
+            if (currentCustomer.isPensioner()) {
+                TimeUtils.sleep(RandomUtils.random(3000, 7500));
+            } else {
+                TimeUtils.sleep(RandomUtils.random(2000, 5000));
+            }
             currentCustomer.notify();
+            Printer.printCheck(currentCustomer, this);
+            //currentCustomer.setFlagWait(false);
+            System.out.println(this + " finished service " + currentCustomer);
         }
-        System.out.println(this + " finished service " + currentCustomer);
     }
 
+    private void closeWaitingCashiers() {
+        while (ClosedCashiers.getSize() > 0) {
+            Cashier currentCashier = ClosedCashiers.poll();
+            if (currentCashier != null) {
+                synchronized (currentCashier.getMonitor()) {
+                    currentCashier.setFlagWait(false);
+                    currentCashier.notify();
+                }
+            }
+        }
+    }
 
     private void cashierWait() {
         synchronized (this) {
             ClosedCashiers.add(this);
+            flagWait = true;
             System.out.println(this + " closed");
             try {
                 this.wait();

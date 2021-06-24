@@ -8,41 +8,43 @@ import java.util.concurrent.TimeUnit;
 
 public class Store {
 
+   private static ForkJoinPool threadFJP = new ForkJoinPool();
     private static final List<Thread> THREADS = new ArrayList<>();
     private static int randomMin = 9;
     private static int randomMax = 11;
 
     public static void main(String[] args) {
         System.out.println("Store is open");
-
-        ForkJoinPool cashierPool = new ForkJoinPool();
         for (int numberCashier = 1; numberCashier <= Config.MAX_CASHIER_COUNT; numberCashier++) {
-            Cashier cashier=new Cashier(numberCashier);
-            cashierPool.submit(cashier);
+            Cashier cashier = new Cashier(numberCashier);
+            threadFJP.submit(cashier);
         }
+        threadFJP.shutdown();
         addCustomers();
+        joinToMain();
         int second = 1;
-        while (Manager.storeOpened()){
+        while (Manager.storeOpened()) {
             addCustomers();
             correctCountCustomers(second++);
             TimeUtils.sleep(1000);
         }
-       // joinToMain();
-        cashierPool.shutdown();
-        while (!cashierPool.isTerminated()){
+
+        while (!threadFJP.isTerminated()) {
             try {
-                cashierPool.awaitTermination(10, TimeUnit.MINUTES);
+                threadFJP.awaitTermination(10, TimeUnit.HOURS);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
         System.out.println("Store is closed");
+
     }
+
 
     private static void addCustomers() {
         int peoplesPerSec = RandomUtils.random(randomMin, randomMax);
         for (int j = 0; j < peoplesPerSec; j++) {
-            if (Manager.peopleCount<Config.CUSTOMER_PLAN) {
+            if (Manager.peopleCount < Config.CUSTOMER_PLAN) {
                 Customer customer = new Customer(++Manager.peopleCount);
                 THREADS.add(customer);
                 if (RandomUtils.random(3) == 0) {
@@ -79,4 +81,13 @@ public class Store {
         }
     }
 
+    private static void joinToMain() {
+        for (Thread thread : THREADS) {
+            try {
+                thread.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

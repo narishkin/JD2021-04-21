@@ -3,6 +3,7 @@ package by.it.nikitko.jd02_03;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.Semaphore;
 
 
 public class Customer extends Thread implements Customers, UseBasket {
@@ -12,6 +13,8 @@ public class Customer extends Thread implements Customers, UseBasket {
     public boolean isPensioner() {
         return pensioner;
     }
+
+    private static final Semaphore semaphore = new Semaphore(20);
 
     private boolean pensioner;
     private boolean flagWait;
@@ -60,30 +63,29 @@ public class Customer extends Thread implements Customers, UseBasket {
                 QueueCustomers.add(this);
             }
             wakeUpCashier();
-            try {
+           /* try {
                 flagWait = true;
                 this.wait();
             } catch (InterruptedException e) {
                 e.printStackTrace();
-            }
+            }*/
         }
     }
 
     private void wakeUpCashier() {
-        synchronized (this) {
-            int cashierNeeded = (int) Math.ceil(QueueCustomers.getSize() / Config.MAX_QUEUE_LENGTH);
-            int openedCashier = ClosedCashiers.getOpenedCashier();
-            // System.out.println("Queue size: " + QueueCustomers.getSize());
-            //  System.out.println("cashierNeeded: " + cashierNeeded);
-            //  System.out.println("cashierOpened: " + openedCashier);
-            while (ClosedCashiers.getSize() > 0 & openedCashier < cashierNeeded) {
-                Cashier currentCashier = ClosedCashiers.poll();
-                synchronized (currentCashier.getMonitor()) {
-                    openedCashier = ClosedCashiers.getOpenedCashier();
-                    currentCashier.notify();
-                }
+
+        int cashierNeeded = (int) Math.ceil(QueueCustomers.getSize() / Config.MAX_QUEUE_LENGTH);
+        int openedCashier = ClosedCashiers.getOpenedCashier();
+
+        while (ClosedCashiers.getSize() > 0 & openedCashier < cashierNeeded) {
+            Cashier currentCashier = ClosedCashiers.poll();
+            synchronized (currentCashier.getMonitor()) {
+                openedCashier = ClosedCashiers.getOpenedCashier();
+                currentCashier.setFlagWait(false);
+                currentCashier.notify();
             }
         }
+
     }
 
     @Override
@@ -96,13 +98,21 @@ public class Customer extends Thread implements Customers, UseBasket {
 
     @Override
     public void chooseGoods() {
-        System.out.printf("Customer #%4d begin choose goods \n", customerNumber);
-        if (pensioner) {
-            TimeUtils.sleep(RandomUtils.random(500, 3000));
-        } else {
-            TimeUtils.sleep(RandomUtils.random(500, 2000));
+        try {
+            semaphore.acquire();
+            System.out.printf("Customer #%4d begin choose goods \n", customerNumber);
+            if (pensioner) {
+                TimeUtils.sleep(RandomUtils.random(500, 3000));
+            } else {
+                TimeUtils.sleep(RandomUtils.random(500, 2000));
+            }
+            System.out.printf("Customer #%4d finished choose goods \n", customerNumber);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } finally {
+            semaphore.release();
         }
-        System.out.printf("Customer #%4d finished choose goods \n", customerNumber);
+
     }
 
     @Override
@@ -136,7 +146,6 @@ public class Customer extends Thread implements Customers, UseBasket {
 
             int count = customerGoods.getOrDefault(goodsName, 0);
             customerGoods.put(goodsName, count + 1);
-
 
             if (pensioner) {
                 TimeUtils.sleep(RandomUtils.random(500, 3000));

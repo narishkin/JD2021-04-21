@@ -23,11 +23,11 @@ public class QueueCustomers {
     }
 
     public static Customer poll(){
-           return QUEUE_CUSTOMERS.pollFirst();
+        return QUEUE_CUSTOMERS.pollFirst();
     }
 
     public static Customer polPensioner(){
-           return QUEUE_PENSIONERS.pollFirst();
+        return QUEUE_PENSIONERS.pollFirst();
     }
 
     public static void add (Customer customer){

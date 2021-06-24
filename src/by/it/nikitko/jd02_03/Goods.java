@@ -8,7 +8,6 @@ public class Goods {
     private static final Map<String, Integer> GOODS = new HashMap<>();
 
     static {
-        GOODS.put("Absent", 104);
         GOODS.put("Whiskey", 160);
         GOODS.put("Beer", 12);
         GOODS.put("Vodka", 73);

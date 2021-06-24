@@ -1,4 +1,4 @@
-package by.it.nikitko.jdtest;
+package by.it.nikitko.test;
 
 import java.util.Random;
 

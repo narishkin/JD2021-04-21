@@ -40,7 +40,7 @@ public class Cashier implements Runnable {
                 currentCustomer = QueueCustomers.poll();
             }
             if (currentCustomer != null) {
-               serveCustomer(currentCustomer);
+                serveCustomer(currentCustomer);
             } else {
                 cashierWait();
             }
@@ -50,13 +50,14 @@ public class Cashier implements Runnable {
     }
 
     private void serveCustomer(Customer currentCustomer) {
+
+        System.out.println(this + " started service " + currentCustomer);
+        if (currentCustomer.isPensioner()) {
+            TimeUtils.sleep(RandomUtils.random(3000, 7500));
+        } else {
+            TimeUtils.sleep(RandomUtils.random(2000, 5000));
+        }
         synchronized (currentCustomer) {
-            System.out.println(this + " started service " + currentCustomer);
-            if (currentCustomer.isPensioner()) {
-                TimeUtils.sleep(RandomUtils.random(3000, 7500));
-            } else {
-                TimeUtils.sleep(RandomUtils.random(2000, 5000));
-            }
             currentCustomer.notify();
             Printer.printCheck(currentCustomer, this);
             //currentCustomer.setFlagWait(false);

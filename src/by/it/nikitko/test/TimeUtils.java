@@ -1,4 +1,6 @@
-package by.it.nikitko.jdtest;
+package by.it.nikitko.test;
+
+import by.it.nikitko.jd02_03.Config;
 
 public class TimeUtils {
     static void sleep(int sleepTime) {

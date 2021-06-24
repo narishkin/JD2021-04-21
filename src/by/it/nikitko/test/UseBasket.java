@@ -1,4 +1,4 @@
-package by.it.nikitko.jdtest;
+package by.it.nikitko.test;
 
 public interface UseBasket {
     void takeBasket(); //взял корзину

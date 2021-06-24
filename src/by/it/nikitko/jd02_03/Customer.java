@@ -56,7 +56,7 @@ public class Customer extends Thread implements Customers, UseBasket {
     @Override
     public void goToQueue() {
         synchronized (this) {
-            System.out.printf("Customer #%4d go to the queue \n", customerNumber);
+           // System.out.printf("Customer #%4d go to the queue \n", customerNumber);
             if (this.pensioner) {
                 QueueCustomers.addPensioner(this);
             } else {

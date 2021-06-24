@@ -20,10 +20,11 @@ public class Basket {
         return listGoods;
     }
 
-    public void toConsoleBasket(){
+    public void toConsoleBasket(boolean pensioner){
         HashMap good = new PriceOfGood().getGoods();
         double sum = 0.0;
-        System.out.println("\n"+"Bayer #"+idBuyer+" chose a goods:");
+        String logoBuyer = (pensioner) ? "Bayer (pensioner) #" : "Bayer #";
+        System.out.println("\n"+logoBuyer+idBuyer+" chose a goods:");
         for (int i = 0; i < listGoods.size(); i++) {
             System.out.print(listGoods.get(i).name()+" ");
 

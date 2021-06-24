@@ -6,6 +6,7 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
 
 
     int num;
+    boolean pensioner = false;
 
     public Buyer(int num) {
 
@@ -14,6 +15,15 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
 
     }
 
+    public Buyer(int num, boolean pensioner) {
+
+        super("Buyer #" + num + " ");
+        this.num = num;
+        this.pensioner = pensioner;
+
+    }
+
+
     @Override
     public void run() {
         Dispatcher.currentCountBuyer++;
@@ -21,6 +31,7 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
         chooseGoods();
         goOut();
         Dispatcher.currentCountBuyer--;
+        System.out.println("In market " + Dispatcher.currentCountBuyer + " buyers");
     }
 
     @Override
@@ -32,6 +43,7 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
     public void chooseGoods() {
         System.out.println(this + "started choosing ");
         int timeChoose = RandomHelper.randomValue(Configs.CHOOSE_MIN, Configs.CHOOSE_MAX);
+        timeChoose = (this.pensioner) ? (int) (timeChoose * 1.5) : timeChoose;
         TimerHelper.sleep(timeChoose);
         putGoodsToBasket();
         System.out.println(this + "completed selection ");
@@ -52,6 +64,7 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
     public void takeBasket() {
         System.out.println(this + "take a basket ");
         int timeChoose = RandomHelper.randomValue(Configs.CHOOSE_MIN, Configs.CHOOSE_MAX);
+        timeChoose = (this.pensioner) ? (int) (timeChoose * 1.5) : timeChoose;
         TimerHelper.sleep(timeChoose);
     }
 
@@ -65,8 +78,9 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
             GoodEnum goodValue = GoodEnum.values()[idGood];
             basket.addToBasket(goodValue);
             int timeChoose = RandomHelper.randomValue(Configs.CHOOSE_MIN, Configs.CHOOSE_MAX);
+            timeChoose = (this.pensioner) ? (int) (timeChoose * 1.5) : timeChoose;
             TimerHelper.sleep(timeChoose);
         }
-        basket.toConsoleBasket();
+        basket.toConsoleBasket(pensioner);
     }
 }

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Consumer;
 
 public class Store {
     public static final Map<String, Integer> GOODS = new HashMap<>();
@@ -89,19 +88,15 @@ public class Store {
             for (Shopper shopper : shoppers) {
                 shopper.join();
             }
-            System.out.println("Шоперы всё");
 
             for (Thread thread : cashierThreads) {
                 thread.join();
             }
-            System.out.println("Кассиры всё");
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
-//        System.out.println(cashiersMap.toString());
         System.out.println("Store revenue: " + cashiersMap.values().stream().reduce((s1, s2) -> s1 + s2).orElse(0));
-
         System.out.println("Store closed");
     }
 }

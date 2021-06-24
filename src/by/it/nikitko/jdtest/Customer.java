@@ -1,4 +1,4 @@
-package by.it.nikitko.jd02_03;
+package by.it.nikitko.jdtest;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -46,9 +46,9 @@ public class Customer extends Thread implements Customers, UseBasket {
     @Override
     public void run() {
         enterToMarket();
-        takeBasket();
-        chooseGoods();
-        putGoodsToBasket();
+       // takeBasket();
+       // chooseGoods();
+     //   putGoodsToBasket();
         goToQueue();
         goOut();
     }
@@ -57,18 +57,14 @@ public class Customer extends Thread implements Customers, UseBasket {
     public void goToQueue() {
         synchronized (this) {
             System.out.printf("Customer #%4d go to the queue \n", customerNumber);
-            if (this.pensioner) {
-                QueueCustomers.addPensioner(this);
-            } else {
                 QueueCustomers.add(this);
-            }
             wakeUpCashier();
-            try {
+          /*  try {
                 flagWait = true;
                 this.wait();
             } catch (InterruptedException e) {
                 e.printStackTrace();
-            }
+            }*/
         }
     }
 

@@ -3,7 +3,7 @@ package by.it.naryshkin.jd02_03;
 public class PrintHelper {
 
 
-    public  static  void printConsole(StringBuilder sb, Object o){
+    public    void printConsole(StringBuilder sb, Object o){
 
         switch (o.toString()) {
             case "Cashier #0 ": {

@@ -11,11 +11,23 @@ public class Shopper extends Thread implements TypicalShopper, UsingBasket {
     private boolean waitPointer;
     public final int numberOfGoods = RandomHelper.random(1, 4);
     public short basketNumber;
+    private final Dispatcher dispatcher;
 
     static final Semaphore semaphore = new Semaphore(20);
     private static final BlockingDeque<Shopper> SHOPPERS = new LinkedBlockingDeque<>(Config.QUEUE_CAPACITY);
     private static final BlockingDeque<Shopper> PENSIONERS = new LinkedBlockingDeque<>(Config.QUEUE_CAPACITY);
 
+
+    public Shopper(int name, boolean pensioner, Dispatcher dispatcher) {
+        this.dispatcher = dispatcher;
+        this.pensioner = pensioner;
+        if (pensioner) {
+            this.name = "S-pensioner №" + name;
+        } else {
+            this.name = "Shopper №" + name;
+        }
+        dispatcher.addShopper();
+    }
 
     public static Shopper poll() {
         if (PENSIONERS.size() != 0) {
@@ -25,7 +37,7 @@ public class Shopper extends Thread implements TypicalShopper, UsingBasket {
         }
     }
 
-    public static void add(Shopper shopper) {
+    public  void add(Shopper shopper) {
         if (shopper.pensioner) {
             try {
                 PENSIONERS.putLast(shopper);
@@ -48,17 +60,6 @@ public class Shopper extends Thread implements TypicalShopper, UsingBasket {
 
     public void setWaitPointer(boolean waitPointer) {
         this.waitPointer = waitPointer;
-    }
-
-    public Shopper(int name, boolean pensioner) {
-
-        this.pensioner = pensioner;
-        if (pensioner) {
-            this.name = "S-pensioner №" + name;
-        } else {
-            this.name = "Shopper №" + name;
-        }
-        Dispatcher.addShopper();
     }
 
     Object getMonitor() {
@@ -111,8 +112,6 @@ public class Shopper extends Thread implements TypicalShopper, UsingBasket {
                 puttingTime = RandomHelper.random(500, 2000);
             }
             TimerHelper.sleep(puttingTime);
-            int goodNumber = RandomHelper.random(0, list.size() - 1);
-//            System.out.println(name + " took " + list.get(goodNumber) + ". It takes: " + puttingTime/1000);
         }
     }
 
@@ -120,7 +119,7 @@ public class Shopper extends Thread implements TypicalShopper, UsingBasket {
     public void goToQueue() {
         semaphore.release();
         synchronized (this) {
-            Shopper.add(this);
+            add(this);
             try {
                 waitPointer = true;
                 while (waitPointer){
@@ -155,6 +154,6 @@ public class Shopper extends Thread implements TypicalShopper, UsingBasket {
         putGoodsToBasket();
         goToQueue();
         storeExit();
-        Dispatcher.finishedShoppersCounter();
+        dispatcher.finishedShoppersCounter();
     }
 }

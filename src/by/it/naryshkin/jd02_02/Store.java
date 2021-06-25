@@ -11,6 +11,7 @@ public class Store {
     public static Map<String, Integer> cashiersMap = new HashMap<>();
     public static List<Shopper> shoppers = new ArrayList<>();
     public static volatile int storeSum = 0;
+    public static boolean[] cashiers = new boolean[]{false,false,false,false,false};
 
     static {
         GOODS.put("Jeans", 42);
@@ -36,7 +37,15 @@ public class Store {
         while (!Dispatcher.storeClosed()) {
             while (Dispatcher.getCurrentCashiersNumber() < (int) Math.ceil((Shopper.getDequeSize() / (double) 5)) &&
                     Dispatcher.getCurrentCashiersNumber() < 5) {
-                Cashier cashier = new Cashier(getCashierThreadsSize());
+                int c=0;
+                for (int i = 0; i < cashiers.length; i++) {
+                    if (!cashiers[i]){
+                        c = i;
+                        cashiers[i] = true;
+                        break;
+                    }
+                }
+                Cashier cashier = new Cashier(c);
                 Thread thread = new Thread(cashier);
                 if (!cashiersMap.containsKey(cashier.toString())) {
                     cashiersMap.put(cashier.toString(), 0);

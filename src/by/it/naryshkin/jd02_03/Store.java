@@ -8,9 +8,11 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Store {
+
     public static final Map<String, Integer> GOODS = new ConcurrentHashMap<>();
     public static Map<String, Integer> cashiersMap = new ConcurrentHashMap<>();
     public static AtomicInteger storeSum = new AtomicInteger(0);
+    public static boolean[] cashiers = new boolean[]{false,false,false,false,false};
 
     static {
         GOODS.put("Jeans", 42);
@@ -19,12 +21,14 @@ public class Store {
         GOODS.put("Shoes", 37);
     }
 
-    public Object getStoreMonitor() {
+    public Store getStore() {
         return this;
     }
 
     public static void main(String[] args) {
+        Dispatcher dispatcher = new Dispatcher();
         System.out.println("Store opened");
+
         //Склад корзин
         for (short i = 1; i <= Config.BASKET_POOL_SIZE; i++) {
             Basket.basketBlockingQueue.add(i);
@@ -34,58 +38,69 @@ public class Store {
         int time = 0;
         int localFunctionTime;
         int periodSwitcher;
-        ExecutorService cashiersThreads =  Executors.newFixedThreadPool(5);
-        ExecutorService shoppersThreads =  Executors.newCachedThreadPool();
+        ExecutorService cashiersThreads = Executors.newFixedThreadPool(5);
+        ExecutorService shoppersThreads = Executors.newCachedThreadPool();
 
-        while (Dispatcher.storeOpened()) {
-            while (Dispatcher.getCurrentCashiersNumber() < (int) Math.floor((Shopper.getDequeSize() / (double) 5) + 1) &&
-                    Dispatcher.getCurrentCashiersNumber() < 5) {
-                Cashier cashier = new Cashier(Dispatcher.getCurrentCashiersNumber());
-                cashiersThreads.submit(cashier);
+        while (dispatcher.storeOpened()) {
+            while (dispatcher.getCurrentCashiersNumber() < (int) Math.floor((Shopper.getDequeSize() / (double) 5) + 1) &&
+                    dispatcher.getCurrentCashiersNumber() < 5) {
+                int c=0;
+                for (int i = 0; i < cashiers.length; i++) {
+                    if (!cashiers[i]){
+                        c = i;
+                        cashiers[i] = true;
+                        break;
+                    }
+                }
+                Cashier cashier = new Cashier(c, dispatcher);
+                cashiersThreads.execute(cashier);
                 if (!cashiersMap.containsKey(cashier.toString())) {
                     cashiersMap.put(cashier.toString(), 0);
                 }
-                Dispatcher.addCashier();
+                dispatcher.addCashier();
+
             }
             periodSwitcher = (time / 30) % 2;
             localFunctionTime = time - (time / 60) * 60;
 //            System.out.println("TIME: " + time);
-            if (periodSwitcher == 0 && Dispatcher.currentCountShoppersInside.get() < 10) {
-                for (int j = 0; j <= RandomHelper.random(20 + localFunctionTime - Dispatcher.currentCountShoppersInside.get()); j++) {
-                    if (Dispatcher.storeClosed()) {
+            if (periodSwitcher == 0 && dispatcher.currentCountShoppersInside.get() < 10) {
+                int d = RandomHelper.random(20 + localFunctionTime - dispatcher.currentCountShoppersInside.get());
+                for (int j = 0; j <= d; j++) {
+                    if (dispatcher.storeClosed()) {
                         break;
                     }
                     Shopper shopper;
                     if (RandomHelper.random(1, 4) == 1) {
-                        shopper = new Shopper(shopperCounter++, true);
+                        shopper = new Shopper(shopperCounter++, true, dispatcher);
                     } else {
-                        shopper = new Shopper(shopperCounter++, false);
+                        shopper = new Shopper(shopperCounter++, false, dispatcher);
                     }
                     shoppersThreads.submit(shopper);
                 }
             }
-            if (periodSwitcher == 1 && Dispatcher.currentCountShoppersInside.get() < 40) {
-                for (int j = 0; j <= RandomHelper.random(140 - localFunctionTime - Dispatcher.currentCountShoppersInside.get()); j++) {
-                    if (Dispatcher.storeClosed()) {
+            if (periodSwitcher == 1 && dispatcher.currentCountShoppersInside.get() < 40) {
+                int d = RandomHelper.random(140 - localFunctionTime - dispatcher.currentCountShoppersInside.get());
+                for (int j = 0; j <= d; j++) {
+                    if (dispatcher.storeClosed()) {
                         break;
                     }
                     Shopper shopper;
                     if (RandomHelper.random(1, 4) == 1) {
-                        shopper = new Shopper(shopperCounter++, true);
+                        shopper = new Shopper(shopperCounter++, true, dispatcher);
                     } else {
-                        shopper = new Shopper(shopperCounter++, false);
+                        shopper = new Shopper(shopperCounter++, false, dispatcher);
                     }
                     shoppersThreads.submit(shopper);
                 }
             }
             TimerHelper.sleep(1000);
             time++;
-
         }
+
         cashiersThreads.shutdown();
         shoppersThreads.shutdown();
         try {
-            cashiersThreads.awaitTermination(1,TimeUnit.HOURS);
+            cashiersThreads.awaitTermination(1, TimeUnit.HOURS);
             shoppersThreads.awaitTermination(1, TimeUnit.HOURS);
         } catch (InterruptedException e) {
             e.printStackTrace();

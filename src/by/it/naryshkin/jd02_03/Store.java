@@ -62,8 +62,8 @@ public class Store {
             periodSwitcher = (time / 30) % 2;
             localFunctionTime = time - (time / 60) * 60;
 //            System.out.println("TIME: " + time);
-            if (periodSwitcher == 0 && Dispatcher.currentCountShoppersInside < 10) {
-                for (int j = 0; j <= RandomHelper.random(20 + localFunctionTime - Dispatcher.currentCountShoppersInside); j++) {
+            if (periodSwitcher == 0 && Dispatcher.currentCountShoppersInside.get() < 10) {
+                for (int j = 0; j <= RandomHelper.random(20 + localFunctionTime - Dispatcher.currentCountShoppersInside.get()); j++) {
                     if (!Dispatcher.storeOpened()) {
                         break;
                     }
@@ -78,8 +78,8 @@ public class Store {
 //                    shoppersThreads.submit(shopper);
                 }
             }
-            if (periodSwitcher == 1 && Dispatcher.currentCountShoppersInside < 40) {
-                for (int j = 0; j <= RandomHelper.random(140 - localFunctionTime - Dispatcher.currentCountShoppersInside); j++) {
+            if (periodSwitcher == 1 && Dispatcher.currentCountShoppersInside.get() < 40) {
+                for (int j = 0; j <= RandomHelper.random(140 - localFunctionTime - Dispatcher.currentCountShoppersInside.get()); j++) {
                     if (!Dispatcher.storeOpened()) {
                         break;
                     }

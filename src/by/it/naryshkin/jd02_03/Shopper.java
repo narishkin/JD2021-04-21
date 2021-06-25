@@ -3,6 +3,8 @@ package by.it.naryshkin.jd02_03;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
+import java.util.concurrent.BlockingDeque;
+import java.util.concurrent.LinkedBlockingDeque;
 
 public class Shopper extends Thread implements TypicalShopper, UsingBasket {
     public final String name;
@@ -14,31 +16,28 @@ public class Shopper extends Thread implements TypicalShopper, UsingBasket {
     private static final Object MONITOR_QUEUE_SHOPPERS = new Object();
 
 
-    private static final Deque<Shopper> SHOPPERS = new ArrayDeque<>();
-    private static final Deque<Shopper> PENSIONERS = new ArrayDeque<>();
+    private static final BlockingDeque<Shopper> SHOPPERS = new LinkedBlockingDeque<>(Config.QUEUE_CAPACITY);
+    private static final BlockingDeque<Shopper> PENSIONERS = new LinkedBlockingDeque<>(Config.QUEUE_CAPACITY);
+
 
 
     public static Shopper poll() {
-        synchronized (MONITOR_QUEUE_SHOPPERS) {
             if (PENSIONERS.size()!=0){
                 return PENSIONERS.pollFirst();
             } else {
                 return SHOPPERS.pollFirst();
             }
-        }
     }
 
     public static void add(Shopper shopper) {
-        synchronized (MONITOR_QUEUE_SHOPPERS) {
             if (shopper.pensioner) {
                 PENSIONERS.addLast(shopper);
             } else {
                 SHOPPERS.addLast(shopper);
             }
-        }
     }
 
-    public static synchronized int getDequeSize() {
+    public static  int getDequeSize() {
         return SHOPPERS.size();
     }
 

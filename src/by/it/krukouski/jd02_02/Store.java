@@ -9,21 +9,21 @@ public class Store {
         List<Thread> threads = new ArrayList<>();
 
 
-        for (int numberCashiers=1; numberCashiers<=2; numberCashiers++){
+        for (int numberCashiers=1; numberCashiers<=Config.COUNT_CASHIER; numberCashiers++){
             Cashier cashier = new Cashier(numberCashiers);
             Thread thread = new Thread(cashier);
             threads.add(thread);
             thread.start();
         }
 
-
-        int number = 0;
         while (CounterBuyers.storeOpened()){
             int countBuyersPerSecond = RandomHelper.random(2);
             for (int i = 0; i < countBuyersPerSecond; i++) {
-                Buyer buyer = new Buyer(++number);
-                threads.add(buyer);
-                buyer.start();
+                if (CounterBuyers.buyersCount < Config.PLAN_BUYERS) {
+                    Buyer buyer = new Buyer(++CounterBuyers.buyersCount);
+                    threads.add(buyer);
+                    buyer.start();
+                }
             }
             TimerHelper.sleep(1000);
         }

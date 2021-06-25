@@ -2,12 +2,15 @@ package by.it.krukouski.jd02_03;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
 public class Store {
 
     private Manager manager;
     private QueueBuyers queueBuyers;
+
+    private static final Semaphore semaphore = new Semaphore(20);
 
     public Manager getManager() {
         return manager;
@@ -40,6 +43,15 @@ public class Store {
                 if (Manager.buyersCount < Config.PLAN_BUYERS) {
                     Buyer buyer = new Buyer(++Manager.buyersCount, this);
                     buyer.start();
+
+                }
+                try {
+                    semaphore.acquire();
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } finally {
+                    semaphore.release();
                 }
             }
             TimerHelper.sleep(1000);

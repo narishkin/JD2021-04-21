@@ -85,14 +85,18 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
 
     @Override
     public void putGoodsToBasket() {
+        int totalSum=0;
         int countGoods = RandomHelper.random(1, 4);
         int timeout = RandomHelper.random(500, 2000);
         for (int i = 0; i < countGoods; i++) {
             ArrayList<String> strings = new ArrayList<>(HashMapGoods.getHashMap().keySet());
             String good = strings.get(RandomHelper.random(strings.size() - 1));
+            Integer price = HashMapGoods.getHashMap().get(good);
             TimerHelper.sleep(timeout);
-            System.out.println(this + " put " + good + " to basket with price " + HashMapGoods.getHashMap().get(good));
+            System.out.println(this + " put " + good + " to basket with price " + price);
+            totalSum+=price;
         }
+        System.out.println(this + " have a total price= " + totalSum);
     }
 
     private void cashierToWork() {

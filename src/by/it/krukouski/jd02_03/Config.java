@@ -7,5 +7,9 @@ public class Config {
 
     static final int PLAN_BUYERS = 100;
 
-    public static final int QUEUE_CAPACITY = 30;
+    static final int COUNT_CASHIER = 5;
+
+    static final double QUEUE_LENGTH = 5.0;
+
+    static final int QUEUE_CAPACITY = 30;
 }

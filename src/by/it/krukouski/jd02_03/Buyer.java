@@ -8,6 +8,8 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
 
     private final Store store;
 
+    private final int number;
+
     public void setWaitFlag(boolean waitFlag) {
         this.waitFlag = waitFlag;
     }
@@ -16,9 +18,10 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
         return this;
     }
 
-    public Buyer(long number, Store store) {
-        super("Buyer № " + number + " ");
-        this.store = store;
+    public Buyer(int number, Store store) {
+        this.number = number;
+        this.setName("Buyer " + number);
+        this.store=store;
         store.getManager().addNewBuyer();
     }
 
@@ -33,14 +36,16 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
         store.getManager().completeBuyer();
     }
 
-    private void goToQueue() {
+    @Override
+    public void goToQueue() {
         synchronized (this) {
+            System.out.printf("Buyer №%5d go to queue\n", number);
             store.getQueueBuyers().add(this);
+            cashierToWork();
             try {
-                waitFlag = true;
-                while (waitFlag) {
-                    this.wait();
-                }
+                waitFlag=true;
+                this.wait();
+
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -49,20 +54,20 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
 
     @Override
     public void enterToMarket() {
-        System.out.println(this + "Enter to market");
+        System.out.println(this + " Enter to market");
     }
 
     @Override
     public void chooseGoods() {
-        System.out.println(this + "Start choose goods");
+        System.out.println(this + " Start choose goods");
         int timeout = RandomHelper.random(500, 2000);
         TimerHelper.sleep(timeout);
-        System.out.println(this + "Finish choose goods");
+        System.out.println(this + " Finish choose goods");
     }
 
     @Override
     public void goOut() {
-        System.out.println(this + "Go out market");
+        System.out.println(this + " Go out market");
 
     }
 
@@ -73,7 +78,9 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
 
     @Override
     public void takeBasket() {
-        System.out.println(this + "Take Basket");
+        System.out.println(this + " Take Basket");
+        int timeout = RandomHelper.random(500, 2000);
+        TimerHelper.sleep(timeout);
     }
 
     @Override
@@ -84,8 +91,24 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
             ArrayList<String> strings = new ArrayList<>(HashMapGoods.getHashMap().keySet());
             String good = strings.get(RandomHelper.random(strings.size() - 1));
             TimerHelper.sleep(timeout);
-            System.out.println(this + "put " + good + " to basket with price " + HashMapGoods.getHashMap().get(good));
-
+            System.out.println(this + " put " + good + " to basket with price " + HashMapGoods.getHashMap().get(good));
         }
     }
+
+    private void cashierToWork() {
+        synchronized (this) {
+            int cashierNeededToWork = (int) Math.ceil(store.getQueueBuyers().getQueueSize() / Config.QUEUE_LENGTH);
+            int cashierWorked = QueueCashiers.getCashierWorked();
+            while (QueueCashiers.getQueueSize() > 0 & cashierWorked < cashierNeededToWork) {
+                Cashier cashier = QueueCashiers.poll();
+                synchronized (cashier.getMonitor()) {
+                    cashierWorked=QueueCashiers.getCashierWorked();
+                    cashier.setWaitFlag(false);
+                    cashier.notify();
+                }
+            }
+        }
+    }
+
+
 }

@@ -25,27 +25,26 @@ public class Store {
         this.queueBuyers = queueBuyers;
     }
 
-
     public void start() {
         System.out.println("Open Store");
         ExecutorService threadPool = Executors.newFixedThreadPool(5);
-
-        for (int numberCashiers = 1; numberCashiers <= 2; numberCashiers++) {
+        for (int numberCashiers = 1; numberCashiers <= Config.COUNT_CASHIER; numberCashiers++) {
             Cashier cashier = new Cashier(numberCashiers, this);
             threadPool.submit(cashier);
         }
         threadPool.shutdown();
 
-
-        int number = 0;
         while (manager.storeOpened()) {
             int countBuyersPerSecond = RandomHelper.random(2);
-            for (int i = 0; i < countBuyersPerSecond; i++) {
-                Buyer buyer = new Buyer(++number, this);
-                buyer.start();
+            for (int i = 0; i < countBuyersPerSecond & manager.storeOpened(); i++) {
+                if (Manager.buyersCount < Config.PLAN_BUYERS) {
+                    Buyer buyer = new Buyer(++Manager.buyersCount, this);
+                    buyer.start();
+                }
             }
             TimerHelper.sleep(1000);
         }
+
         try {
             while (!threadPool.isTerminated()) {
                 threadPool.awaitTermination(10, TimeUnit.HOURS);
@@ -53,8 +52,6 @@ public class Store {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
         System.out.println("Close Store");
     }
 }
-

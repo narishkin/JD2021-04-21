@@ -1,8 +1,8 @@
 package by.it.krukouski.jd02_02;
 
-class CounterBuyers {
+class Manager {
 
-    private CounterBuyers() {
+    private Manager() {
     }
 
     static int buyersCount = 0;

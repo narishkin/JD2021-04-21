@@ -7,24 +7,30 @@ class Manager {
     Manager() {
     }
 
-    private final AtomicInteger INSIDE_COUNT_BUYERS = new AtomicInteger(0);
-    private final AtomicInteger COMPLETE_COUNT_BUYERS = new AtomicInteger(0);
+    static int buyersCount = 0;
 
-    boolean storeClosed() {
-        return COMPLETE_COUNT_BUYERS.get() == Config.PLAN_BUYERS;
+    private final AtomicInteger insideCountBuyers = new AtomicInteger(0);
+    private final AtomicInteger completeCountBuyers = new AtomicInteger(0);
+
+    public int getCompleteCountBuyers(){
+        return completeCountBuyers.get();
     }
 
-    boolean storeOpened() {
-        return COMPLETE_COUNT_BUYERS.get() + INSIDE_COUNT_BUYERS.get() < Config.PLAN_BUYERS;
+    boolean storeClosed() {
+        return completeCountBuyers.get() == Config.PLAN_BUYERS;
+    }
+
+   boolean storeOpened() {
+        return completeCountBuyers.get() + insideCountBuyers.get() < Config.PLAN_BUYERS;
     }
 
     void addNewBuyer() {
-        INSIDE_COUNT_BUYERS.getAndIncrement();
+        insideCountBuyers.getAndIncrement();
     }
 
-   void completeBuyer() {
-        COMPLETE_COUNT_BUYERS.getAndIncrement();
-        INSIDE_COUNT_BUYERS.getAndDecrement();
+    void completeBuyer() {
+        completeCountBuyers.getAndIncrement();
+        insideCountBuyers.getAndDecrement();
 
     }
 }

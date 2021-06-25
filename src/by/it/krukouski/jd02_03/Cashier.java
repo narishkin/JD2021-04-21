@@ -11,6 +11,16 @@ public class Cashier implements Runnable {
         this.store = store;
     }
 
+    Object getMonitor() {
+        return this;
+    }
+
+    private boolean waitFlag;
+
+    public void setWaitFlag(boolean waitFlag) {
+        this.waitFlag = waitFlag;
+    }
+
     @Override
     public void run() {
         System.out.println(this + " opened");
@@ -26,17 +36,36 @@ public class Cashier implements Runnable {
                 }
                 System.out.println(this + " finished service " + buyer);
             } else {
-                // thinking
-                System.out.println(this + " sleep");
-                TimerHelper.sleep(1);
+                synchronized (this) {
+                    QueueCashiers.add(this);
+                    waitFlag = true;
+                    System.out.println(this + "closed");
+                    try {
+                        this.wait();
+                        if (store.getManager().getCompleteCountBuyers() < 100) {
+                            System.out.println(this + "opened");
+                        }
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
         }
-        System.out.println(this + " closed");
+        while (QueueCashiers.getQueueSize() > 0) {
+            Cashier cashier = QueueCashiers.poll();
+            if (cashier != null) {
+                synchronized (cashier.getMonitor()) {
+                    cashier.setWaitFlag(false);
+                    cashier.notify();
+                }
+            }
+            System.out.println(this + " closed");
+        }
 
     }
 
     @Override
     public String toString() {
-        return String.format("Cashier №%d ", number);
+        return String.format("Cashier № %d", number);
     }
 }

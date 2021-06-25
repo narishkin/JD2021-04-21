@@ -19,7 +19,7 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
     public Buyer(int number) {
         this.number = number;
         this.setName("Buyer " + number);
-        CounterBuyers.addNewBuyer();
+        Manager.addNewBuyer();
     }
 
     @Override
@@ -30,7 +30,7 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
         putGoodsToBasket();
         goToQueue();
         goOut();
-        CounterBuyers.completeBuyer();
+        Manager.completeBuyer();
     }
 
     @Override

@@ -12,7 +12,7 @@ public class Store {
     public static final Map<String, Integer> GOODS = new ConcurrentHashMap<>();
     public static Map<String, Integer> cashiersMap = new ConcurrentHashMap<>();
     public static AtomicInteger storeSum = new AtomicInteger(0);
-    public static boolean[] cashiers = new boolean[]{false,false,false,false,false};
+    public static boolean[] cashiers = new boolean[5];
 
     static {
         GOODS.put("Jeans", 42);
@@ -44,9 +44,9 @@ public class Store {
         while (dispatcher.storeOpened()) {
             while (dispatcher.getCurrentCashiersNumber() < (int) Math.floor((Shopper.getDequeSize() / (double) 5) + 1) &&
                     dispatcher.getCurrentCashiersNumber() < 5) {
-                int c=0;
+                int c = 0;
                 for (int i = 0; i < cashiers.length; i++) {
-                    if (!cashiers[i]){
+                    if (!cashiers[i]) {
                         c = i;
                         cashiers[i] = true;
                         break;
@@ -105,6 +105,7 @@ public class Store {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        System.out.println(cashiersMap.toString());
 
         System.out.println("Store revenue: " + cashiersMap.values().stream().reduce((s1, s2) -> s1 + s2).orElse(0));
         System.out.println("Store closed");

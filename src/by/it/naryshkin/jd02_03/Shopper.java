@@ -12,7 +12,6 @@ public class Shopper extends Thread implements TypicalShopper, UsingBasket {
     public final int numberOfGoods = RandomHelper.random(1, 4);
     public short basketNumber;
     private final Dispatcher dispatcher;
-
     static final Semaphore semaphore = new Semaphore(20);
     private static final BlockingDeque<Shopper> SHOPPERS = new LinkedBlockingDeque<>(Config.QUEUE_CAPACITY);
     private static final BlockingDeque<Shopper> PENSIONERS = new LinkedBlockingDeque<>(Config.QUEUE_CAPACITY);
@@ -37,7 +36,7 @@ public class Shopper extends Thread implements TypicalShopper, UsingBasket {
         }
     }
 
-    public  void add(Shopper shopper) {
+    public void add(Shopper shopper) {
         if (shopper.pensioner) {
             try {
                 PENSIONERS.putLast(shopper);
@@ -72,7 +71,6 @@ public class Shopper extends Thread implements TypicalShopper, UsingBasket {
     public void storeEntry() {
 //        System.out.println(name + " enters into the store.");
         try {
-            basketNumber = Basket.basketBlockingQueue.take();
             semaphore.acquire();
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -81,6 +79,11 @@ public class Shopper extends Thread implements TypicalShopper, UsingBasket {
 
     @Override
     public void takeBasket() {
+        try {
+            basketNumber = Basket.basketBlockingQueue.take();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         if (pensioner) {
             TimerHelper.sleep((RandomHelper.random(500, 2000)) * Config.PENS_COEFFICIENT);
         } else {
@@ -122,8 +125,8 @@ public class Shopper extends Thread implements TypicalShopper, UsingBasket {
             add(this);
             try {
                 waitPointer = true;
-                while (waitPointer){
-                this.wait();
+                while (waitPointer) {
+                    this.wait();
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();

@@ -10,10 +10,10 @@ public class RandomHelper {
     }
 
     static int random(int max) {
-        return  random(0,max);
+        return random(0, max);
     }
 
     static double random(double min, double max) {
-        return min + (max-min)*RANDOM.nextDouble();
+        return min + (max - min) * RANDOM.nextDouble();
     }
 }

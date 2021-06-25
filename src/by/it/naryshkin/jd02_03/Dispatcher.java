@@ -6,15 +6,15 @@ public class Dispatcher {
 
     static AtomicInteger currentCountShoppersInside = new AtomicInteger(0);
     static AtomicInteger currentCountShoppersAfterExit = new AtomicInteger(0);
-    static  AtomicInteger currentCashiersNumber = new AtomicInteger(0);
+    static AtomicInteger currentCashiersNumber = new AtomicInteger(0);
 
-
-    static boolean storeClosed() {
-        return currentCountShoppersAfterExit.get() >= Config.PLAN_SHOPPERS;
-    }
 
     static boolean storeOpened() {
-        return currentCountShoppersAfterExit.get() + currentCountShoppersInside.get() < Config.PLAN_SHOPPERS;
+        return currentCountShoppersAfterExit.get() < Config.PLAN_SHOPPERS;
+    }
+
+    static boolean storeClosed() {
+        return currentCountShoppersAfterExit.get() + currentCountShoppersInside.get() >= Config.PLAN_SHOPPERS;
     }
 
     static synchronized void addShopper() {
@@ -30,12 +30,12 @@ public class Dispatcher {
         return currentCashiersNumber.get();
     }
 
-    public static synchronized void addCashier(Thread thread){
+    public static synchronized void addCashier(Thread thread) {
         Store.cashierThreads.add(thread);
         currentCashiersNumber.getAndIncrement();
     }
 
-    public static synchronized void removeCashier(Thread thread){
+    public static synchronized void removeCashier(Thread thread) {
         Store.cashierThreads.remove(thread);
         currentCashiersNumber.getAndDecrement();
     }

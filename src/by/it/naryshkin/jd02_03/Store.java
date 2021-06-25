@@ -4,13 +4,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class Store {
     public static final Map<String, Integer> GOODS = new HashMap<>();
     public volatile static List<Thread> cashierThreads = new ArrayList<>();
-    public static Map<String, Integer> cashiersMap = new HashMap<>();
+    public static Map<String, Integer> cashiersMap = new ConcurrentHashMap<>();
     public static List<Shopper> shoppers = new ArrayList<>();
     public static volatile int storeSum = 0;
 
@@ -47,7 +48,7 @@ public class Store {
         ExecutorService cashiersThreads =  Executors.newFixedThreadPool(5);
         ExecutorService shoppersThreads =  Executors.newCachedThreadPool();
 
-        while (!Dispatcher.storeClosed()) {
+        while (Dispatcher.storeOpened()) {
             while (Dispatcher.getCurrentCashiersNumber() < (int) Math.floor((Shopper.getDequeSize() / (double) 5) + 1) &&
                     Dispatcher.getCurrentCashiersNumber() < 5) {
                 Cashier cashier = new Cashier(getCashierThreadsSize());
@@ -64,7 +65,7 @@ public class Store {
 //            System.out.println("TIME: " + time);
             if (periodSwitcher == 0 && Dispatcher.currentCountShoppersInside.get() < 10) {
                 for (int j = 0; j <= RandomHelper.random(20 + localFunctionTime - Dispatcher.currentCountShoppersInside.get()); j++) {
-                    if (!Dispatcher.storeOpened()) {
+                    if (Dispatcher.storeClosed()) {
                         break;
                     }
                     Shopper shopper;
@@ -80,7 +81,7 @@ public class Store {
             }
             if (periodSwitcher == 1 && Dispatcher.currentCountShoppersInside.get() < 40) {
                 for (int j = 0; j <= RandomHelper.random(140 - localFunctionTime - Dispatcher.currentCountShoppersInside.get()); j++) {
-                    if (!Dispatcher.storeOpened()) {
+                    if (Dispatcher.storeClosed()) {
                         break;
                     }
                     Shopper shopper;

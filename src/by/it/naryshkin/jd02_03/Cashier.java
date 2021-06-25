@@ -18,7 +18,7 @@ public class Cashier implements Runnable {
     public void run() {
         int sumCash = 0;
         PrintHelper.printConsole(new StringBuilder(this + " opened"), this);
-        while (!Dispatcher.storeClosed()) {
+        while (Dispatcher.storeOpened()) {
             Shopper currentShopper = Shopper.poll();
             if (currentShopper != null) {
                 int cashingTime = RandomHelper.random(2000, 5000);

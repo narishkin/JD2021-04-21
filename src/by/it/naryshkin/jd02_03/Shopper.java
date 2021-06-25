@@ -12,7 +12,7 @@ public class Shopper extends Thread implements TypicalShopper, UsingBasket {
     private final boolean pensioner;
     private boolean waitPointer;
     public final int numberOfGoods = RandomHelper.random(1, 4);
-    public  short basketNumber;
+    public short basketNumber;
 
     private static final Object MONITOR_QUEUE_SHOPPERS = new Object();
 
@@ -21,33 +21,32 @@ public class Shopper extends Thread implements TypicalShopper, UsingBasket {
     private static final BlockingDeque<Shopper> PENSIONERS = new LinkedBlockingDeque<>(Config.QUEUE_CAPACITY);
 
 
-
     public static Shopper poll() {
-            if (PENSIONERS.size()!=0){
-                return PENSIONERS.pollFirst();
-            } else {
-                return SHOPPERS.pollFirst();
-            }
+        if (PENSIONERS.size() != 0) {
+            return PENSIONERS.pollFirst();
+        } else {
+            return SHOPPERS.pollFirst();
+        }
     }
 
     public static void add(Shopper shopper) {
-            if (shopper.pensioner) {
-                try {
-                    PENSIONERS.putLast(shopper);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            } else {
-                try {
-                    SHOPPERS.putLast(shopper);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+        if (shopper.pensioner) {
+            try {
+                PENSIONERS.putLast(shopper);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
+        } else {
+            try {
+                SHOPPERS.putLast(shopper);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
-    public static  int getDequeSize() {
-        return SHOPPERS.size()+PENSIONERS.size();
+    public static int getDequeSize() {
+        return SHOPPERS.size() + PENSIONERS.size();
     }
 
 
@@ -76,15 +75,12 @@ public class Shopper extends Thread implements TypicalShopper, UsingBasket {
     public void storeEntry() {
 //        System.out.println(name + " enters into the store.");
         try {
-             basketNumber = Basket.basketBlockingQueue.take();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        try {
+            basketNumber = Basket.basketBlockingQueue.take();
             semaphore.acquire();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
 
     }
 

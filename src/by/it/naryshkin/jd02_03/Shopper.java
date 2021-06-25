@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Deque;
 import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.LinkedBlockingDeque;
+import java.util.concurrent.Semaphore;
 
 public class Shopper extends Thread implements TypicalShopper, UsingBasket {
     public final String name;
@@ -15,7 +16,7 @@ public class Shopper extends Thread implements TypicalShopper, UsingBasket {
 
     private static final Object MONITOR_QUEUE_SHOPPERS = new Object();
 
-
+    static final Semaphore semaphore = new Semaphore(20);
     private static final BlockingDeque<Shopper> SHOPPERS = new LinkedBlockingDeque<>(Config.QUEUE_CAPACITY);
     private static final BlockingDeque<Shopper> PENSIONERS = new LinkedBlockingDeque<>(Config.QUEUE_CAPACITY);
 
@@ -31,14 +32,22 @@ public class Shopper extends Thread implements TypicalShopper, UsingBasket {
 
     public static void add(Shopper shopper) {
             if (shopper.pensioner) {
-                PENSIONERS.addLast(shopper);
+                try {
+                    PENSIONERS.putLast(shopper);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             } else {
-                SHOPPERS.addLast(shopper);
+                try {
+                    SHOPPERS.putLast(shopper);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
     }
 
     public static  int getDequeSize() {
-        return SHOPPERS.size();
+        return SHOPPERS.size()+PENSIONERS.size();
     }
 
 
@@ -61,11 +70,18 @@ public class Shopper extends Thread implements TypicalShopper, UsingBasket {
         return this;
     }
 
+    // Shopper's store way
+
     @Override
     public void storeEntry() {
 //        System.out.println(name + " enters into the store.");
         try {
              basketNumber = Basket.basketBlockingQueue.take();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        try {
+            semaphore.acquire();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -112,6 +128,7 @@ public class Shopper extends Thread implements TypicalShopper, UsingBasket {
 
     @Override
     public void goToQueue() {
+        semaphore.release();
         synchronized (this) {
             Shopper.add(this);
             try {

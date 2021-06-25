@@ -12,8 +12,6 @@ public class Shopper extends Thread implements TypicalShopper, UsingBasket {
     public final int numberOfGoods = RandomHelper.random(1, 4);
     public short basketNumber;
 
-    private static final Object MONITOR_QUEUE_SHOPPERS = new Object();
-
     static final Semaphore semaphore = new Semaphore(20);
     private static final BlockingDeque<Shopper> SHOPPERS = new LinkedBlockingDeque<>(Config.QUEUE_CAPACITY);
     private static final BlockingDeque<Shopper> PENSIONERS = new LinkedBlockingDeque<>(Config.QUEUE_CAPACITY);
@@ -78,8 +76,6 @@ public class Shopper extends Thread implements TypicalShopper, UsingBasket {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
-
     }
 
     @Override

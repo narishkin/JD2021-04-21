@@ -8,7 +8,6 @@ public class Dispatcher {
     static AtomicInteger currentCountShoppersAfterExit = new AtomicInteger(0);
     static AtomicInteger currentCashiersNumber = new AtomicInteger(0);
 
-
     static boolean storeOpened() {
         return currentCountShoppersAfterExit.get() < Config.PLAN_SHOPPERS;
     }

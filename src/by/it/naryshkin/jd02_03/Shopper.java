@@ -1,8 +1,6 @@
 package by.it.naryshkin.jd02_03;
 
-import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Deque;
 import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.Semaphore;
@@ -129,9 +127,9 @@ public class Shopper extends Thread implements TypicalShopper, UsingBasket {
             Shopper.add(this);
             try {
                 waitPointer = true;
-//                while (waitPointer){
+                while (waitPointer){
                 this.wait();
-//                }
+                }
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

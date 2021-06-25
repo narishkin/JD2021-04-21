@@ -43,7 +43,7 @@ public class Cashier implements Runnable {
                         sbTotalPrice.append("Total price for " + currentShopper.name + " is " + totalPrice + " r.");
                         PrintHelper.printConsole(sbTotalPrice, this);
                         sumCash = sumCash + totalPrice;
-                        Store.storeSum += totalPrice;
+                        Store.storeSum.getAndAdd(totalPrice);
                         PrintHelper.printConsole(new StringBuilder(this + "finished service " + currentShopper), this);
                     }
             }

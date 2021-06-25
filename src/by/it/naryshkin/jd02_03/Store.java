@@ -7,13 +7,14 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Store {
     public static final Map<String, Integer> GOODS = new HashMap<>();
     public volatile static List<Thread> cashierThreads = new ArrayList<>();
     public static Map<String, Integer> cashiersMap = new ConcurrentHashMap<>();
     public static List<Shopper> shoppers = new ArrayList<>();
-    public static volatile int storeSum = 0;
+    public static AtomicInteger storeSum = new AtomicInteger(0);
 
     static {
         GOODS.put("Jeans", 42);
@@ -30,12 +31,11 @@ public class Store {
         return cashierThreads.size();
     }
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
         System.out.println("Store opened");
         //Склад корзин
         for (short i = 1; i <= Config.BASKET_POOL_SIZE; i++) {
             Basket.basketBlockingQueue.add(i);
-
         }
 //        for (Short aShort : Basket.basketBlockingQueue) {
 //            System.out.println(aShort);

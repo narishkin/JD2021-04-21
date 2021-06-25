@@ -16,11 +16,11 @@ public class Store {
             thread.start();
         }
 
-        while (CounterBuyers.storeOpened()){
+        while (Manager.storeOpened()){
             int countBuyersPerSecond = RandomHelper.random(2);
             for (int i = 0; i < countBuyersPerSecond; i++) {
-                if (CounterBuyers.buyersCount < Config.PLAN_BUYERS) {
-                    Buyer buyer = new Buyer(++CounterBuyers.buyersCount);
+                if (Manager.buyersCount < Config.PLAN_BUYERS) {
+                    Buyer buyer = new Buyer(++Manager.buyersCount);
                     threads.add(buyer);
                     buyer.start();
                 }

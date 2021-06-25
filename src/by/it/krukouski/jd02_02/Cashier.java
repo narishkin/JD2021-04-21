@@ -21,7 +21,7 @@ public class Cashier implements Runnable {
     @Override
     public void run() {
         System.out.println(this + " opened");
-        while (!CounterBuyers.storeClosed()) {
+        while (!Manager.storeClosed()) {
             Buyer buyer = QueueBuyers.poll();
             if (buyer != null) {
                 System.out.println(this + " started service " + buyer);
@@ -39,7 +39,7 @@ public class Cashier implements Runnable {
                     System.out.println(this + "closed");
                     try {
                         this.wait();
-                        if (CounterBuyers.getCompleteCountBuyers() < 100) {
+                        if (Manager.getCompleteCountBuyers() < 100) {
                             System.out.println(this + "opened");
                         }
                     } catch (InterruptedException e) {

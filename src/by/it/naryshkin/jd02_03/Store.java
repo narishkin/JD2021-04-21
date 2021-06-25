@@ -1,19 +1,15 @@
 package by.it.naryshkin.jd02_03;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Store {
-    public static final Map<String, Integer> GOODS = new HashMap<>();
-    public volatile static List<Thread> cashierThreads = new ArrayList<>();
+    public static final Map<String, Integer> GOODS = new ConcurrentHashMap<>();
     public static Map<String, Integer> cashiersMap = new ConcurrentHashMap<>();
-    public static List<Shopper> shoppers = new ArrayList<>();
     public static AtomicInteger storeSum = new AtomicInteger(0);
 
     static {
@@ -27,19 +23,12 @@ public class Store {
         return this;
     }
 
-    public static synchronized int getCashierThreadsSize() {
-        return cashierThreads.size();
-    }
-
     public static void main(String[] args) {
         System.out.println("Store opened");
         //Склад корзин
         for (short i = 1; i <= Config.BASKET_POOL_SIZE; i++) {
             Basket.basketBlockingQueue.add(i);
         }
-//        for (Short aShort : Basket.basketBlockingQueue) {
-//            System.out.println(aShort);
-//        }
 
         int shopperCounter = 1;
         int time = 0;
@@ -51,14 +40,12 @@ public class Store {
         while (Dispatcher.storeOpened()) {
             while (Dispatcher.getCurrentCashiersNumber() < (int) Math.floor((Shopper.getDequeSize() / (double) 5) + 1) &&
                     Dispatcher.getCurrentCashiersNumber() < 5) {
-                Cashier cashier = new Cashier(getCashierThreadsSize());
-//                cashiersThreads.submit(cashier);
-                Thread thread = new Thread(cashier);
+                Cashier cashier = new Cashier(Dispatcher.getCurrentCashiersNumber());
+                cashiersThreads.submit(cashier);
                 if (!cashiersMap.containsKey(cashier.toString())) {
                     cashiersMap.put(cashier.toString(), 0);
                 }
-                thread.start();
-                Dispatcher.addCashier(thread);
+                Dispatcher.addCashier();
             }
             periodSwitcher = (time / 30) % 2;
             localFunctionTime = time - (time / 60) * 60;
@@ -74,9 +61,7 @@ public class Store {
                     } else {
                         shopper = new Shopper(shopperCounter++, false);
                     }
-                    shoppers.add(shopper);
-                    shopper.start();
-//                    shoppersThreads.submit(shopper);
+                    shoppersThreads.submit(shopper);
                 }
             }
             if (periodSwitcher == 1 && Dispatcher.currentCountShoppersInside.get() < 40) {
@@ -90,34 +75,22 @@ public class Store {
                     } else {
                         shopper = new Shopper(shopperCounter++, false);
                     }
-                    shoppers.add(shopper);
-//                    shopper.start();
                     shoppersThreads.submit(shopper);
                 }
             }
             TimerHelper.sleep(1000);
-//            System.out.println("Current numbers of shoppers in the store: " + Dispatcher.currentCountShoppersInside);
-//            System.out.println("Current numbers of shoppers after shopping: " + Dispatcher.currentCountShoppersAfterExit);
             time++;
 
         }
         cashiersThreads.shutdown();
         shoppersThreads.shutdown();
-
         try {
-            for (Shopper shopper : shoppers) {
-                shopper.join();
-            }
-
-            for (Thread thread : cashierThreads) {
-                thread.join();
-            }
+            cashiersThreads.awaitTermination(1,TimeUnit.HOURS);
+            shoppersThreads.awaitTermination(1, TimeUnit.HOURS);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-//        for (Short aShort : Basket.basketBlockingQueue) {
-//            System.out.println(aShort);
-//        }
+
         System.out.println("Store revenue: " + cashiersMap.values().stream().reduce((s1, s2) -> s1 + s2).orElse(0));
         System.out.println("Store closed");
     }

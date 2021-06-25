@@ -17,26 +17,24 @@ public class Dispatcher {
         return currentCountShoppersAfterExit.get() + currentCountShoppersInside.get() >= Config.PLAN_SHOPPERS;
     }
 
-    static synchronized void addShopper() {
+    static  void addShopper() {
         currentCountShoppersInside.getAndIncrement();
     }
 
-    static synchronized void finishedShoppersCounter() {
+    static  void finishedShoppersCounter() {
         currentCountShoppersInside.getAndDecrement();
         currentCountShoppersAfterExit.getAndIncrement();
     }
 
-    public static synchronized int getCurrentCashiersNumber() {
+    public static  int getCurrentCashiersNumber() {
         return currentCashiersNumber.get();
     }
 
-    public static synchronized void addCashier(Thread thread) {
-        Store.cashierThreads.add(thread);
+    public static  void addCashier() {
         currentCashiersNumber.getAndIncrement();
     }
 
-    public static synchronized void removeCashier(Thread thread) {
-        Store.cashierThreads.remove(thread);
+    public static  void removeCashier() {
         currentCashiersNumber.getAndDecrement();
     }
 }

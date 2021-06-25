@@ -56,7 +56,7 @@ public class Cashier implements Runnable {
                 break;
             }
         }
-        Dispatcher.removeCashier(Thread.currentThread());
+        Dispatcher.removeCashier();
         PrintHelper.printConsole(new StringBuilder(this + " closed"), this);
         synchronized (this) {
             setCashiersMap(this, sumCash);

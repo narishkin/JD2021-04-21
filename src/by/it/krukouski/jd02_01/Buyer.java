@@ -59,8 +59,7 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
             ArrayList<String> strings = new ArrayList<>(HashMapGoods.getHashMap().keySet());
             String good = strings.get(RandomHelper.random(strings.size()-1));
             TimerHelper.sleep(timeout);
-            System.out.println(this + "put " + good + " to basket");
-
+            System.out.println(this + "put " + good + " to basket with price " + HashMapGoods.getHashMap().get(good));
         }
     }
 }

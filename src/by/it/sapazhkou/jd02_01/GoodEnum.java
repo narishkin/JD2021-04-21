@@ -1,6 +1,6 @@
 package by.it.sapazhkou.jd02_01;
 
-public enum Good {
+public enum GoodEnum {
 
     BREAD,
     BUTTER,

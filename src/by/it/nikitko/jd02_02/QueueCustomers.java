@@ -19,7 +19,7 @@ public class QueueCustomers {
         return QUEUE_PENSIONERS.size();
     }
 
-    public static Customer poll(){
+    public static by.it.nikitko.jd02_02.Customer poll(){
         synchronized (MONITOR_QUEUE_CUSTOMERS){
            return QUEUE_CUSTOMERS.pollFirst();
         }

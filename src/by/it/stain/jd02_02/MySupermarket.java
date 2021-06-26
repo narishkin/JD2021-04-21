@@ -21,11 +21,11 @@ public class MySupermarket {
         int numberBuyers = 0;
 
         while (Dispatcher.openedSupermarket()) {
-            int countBuyers = RandomTimeForSupermarket.random(1);
+            int countBuyers = RandomTimeForSupermarket.random(2);
 
 
 
-            for (int j = 0; j < countBuyers; j++) {
+            for (int j = 0; j < countBuyers&&Dispatcher.openedSupermarket(); j++) {
 
 
                 Buyer buyer = new Buyer(++numberBuyers);

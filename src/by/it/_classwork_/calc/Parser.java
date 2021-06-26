@@ -4,6 +4,7 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@SuppressWarnings("DuplicatedCode")
 public class Parser {
 
     private static final Map<String, Integer> PRIORITY = Map.of(

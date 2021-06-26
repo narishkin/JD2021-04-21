@@ -63,9 +63,9 @@ public class Helper {
     static double[][] mul(double[][] matrixLeft, double[][] matrixRight) {
         double[][] result = new double[matrixLeft.length][matrixRight[0].length];
         for (int i = 0; i < matrixLeft.length; i++) {
-            for (int j = 0; j < matrixRight[0].length; j++) {
+            for (int j = 0; j < matrixRight[i].length; j++) {
                 for (int k = 0; k < matrixRight.length; k++) {
-                    result[i][j] = result[i][j] + matrixLeft[i][j] * matrixRight[i][j];
+                    result[i][j] = result[i][j] + matrixLeft[i][k] * matrixRight[k][j];
 
 
                 }

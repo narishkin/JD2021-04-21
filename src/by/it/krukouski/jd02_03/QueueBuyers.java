@@ -1,7 +1,5 @@
 package by.it.krukouski.jd02_03;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
 import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.LinkedBlockingDeque;
 
@@ -10,7 +8,6 @@ public class QueueBuyers {
     QueueBuyers() {
     }
 
-    private static final Object MONITOR_BUYERS = new Object();
 
     private final BlockingDeque<Buyer> QUEUE_BUYERS = new LinkedBlockingDeque<>(Config.QUEUE_CAPACITY);
 

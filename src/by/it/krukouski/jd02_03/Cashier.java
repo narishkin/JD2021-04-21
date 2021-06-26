@@ -1,11 +1,14 @@
-package by.it.krukouski.jd02_02;
+package by.it.krukouski.jd02_03;
 
 public class Cashier implements Runnable {
 
     private final int number;
 
-    public Cashier(int number) {
+    private final Store store;
+
+    public Cashier(int number, Store store) {
         this.number = number;
+        this.store = store;
     }
 
     Object getMonitor() {
@@ -21,8 +24,8 @@ public class Cashier implements Runnable {
     @Override
     public void run() {
         System.out.println(this + " opened");
-        while (!Manager.storeClosed()) {
-            Buyer buyer = QueueBuyers.poll();
+        while (!store.getManager().storeClosed()) {
+            Buyer buyer = store.getQueueBuyers().poll();
             if (buyer != null) {
                 System.out.println(this + " started service " + buyer);
                 int timeout = RandomHelper.random(2000, 5000);
@@ -39,7 +42,7 @@ public class Cashier implements Runnable {
                     System.out.println(this + "closed");
                     try {
                         this.wait();
-                        if (Manager.getCompleteCountBuyers() < 100) {
+                        if (store.getManager().getCompleteCountBuyers() < 100) {
                             System.out.println(this + "opened");
                         }
                     } catch (InterruptedException e) {

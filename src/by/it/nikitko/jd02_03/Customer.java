@@ -14,7 +14,8 @@ public class Customer extends Thread implements Customers, UseBasket {
         return pensioner;
     }
 
-    private static final Semaphore semaphore = new Semaphore(20);
+    private static final Semaphore semaphoreChooseGoods = new Semaphore(20);
+    private static final Semaphore semaphoreBasket = new Semaphore(50);
 
     private boolean pensioner;
     private boolean flagWait;
@@ -56,32 +57,31 @@ public class Customer extends Thread implements Customers, UseBasket {
     @Override
     public void goToQueue() {
         synchronized (this) {
-           // System.out.printf("Customer #%4d go to the queue \n", customerNumber);
+            System.out.printf("Customer #%4d go to the queue \n", customerNumber);
             if (this.pensioner) {
                 QueueCustomers.addPensioner(this);
             } else {
                 QueueCustomers.add(this);
             }
             wakeUpCashier();
-            try {
-                flagWait = true;
+           /* try {
                 this.wait();
             } catch (InterruptedException e) {
                 e.printStackTrace();
-            }
+            }*/
         }
     }
 
     private void wakeUpCashier() {
 
-        int cashierNeeded = (int) Math.ceil(QueueCustomers.getSize() / Config.MAX_QUEUE_LENGTH);
+        int cashierNeeded = (int) Math.ceil(QueueCustomers.getSize() /(double) Config.MAX_CASHIER_QUEUE);
         int openedCashier = ClosedCashiers.getOpenedCashier();
 
         while (ClosedCashiers.getSize() > 0 & openedCashier < cashierNeeded) {
             Cashier currentCashier = ClosedCashiers.poll();
             synchronized (currentCashier.getMonitor()) {
                 openedCashier = ClosedCashiers.getOpenedCashier();
-                currentCashier.setFlagWait(false);
+                // currentCashier.setFlagWait(false);
                 currentCashier.notify();
             }
         }
@@ -99,7 +99,7 @@ public class Customer extends Thread implements Customers, UseBasket {
     @Override
     public void chooseGoods() {
         try {
-            semaphore.acquire();
+            semaphoreChooseGoods.acquire();
             System.out.printf("Customer #%4d begin choose goods \n", customerNumber);
             if (pensioner) {
                 TimeUtils.sleep(RandomUtils.random(500, 3000));
@@ -110,7 +110,7 @@ public class Customer extends Thread implements Customers, UseBasket {
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally {
-            semaphore.release();
+            semaphoreChooseGoods.release();
         }
 
     }
@@ -129,11 +129,18 @@ public class Customer extends Thread implements Customers, UseBasket {
 
     @Override
     public void takeBasket() {
-        System.out.printf("Customer #%4d take basket\n", customerNumber);
-        if (pensioner) {
-            TimeUtils.sleep(RandomUtils.random(500, 3000));
-        } else {
-            TimeUtils.sleep(RandomUtils.random(500, 2000));
+        try {
+            semaphoreBasket.acquire();
+            System.out.printf("Customer #%4d take basket\n", customerNumber);
+            if (pensioner) {
+                TimeUtils.sleep(RandomUtils.random(500, 3000));
+            } else {
+                TimeUtils.sleep(RandomUtils.random(500, 2000));
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } finally {
+            semaphoreBasket.release();
         }
     }
 

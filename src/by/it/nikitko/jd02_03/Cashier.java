@@ -34,7 +34,7 @@ public class Cashier implements Runnable {
         System.out.println(this + "opened");
         while (!Manager.storeClosed()) {
             Customer currentCustomer;
-            if (QueueCustomers.getSizePensioner() > 0) {
+            if (QueueCustomers.getSizePensioner()>0) {
                 currentCustomer = QueueCustomers.polPensioner();
             } else {
                 currentCustomer = QueueCustomers.poll();
@@ -42,6 +42,7 @@ public class Cashier implements Runnable {
             if (currentCustomer != null) {
                 serveCustomer(currentCustomer);
             } else {
+               // TimeUtils.sleep(1);
                 cashierWait();
             }
         }

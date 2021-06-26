@@ -17,7 +17,7 @@ public class ParserTest {
     }
 
     @Test
-    public void evaluateTest() throws Exception {
+    public void evaluateScalarTest() throws Exception {
         String expression = "A=2+-4*-2/8";
         Var actualVar = parser.evaluate(expression);
         double expected = 3.0;

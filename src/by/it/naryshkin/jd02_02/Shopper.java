@@ -15,20 +15,23 @@ public class Shopper extends Thread implements TypicalShopper, UsingBasket {
 
 
     private static final Deque<Shopper> SHOPPERS = new ArrayDeque<>();
+    private static final Deque<Shopper> PENSIONERS = new ArrayDeque<>();
 
 
     public static Shopper poll() {
         synchronized (MONITOR_QUEUE_SHOPPERS) {
-            return SHOPPERS.pollFirst();
+            if (PENSIONERS.size()!=0){
+                return PENSIONERS.pollFirst();
+            } else {
+                return SHOPPERS.pollFirst();
+            }
         }
-
-
     }
 
     public static void add(Shopper shopper) {
         synchronized (MONITOR_QUEUE_SHOPPERS) {
-            if (shopper.name.contains("pens")) {
-                SHOPPERS.addFirst(shopper);
+            if (shopper.pensioner) {
+                PENSIONERS.addLast(shopper);
             } else {
                 SHOPPERS.addLast(shopper);
             }

@@ -34,26 +34,23 @@ package by.it.stain.jd01_01;
 import java.util.Scanner;
 
 class TaskC3 {
+    static final double GRAVITATION_MARS = 3.86;
+    static final double GRAVITATION_EARTH = 9.81;
+
     public static void main(String[] args) {
-        System.out.println("Введите вес человека в кг. ");
         Scanner s = new Scanner(System.in);
-        System.out.println("Вес человека на марсе = "+getWeight(s.nextInt())+"кг");
-        getWeight(s.nextInt());
+        System.out.println(+getWeight(s.nextInt()));
+
     }
 
 
-        public static double getWeight(double s) {
+        public static double getWeight(int weight) {
 
 
-            double z = 9.81;
-            double y = 3.86;
-            double n = y / z;
-            double q=s;
-            double a = q*n;
-            double c = Math.pow(10 ,2);
-            double result = Math.round(a * c) / c;
+            double weightOnMars = weight/GRAVITATION_EARTH*GRAVITATION_MARS;
+            double result =(int)(weightOnMars*100+0.5);
 
-            return result ;
+            return result/100 ;
 
     }
 

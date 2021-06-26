@@ -23,7 +23,6 @@ public class Cashier implements Runnable {
             if (currentShopper != null) {
                 int cashingTime = RandomHelper.random(2000, 5000);
                 TimerHelper.sleep(cashingTime);
-
                 synchronized (PrintHelper.class) {
                     synchronized (currentShopper.getMonitor()) {
                         PrintHelper.printConsole(new StringBuilder(this + "started service " + currentShopper), this);
@@ -34,7 +33,7 @@ public class Cashier implements Runnable {
                         for (int i = 0; i < currentShopper.numberOfGoods; i++) {
                             int goodNumber = RandomHelper.random(0, list.size() - 1);
                             StringBuilder sb = new StringBuilder();
-                            sb.append(currentShopper.name + " pays for" + list.get(goodNumber) +
+                            sb.append(currentShopper.name + " pays for " + list.get(goodNumber) +
                                     " " + Store.GOODS.get(list.get(goodNumber)) + " r.");
                             PrintHelper.printConsole(sb, this);
                             totalPrice += Store.GOODS.get(list.get(goodNumber));
@@ -57,14 +56,14 @@ public class Cashier implements Runnable {
                 break;
             }
         }
+        Dispatcher.removeCashier(Thread.currentThread());
         PrintHelper.printConsole(new StringBuilder(this + " closed"), this);
         synchronized (this) {
-//            Store.storeSum+=sumCash;
+            Store.cashiers[number] = false;
             setCashiersMap(this, sumCash);
         }
 
         PrintHelper.printConsole(new StringBuilder("Итого по кассе в сеансе: " + this + sumCash), this);
-        Dispatcher.removeCashier(Thread.currentThread());
 
     }
 

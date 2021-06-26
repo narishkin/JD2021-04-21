@@ -6,6 +6,7 @@ public class Dispatcher {
     static volatile int currentCountShoppersAfterExit = 0;
     static  volatile int currentCashiersNumber = 0;
 
+
     static boolean storeClosed() {
         return currentCountShoppersAfterExit >= Config.PLAN_SHOPPERS;
     }
@@ -27,13 +28,13 @@ public class Dispatcher {
         return currentCashiersNumber;
     }
 
-    public static synchronized int addCashier(Thread thread){
+    public static synchronized void addCashier(Thread thread){
         Store.cashierThreads.add(thread);
-        return currentCashiersNumber++;
+        currentCashiersNumber++;
     }
 
-    public static synchronized int removeCashier(Thread thread){
+    public static synchronized void removeCashier(Thread thread){
         Store.cashierThreads.remove(thread);
-        return currentCashiersNumber--;
+        currentCashiersNumber--;
     }
 }

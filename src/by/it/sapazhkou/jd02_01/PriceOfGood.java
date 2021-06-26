@@ -3,11 +3,11 @@ package by.it.sapazhkou.jd02_01;
 
 import java.util.HashMap;
 
-public class PriceOfGood {
+public class PriceOfGood extends HashMap {
 
     private final HashMap goods = new HashMap();
 
-    PriceOfGood() {
+    public PriceOfGood() {
         goods.put("BREAD", 1.2);
         goods.put("MILK", 0.9);
         goods.put("BUTTER", 2.3);
@@ -17,6 +17,7 @@ public class PriceOfGood {
     public HashMap getGoods() {
         return goods;
     }
+
 
 }
 

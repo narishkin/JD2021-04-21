@@ -4,8 +4,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 class Dispatcher {
 
-    //private static final Object MONITOR = Dispatcher.class;
-
     Dispatcher() {
     }
 

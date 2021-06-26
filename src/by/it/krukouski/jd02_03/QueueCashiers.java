@@ -1,33 +1,29 @@
 package by.it.krukouski.jd02_03;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class QueueCashiers {
     private QueueCashiers() {
     }
 
-    private static final Object MONITOR_CASHIERS = new Object();
 
-    private static final Deque<Cashier> QUEUE_CASHIERS = new ArrayDeque<>();
+    private static final ConcurrentLinkedQueue<Cashier> QUEUE_CASHIERS = new ConcurrentLinkedQueue<>();
 
-    public static int getQueueSize(){
+    public static int getQueueSize() {
         return QUEUE_CASHIERS.size();
     }
 
     public static Cashier poll() {
-        synchronized (MONITOR_CASHIERS) {
-            return QUEUE_CASHIERS.poll();
-        }
+        return QUEUE_CASHIERS.poll();
+
     }
 
     public static void add(Cashier cashier) {
-        synchronized (MONITOR_CASHIERS) {
-            QUEUE_CASHIERS.add(cashier);
-        }
+        QUEUE_CASHIERS.add(cashier);
+
     }
 
-    public static int getCashierWorked(){
-        return Config.COUNT_CASHIER-getQueueSize();
+    public static int getCashierWorked() {
+        return Config.COUNT_CASHIER - getQueueSize();
     }
 }

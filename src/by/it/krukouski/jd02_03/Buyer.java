@@ -1,10 +1,13 @@
 package by.it.krukouski.jd02_03;
 
 import java.util.ArrayList;
+import java.util.concurrent.Semaphore;
 
 public class Buyer extends Thread implements IBuyer, IUseBasket {
 
     private boolean waitFlag;
+
+    private static final Semaphore semaphore = new Semaphore(20);
 
     private final Store store;
 
@@ -54,7 +57,12 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
 
     @Override
     public void enterToMarket() {
-        System.out.println(this + " Enter to market");
+        try {
+            semaphore.acquire();
+            System.out.println(this + " Enter to market");
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -67,6 +75,7 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
 
     @Override
     public void goOut() {
+        semaphore.release();
         System.out.println(this + " Go out market");
 
     }

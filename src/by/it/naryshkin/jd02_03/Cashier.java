@@ -57,7 +57,7 @@ public class Cashier implements Runnable {
 
             }
         }
-        Store.cashiers[number] = false;
+        Store.cashiers.set(number, false);
         printHelper.printConsole(new StringBuilder(this + " closed"), this);
         dispatcher.removeCashier();
 

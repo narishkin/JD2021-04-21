@@ -1,10 +1,8 @@
 package by.it.naryshkin.jd02_03;
 
+import java.util.Arrays;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Store {
@@ -12,7 +10,7 @@ public class Store {
     public static final Map<String, Integer> GOODS = new ConcurrentHashMap<>();
     public static Map<String, Integer> cashiersMap = new ConcurrentHashMap<>();
     public static AtomicInteger storeSum = new AtomicInteger(0);
-    public static boolean[] cashiers = new boolean[5];
+    public static CopyOnWriteArrayList<Boolean> cashiers = new CopyOnWriteArrayList<>(Arrays.asList(false,false,false,false,false));
 
     static {
         GOODS.put("Jeans", 42);
@@ -28,6 +26,7 @@ public class Store {
     public static void main(String[] args) {
         Dispatcher dispatcher = new Dispatcher();
         System.out.println("Store opened");
+
 
         //Склад корзин
         for (short i = 1; i <= Config.BASKET_POOL_SIZE; i++) {
@@ -45,10 +44,11 @@ public class Store {
             while (dispatcher.getCurrentCashiersNumber() < (int) Math.floor((Shopper.getDequeSize() / (double) 5) + 1) &&
                     dispatcher.getCurrentCashiersNumber() < 5) {
                 int c = 0;
-                for (int i = 0; i < cashiers.length; i++) {
-                    if (!cashiers[i]) {
+
+                for (int i = 0; i < cashiers.size(); i++) {
+                    if (!cashiers.get(i)) {
                         c = i;
-                        cashiers[i] = true;
+                        cashiers.set(i, true);
                         break;
                     }
                 }
@@ -105,8 +105,6 @@ public class Store {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println(cashiersMap.toString());
-
         System.out.println("Store revenue: " + cashiersMap.values().stream().reduce((s1, s2) -> s1 + s2).orElse(0));
         System.out.println("Store closed");
     }

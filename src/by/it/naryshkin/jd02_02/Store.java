@@ -37,12 +37,14 @@ public class Store {
         while (!Dispatcher.storeClosed()) {
             while (Dispatcher.getCurrentCashiersNumber() < (int) Math.ceil((Shopper.getDequeSize() / (double) 5)) &&
                     Dispatcher.getCurrentCashiersNumber() < 5) {
-                int c=0;
-                for (int i = 0; i < cashiers.length; i++) {
-                    if (!cashiers[i]){
-                        c = i;
-                        cashiers[i] = true;
-                        break;
+                int c = 0;
+                synchronized (Store.class) {
+                    for (int i = 0; i < cashiers.length; i++) {
+                        if (!cashiers[i]) {
+                            c = i;
+                            cashiers[i] = true;
+                            break;
+                        }
                     }
                 }
                 Cashier cashier = new Cashier(c);

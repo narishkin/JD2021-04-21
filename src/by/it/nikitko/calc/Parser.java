@@ -13,8 +13,8 @@ public class Parser {
             System.out.println(Var.getVars().entrySet());
         }
 
-        String[] parts = expression.split(Patterns.OPERATION, 2);
-
+        String[] parts = expression.split(Patterns.OPERATION, 2);//change
+// add strings
         if (parts.length == 1) {
             return Var.createVar(parts[0]);
         }

@@ -1,6 +1,9 @@
-package by.it._classwork_.calc;
+package by.it._classwork_.jd02_04;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

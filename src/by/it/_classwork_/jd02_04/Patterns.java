@@ -1,4 +1,4 @@
-package by.it._classwork_.calc;
+package by.it._classwork_.jd02_04;
 
 public interface Patterns {
 

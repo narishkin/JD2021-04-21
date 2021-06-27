@@ -1,8 +1,11 @@
 package by.it.mogonov.jd01_14;
 
-import java.io.*;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class TaskB {
@@ -13,48 +16,31 @@ public class TaskB {
     public static void main(String[] args) throws IOException {
 
         String fileName = PathCreator.getFileName(TaskB.class, FILENAME);
-        String txtName = PathCreator.getFileName(TaskB.class, RESULT);
-        printTxt(txtName);
 
-        Stream<String> lines3 =
-                Files.lines(Paths.get(fileName));
+        List<String> lines =
+                Files.lines(Paths.get(fileName)).collect(Collectors.toList());
 
-        long simblCount = lines3
+        long simblCount = lines.stream()
                 .flatMap(s -> Stream.of(s.replaceAll("[а-яА-ЯёЁ]", "")))
                 .map(t -> t.replaceAll(" ", ""))
                 .map(t -> t.replaceAll("\\.{3}", "\\."))
                 .filter(t -> !t.isEmpty())
                 .flatMapToInt(t -> t.chars())
                 .mapToObj(i -> (char) i)
-                //.peek(t -> System.out.println(t))
                 .count();
 
 
-        int wordsCount = 0;
-        File file = new File(fileName);
-        FileInputStream fis = new FileInputStream(file);
-        byte[] bytesArray = new byte[(int) file.length()];
-        fis.read(bytesArray);
-        String s = new String(bytesArray);
-        String[] data = s.split("[^а-яА-ЯёЁ]+");
-        for (int i = 0; i < data.length; i++) {
-            wordsCount++;
-
-        }
-        txtName = "words=" + wordsCount + ", " + "punctuation marks=" + simblCount;
-        printTxt(txtName);
-        System.out.println("words=" + wordsCount + ", " + "punctuation marks=" + simblCount);
+        long wordsCount = lines.stream().flatMap(line -> Stream.of(line.split("[^а-яА-ЯёЁ]+"))).count();
+        String result = "words=" + wordsCount + ", " + "punctuation marks=" + simblCount;
+        printTxt(result);
     }
 
 
-   private static void printTxt(final String txtName) throws IOException {
+    private static void printTxt(final String txtName) throws IOException {
 
-        PrintWriter fileWriter = new PrintWriter(RESULT);
-      fileWriter.println(txtName);
-       fileWriter.close();
+        System.out.println(txtName);
 
-        FileWriter fw = new FileWriter(txtName,false );
-       fw.write(txtName);
+        FileWriter fw = new FileWriter(PathCreator.getFileName(TaskB.class, RESULT), false);
         fw.write(txtName);
         fw.flush();
         fw.close();
@@ -62,5 +48,3 @@ public class TaskB {
     }
 
 }
-
-

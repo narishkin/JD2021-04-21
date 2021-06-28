@@ -20,19 +20,18 @@ public class Parser {
     Var calc(String expression) throws CalcException {
 
         if (expression.equals("printvar")) {
-            System.out.println(Var.getVars());
+            System.out.println(VarRepo.getVars());
         }
         if (expression.equals("sortvar")) {
-            System.out.println(Var.getVars().entrySet());
+            System.out.println(VarRepo.getVars().entrySet());
         }
 
-
         List<String> operands = new ArrayList<>(
-                Arrays.asList(expression.split(by.it._classwork_.jd02_04.Patterns.OPERATION))
+                Arrays.asList(expression.split(Patterns.OPERATION))
         );
         List<String> operations = new ArrayList<>();
         Matcher matcher = Pattern
-                .compile(by.it._classwork_.jd02_04.Patterns.OPERATION)
+                .compile(Patterns.OPERATION)
                 .matcher(expression);
         while (matcher.find()) {
             operations.add(matcher.group());

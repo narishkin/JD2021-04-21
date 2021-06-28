@@ -7,17 +7,19 @@ abstract class Var implements Operation {
 
     private static Map<String, Var> vars = new HashMap<>();
 
-    public static Map<String, Var> getVars() {
+   /* public static Map<String, Var> getVars() {
         return vars;
     }
 
     static Var saveVar(String name, Var var) {
         vars.put(name, var);
         return var;
-    }
+    }*/
 
     static Var createVar(String expression) throws CalcException {
         expression = expression.replaceAll("\\s+", "");
+
+
 
         if (expression.matches(Patterns.SCALAR))
             return new Scalar(expression);

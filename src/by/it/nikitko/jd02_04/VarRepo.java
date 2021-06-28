@@ -13,6 +13,11 @@ import java.util.Map;
 public class VarRepo {
 
     private static final String VARS_TXT = "vars.txt";
+
+    public static Map<String, Var> getVars() {
+        return vars;
+    }
+
     private static final Map<String, Var> vars = new HashMap<>();
     private static final String FILE_NAME = PathCreator.getFileName(ConsoleRunner.class, VARS_TXT);
 

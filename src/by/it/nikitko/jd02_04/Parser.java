@@ -73,7 +73,7 @@ public class Parser {
             VarRepo.save(leftString, right);
             return right;
         }
-        Var left = Var.createVar(leftString);
+         Var left = Var.createVar(leftString);
         if (left == null || right == null) {
             throw new CalcException("Incorrect expression");
         }

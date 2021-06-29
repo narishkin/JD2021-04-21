@@ -5,27 +5,21 @@ import java.util.HashMap;
 public class TaskA {
     public static void main(String[] args) {
         try {
-
-            if (Math.random() > 0.5)
+            if (Math.random() > 0.5) {
                 new HashMap<String, String>(null);
-            else
+            } else {
                 Integer.parseInt("привет");
+            }
+        } catch (Exception e) {
 
-
-        } catch (NumberFormatException | NullPointerException e) {
-            Class<? extends RuntimeException> eClass = e.getClass();
-
-
-            System.out.println(e);
-
-
-            Class<TaskA> mainClass = TaskA.class;
             StackTraceElement[] traceElements = e.getStackTrace();
             for (StackTraceElement traceElement : traceElements) {
-                String className = traceElement.getClassName();
-                if (className.equals(mainClass.getName())) {
-                    int lineNumber = traceElement.getLineNumber();
-                    System.out.printf(" " + " name: %s\n" + "class: %\n");
+                if (TaskA.class.getName().equals(traceElement.getClassName())) {
+                    String name = e.getClass().getName();
+                    String className = traceElement.getClassName();
+                    int rowNumber = traceElement.getLineNumber();
+                    System.out.printf("name: %s\nclass: %s\nline: %d", name, className, rowNumber);
+                    break;
                 }
             }
         }

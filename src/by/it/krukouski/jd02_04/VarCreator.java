@@ -13,10 +13,12 @@ public class VarCreator {
             return new Vector(string);
         } else if (string.matches(Patterns.MATRIX)) {
             return new Matrix(string);
-        } else if (VarRepo.contain(string)) {
-            return VarRepo.load(string);
         } else {
-            throw new CalcException("ERROR Var" + string);
+            if (VarRepo.contain(string)) {
+                return VarRepo.load(string);
+            } else {
+                throw new CalcException("ERROR: Unknown Var " + string);
+            }
         }
     }
 

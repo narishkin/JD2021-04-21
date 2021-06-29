@@ -36,7 +36,7 @@ public class Parser {
             operands.add(index, result);
         }
 
-        return VarCreator.createVar(operands.get(0));
+        return VarCreator.createVar(operands.get(0).replace(" ", ""));
     }
 
     private int getIndexOperation(List<String> operations) {

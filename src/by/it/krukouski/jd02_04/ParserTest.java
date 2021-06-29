@@ -1,6 +1,7 @@
 package by.it.krukouski.jd02_04;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -127,14 +128,15 @@ public class ParserTest {
         System.out.printf("Expected: %s\nActual: %s\n", expected, actual);
     }
     @Test
-    public void calc_div_vector_and_vector() throws CalcException {
+    public void calc_div_vector_and_vector() {
         String expression = "{4,3,2}/{4,3,2}";
-        Var actualVar = parser.calc(expression);
-        String expected = "ERROR: Division impossible";
-        String actual = actualVar.toString();
-        fail();
-        //assertEquals(expected,actual);
-        System.out.printf("Expected: %s\nActual: %s\n", expected, actual);
+        try {
+            parser.calc(expression);
+            Assert.fail("Expected CalcException");
+        } catch (CalcException e) {
+            Assert.assertNotEquals("", e.getMessage());
+        }
+
     }
 
 

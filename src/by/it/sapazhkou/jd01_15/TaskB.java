@@ -63,7 +63,6 @@ public class TaskB {
                         }
                         continue; //это тоже комментарий
                     } else if (stringCurrent[i] == '/' && charCurrent == '/') {
-                        sb.delete(0, line.length());
                         break;
                     } else if (stringCurrent[i] != '/' && charCurrent == '/') {
                         if (stringCurrent[i] == '\u002A') {

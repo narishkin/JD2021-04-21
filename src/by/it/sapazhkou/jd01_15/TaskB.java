@@ -47,26 +47,27 @@ public class TaskB {
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath))) {
             String line;
             boolean strDel = false;
-            boolean strDel1 = false;
             while ((line = bufferedReader.readLine()) != null) {
                 char[] stringCurrent = line.toCharArray();
                 char charCurrent = '\u0000';
                 for (int i = 0; i < stringCurrent.length; i++) {
                     if (strDel) {
                         strDel = false;
+                        sb.delete(0, line.length());
                         break;
                     }
                     if (stringCurrent[i] == '/' && charCurrent != '/') {
-                        charCurrent = stringCurrent[i];
+                        charCurrent = '/';
                         if (i == stringCurrent.length - 1) {
                             sb.append(stringCurrent[i]);
                         }
                         continue; //это тоже комментарий
                     } else if (stringCurrent[i] == '/' && charCurrent == '/') {
+                        sb.delete(0, line.length());
                         break;
                     } else if (stringCurrent[i] != '/' && charCurrent == '/') {
                         if (stringCurrent[i] == '\u002A') {
-                            charCurrent = stringCurrent[i];
+                            charCurrent = '\u002A';
                             strDel = true;
                             continue;
                         }
@@ -74,25 +75,15 @@ public class TaskB {
                             sb.append(charCurrent);
                             charCurrent = '\u0000';
                         }
+                    } else if (stringCurrent[i] == '\u002A') {
+                        sb.delete(0, line.length());
+                        break;
                     }
                     sb.append(stringCurrent[i]);
                 }
-
                 sbResult.append(sb);
                 sbResult.append('\n');
                 sb.delete(0, line.length());
-
-                for (int i = 0; i < sbResult.length(); i++) {
-                    if (stringCurrent[i] == '\u002A') {
-                        strDel1 = true;
-                        break;
-                    }
-                }
-                if (strDel1) {
-                    strDel1 = false;
-                    continue;
-                }
-
             }
         } catch (IOException e) {
             e.printStackTrace();

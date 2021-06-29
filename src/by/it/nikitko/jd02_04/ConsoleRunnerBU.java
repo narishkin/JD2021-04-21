@@ -2,7 +2,7 @@ package by.it.nikitko.jd02_04;
 
 import java.util.Scanner;
 
-public class ConsoleRunner {
+public class ConsoleRunnerBU {
     public static void main(String[] args) {
         Scanner input =new Scanner(System.in);
         String enteredString;
@@ -14,7 +14,6 @@ public class ConsoleRunner {
         while (!(enteredString=input.nextLine()).equals("end")){
 
             try {
-                parser.scopesFinder(enteredString);
                Var result = parser.calc(enteredString);
                 printer.print(result);
             } catch (CalcException e) {

@@ -14,7 +14,6 @@ public class ConsoleRunner {
         while (!(enteredString=input.nextLine()).equals("end")){
 
             try {
-                parser.scopesFinder(enteredString);
                Var result = parser.calc(enteredString);
                 printer.print(result);
             } catch (CalcException e) {

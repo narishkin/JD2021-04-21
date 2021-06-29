@@ -21,7 +21,7 @@ public class Parser {
         if (expression.equals("sortvar")) {
             System.out.println(VarRepo.getVars().entrySet());
         }
-        // scopesFinder(expression);
+        expression = scopesFinder(expression);
 
         List<String> operands = new ArrayList<>(
                 Arrays.asList(expression.split(Patterns.OPERATION)));
@@ -82,12 +82,10 @@ public class Parser {
         throw new CalcException("Error");
     }
 
-    public void scopesFinder(String expression) throws CalcException {
+    public String scopesFinder(String expression) throws CalcException {
 
         ArrayDeque<Character> expressionCharDeque = new ArrayDeque<>();
-        ArrayDeque<Character> scopes1 = new ArrayDeque<>();
-        StringBuilder stringExp = new StringBuilder();
-
+        ArrayDeque<Character> leftPartExpression = new ArrayDeque<>();
         StringBuilder result = new StringBuilder();
 
         char[] charArray = expression.toCharArray();
@@ -98,33 +96,28 @@ public class Parser {
         while (expressionCharDeque.contains(')')) {
             StringBuilder currScopeSB = new StringBuilder();
             char currChar = expressionCharDeque.pollFirst();
-            scopes1.add(currChar);
+            leftPartExpression.add(currChar);
             if (currChar == ')') {
-                while (currChar != '(' & !scopes1.isEmpty()) {
-                    currChar = scopes1.pollLast();
+                while (currChar != '(' & !leftPartExpression.isEmpty()) {
+                    currChar = leftPartExpression.pollLast();
                     currScopeSB.append(currChar);
                 }
                 String currScopeString = currScopeSB.reverse().toString().replaceAll("[\\(\\)]", "");
-                System.out.println(currScopeString);
+               // System.out.println(currScopeString);
                 char[] currentScopeResult = calc(currScopeString).toString().toCharArray();
                 for (int i = currentScopeResult.length - 1; i >= 0; i--) {
                     expressionCharDeque.addFirst(currentScopeResult[i]);
                 }
-                while (!scopes1.isEmpty()) {
-                    expressionCharDeque.addFirst(scopes1.pollLast());
+                while (!leftPartExpression.isEmpty()) {
+                    expressionCharDeque.addFirst(leftPartExpression.pollLast());
                 }
-
-                System.out.println(expressionCharDeque);
-
-
-            } else {
-                stringExp.append(currChar);
+              //  System.out.println(expressionCharDeque);
             }
         }
         for (Character character : expressionCharDeque) {
             result.append(character);
         }
-        System.out.println(result);
-        System.out.println(calc(result.toString()));
+       return result.toString();
+      //  System.out.println(calc(result.toString()));
     }
 }

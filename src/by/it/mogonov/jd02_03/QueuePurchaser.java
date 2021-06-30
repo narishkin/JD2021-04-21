@@ -1,23 +1,26 @@
 package by.it.mogonov.jd02_03;
 
-import java.util.ArrayDeque;
-import java.util.Deque;
+import java.util.concurrent.BlockingDeque;
+import java.util.concurrent.LinkedBlockingDeque;
 
 public class QueuePurchaser {
-    public static final Object MONITOR_QUEUE_PURCHASERS= new Object();
-    private QueuePurchaser(){
+
+    public QueuePurchaser() {
 
     }
-    public static final Deque<Purchaser>PURCHASERS=new ArrayDeque<>();
-    public static Purchaser pool(){
-        synchronized (MONITOR_QUEUE_PURCHASERS){
-            return PURCHASERS.pollFirst();
-        }
+
+    private final BlockingDeque<Purchaser> PURCHASERS = new LinkedBlockingDeque<>(Conctant.QUEUE_CAPACITY);
+
+    public Purchaser poll() {
+        return PURCHASERS.pollFirst();
     }
 
-    public static void add(Purchaser purchaser){
-        synchronized (MONITOR_QUEUE_PURCHASERS){
-            PURCHASERS.addLast(purchaser);
+
+    public void add(Purchaser purchaser) {
+        try {
+            PURCHASERS.putLast(purchaser);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 }

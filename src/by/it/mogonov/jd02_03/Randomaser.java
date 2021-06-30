@@ -1,14 +1,17 @@
 package by.it.mogonov.jd02_03;
 
-import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Randomaser {
-    public static final Random RANDOM = new Random();
+    private Randomaser() {
+
+    }
 
     static int random(int min, int max) {
-return  min + RANDOM.nextInt(max-min+1);
+        return min + ThreadLocalRandom.current().nextInt(max - min + 1);
     }
-    static int random(int max){
-        return random(0,max);
+
+    static int random(int max) {
+        return random(0, max);
     }
 }

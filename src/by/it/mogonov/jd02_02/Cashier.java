@@ -23,7 +23,7 @@ public class Cashier implements Runnable {
                 }
                 System.out.println(this+"finish service "+ currentPurchaser);
             }else {
-
+                System.out.println(this + "sleep");
                 Timer.sleep(1000);
             }
         }

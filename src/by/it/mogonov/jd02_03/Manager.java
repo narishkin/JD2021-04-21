@@ -1,30 +1,34 @@
 package by.it.mogonov.jd02_03;
 
-public class Manager {
-    private Manager() {
+import java.util.concurrent.atomic.AtomicInteger;
+
+class Manager {
+
+    Manager() {
     }
 
+    private final AtomicInteger INSIDE_COUNT_PURCHASERS = new AtomicInteger(0);
+    private final AtomicInteger COMPLETE_COUNT_PURCHASERS = new AtomicInteger(0);
 
-    static int insideCountPurchasers = 0;
-    static int completeCountPurchasers = 0;
 
-    static boolean koronaClosed() {
-        return completeCountPurchasers == Conctant.PLAN_PURCHASE;
-
-    }
-    static boolean koronaOpened(){
-        return completeCountPurchasers +insideCountPurchasers< Conctant.PLAN_PURCHASE;
-    }
-    static synchronized void addNewPurchaser(){
-
-        insideCountPurchasers++;
-    }
-    static synchronized void complitePurchaser(){
-        insideCountPurchasers--;
-        completeCountPurchasers++;
+    boolean koronaClosed() {
+        return COMPLETE_COUNT_PURCHASERS.get() == Conctant.PLAN_PURCHASE;
     }
 
+    boolean koronaOpened() {
+        return COMPLETE_COUNT_PURCHASERS.get() + INSIDE_COUNT_PURCHASERS.get() < Conctant.PLAN_PURCHASE;
+    }
 
+    void addNewPurchaser() {
+        INSIDE_COUNT_PURCHASERS.getAndIncrement();
+    }
 
+    void complitePurchaser() {
+        INSIDE_COUNT_PURCHASERS.getAndIncrement();
+        COMPLETE_COUNT_PURCHASERS.getAndIncrement();
+
+    }
 
 }
+
+

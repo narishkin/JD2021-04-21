@@ -18,12 +18,24 @@ public class Parser {
     );
 
     Var calc(String expression) throws CalcException {
-        expression = expression.replace(" ", "");
-        List<String> operands = new ArrayList<>(Arrays.asList(expression.split(Patterns.OPERATION)));
+        StringBuilder stringBrackets = new StringBuilder(expression);
+        Matcher matcherBrackets;
+        while ((matcherBrackets = Pattern
+                .compile(Patterns.BRACKETS)
+                .matcher(stringBrackets))
+                .find()) {
+            int startIndex = matcherBrackets.start();
+            int endIndex = matcherBrackets.end();
+            Var resultString = calc(stringBrackets.substring(startIndex + 1, endIndex - 1));
+            stringBrackets.replace(startIndex, endIndex, resultString.toString());
+        }
+
+        String finalExpression = stringBrackets.toString().replace(" ", "");
+        List<String> operands = new ArrayList<>(Arrays.asList(finalExpression.split(Patterns.OPERATION)));
         List<String> operations = new ArrayList<>();
         Matcher matcher = Pattern
                 .compile(Patterns.OPERATION)
-                .matcher(expression);
+                .matcher(finalExpression);
         while (matcher.find()) {
             operations.add(matcher.group());
         }
@@ -64,16 +76,16 @@ public class Parser {
         if (leftPart == null || rightPart == null) {
             throw new CalcException("Incorrect expression");
         }
-            switch (operation) {
-                case "+":
-                    return leftPart.add(rightPart);
-                case "-":
-                    return leftPart.sub(rightPart);
-                case "*":
-                    return leftPart.mul(rightPart);
-                case "/":
-                    return leftPart.div(rightPart);
-            }
+        switch (operation) {
+            case "+":
+                return leftPart.add(rightPart);
+            case "-":
+                return leftPart.sub(rightPart);
+            case "*":
+                return leftPart.mul(rightPart);
+            case "/":
+                return leftPart.div(rightPart);
+        }
         throw new CalcException("Incorrect expression");
     }
 }

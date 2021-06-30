@@ -1,6 +1,4 @@
-package by.it.mogonov.calc;
-
-
+package by.it.mogonov.jd02_04;
 
 
 abstract class Var implements Operation {

@@ -1,7 +1,5 @@
 package by.it.mogonov.jd01_15;
 
-import by.it.mogonov.jd01_14.TaskA;
-
 import java.io.File;
 
 class PathCreator {
@@ -13,9 +11,9 @@ class PathCreator {
 
     }
 
-    static String getFileName(Class<by.it.mogonov.jd01_15.TaskA> taskAClass, String filename) {
+    static String getFileName(Class<TaskA> taskAClass, String filename) {
         String root = System.getProperty(USER_DIR);
-        String path = by.it.mogonov.jd01_15.TaskA.class
+        String path = TaskA.class
                 .getName()
                 .replace(TaskA.class.getSimpleName(), "")
                 .replace(".", File.separator);

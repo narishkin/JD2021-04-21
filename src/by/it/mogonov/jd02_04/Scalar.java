@@ -1,4 +1,4 @@
-package by.it.mogonov.calc;
+package by.it.mogonov.jd02_04;
 
 
 class Scalar extends Var {

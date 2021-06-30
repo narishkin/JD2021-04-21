@@ -8,7 +8,7 @@ public class ConsoleRunner {
     public static void main(String[] args) {
         Printer printer = new Printer();
         Parser parser = new Parser();
-        Var.loadVars();
+        VarRepo.loadVars();
         Scanner sc = new Scanner(System.in);
         String line;
         for (; ; ) {
@@ -21,7 +21,7 @@ public class ConsoleRunner {
                     printer.print(e);
                 }
             } else {
-                Var.saveVars();
+                VarRepo.saveVars();
                 break;
             }
         }

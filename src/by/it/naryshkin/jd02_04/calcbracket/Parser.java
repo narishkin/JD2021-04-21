@@ -11,11 +11,11 @@ public class Parser {
 
     Var calc(String expression) throws CalcException {
         if (expression.equals("printvar")) {
-            printer.printMap(Var.getVar());
+            printer.printMap(VarRepo.getVar());
             return null;
         }
         if (expression.equals("sortvar")) {
-            printer.sortedPrintMap(Var.getVar());
+            printer.sortedPrintMap(VarRepo.getVar());
             return null;
         }
 
@@ -65,7 +65,7 @@ public class Parser {
     private Var calcOneOperation(String left, String operationType, String right) throws CalcException {
         Var op2 = VarCreator.get(right);
         if (operationType.equals("=")) {
-            Var.setVar(left, op2);
+            VarRepo.setVar(left, op2);
             return op2;
         }
         Var op1 = VarCreator.get(left);

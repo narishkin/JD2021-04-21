@@ -15,7 +15,7 @@ public class VarCreator {
             return new Matrix(operand);
         } else
         if (operand.matches(Patterns.VARNAME)) {
-            return Var.vars.get(operand);
+            return VarRepo.vars.get(operand);
         } else {
             throw new CalcException("Unable to parse expression " + operand);
         }

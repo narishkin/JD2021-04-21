@@ -184,33 +184,6 @@ public class Matrix extends Var {
 
     @Override
     public Var div(Var other) throws CalcException {
-        if (other instanceof Scalar) {
-            double[][] resultMatrix = new double[this.ARRAY.length][this.ARRAY[0].length];
-            for (int i = 0; i < this.ARRAY.length; i++) {
-                for (int j = 0; j < this.ARRAY[i].length; j++) {
-                    resultMatrix[i] = Arrays.copyOf(this.ARRAY[i], this.ARRAY[i].length);
-                }
-            }
-            double scalar = ((Scalar) other).getScalar();
-            if (scalar == 0) {
-                System.out.println("Division by zero");
-            } else {
-                for (int i = 0; i < resultMatrix.length; i++) {
-                    for (int j = 0; j < resultMatrix[i].length; j++) {
-                        resultMatrix[i][j] += scalar;
-                    }
-                }
-            }
-            return new Matrix(resultMatrix);
-        }
-
-        if (other instanceof Vector) {
-            throw new CalcException("Operation impossible");
-        }
-
-        if (other instanceof Matrix) {
-            throw new CalcException("Operation impossible");
-        }
         return super.div(other);
     }
 

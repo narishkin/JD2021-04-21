@@ -8,8 +8,9 @@ public class CalcException extends Exception{
 
     public  CalcException(String message) {
         super("ERROR: " + message);
+        System.out.println(this.getMessage());
         Printer printer = new Printer();
-        printer.print(new CalcException());
+        printer.print(this);
 
     }
 

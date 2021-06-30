@@ -19,7 +19,6 @@ public class Printer {
     }
 
     void print(CalcException e) {
-        System.out.print(e.getStackTrace());
         try {
             fileWriter = new FileWriter(PathCreator.getFileName(ConsoleRunner.class, Printer.CONSOLE_LOG),true);
             fileWriter.write(e + "\n");

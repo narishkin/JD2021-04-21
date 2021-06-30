@@ -62,17 +62,14 @@ class ParserTest {
     }
 
     @Test()
-    void evaluateScalarVariable_TestA6() throws Exception {
-        String expression = "X=1";
+    void evaluateScalarCreate_TestA6() throws Exception {
+        String expression = "1";
         System.out.println(expression);
-        Var actualVar = parser.calc(expression);
-        VarRepo.saveVars();
+        Var actualVar = VarCreator.get(expression);
         String expectedValue = "1.0";
         String actualValue = actualVar.toString();
         System.out.println(actualValue);
         Assertions.assertEquals(expectedValue,actualValue);
-
-
     }
 
     @Test
@@ -162,11 +159,10 @@ class ParserTest {
         assertTrue(thrown.getMessage().contains("невозможна"));
     }
     @Test()
-    void evaluateVectorVariable_TestB9() throws Exception {
-        String expression = "X={1,2,3}";
+    void evaluateVectorCreate_TestB9() throws Exception {
+        String expression = "{1,2,3}";
         System.out.println(expression);
-        Var actualVar = parser.calc(expression);
-        VarRepo.saveVars();
+        Var actualVar = VarCreator.get(expression);
         String expectedValue = "{1.0, 2.0, 3.0}";
         String actualValue = actualVar.toString();
         System.out.println(actualValue);
@@ -309,12 +305,11 @@ class ParserTest {
         assertTrue(thrown.getMessage().contains("невозможна"));
     }
     @Test()
-    void evaluateMatrixVariable_TestC17() throws Exception {
-        String expression = "X={{1,2},{5,9}}";
+    void evaluateMatrixCreate_TestC17() throws Exception {
+        String expression = "{{1,2,3},{4,5,6},{7,8,9}}";
         System.out.println(expression);
-        Var actualVar = parser.calc(expression);
-        VarRepo.saveVars();
-        String expectedValue = "{{1.0, 2.0}, {5.0, 9.0}}";
+        Var actualVar = VarCreator.get(expression);
+        String expectedValue = "{{1.0, 2.0, 3.0}, {4.0, 5.0, 6.0}, {7.0, 8.0, 9.0}}";
         String actualValue = actualVar.toString();
         System.out.println(actualValue);
         Assertions.assertEquals(expectedValue,actualValue);

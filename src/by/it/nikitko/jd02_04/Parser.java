@@ -7,7 +7,6 @@ import java.util.regex.Pattern;
 
 public class Parser {
 
-
     private static final Map<String, Integer> PRIORITY = Map.of(
             "=", 0,
             "+", 1, "-", 1,
@@ -23,14 +22,13 @@ public class Parser {
         }
         expression = scopesFinder(expression);
 
-        List<String> operands = new ArrayList<>(
-                Arrays.asList(expression.split(Patterns.OPERATION)));
+        List<String> operands = new ArrayList<>(Arrays.asList(expression.split(Patterns.OPERATION)));
         List<String> operations = new ArrayList<>();
-        Matcher matcher = Pattern
+        Matcher matcherOperation = Pattern
                 .compile(Patterns.OPERATION)
                 .matcher(expression);
-        while (matcher.find()) {
-            operations.add(matcher.group());
+        while (matcherOperation.find()) {
+            operations.add(matcherOperation.group());
         }
 
         while (operations.size() > 0) {
@@ -47,11 +45,11 @@ public class Parser {
 
     private int getIndexOperation(List<String> operations) {
         int index = -1;
-        int pr = -1;
+        int currentPriority = -1;
         for (int i = 0; i < operations.size(); i++) {
-            String op = operations.get(i);
-            if (PRIORITY.get(op) > pr) {
-                pr = PRIORITY.get(op);
+            String operationsString = operations.get(i);
+            if (PRIORITY.get(operationsString) > currentPriority) {
+                currentPriority = PRIORITY.get(operationsString);
                 index = i;
             }
         }
@@ -86,6 +84,7 @@ public class Parser {
 
         ArrayDeque<Character> expressionCharDeque = new ArrayDeque<>();
         ArrayDeque<Character> leftPartExpression = new ArrayDeque<>();
+        StringBuilder currentScopeSB = new StringBuilder();
         StringBuilder result = new StringBuilder();
 
         char[] charArray = expression.toCharArray();
@@ -94,16 +93,15 @@ public class Parser {
         }
 
         while (expressionCharDeque.contains(')')) {
-            StringBuilder currScopeSB = new StringBuilder();
-            char currChar = expressionCharDeque.pollFirst();
-            leftPartExpression.add(currChar);
-            if (currChar == ')') {
-                while (currChar != '(' & !leftPartExpression.isEmpty()) {
-                    currChar = leftPartExpression.pollLast();
-                    currScopeSB.append(currChar);
+            currentScopeSB.delete(0,currentScopeSB.length());
+            char currentChar = expressionCharDeque.pollFirst();
+            leftPartExpression.add(currentChar);
+            if (currentChar == ')') {
+                while (currentChar != '(' & !leftPartExpression.isEmpty()) {
+                    currentChar = leftPartExpression.pollLast();
+                    currentScopeSB.append(currentChar);
                 }
-                String currScopeString = currScopeSB.reverse().toString().replaceAll("[\\(\\)]", "");
-               // System.out.println(currScopeString);
+                String currScopeString = currentScopeSB.reverse().toString().replaceAll("[()]", "");
                 char[] currentScopeResult = calc(currScopeString).toString().toCharArray();
                 for (int i = currentScopeResult.length - 1; i >= 0; i--) {
                     expressionCharDeque.addFirst(currentScopeResult[i]);
@@ -111,13 +109,12 @@ public class Parser {
                 while (!leftPartExpression.isEmpty()) {
                     expressionCharDeque.addFirst(leftPartExpression.pollLast());
                 }
-              //  System.out.println(expressionCharDeque);
             }
         }
         for (Character character : expressionCharDeque) {
             result.append(character);
         }
-       return result.toString();
-      //  System.out.println(calc(result.toString()));
+        return result.toString();
+        //  System.out.println(calc(result.toString()));
     }
 }

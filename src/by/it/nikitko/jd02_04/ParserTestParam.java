@@ -1,51 +1,50 @@
 package by.it.nikitko.jd02_04;
-import org.junit.jupiter.api.Test;
+
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+
+import java.util.Arrays;
+import java.util.Collection;
+
 import static org.junit.Assert.assertEquals;
 
+@RunWith(Parameterized.class)
+public class ParserTestParam {
 
-
-class ParserTest {
-
+    private String expression;
+    private String expectedResult;
     private Parser parser;
+
+    public ParserTestParam(String expression, String expectedResult) {
+        this.expression = expression;
+        this.expectedResult = expectedResult;
+    }
+
+    @Parameterized.Parameters
+    public static Collection<Object> data() {
+        Object[][] data = new Object[][]{
+                {"A=2+5.3", "7.3"},
+                {"B=A*3.5", "25.55"},
+                {"C=B+(A*2)", "40.15"}
+        };
+        return Arrays.asList(data);
+    }
 
     @BeforeEach
     void setUp() {
-        parser=new Parser();
+        parser = new Parser();
     }
 
     @Test
-    void scalarA1() throws CalcException {
-        String expression = "A=2+5.3";
+    public void scalar() throws CalcException {
         Var actualVar = parser.calc(expression);
-        double expected = 7.3;
-        double actual = Double.parseDouble(actualVar.toString());
-        assertEquals(expected,actual,1e-10);
+        String actual = actualVar.toString();
+        assertEquals(expectedResult, actual);
     }
-    @Test
-    void scalarA2() throws CalcException {
-        String expression = "B=A*3.5";
-        Var actualVar = parser.calc(expression);
-        double expected = 25.55;
-        double actual = Double.parseDouble(actualVar.toString());
-        assertEquals(expected,actual,1e-10);
-    }
-    @Test
-    void scalarA3() throws CalcException {
-        String expression = "B1=B+0.11*-5";
-        Var actualVar = parser.calc(expression);
-        double expected = 25;
-        double actual = Double.parseDouble(actualVar.toString());
-        assertEquals(expected,actual,1e-10);
-    }
-    @Test
-    void scalarA4() throws CalcException {
-        String expression = "B2=A/2-1";
-        Var actualVar = parser.calc(expression);
-        double expected = 2.65;
-        double actual = Double.parseDouble(actualVar.toString());
-        assertEquals(expected,actual,1e-10);
-    } @Test
+}
+   /*  @Test
     void scalarB1() throws CalcException {
         String expression = "C=B+(A*2)";
         Var actualVar = parser.calc(expression);
@@ -116,8 +115,6 @@ class ParserTest {
     }
 
 
+*/
 
 
-
-
-}

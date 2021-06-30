@@ -43,7 +43,9 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
         goToQueue();
         goOut();
         Dispatcher.currentCountBuyer--;
-        System.out.println("In market " + Dispatcher.currentCountBuyer + " buyers");
+//        System.out.println("In market " + Dispatcher.currentCountBuyer + " buyers");
+//        System.out.println("Вошедших " + Dispatcher.getInsideCountBuyers());
+//        System.out.println(("Вышедших "+ Dispatcher.getCompleteCountBuyers()));
     }
 
     @Override

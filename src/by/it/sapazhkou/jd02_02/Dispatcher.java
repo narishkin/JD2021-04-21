@@ -7,8 +7,16 @@ public class Dispatcher {
     private static volatile int insideCountBuyers = 0;
     private static volatile int completeCountBuyers = 0;
 
+    public static int getInsideCountBuyers() {
+        return insideCountBuyers;
+    }
+
+    public static int getCompleteCountBuyers() {
+        return completeCountBuyers;
+    }
+
     public static boolean marketClosed() {
-        return completeCountBuyers >= Configs.PLAN_BUYERS;
+        return completeCountBuyers == Configs.PLAN_BUYERS;
     }
 
     static boolean marketOpened() {

@@ -26,7 +26,7 @@ public class Purchaser extends Thread implements LPurchaser {
 
     }
 
-    private void goToQueue() {
+    public void goToQueue() {
         synchronized (this){
             QueuePurchaser.add(this);
             try {

@@ -18,6 +18,10 @@ public class QueueBuyers {
         }
     }
 
+    public static int getQueueSize(){
+        return QUEUE_BUYERS.size();
+    }
+
     public static void add(Buyer buyer) {
         synchronized (MONITOR) {
             QUEUE_BUYERS.addLast(buyer);

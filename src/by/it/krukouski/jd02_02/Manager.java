@@ -1,12 +1,18 @@
 package by.it.krukouski.jd02_02;
 
-class CounterBuyers {
+class Manager {
 
-    private CounterBuyers() {
+    private Manager() {
     }
+
+    static int buyersCount = 0;
 
     private static volatile int insideCountBuyers = 0;
     private static volatile int completeCountBuyers = 0;
+
+    public static int getCompleteCountBuyers(){
+        return completeCountBuyers;
+    }
 
     static boolean storeClosed() {
         return completeCountBuyers == Config.PLAN_BUYERS;

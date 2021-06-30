@@ -1,8 +1,16 @@
 package by.it.mogonov.calc;
 
+
+
+import java.util.Objects;
+
 public class Printer {
+
+
     void print(Var var){
-        if (var!=null)
+        if (Objects.nonNull(var)){
             System.out.println(var);
     }
+}
+public void print(CalcException e) { System.out.println(e.getMessage());}
 }

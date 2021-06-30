@@ -14,11 +14,6 @@ public class Vector extends Var {
     }
 
 
-    Vector(Vector vector) {
-        value = vector.value;
-
-    }
-
     public Vector(String strVector) {
 
         String[] token = strVector.replaceAll("[ {}]", "").split(",");

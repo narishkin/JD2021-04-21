@@ -31,7 +31,7 @@ abstract class Var implements Operation {
             if (VarRepo.contain(expression)) {
                 return VarRepo.load(expression);
             } else {
-                throw new CalcException("Incorrect expression1");
+                throw new CalcException("Incorrect expression");
             }
         }
     }

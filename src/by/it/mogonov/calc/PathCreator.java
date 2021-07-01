@@ -1,4 +1,4 @@
-package by.it.mogonov.jd01_14;
+package by.it.mogonov.calc;
 
 import java.io.File;
 
@@ -11,7 +11,7 @@ public class PathCreator {
 
      }
 
-      public static String getFileName(Class<?> aClass, String filename) {
+       static String getFileName(Class<?> aClass, String filename) {
          String root = System.getProperty(USER_DIR);
          String path = aClass
                  .getName()

@@ -1,4 +1,4 @@
-package by.it.mogonov.jd02_02;
+package by.it.mogonov.jd02_03;
 
 public interface LPurchaser {
     void goToKorona();

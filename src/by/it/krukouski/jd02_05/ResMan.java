@@ -6,7 +6,8 @@ import java.util.ResourceBundle;
 public enum ResMan {
     INSTANCE;
 
-    private final String RES_LANGUAGE = "";
+    @SuppressWarnings("FieldCanBeLocal")
+    private final String RES_LANGUAGE = "by.it.krukouski.jd02_05.res.language";
 
    private ResourceBundle resourceBundle;
 

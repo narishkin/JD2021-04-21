@@ -1,4 +1,4 @@
-package by.it.mogonov.calc;
+package by.it.mogonov.jd02_04;
 
 import java.util.Scanner;
 

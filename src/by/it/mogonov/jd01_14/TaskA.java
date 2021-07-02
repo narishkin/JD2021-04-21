@@ -11,8 +11,8 @@ public class TaskA {
 
     public static void main(String[] args) {
 
-        String fileName = PathCreator.getFileName(FILENAME);
-        String txtName = PathCreator.getFileName(RESULT);
+        String fileName = PathCreator.getFileName(TaskA.class,FILENAME);
+        String txtName = PathCreator.getFileName(TaskA.class,RESULT);
 
         writeIntegers(fileName);
         List<Integer> integerList = readIntegers(fileName);

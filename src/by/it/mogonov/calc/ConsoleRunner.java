@@ -3,20 +3,30 @@ package by.it.mogonov.calc;
 import java.util.Scanner;
 
 public class ConsoleRunner {
-    public static void main(String[] args) throws CalcException {
-        Scanner sc = new Scanner(System.in);
-        String line;
 
-        Parser parser = new Parser();
+    static final String KEY_STOP_APP = "end";
+
+    public static void main(String[] args) {
         Printer printer = new Printer();
+        Parser parser = new Parser();
+        VarRepo.loadVars();
 
-        while (!(line = sc.nextLine()).equals("end")) {
-            try {
-                Var result = parser.calc(line);
-                printer.print(result);
-            } catch (CalcException e) {
-                System.out.println(e.getMessage());
+        Scanner input = new Scanner(System.in);
+        for (; ; ) {
+            String expression = input.nextLine();
+            if (!expression.equals(KEY_STOP_APP)) {
+                try {
+                    Var var = parser.evaluate(expression);
+                    printer.print(var);
+                } catch (CalcException e) {
+                    printer.print(e);
+                }
+            } else {
+                VarRepo.saveVars();
+                break;
             }
         }
     }
 }
+
+

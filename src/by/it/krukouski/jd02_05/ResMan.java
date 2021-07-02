@@ -9,7 +9,11 @@ public enum ResMan {
     @SuppressWarnings("FieldCanBeLocal")
     private final String RES_LANGUAGE = "by.it.krukouski.jd02_05.res.language";
 
-   private ResourceBundle resourceBundle;
+    private ResourceBundle resourceBundle;
+
+    public Locale getResourceBundle() {
+        return resourceBundle.getLocale();
+    }
 
    ResMan(){
        set(Locale.getDefault());
@@ -22,4 +26,6 @@ public enum ResMan {
    public String get(String key){
        return resourceBundle.getString(key);
    }
+
+
 }

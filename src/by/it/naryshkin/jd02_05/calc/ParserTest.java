@@ -131,7 +131,7 @@ class ParserTest {
         String expression = "E={1,2,3}+{4,5,6,7}";
         System.out.println(expression);
         Throwable thrown = assertThrows(CalcException.class, () -> parser.calc(expression));
-        assertTrue(thrown.getMessage().contains("длина векторов неодинакова"));
+        assertTrue(thrown.getMessage().contains("ERROR: Unequal vector length"));
     }
 
     @Test
@@ -140,7 +140,7 @@ class ParserTest {
         String expression = "E={1,2,3}-{4,5,6,7}";
         System.out.println(expression);
         Throwable thrown = assertThrows(CalcException.class, () -> parser.calc(expression));
-        assertTrue(thrown.getMessage().contains("длина векторов неодинакова"));
+        assertTrue(thrown.getMessage().contains("ERROR: Unequal vector length"));
     }
     @Test
     void evaluateUnequalVectorMul_TestB7() throws Exception {
@@ -148,7 +148,7 @@ class ParserTest {
         String expression = "E={1,2,3}*{4,5,6,7}";
         System.out.println(expression);
         Throwable thrown = assertThrows(CalcException.class, () -> parser.calc(expression));
-        assertTrue(thrown.getMessage().contains("длина векторов неодинакова"));
+        assertTrue(thrown.getMessage().contains("ERROR: Unequal vector length"));
     }
     @Test
     void evaluateVectorDiv_TestB8() throws Exception {
@@ -156,7 +156,7 @@ class ParserTest {
         String expression = "E={1,2,3}/{4,5,6}";
         System.out.println(expression);
         Throwable thrown = assertThrows(CalcException.class, () -> parser.calc(expression));
-        assertTrue(thrown.getMessage().contains("невозможна"));
+        assertTrue(thrown.getMessage().contains("impossible"));
     }
     @Test()
     void evaluateVectorCreate_TestB9() throws Exception {
@@ -190,35 +190,35 @@ class ParserTest {
         String expression = "Z={{1,2,3},{4,5,6},{7,8,9}}/0";
         System.out.println(expression);
         Throwable thrown = assertThrows(CalcException.class, () -> parser.calc(expression));
-        assertTrue(thrown.getMessage().contains("невозможна"));
+        assertTrue(thrown.getMessage().contains("impossible"));
     }
     @Test()
     void evaluateMatrixAddVector_TestC3() throws Exception {
         String expression = "Z={{1,2,3},{4,5,6},{7,8,9}}+{1,2,3}";
         System.out.println(expression);
         Throwable thrown = assertThrows(CalcException.class, () -> parser.calc(expression));
-        assertTrue(thrown.getMessage().contains("невозможна"));
+        assertTrue(thrown.getMessage().contains("impossible"));
     }
     @Test()
     void evaluateMatrixSubVector_TestC4() throws Exception {
         String expression = "Z={{1,2,3},{4,5,6},{7,8,9}}-{1,2,3}";
         System.out.println(expression);
         Throwable thrown = assertThrows(CalcException.class, () -> parser.calc(expression));
-        assertTrue(thrown.getMessage().contains("невозможна"));
+        assertTrue(thrown.getMessage().contains("ERROR: Unequal matrices length"));
     }
     @Test()
     void evaluateMatrixMulUnequalSizeMatrix_TestC5() throws Exception {
         String expression = "Z={{1,2,3},{4,5,6},{7,8,9}}*{1,2}";
         System.out.println(expression);
         Throwable thrown = assertThrows(CalcException.class, () -> parser.calc(expression));
-        assertTrue(thrown.getMessage().contains("невозможна"));
+        assertTrue(thrown.getMessage().contains("impossible"));
     }
     @Test()
     void evaluateMatrixDivMatrix_TestC6() throws Exception {
         String expression = "Z={{1,2},{4,5}}/{{1,2},{4,5}}";
         System.out.println(expression);
         Throwable thrown = assertThrows(CalcException.class, () -> parser.calc(expression));
-        assertTrue(thrown.getMessage().contains("невозможна"));
+        assertTrue(thrown.getMessage().contains("impossible"));
     }
 
 
@@ -248,14 +248,14 @@ class ParserTest {
         String expression = "Z=6/{{1,2},{4,5}}";
         System.out.println(expression);
         Throwable thrown = assertThrows(CalcException.class, () -> parser.calc(expression));
-        assertTrue(thrown.getMessage().contains("невозможна"));
+        assertTrue(thrown.getMessage().contains("impossible"));
     }
     @Test()
     void evaluateVectorAddMatrix_TestC10() throws Exception {
         String expression = "Z={1,2}+{{1,2},{4,5}}";
         System.out.println(expression);
         Throwable thrown = assertThrows(CalcException.class, () -> parser.calc(expression));
-        assertTrue(thrown.getMessage().contains("невозможна"));
+        assertTrue(thrown.getMessage().contains("impossible"));
     }
 
     @Test()
@@ -263,7 +263,7 @@ class ParserTest {
         String expression = "Z={1,2}-{{1,2},{4,5}}";
         System.out.println(expression);
         Throwable thrown = assertThrows(CalcException.class, () -> parser.calc(expression));
-        assertTrue(thrown.getMessage().contains("невозможна"));
+        assertTrue(thrown.getMessage().contains("impossible"));
     }
 
     @Test()
@@ -271,21 +271,21 @@ class ParserTest {
         String expression = "Z={1,2}*{{1,2},{4,5}}";
         System.out.println(expression);
         Throwable thrown = assertThrows(CalcException.class, () -> parser.calc(expression));
-        assertTrue(thrown.getMessage().contains("невозможна"));
+        assertTrue(thrown.getMessage().contains("impossible"));
     }
     @Test()
     void evaluateVectorDivMatrix_TestC13() throws Exception {
         String expression = "Z={1,2}/{{1,2},{4,5}}";
         System.out.println(expression);
         Throwable thrown = assertThrows(CalcException.class, () -> parser.calc(expression));
-        assertTrue(thrown.getMessage().contains("невозможна"));
+        assertTrue(thrown.getMessage().contains("impossible"));
     }
     @Test()
     void evaluateUnequalMatrixMulMatrix_TestC14() throws Exception {
         String expression = "Z={{1,2},{4,5}}*{{1,2,6},{4,5,7},{4,5,6}}";
         System.out.println(expression);
         Throwable thrown = assertThrows(CalcException.class, () -> parser.calc(expression));
-        assertTrue(thrown.getMessage().contains("невозможна"));
+        assertTrue(thrown.getMessage().contains("impossible"));
     }
     @Test()
     void evaluateMatrixMulMatrix_TestC15() throws CalcException {
@@ -302,7 +302,7 @@ class ParserTest {
         String expression = "Z={{1,2},{5,9}}/{{1,2},{4,5}}";
         System.out.println(expression);
         Throwable thrown = assertThrows(CalcException.class, () -> parser.calc(expression));
-        assertTrue(thrown.getMessage().contains("невозможна"));
+        assertTrue(thrown.getMessage().contains("impossible"));
     }
     @Test()
     void evaluateMatrixCreate_TestC17() throws Exception {

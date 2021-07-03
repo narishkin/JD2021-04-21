@@ -12,39 +12,29 @@ public enum ResourceManager {
     INSTANCE;
 
     private ResourceBundle resourceBundle;
+
+    public DateFormat getDateFormat() {
+        return dateFormat;
+    }
+
     private DateFormat dateFormat;
-    private DateTimeFormatter dateTimeFormatter;
 
     ResourceManager() {
         setLocale(Locale.getDefault());
     }
 
     public void setLocale(Locale locale) {
-
         resourceBundle = ResourceBundle.getBundle(PathCreator.getPath(ResourceManager.class), locale);
-     // dateFormat = DateFormat.getDateInstance(DateFormat.MEDIUM, locale);
-       //  dateTimeFormatter = new DateTimeFormatter(locale);
+        dateFormat = DateFormat.getDateInstance(DateFormat.MEDIUM, locale);
     }
 
     public String get(String key) {
         return resourceBundle.getString(key);
     }
 
-    public  void getDate() {
+    public void getDate() {
+        Date date = new Date();
+        System.out.println(dateFormat.format(date.getTime()));
 
-
-     //   String s = dateFormat.format(new Date());
-       LocalDate today = LocalDate.now();
-        System.out.println(today);
-
-        // String todayString = today.toString();
-       //    String s = dateFormat.format(todayString);
-       /* try {
-           Date d=null;
-                  d=  dateFormat.parse("April 12, 2016");
-            System.out.println(d);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }*/
     }
 }

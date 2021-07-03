@@ -20,9 +20,10 @@ public enum ResourceManager {
     }
 
     public void setLocale(Locale locale) {
+
         resourceBundle = ResourceBundle.getBundle(PathCreator.getPath(ResourceManager.class), locale);
      // dateFormat = DateFormat.getDateInstance(DateFormat.MEDIUM, locale);
-         dateTimeFormatter = new DateTimeFormatter(locale);
+       //  dateTimeFormatter = new DateTimeFormatter(locale);
     }
 
     public String get(String key) {
@@ -34,16 +35,16 @@ public enum ResourceManager {
 
      //   String s = dateFormat.format(new Date());
        LocalDate today = LocalDate.now();
-
+        System.out.println(today);
 
         // String todayString = today.toString();
        //    String s = dateFormat.format(todayString);
-        try {
+       /* try {
            Date d=null;
                   d=  dateFormat.parse("April 12, 2016");
             System.out.println(d);
         } catch (ParseException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 }

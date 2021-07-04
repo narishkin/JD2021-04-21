@@ -40,6 +40,7 @@ public class Korona {
             for (int i = 0; i < countPurchaserPerSecond && manager.koronaOpened(); i++) {
                 Purchaser purchaser = new Purchaser(++numberPurchasers, this);
                 purchaser.start();
+                manager.addNewPurchaser();
             }
             Timer.sleep(1000);
         }

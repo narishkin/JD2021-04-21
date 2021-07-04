@@ -14,7 +14,6 @@ public class Purchaser extends Thread implements LPurchaser {
     public Purchaser(long number, Korona korona) {
         super("Purchaser № " + number + " ");
         this.korona = korona;
-        korona.getManager().addNewPurchaser();
     }
 
     @Override
@@ -23,7 +22,6 @@ public class Purchaser extends Thread implements LPurchaser {
         chooseGoods();
         goToQueue();
         goOut();
-        korona.getManager().complitePurchaser();
     }
 
     @Override

@@ -1,0 +1,7 @@
+﻿messages.welcome=Сардэчна запрашаем!
+messages.question=Як справы?
+messages.inputOffer=выберыце мову ru / be / en альбо бярыце яе з аргументаў праграмы
+messages.wrongInput=няправільны ўвод, мова ўзята з аргументаў праграмы
+user.firstname=Канстанцiн
+user.lastname=Жураулеу
+formats.date=dd MM yyyy

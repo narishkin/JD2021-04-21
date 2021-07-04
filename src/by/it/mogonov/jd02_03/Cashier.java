@@ -17,7 +17,7 @@ public class Cashier implements Runnable {
         System.out.println(this + "open");
         while (!korona.getManager().koronaClosed()) {
             Purchaser currentPurchaser = korona.getQueuePurchaser().poll();
-            if (currentPurchaser != null) {
+            if (currentPurchaser !=null) {
                 System.out.println(this + "start service " + currentPurchaser);
                 int timeService = Randomaser.random(2000, 5000);
                 Timer.sleep(timeService);
@@ -38,6 +38,4 @@ public class Cashier implements Runnable {
     public String toString() {
         return String.format("\rCashier #%d ", number);
     }
-
-
 }

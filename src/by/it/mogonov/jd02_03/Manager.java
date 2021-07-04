@@ -7,8 +7,8 @@ class Manager {
     Manager() {
     }
 
-    private final AtomicInteger INSIDE_COUNT_PURCHASERS = new AtomicInteger(0);
-    private final AtomicInteger COMPLETE_COUNT_PURCHASERS = new AtomicInteger(0);
+    private final AtomicInteger INSIDE_COUNT_PURCHASERS = new AtomicInteger();
+    private final AtomicInteger COMPLETE_COUNT_PURCHASERS = new AtomicInteger();
 
 
     boolean koronaClosed() {

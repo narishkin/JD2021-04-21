@@ -11,9 +11,7 @@ public class QueuePurchaser {
 
     private final BlockingDeque<Purchaser> PURCHASERS = new LinkedBlockingDeque<>(Conctant.QUEUE_CAPACITY);
 
-    public Purchaser poll() {
-        return PURCHASERS.pollFirst();
-    }
+    public Purchaser poll() { return PURCHASERS.pollFirst(); }
 
 
     public void add(Purchaser purchaser) {

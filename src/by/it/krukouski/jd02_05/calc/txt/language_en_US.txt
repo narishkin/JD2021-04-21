@@ -8,3 +8,4 @@ errors.unknownVar=ERROR: Unknown Var
 errors.differentLengthVectors=Different length Vectors
 errors.divisionImpossible=Division impossible
 message.abstractVariable=Abstract Variable
+message.keyword=Enter "end" for finish program

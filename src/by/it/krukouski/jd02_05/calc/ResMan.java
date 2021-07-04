@@ -15,7 +15,7 @@ public enum ResMan {
         set(Locale.getDefault());
     }
 
-    private void set(Locale locale) {
+    public void set(Locale locale) {
         resourceBundle=ResourceBundle.getBundle(RES_LANGUAGE,locale);
     }
 

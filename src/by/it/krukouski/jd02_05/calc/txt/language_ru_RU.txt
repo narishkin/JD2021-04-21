@@ -8,3 +8,4 @@ errors.unknownVar=Ошибка: неизвестная переменная
 errors.differentLengthVectors=Разная длина векторов
 errors.divisionImpossible=Деление невозможно
 message.abstractVariable=Абстрактная переменная
+message.keyword=Введите "конец" для завершения программы

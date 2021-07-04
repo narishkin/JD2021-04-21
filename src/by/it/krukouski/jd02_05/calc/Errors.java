@@ -12,5 +12,6 @@ public interface Errors {
     String differentLengthVectors="errors.differentLengthVectors";
     String divisionImpossible="errors.divisionImpossible";
     String abstractVariable="message.abstractVariable";
+    String keyWord="message.keyword";
 
 }

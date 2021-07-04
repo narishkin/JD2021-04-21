@@ -8,3 +8,4 @@ errors.unknownVar=Памылка: невядомая пераменная
 errors.differentLengthVectors=Розная дліна вектароў
 errors.divisionImpossible=Дзяленне немагчыма
 message.abstractVariable=Абстрактная пераменная
+message.keyword=Увядзіце "канец" каб скончыць праграму

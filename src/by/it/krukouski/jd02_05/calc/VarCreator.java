@@ -17,7 +17,7 @@ public class VarCreator {
             if (VarRepo.contain(string)) {
                 return VarRepo.load(string);
             } else {
-                throw new CalcException("ERROR: Unknown Var " + string);
+                throw new CalcException(ResMan.INSTANCE.get(Errors.unknownVar) + string);
             }
         }
     }

@@ -74,7 +74,7 @@ public class Parser {
 
         Var leftPart = VarCreator.createVar(leftString);
         if (leftPart == null || rightPart == null) {
-            throw new CalcException("Incorrect expression");
+            throw new CalcException(ResMan.INSTANCE.get(Errors.incorrectExpression));
         }
         switch (operation) {
             case "+":
@@ -86,6 +86,6 @@ public class Parser {
             case "/":
                 return leftPart.div(rightPart);
         }
-        throw new CalcException("Incorrect expression");
+        throw new CalcException(ResMan.INSTANCE.get(Errors.incorrectExpression));
     }
 }

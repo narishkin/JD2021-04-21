@@ -20,13 +20,13 @@ public class TaskC {
         String pathDir = root + File.separator + "src" + File.separator + pathProjectUser;
         String pathFileResult = root + File.separator + "src" + File.separator + pathProject + "resultTaskC.txt";
 
-        printToConsole(pathDir);
-
         try(PrintWriter printWriter = new PrintWriter(pathFileResult)){
            printToConsole(pathDir,printWriter);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+
+        printToConsole(pathDir);
 
     }
 
@@ -56,6 +56,5 @@ public class TaskC {
             }
         }
     }
-
 }
 

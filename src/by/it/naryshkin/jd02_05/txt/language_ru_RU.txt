@@ -1,0 +1,4 @@
+user.firstname=Константин
+user.lastname=Нарышкин
+message.welcome=Привет!
+message.question1=Как дела?

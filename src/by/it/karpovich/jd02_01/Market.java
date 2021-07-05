@@ -1,36 +1,53 @@
 package by.it.karpovich.jd02_01;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Market {
-    public static void main(String[] args) throws InterruptedException {
+    static Map<String, Double> goodsList = new HashMap<>(20);
+
+
+
+    public static Map.Entry<String, Double> getRandomGoods() {
+
+        goodsList.putIfAbsent("milk", 2.5);
+        goodsList.putIfAbsent("bread", 5.5);
+        goodsList.putIfAbsent("crisps", 1.8);
+        goodsList.putIfAbsent("yoghurt", 12.2);
+        goodsList.putIfAbsent("meat", 9.99);
+        goodsList.putIfAbsent("potato", 0.99);
+        goodsList.putIfAbsent("cucumber", 1.5);
+
+        Set<Map.Entry<String, Double>> entries = goodsList.entrySet();
+        Iterator<Map.Entry<String, Double>> itr = entries.iterator();
+        int number = Util.random(1, goodsList.size());
+        int i = 0;
+        while (itr.hasNext()) {
+            i++;
+            if (i==number)
+                return  itr.next();
+            else itr.next();
+        }
+        return null;
+    }
+    public static void main(String[] args) {
         System.out.println("Market opened");
-        List<Buyer> buyerList = new ArrayList<>();
-
-        Map<String, Integer> goods = new HashMap<>();
-        Goods.goods.put("banana", 3);
-        Goods.goods.put("strawberry", 14);
-        Goods.goods.put("pineapple", 8);
-        Goods.goods.put("orange", 6);
-        Goods.goods.put("mango", 7);
-        Goods.goods.put("watermelon", 9);
-        Goods.goods.put("coconut", 5);
-
-        for (int i = 0; i < 120; i++) {
-            int currentCount = Helper.random(2);
-            for (int j = 0; j <= currentCount; j++) {
-                Buyer buyer = new Buyer(++Dispatcher.counterBuyer);
-                buyerList.add(buyer);
-                buyer.start();
+        int numberBuyer = 0;
+        List<Buyer> buyerList = new ArrayList<>(200);
+        for (int time = 0; time < 120; time++) {
+            int countBuyer = Util.random(2);
+            for (int i=0; i < countBuyer; i++) {
+                Buyer b = new Buyer(++numberBuyer);
+                buyerList.add(b);
+                b.start();
             }
-            Helper.sleep(1000);
+            Util.sleep(1000);
         }
-        for (Buyer buyer : buyerList) {
-            buyer.join();
-        }
+        for (Buyer b: buyerList)
+            try {
+                b.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         System.out.println("Market closed");
     }
 }

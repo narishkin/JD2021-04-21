@@ -14,12 +14,7 @@ public class Parser {
     );
 
     Var calc(String expression) throws CalcException {
-        if (expression.equals("printvar")) {
-            System.out.println(VarRepo.getVars());
-        }
-        if (expression.equals("sortvar")) {
-            System.out.println(VarRepo.getVars().entrySet());
-        }
+
         expression = scopesFinder(expression);
 
         List<String> operands = new ArrayList<>(Arrays.asList(expression.split(Patterns.OPERATION)));

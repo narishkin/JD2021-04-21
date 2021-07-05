@@ -7,8 +7,6 @@ abstract class Var implements Operation {
     static Var createVar(String expression) throws CalcException {
         expression = expression.replaceAll("\\s+", "");
 
-
-
         if (expression.matches(Patterns.SCALAR))
             return new Scalar(expression);
         if (expression.matches(Patterns.VECTOR))

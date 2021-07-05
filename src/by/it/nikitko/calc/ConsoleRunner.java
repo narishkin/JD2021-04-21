@@ -14,23 +14,33 @@ public class ConsoleRunner {
         Parser parser = new Parser();
         VarRepo.loadVars();
         Printer printer = new Printer();
-
-        if (args.length == 2) {
-            Locale locale = new Locale(args[0], args[1]);
-            manager.setLocale(locale);
-        }
+        setLocalFromArgs(args);
 
 
         while (!(enteredString = input.nextLine()).equals("end")) {
-            switchLocale(enteredString);
             try {
-                Var result = parser.calc(enteredString);
-                printer.print(result);
+                if (enteredString.equals("printvar")) {
+                    System.out.println(VarRepo.getVars());
+                } else if (enteredString.equals("sortvar")) {
+                    System.out.println(VarRepo.getVars().entrySet());
+                } else if (enteredString.equals("en") | enteredString.equals("ru") | enteredString.equals("be")) {
+                    switchLocale(enteredString);
+                } else {
+                    Var result = parser.calc(enteredString);
+                    printer.print(result);
+                }
             } catch (CalcException e) {
                 System.out.println(e.getMessage());
             }
             VarRepo.saveVars();
 
+        }
+    }
+
+    private static void setLocalFromArgs(String[] args) {
+        if (args.length == 2) {
+            Locale locale = new Locale(args[0], args[1]);
+            manager.setLocale(locale);
         }
     }
 

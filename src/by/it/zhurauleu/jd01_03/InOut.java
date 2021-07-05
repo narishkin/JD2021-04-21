@@ -1,7 +1,5 @@
 package by.it.zhurauleu.jd01_03;
 
-import java.util.Scanner;
-
 public class InOut {
     /**
      *

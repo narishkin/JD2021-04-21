@@ -1,0 +1,7 @@
+﻿messages.welcome=Добро пожаловать!
+messages.question=Как Дела?
+messages.inputOffer=выберите язык ru / be / en или язык будет взят из аргументов программы
+messages.wrongInput=неправильный ввод, язык взят из аргументов программы
+user.firstname=Константин
+user.lastname=Журавлев
+formats.date=dd MM yyyy

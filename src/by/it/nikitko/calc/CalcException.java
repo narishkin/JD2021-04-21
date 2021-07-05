@@ -17,6 +17,6 @@ public class CalcException extends Exception{
     }
 
     public CalcException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
-        super("ERRO: "+message, cause, enableSuppression, writableStackTrace);
+        super("ERROR: "+message, cause, enableSuppression, writableStackTrace);
     }
 }

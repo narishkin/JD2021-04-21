@@ -61,7 +61,7 @@ class Scalar extends Var {
             return new Scalar(div);
         }
         if (other instanceof Vector) {
-            throw new CalcException("Opretion Scalar/Vector is impossible");
+            throw new CalcException("Operation Scalar/Vector is impossible");
         }
         else {
             return other.div(this);

@@ -1,34 +1,27 @@
 package by.it.nikitko.calc;
 
-import java.util.HashMap;
-import java.util.Map;
 
 abstract class Var implements Operation {
 
-    private static Map<String, Var> vars = new HashMap<>();
-
-    public static Map<String, Var> getVars() {
-        return vars;
-    }
-
-    static Var saveVar(String name, Var var) {
-        vars.put(name, var);
-        return var;
-    }
 
     static Var createVar(String expression) throws CalcException {
         expression = expression.replaceAll("\\s+", "");
+
+
 
         if (expression.matches(Patterns.SCALAR))
             return new Scalar(expression);
         if (expression.matches(Patterns.VECTOR))
             return new Vector(expression);
-        if (expression.matches(Patterns.MATRIX))
+        if (expression.matches(Patterns.MATRIX)) {
             return new Matrix(expression);
-        if (vars.containsKey(expression))
-            return vars.get(expression);
-        throw new CalcException("Incorrect expression");
-
+        } else {
+            if (VarRepo.contain(expression)) {
+                return VarRepo.load(expression);
+            } else {
+                throw new CalcException("Incorrect expression");
+            }
+        }
     }
 
     @Override

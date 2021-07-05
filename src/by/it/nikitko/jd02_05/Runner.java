@@ -6,7 +6,6 @@ import java.util.Scanner;
 public class Runner {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        String enteredString;
         TimeUtils timeUtils = new TimeUtils();
         ResourceManager manager = ResourceManager.INSTANCE;
         Locale locale = new Locale("en", "US");
@@ -18,7 +17,11 @@ public class Runner {
         }
 
         printMessages(timeUtils, manager, locale);
+        switchLocale(scanner, timeUtils, manager, locale);
+    }
 
+    private static void switchLocale(Scanner scanner, TimeUtils timeUtils, ResourceManager manager, Locale locale) {
+        String enteredString;
         while (!(enteredString = scanner.nextLine()).equals("end")) {
             switch (enteredString) {
                 case ("ru"):

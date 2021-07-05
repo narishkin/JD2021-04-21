@@ -1,8 +1,8 @@
-package by.it.karpiuk.jd01_08;
+package by.it.karpiuk.jd01_09;
 
 import java.util.Arrays;
 
-class Vector extends by.it.karpiuk.jd01_08.Var {
+class Vector extends Var {
     private final double[] value;
 
     public Vector(double[] value) {

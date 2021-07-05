@@ -1,4 +1,4 @@
-package by.it._classwork_.jd02_04;
+package by.it.nakov.jd02_04;
 
 public class VarCreator {
     private VarCreator() {
@@ -15,7 +15,7 @@ public class VarCreator {
             if (VarRepo.contain(stringVar)) {
                 return VarRepo.load(stringVar);
             } else {
-                throw new CalcException("unknown " + stringVar);
+                throw new CalcException("unknown" + stringVar);
             }
         }
     }

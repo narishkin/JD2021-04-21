@@ -6,7 +6,8 @@ import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.TimeUnit;
 
 
-public class Store {
+public class
+Store {
 
    private static ForkJoinPool threadFJP = new ForkJoinPool();
     private static final List<Thread> THREADS = new ArrayList<>();

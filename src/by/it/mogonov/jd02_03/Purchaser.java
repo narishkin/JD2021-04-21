@@ -7,20 +7,13 @@ public class Purchaser extends Thread implements LPurchaser {
     private final Korona korona;
 
 
-    public void setWaitFlag(boolean waitFlag) {
-        this.waitFlag = waitFlag;
-    }
+    public void setWaitFlag(boolean waitFlag) { this.waitFlag = waitFlag; }
 
-    Object getMonitor() {
-        return this;
-    }
+    Object getMonitor() { return this; }
 
     public Purchaser(long number, Korona korona) {
-
         super("Purchaser № " + number + " ");
         this.korona = korona;
-        korona.getManager().addNewPurchaser();
-
     }
 
     @Override
@@ -29,7 +22,6 @@ public class Purchaser extends Thread implements LPurchaser {
         chooseGoods();
         goToQueue();
         goOut();
-        korona.getManager().complitePurchaser();
     }
 
     @Override
@@ -66,9 +58,7 @@ public class Purchaser extends Thread implements LPurchaser {
 
 
     @Override
-    public String toString() {
-        return this.getName();
-    }
+    public String toString() { return this.getName(); }
 }
 
 

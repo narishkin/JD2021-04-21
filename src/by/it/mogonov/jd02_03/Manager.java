@@ -7,16 +7,16 @@ class Manager {
     Manager() {
     }
 
-    private final AtomicInteger INSIDE_COUNT_PURCHASERS = new AtomicInteger(0);
-    private final AtomicInteger COMPLETE_COUNT_PURCHASERS = new AtomicInteger(0);
+    private final AtomicInteger INSIDE_COUNT_PURCHASERS = new AtomicInteger();
+    private final AtomicInteger COMPLETE_COUNT_PURCHASERS = new AtomicInteger();
 
 
     boolean koronaClosed() {
-        return COMPLETE_COUNT_PURCHASERS.get() == Conctant.PLAN_PURCHASE;
+        return COMPLETE_COUNT_PURCHASERS.get() >= Conctant.PLAN_PURCHASE;
     }
 
     boolean koronaOpened() {
-        return COMPLETE_COUNT_PURCHASERS.get() + INSIDE_COUNT_PURCHASERS.get() < Conctant.PLAN_PURCHASE;
+        return COMPLETE_COUNT_PURCHASERS.get() < Conctant.PLAN_PURCHASE;
     }
 
     void addNewPurchaser() {
@@ -24,7 +24,6 @@ class Manager {
     }
 
     void complitePurchaser() {
-        INSIDE_COUNT_PURCHASERS.getAndIncrement();
         COMPLETE_COUNT_PURCHASERS.getAndIncrement();
 
     }

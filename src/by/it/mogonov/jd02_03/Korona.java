@@ -6,18 +6,13 @@ import java.util.concurrent.TimeUnit;
 
 public class Korona {
 
-
     private Manager manager;
     private QueuePurchaser queuePurchaser;
 
 
-    public QueuePurchaser getQueuePurchaser() {
-        return queuePurchaser;
-    }
+    public QueuePurchaser getQueuePurchaser() { return queuePurchaser; }
 
-    public void setQueuePurchaser(QueuePurchaser queuePurchaser) {
-        this.queuePurchaser = queuePurchaser;
-    }
+    public void setQueuePurchaser(QueuePurchaser queuePurchaser) { this.queuePurchaser = queuePurchaser; }
 
     public Manager getManager() {
         return manager;
@@ -33,7 +28,6 @@ public class Korona {
         for (int numberCashiers = 1; numberCashiers <= 2; numberCashiers++) {
             Cashier cashier = new Cashier(numberCashiers, this);
             threadPool.submit(cashier);
-
         }
         threadPool.shutdown();
 
@@ -43,10 +37,10 @@ public class Korona {
             int countPurchaserPerSecond = Randomaser.random(2);
 
 
-            for (int i = 0; i < countPurchaserPerSecond && getManager().koronaOpened(); i++) {
+            for (int i = 0; i < countPurchaserPerSecond && manager.koronaOpened(); i++) {
                 Purchaser purchaser = new Purchaser(++numberPurchasers, this);
                 purchaser.start();
-
+                manager.addNewPurchaser();
             }
             Timer.sleep(1000);
         }
@@ -57,9 +51,7 @@ public class Korona {
             }
         } catch (InterruptedException e) {
             e.printStackTrace();
-
         }
-
 
         System.out.println("Korona close");
     }

@@ -1,0 +1,3 @@
+messages.welcome=Прывiтанне!
+messages.question=Як справы?
+user.firstname=Андрэй

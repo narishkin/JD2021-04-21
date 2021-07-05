@@ -1,0 +1,11 @@
+errors.error=Памылка:
+errors.sumImpossible=Сумаванне немагчыма
+errors.differentLengthMatrix=Розная дліна матрыц
+errors.incorrectExpression=Няправільны выраз
+errors.divisionByZero=Дзяленне на нуль
+errors.operationImpossible= Аперацыя немагчыма
+errors.unknownVar=Памылка: невядомая пераменная
+errors.differentLengthVectors=Розная дліна вектароў
+errors.divisionImpossible=Дзяленне немагчыма
+message.abstractVariable=Абстрактная пераменная
+message.keyword=Увядзіце "канец" каб скончыць праграму

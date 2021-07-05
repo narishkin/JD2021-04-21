@@ -1,4 +1,4 @@
-package by.it.krukouski.calc;
+package by.it.krukouski.jd02_04;
 
 import java.util.Arrays;
 

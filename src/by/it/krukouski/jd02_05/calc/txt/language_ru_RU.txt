@@ -1,0 +1,11 @@
+errors.error=Ошибка:
+errors.sumImpossible=Суммирование невозможно
+errors.differentLengthMatrix=Разная длина матриц
+errors.incorrectExpression=Неправильное выражение
+errors.divisionByZero=Деление на ноль
+errors.operationImpossible= Операция невозможна
+errors.unknownVar=Ошибка: неизвестная переменная
+errors.differentLengthVectors=Разная длина векторов
+errors.divisionImpossible=Деление невозможно
+message.abstractVariable=Абстрактная переменная
+message.keyword=Введите "конец" для завершения программы

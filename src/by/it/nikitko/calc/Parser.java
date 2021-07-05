@@ -65,7 +65,7 @@ public class Parser {
         }
         Var left = Var.createVar(leftString);
         if (left == null || right == null) {
-            throw new CalcException("Incorrect expression");
+                throw new CalcException(ConsoleRunner.manager.get(Messages.INCORRECT_EXPRESSION));
         }
         switch (operationString) {
             case "+":
@@ -77,7 +77,7 @@ public class Parser {
             case "/":
                 return left.div(right);
         }
-        throw new CalcException("Error");
+        throw new CalcException(ConsoleRunner.manager.get(Messages.ERROR));
     }
 
     public String scopesFinder(String expression) throws CalcException {

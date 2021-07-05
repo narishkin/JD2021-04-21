@@ -40,7 +40,7 @@ class Vector extends Var {
             double[] secondValue = ((Vector) other).value;
 
             if (addRes.length!=secondValue.length){
-                throw new CalcException("incorrect size of vectors");
+                throw new CalcException(ConsoleRunner.manager.get(Messages.INCORRECT_SIZE_OF_VECTORS));
             }
             for (int i = 0; i < addRes.length; i++) {
                 addRes[i] = addRes[i] + ((Vector) other).value[i];
@@ -64,7 +64,7 @@ class Vector extends Var {
             double[] subRes = Arrays.copyOf(value, value.length);
             double[] secondValue = ((Vector) other).value;
             if (subRes.length!=secondValue.length) {
-                throw new CalcException("incorrect size of vectors");
+                throw new CalcException(ConsoleRunner.manager.get(Messages.INCORRECT_SIZE_OF_VECTORS));
             }
             for (int i = 0; i < subRes.length; i++) {
                 subRes[i] = subRes[i] - ((Vector) other).value[i];
@@ -102,7 +102,7 @@ class Vector extends Var {
         if (other instanceof Scalar) {
             double denominator = ((Scalar) other).getValue();
             if (denominator == 0) {
-                throw new CalcException("Division by zero");
+                throw new CalcException(ConsoleRunner.manager.get(Messages.DIVISION_BY_ZERO));
             }
             double[] divRes = Arrays.copyOf(value, value.length);
             for (int i = 0; i < divRes.length; i++) {

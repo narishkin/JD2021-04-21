@@ -11,5 +11,7 @@ public interface Messages {
     String OPERATION_MULTIPLICATION = "messages.operationmultiplication";
     String OPERATION_DIVISION = "messages.operationdivision";
     String INCORRECT_SIZE_OF_VECTORS = "messages.incorrectsizeofvectors";
+    String IS_IMPOSSIBLE = "messages.isimpossible";
+    String LANGUAGE_IS_SET = "messages.languageisset";
 
 }

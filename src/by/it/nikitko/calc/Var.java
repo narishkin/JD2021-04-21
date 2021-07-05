@@ -19,32 +19,36 @@ abstract class Var implements Operation {
             if (VarRepo.contain(expression)) {
                 return VarRepo.load(expression);
             } else {
-                throw new CalcException("Incorrect expression");
+                throw new CalcException(ConsoleRunner.manager.get(Messages.INCORRECT_EXPRESSION));
             }
         }
     }
 
     @Override
     public Var add(Var other) throws CalcException {
-        throw new CalcException("Operation additions " + this + "+" + other + " is impossible");
+        throw new CalcException(ConsoleRunner.manager.get(Messages.OPERATION_ADDITIONS)+" " + this + "+" + other +
+                ConsoleRunner.manager.get(Messages.IS_IMPOSSIBLE));
 
     }
 
     @Override
     public Var sub(Var other) throws CalcException {
-        throw new CalcException("Operation subtraction " + this + "-" + other + " is impossible");
+        throw new CalcException(ConsoleRunner.manager.get(Messages.OPERATION_SUBTRACTION)+" " + this + "-" + other +
+                ConsoleRunner.manager.get(Messages.IS_IMPOSSIBLE));
 
     }
 
     @Override
     public Var mul(Var other) throws CalcException {
-        throw new CalcException("Operation multiplication " + this + "*" + other + " is impossible");
+        throw new CalcException(ConsoleRunner.manager.get(Messages.OPERATION_MULTIPLICATION)+" " + this + "*" + other +
+                ConsoleRunner.manager.get(Messages.IS_IMPOSSIBLE));
 
     }
 
     @Override
     public Var div(Var other) throws CalcException {
-        throw new CalcException("Division operation " + this + "/" + other + " is impossible");
+        throw new CalcException(ConsoleRunner.manager.get(Messages.OPERATION_DIVISION)+" " + this + "/" + other +
+                ConsoleRunner.manager.get(Messages.IS_IMPOSSIBLE));
 
     }
 }

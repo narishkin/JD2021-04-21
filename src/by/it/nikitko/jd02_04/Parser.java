@@ -1,4 +1,4 @@
-package by.it.nikitko.calc;
+package by.it.nikitko.jd02_04;
 
 
 import java.util.*;
@@ -14,7 +14,12 @@ public class Parser {
     );
 
     Var calc(String expression) throws CalcException {
-
+        if (expression.equals("printvar")) {
+            System.out.println(VarRepo.getVars());
+        }
+        if (expression.equals("sortvar")) {
+            System.out.println(VarRepo.getVars().entrySet());
+        }
         expression = scopesFinder(expression);
 
         List<String> operands = new ArrayList<>(Arrays.asList(expression.split(Patterns.OPERATION)));
@@ -60,7 +65,7 @@ public class Parser {
         }
         Var left = Var.createVar(leftString);
         if (left == null || right == null) {
-                throw new CalcException(ConsoleRunner.manager.get(Messages.INCORRECT_EXPRESSION));
+            throw new CalcException("Incorrect expression");
         }
         switch (operationString) {
             case "+":
@@ -72,7 +77,7 @@ public class Parser {
             case "/":
                 return left.div(right);
         }
-        throw new CalcException(ConsoleRunner.manager.get(Messages.ERROR));
+        throw new CalcException("Error");
     }
 
     public String scopesFinder(String expression) throws CalcException {

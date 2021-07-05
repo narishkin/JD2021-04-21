@@ -1,4 +1,4 @@
-package by.it.nikitko.calc;
+package by.it.nikitko.jd02_04;
 
 class Scalar extends Var {
 
@@ -55,13 +55,13 @@ class Scalar extends Var {
         if (other instanceof Scalar) {
             double denominator = ((Scalar) other).value;
             if (denominator == 0) {
-                throw new CalcException(ConsoleRunner.manager.get(Messages.DIVISION_BY_ZERO));
+                throw new CalcException("Division by zero");
             }
             double div = this.value / ((Scalar) other).value;
             return new Scalar(div);
         }
         if (other instanceof Vector) {
-            throw new CalcException(ConsoleRunner.manager.get(Messages.OPERATION_SCALAR_DIV_VECTOR_IS_IMPOSSIBLE));
+            throw new CalcException("Opretion Scalar/Vector is impossible");
         }
         else {
             return other.div(this);

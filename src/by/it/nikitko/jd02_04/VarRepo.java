@@ -1,4 +1,4 @@
-package by.it.nikitko.calc;
+package by.it.nikitko.jd02_04;
 
 
 import java.io.FileNotFoundException;

@@ -1,4 +1,5 @@
-package by.it.nikitko.calc;
+package by.it.nikitko.jd02_04;
+
 
 
 abstract class Var implements Operation {
@@ -6,6 +7,8 @@ abstract class Var implements Operation {
 
     static Var createVar(String expression) throws CalcException {
         expression = expression.replaceAll("\\s+", "");
+
+
 
         if (expression.matches(Patterns.SCALAR))
             return new Scalar(expression);
@@ -17,36 +20,32 @@ abstract class Var implements Operation {
             if (VarRepo.contain(expression)) {
                 return VarRepo.load(expression);
             } else {
-                throw new CalcException(ConsoleRunner.manager.get(Messages.INCORRECT_EXPRESSION));
+                throw new CalcException("Incorrect expression");
             }
         }
     }
 
     @Override
     public Var add(Var other) throws CalcException {
-        throw new CalcException(ConsoleRunner.manager.get(Messages.OPERATION_ADDITIONS)+" " + this + "+" + other +
-                ConsoleRunner.manager.get(Messages.IS_IMPOSSIBLE));
+        throw new CalcException("Operation additions " + this + "+" + other + " is impossible");
 
     }
 
     @Override
     public Var sub(Var other) throws CalcException {
-        throw new CalcException(ConsoleRunner.manager.get(Messages.OPERATION_SUBTRACTION)+" " + this + "-" + other +
-                ConsoleRunner.manager.get(Messages.IS_IMPOSSIBLE));
+        throw new CalcException("Operation subtraction " + this + "-" + other + " is impossible");
 
     }
 
     @Override
     public Var mul(Var other) throws CalcException {
-        throw new CalcException(ConsoleRunner.manager.get(Messages.OPERATION_MULTIPLICATION)+" " + this + "*" + other +
-                ConsoleRunner.manager.get(Messages.IS_IMPOSSIBLE));
+        throw new CalcException("Operation multiplication " + this + "*" + other + " is impossible");
 
     }
 
     @Override
     public Var div(Var other) throws CalcException {
-        throw new CalcException(ConsoleRunner.manager.get(Messages.OPERATION_DIVISION)+" " + this + "/" + other +
-                ConsoleRunner.manager.get(Messages.IS_IMPOSSIBLE));
+        throw new CalcException("Division operation " + this + "/" + other + " is impossible");
 
     }
 }

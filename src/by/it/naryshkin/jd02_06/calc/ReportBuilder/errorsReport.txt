@@ -1,0 +1,20 @@
+Calculator session errors REPORT
+Session started on: Wed Jul 07 12:54:49 MSK 2021
+Wed Jul 07 12:55:32 MSK 2021 Unable to parse this expression dsfs
+
+Session finished on: Wed Jul 07 12:55:42 MSK 2021
+Calculator session errors REPORT
+Session started on: Wed Jul 07 12:56:50 MSK 2021
+Wed Jul 07 12:57:06 MSK 2021 Unable to parse this expression fe
+Wed Jul 07 12:57:07 MSK 2021 Unable to parse this expression 
+Wed Jul 07 12:57:08 MSK 2021 Unable to parse this expression fw
+
+Session finished on: Wed Jul 07 12:57:10 MSK 2021
+Calculator session errors REPORT
+Session started on: Wed Jul 07 14:08:20 MSK 2021
+Wed Jul 07 14:08:36 MSK 2021 Unable to parse this expression +6
+Wed Jul 07 14:08:49 MSK 2021 Incorrect expression
+Wed Jul 07 14:09:05 MSK 2021 Unable to parse this expression +9
+Wed Jul 07 14:09:12 MSK 2021 Unable to parse this expression +
+
+Session finished on: Wed Jul 07 14:09:22 MSK 2021

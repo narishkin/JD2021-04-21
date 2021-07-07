@@ -1,0 +1,40 @@
+Calculator session REPORT
+Session started on: Wed Jul 07 12:54:49 MSK 2021
+Wed Jul 07 12:55:30 MSK 2021 25+6
+Wed Jul 07 12:55:30 MSK 2021 31.0
+Wed Jul 07 12:55:32 MSK 2021 dsfs
+Wed Jul 07 12:55:39 MSK 2021 56+(7*8-6)
+Wed Jul 07 12:55:39 MSK 2021 106.0
+
+Session finished on: Wed Jul 07 12:55:42 MSK 2021
+Calculator session REPORT
+Session started on: Wed Jul 07 12:56:50 MSK 2021
+Wed Jul 07 12:56:57 MSK 2021 254415*6
+Wed Jul 07 12:56:57 MSK 2021 1526490.0
+Wed Jul 07 12:57:04 MSK 2021 (45*8)-4
+Wed Jul 07 12:57:04 MSK 2021 356.0
+Wed Jul 07 12:57:06 MSK 2021 fe
+Wed Jul 07 12:57:07 MSK 2021 ()
+Wed Jul 07 12:57:08 MSK 2021 fw
+
+Session finished on: Wed Jul 07 12:57:10 MSK 2021
+Calculator session REPORT
+Session started on: Wed Jul 07 14:08:20 MSK 2021
+Wed Jul 07 14:08:23 MSK 2021 3+6
+Wed Jul 07 14:08:23 MSK 2021 9.0
+Wed Jul 07 14:08:30 MSK 2021 3+6-5*5/5+5+4
+Wed Jul 07 14:08:30 MSK 2021 13.0
+Wed Jul 07 14:08:33 MSK 2021 2+
+Wed Jul 07 14:08:33 MSK 2021 2.0
+Wed Jul 07 14:08:36 MSK 2021 +6
+Wed Jul 07 14:08:41 MSK 2021 45+
+Wed Jul 07 14:08:41 MSK 2021 45.0
+Wed Jul 07 14:08:49 MSK 2021 45+(2*4
+Wed Jul 07 14:09:00 MSK 2021 5*(3+5)
+Wed Jul 07 14:09:00 MSK 2021 40.0
+Wed Jul 07 14:09:05 MSK 2021 +9
+Wed Jul 07 14:09:09 MSK 2021 9+
+Wed Jul 07 14:09:09 MSK 2021 9.0
+Wed Jul 07 14:09:12 MSK 2021 9++
+
+Session finished on: Wed Jul 07 14:09:22 MSK 2021

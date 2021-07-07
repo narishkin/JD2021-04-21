@@ -1,0 +1,188 @@
+Tue Jul 06 21:16:52 MSK 2021	2/0
+Tue Jul 06 21:16:52 MSK 2021	ERROR: Division by zero
+Tue Jul 06 21:16:55 MSK 2021	)(
+Tue Jul 06 21:16:55 MSK 2021	Incorrect expression
+Tue Jul 06 23:48:53 MSK 2021	23+6
+Tue Jul 06 23:48:53 MSK 2021	29.0
+Tue Jul 06 23:48:58 MSK 2021	2/0
+Tue Jul 06 23:48:58 MSK 2021	ERROR: Division by zero
+Tue Jul 06 23:52:22 MSK 2021	26+6
+Tue Jul 06 23:52:22 MSK 2021	32.0
+Wed Jul 07 10:06:12 MSK 2021	56+9
+Wed Jul 07 10:06:12 MSK 2021	65.0
+Wed Jul 07 10:07:34 MSK 2021	sfs
+Wed Jul 07 10:07:34 MSK 2021	Unable to parse this expression sfs
+Wed Jul 07 10:09:54 MSK 2021	tt
+Wed Jul 07 10:09:54 MSK 2021	Unable to parse this expression tt
+Wed Jul 07 10:09:56 MSK 2021	2+6
+Wed Jul 07 10:09:56 MSK 2021	8.0
+Wed Jul 07 10:26:49 MSK 2021	2+9
+Wed Jul 07 10:26:49 MSK 2021	11.0
+Wed Jul 07 10:26:51 MSK 2021	8/0
+Wed Jul 07 10:26:51 MSK 2021	ERROR: Division by zero
+Wed Jul 07 10:28:45 MSK 2021	2/0
+Wed Jul 07 10:28:45 MSK 2021	ERROR: Division by zero
+Wed Jul 07 10:28:47 MSK 2021	dfsd
+Wed Jul 07 10:28:47 MSK 2021	Unable to parse this expression dfsd
+Wed Jul 07 10:33:45 MSK 2021	63+6
+Wed Jul 07 10:33:45 MSK 2021	69.0
+Wed Jul 07 10:33:46 MSK 2021	74+8
+Wed Jul 07 10:33:46 MSK 2021	82.0
+Wed Jul 07 10:33:50 MSK 2021	1/0
+Wed Jul 07 10:33:50 MSK 2021	ERROR: Division by zero
+Wed Jul 07 10:33:51 MSK 2021	)(
+Wed Jul 07 10:33:51 MSK 2021	Incorrect expression
+Wed Jul 07 10:48:16 MSK 2021	25-12
+Wed Jul 07 10:49:20 MSK 2021	25-12
+Wed Jul 07 10:49:20 MSK 2021	13.0
+Wed Jul 07 10:49:25 MSK 2021	5/2
+Wed Jul 07 10:49:25 MSK 2021	2.5
+Wed Jul 07 10:49:32 MSK 2021	25-111
+Wed Jul 07 10:49:32 MSK 2021	-86.0
+Wed Jul 07 10:50:48 MSK 2021	265+9
+Wed Jul 07 10:50:48 MSK 2021	274.0
+Wed Jul 07 10:50:52 MSK 2021	51/0
+Wed Jul 07 10:50:52 MSK 2021	ERROR: Division by zero
+Wed Jul 07 10:55:49 MSK 2021	25/88
+Wed Jul 07 10:55:49 MSK 2021	0.2840909090909091
+Wed Jul 07 10:55:53 MSK 2021	565-541
+Wed Jul 07 10:55:53 MSK 2021	24.0
+Wed Jul 07 10:55:55 MSK 2021	25*7
+Wed Jul 07 10:55:55 MSK 2021	175.0
+Wed Jul 07 11:00:11 MSK 2021	25*5
+Wed Jul 07 11:00:11 MSK 2021	125.0
+Wed Jul 07 11:00:14 MSK 2021	69/0
+Wed Jul 07 11:00:14 MSK 2021	ERROR: Division by zero
+Wed Jul 07 11:02:37 MSK 2021	25/8
+Wed Jul 07 11:02:37 MSK 2021	3.125
+Wed Jul 07 11:02:40 MSK 2021	56-56
+Wed Jul 07 11:02:40 MSK 2021	0.0
+Wed Jul 07 11:09:33 MSK 2021	25/8
+Wed Jul 07 11:09:33 MSK 2021	3.125
+Wed Jul 07 11:09:36 MSK 2021	1235+951
+Wed Jul 07 11:09:36 MSK 2021	2186.0
+Wed Jul 07 11:09:39 MSK 2021	12+98*8
+Wed Jul 07 11:09:39 MSK 2021	796.0
+Wed Jul 07 11:14:49 MSK 2021	257*5
+Wed Jul 07 11:14:49 MSK 2021	1285.0
+Wed Jul 07 11:14:52 MSK 2021	15646-545.
+Wed Jul 07 11:14:52 MSK 2021	Unable to parse this expression 545.
+Wed Jul 07 11:14:55 MSK 2021	1525-5
+Wed Jul 07 11:14:55 MSK 2021	1520.0
+Wed Jul 07 11:14:57 MSK 2021	b
+Wed Jul 07 11:14:57 MSK 2021	Unable to parse this expression b
+Wed Jul 07 11:14:58 MSK 2021	ee
+Wed Jul 07 11:14:58 MSK 2021	Unable to parse this expression ee
+Wed Jul 07 11:15:02 MSK 2021	12*5
+Wed Jul 07 11:15:02 MSK 2021	60.0
+Wed Jul 07 11:15:07 MSK 2021	1.251/512.6945
+Wed Jul 07 11:15:07 MSK 2021	0.0024400495811833364
+Wed Jul 07 11:32:45 MSK 2021	257
+Wed Jul 07 11:32:45 MSK 2021	257.0
+Wed Jul 07 11:32:48 MSK 2021	254/5
+Wed Jul 07 11:32:48 MSK 2021	50.8
+Wed Jul 07 11:32:51 MSK 2021	printvar
+Wed Jul 07 11:32:51 MSK 2021	B2=2.65
+Wed Jul 07 11:32:51 MSK 2021	A=7.3
+Wed Jul 07 11:32:51 MSK 2021	B=25.55
+Wed Jul 07 11:32:51 MSK 2021	C=40.15
+Wed Jul 07 11:32:51 MSK 2021	D=10.0
+Wed Jul 07 11:32:51 MSK 2021	E={5.0, 7.0, 9.0}
+Wed Jul 07 11:32:51 MSK 2021	F={{54.0, 42.0}, {120.0, 102.0}, {186.0, 162.0}}
+Wed Jul 07 11:32:51 MSK 2021	Z={{9.0, 12.0}, {24.0, 33.0}}
+Wed Jul 07 11:32:51 MSK 2021	B1=25.0
+Wed Jul 07 11:55:28 MSK 2021	2+6
+Wed Jul 07 11:55:28 MSK 2021	8.0
+Wed Jul 07 11:55:33 MSK 2021	4/0
+Wed Jul 07 11:55:33 MSK 2021	ERROR: Division by zero
+Wed Jul 07 11:55:35 MSK 2021	)(
+Wed Jul 07 11:55:35 MSK 2021	Incorrect expression
+Wed Jul 07 11:55:39 MSK 2021	45/5
+Wed Jul 07 11:55:39 MSK 2021	9.0
+Wed Jul 07 12:25:19 MSK 2021	25*5
+Wed Jul 07 12:25:19 MSK 2021	125.0
+Wed Jul 07 12:25:21 MSK 2021	215-9
+Wed Jul 07 12:25:21 MSK 2021	206.0
+Wed Jul 07 12:25:22 MSK 2021	1/0
+Wed Jul 07 12:25:22 MSK 2021	ERROR: Division by zero
+Wed Jul 07 12:25:24 MSK 2021	)(
+Wed Jul 07 12:25:24 MSK 2021	Incorrect expression
+Wed Jul 07 12:25:26 MSK 2021	dfsedf
+Wed Jul 07 12:25:26 MSK 2021	Unable to parse this expression dfsedf
+Wed Jul 07 12:27:51 MSK 2021	25/8
+Wed Jul 07 12:27:51 MSK 2021	3.125
+Wed Jul 07 12:27:53 MSK 2021	1/0
+Wed Jul 07 12:27:53 MSK 2021	ERROR: Division by zero
+Wed Jul 07 12:27:55 MSK 2021	)(
+Wed Jul 07 12:27:55 MSK 2021	Incorrect expression
+Wed Jul 07 12:27:56 MSK 2021	()
+Wed Jul 07 12:27:56 MSK 2021	Unable to parse this expression 
+Wed Jul 07 12:27:58 MSK 2021	dfgsd
+Wed Jul 07 12:27:58 MSK 2021	Unable to parse this expression dfgsd
+Wed Jul 07 12:28:07 MSK 2021	452*51-(45+)
+Wed Jul 07 12:28:20 MSK 2021	15*56
+Wed Jul 07 12:28:20 MSK 2021	840.0
+Wed Jul 07 12:28:30 MSK 2021	25+(12*6+6)
+Wed Jul 07 12:28:30 MSK 2021	103.0
+Wed Jul 07 12:28:35 MSK 2021	()
+Wed Jul 07 12:28:35 MSK 2021	Unable to parse this expression 
+Wed Jul 07 12:28:39 MSK 2021	bdf
+Wed Jul 07 12:28:39 MSK 2021	Unable to parse this expression bdf
+Wed Jul 07 12:28:41 MSK 2021	25*5
+Wed Jul 07 12:28:41 MSK 2021	125.0
+Wed Jul 07 12:47:22 MSK 2021	25+6
+Wed Jul 07 12:47:22 MSK 2021	31.0
+Wed Jul 07 12:47:26 MSK 2021	1/0
+Wed Jul 07 12:47:26 MSK 2021	ERROR: Division by zero
+Wed Jul 07 12:47:28 MSK 2021	rtgher
+Wed Jul 07 12:47:28 MSK 2021	Unable to parse this expression rtgher
+Wed Jul 07 12:47:29 MSK 2021	)(
+Wed Jul 07 12:47:29 MSK 2021	Incorrect expression
+Wed Jul 07 12:48:46 MSK 2021	25+6
+Wed Jul 07 12:48:46 MSK 2021	31.0
+Wed Jul 07 12:48:53 MSK 2021	25*(4+7)
+Wed Jul 07 12:48:53 MSK 2021	275.0
+Wed Jul 07 12:48:55 MSK 2021	df
+Wed Jul 07 12:48:55 MSK 2021	Unable to parse this expression df
+Wed Jul 07 12:48:56 MSK 2021	()
+Wed Jul 07 12:48:56 MSK 2021	Unable to parse this expression 
+Wed Jul 07 12:55:30 MSK 2021	25+6
+Wed Jul 07 12:55:30 MSK 2021	31.0
+Wed Jul 07 12:55:32 MSK 2021	dsfs
+Wed Jul 07 12:55:32 MSK 2021	Unable to parse this expression dsfs
+Wed Jul 07 12:55:39 MSK 2021	56+(7*8-6)
+Wed Jul 07 12:55:39 MSK 2021	106.0
+Wed Jul 07 12:56:57 MSK 2021	254415*6
+Wed Jul 07 12:56:57 MSK 2021	1526490.0
+Wed Jul 07 12:57:04 MSK 2021	(45*8)-4
+Wed Jul 07 12:57:04 MSK 2021	356.0
+Wed Jul 07 12:57:06 MSK 2021	fe
+Wed Jul 07 12:57:06 MSK 2021	Unable to parse this expression fe
+Wed Jul 07 12:57:07 MSK 2021	()
+Wed Jul 07 12:57:07 MSK 2021	Unable to parse this expression 
+Wed Jul 07 12:57:08 MSK 2021	fw
+Wed Jul 07 12:57:08 MSK 2021	Unable to parse this expression fw
+Wed Jul 07 13:03:41 MSK 2021	256+
+Wed Jul 07 13:56:39 MSK 2021	+5
+Wed Jul 07 13:56:39 MSK 2021	Unable to parse this expression +5
+Wed Jul 07 13:56:42 MSK 2021	5+
+Wed Jul 07 14:08:23 MSK 2021	3+6
+Wed Jul 07 14:08:23 MSK 2021	9.0
+Wed Jul 07 14:08:30 MSK 2021	3+6-5*5/5+5+4
+Wed Jul 07 14:08:30 MSK 2021	13.0
+Wed Jul 07 14:08:33 MSK 2021	2+
+Wed Jul 07 14:08:33 MSK 2021	2.0
+Wed Jul 07 14:08:36 MSK 2021	+6
+Wed Jul 07 14:08:36 MSK 2021	Unable to parse this expression +6
+Wed Jul 07 14:08:41 MSK 2021	45+
+Wed Jul 07 14:08:41 MSK 2021	45.0
+Wed Jul 07 14:08:49 MSK 2021	45+(2*4
+Wed Jul 07 14:08:49 MSK 2021	Incorrect expression
+Wed Jul 07 14:09:00 MSK 2021	5*(3+5)
+Wed Jul 07 14:09:00 MSK 2021	40.0
+Wed Jul 07 14:09:05 MSK 2021	+9
+Wed Jul 07 14:09:05 MSK 2021	Unable to parse this expression +9
+Wed Jul 07 14:09:09 MSK 2021	9+
+Wed Jul 07 14:09:09 MSK 2021	9.0
+Wed Jul 07 14:09:12 MSK 2021	9++
+Wed Jul 07 14:09:12 MSK 2021	Unable to parse this expression +

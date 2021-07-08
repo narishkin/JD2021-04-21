@@ -6,7 +6,7 @@ import java.util.ResourceBundle;
 public enum ResourceManager {
     INSTANCE;
 
-    private final String RESOURCE_LANGUAGE = "by.it.naryshkin.jd02_05.calc.res.language";
+    private final String RESOURCE_LANGUAGE = "by.it.naryshkin.jd02_06.calc.res.language";
 
     private ResourceBundle resourceBundle;
 

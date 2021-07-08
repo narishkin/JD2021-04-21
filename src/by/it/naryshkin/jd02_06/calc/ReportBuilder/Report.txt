@@ -38,3 +38,12 @@ Wed Jul 07 14:09:09 MSK 2021 9.0
 Wed Jul 07 14:09:12 MSK 2021 9++
 
 Session finished on: Wed Jul 07 14:09:22 MSK 2021
+Calculator session REPORT
+Session started on: Wed Jul 07 15:04:27 MSK 2021
+Session finished on: Wed Jul 07 15:04:31 MSK 2021
+Calculator session REPORT
+Session started on: Thu Jul 08 10:24:10 MSK 2021
+Thu Jul 08 10:24:15 MSK 2021 5*96
+Thu Jul 08 10:24:15 MSK 2021 480.0
+
+Session finished on: Thu Jul 08 10:24:30 MSK 2021

@@ -1,8 +1,6 @@
 package by.it.naryshkin.jd02_06.calc;
 
-import by.it.naryshkin.jd02_06.calc.ReportBuilder.Report;
 import by.it.naryshkin.jd02_06.calc.ReportBuilder.ReportBuilder;
-import by.it.naryshkin.jd02_06.calc.ReportBuilder.ReportWriter;
 
 import java.util.Locale;
 import java.util.Scanner;

@@ -192,3 +192,5 @@ Wed Jul 07 14:09:09 MSK 2021	9+
 Wed Jul 07 14:09:09 MSK 2021	9.0
 Wed Jul 07 14:09:12 MSK 2021	9++
 Wed Jul 07 14:09:12 MSK 2021	Unable to parse this expression +
+Thu Jul 08 10:24:15 MSK 2021	5*96
+Thu Jul 08 10:24:15 MSK 2021	480.0

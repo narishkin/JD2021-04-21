@@ -18,3 +18,9 @@ Wed Jul 07 14:09:05 MSK 2021 Unable to parse this expression +9
 Wed Jul 07 14:09:12 MSK 2021 Unable to parse this expression +
 
 Session finished on: Wed Jul 07 14:09:22 MSK 2021
+Calculator session errors REPORT
+Session started on: Wed Jul 07 15:04:27 MSK 2021
+Session finished on: Wed Jul 07 15:04:31 MSK 2021
+Calculator session errors REPORT
+Session started on: Thu Jul 08 10:24:10 MSK 2021
+Session finished on: Thu Jul 08 10:24:30 MSK 2021
